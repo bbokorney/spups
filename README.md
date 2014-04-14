@@ -1,3 +1,3 @@
 spups
 =====
-**S** hadow **Pu**p**p**et**s**, obviously.
+Shadow Puppets, obviously.
