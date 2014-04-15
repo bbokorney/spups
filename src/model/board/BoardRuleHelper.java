@@ -35,4 +35,5 @@ public class BoardRuleHelper {
         return false;
     }
 
+    public boolean connectsTwoCities(Location location) { return false; }
 }

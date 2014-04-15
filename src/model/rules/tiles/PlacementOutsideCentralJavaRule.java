@@ -7,6 +7,7 @@ import model.board.Location;
  */
 public class PlacementOutsideCentralJavaRule {
     public static boolean canPlaceOutsideCentralJava(Location... locations) {
+
         return false;
     }
 }
