@@ -11,9 +11,7 @@ public abstract class Board {
 	private HashMap<Location, Space> board;
 	
 	public Board() {
-		board = new HashMap<Location, Space>(); 
-		
-		//TODO: add Locations (with pathFromOrigin lists) according to grid size
+		board = new HashMap<Location, Space>();
 	}
 	
 	public void placeSpace(Location loc, Space space) {
