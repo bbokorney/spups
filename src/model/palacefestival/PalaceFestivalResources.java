@@ -7,29 +7,29 @@ import java.util.Collection;
  */
 public class PalaceFestivalResources {
 
-    private CardGameResources<PalaceCard> resources = new CardGameResources<PalaceCard>();
+    private CardGameResources<Card> resources = new CardGameResources<Card>();
 
-    public PalaceFestivalResources(Collection<PalaceCard> deck) {
+    public PalaceFestivalResources(Collection<Card> deck) {
         // TODO
         throw new UnsupportedOperationException();
     }
 
-    public PalaceCard peekAtFaceUpCard() {
+    public Card peekAtFaceUpCard() {
         // TODO
         throw new UnsupportedOperationException();
     }
 
-    public PalaceCard drawFaceUpCard() {
+    public Card drawFaceUpCard() {
         // TODO
         throw new UnsupportedOperationException();
     }
 
-    public PalaceCard drawCardFromDeck() {
+    public Card drawCardFromDeck() {
         // TODO
         throw new UnsupportedOperationException();
     }
 
-    public void discard(PalaceCard card) {
+    public void discard(Card card) {
         // TODO
         throw new UnsupportedOperationException();
     }

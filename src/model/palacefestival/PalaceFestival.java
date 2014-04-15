@@ -36,22 +36,22 @@ public class PalaceFestival {
         throw new UnsupportedOperationException();
     }
 
-    public PalaceCard peekAtFestivalCard() {
+    public Card peekAtFestivalCard() {
         // TODO: Sara
         throw new UnsupportedOperationException();
     }
 
-    public PalaceCard drawFestivalCard() {
+    public Card drawFestivalCard() {
         // TODO: Sara
         throw new UnsupportedOperationException();
     }
 
-    public PalaceCard drawDeckCard() {
+    public Card drawDeckCard() {
         // TODO: Sara
         throw new UnsupportedOperationException();
     }
 
-    public void discard(PalaceCard card) {
+    public void discard(Card card) {
         // TODO: Sara
         throw new UnsupportedOperationException();
     }

@@ -4,7 +4,7 @@ import model.GameModel;
 import model.actions.Action;
 import model.actions.serialization.JsonObject;
 import model.board.Location;
-import model.palacefestival.PalaceCard;
+import model.palacefestival.Card;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class BeginPalaceFestival extends Action {
 
     private int palaceValueForFestival;
     private Location palaceLocation;
-    private ArrayList<PalaceCard> cardsBidded;
+    private ArrayList<Card> cardsBidded;
 
     @Override
     public boolean tryAction(GameModel game) {

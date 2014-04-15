@@ -8,13 +8,13 @@ import java.util.Collection;
 public class JavaPlayerAdapter implements PalaceFestivalPlayer {
 
     @Override
-    public void playCard(PalaceCard card) {
+    public void playCard(Card card) {
         // TODO
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void takeCard(PalaceCard card) {
+    public void takeCard(Card card) {
         // TODO
         throw new UnsupportedOperationException();
     }
@@ -26,7 +26,7 @@ public class JavaPlayerAdapter implements PalaceFestivalPlayer {
     }
 
     @Override
-    public Collection<PalaceCard> getHand() {
+    public Collection<Card> getHand() {
         // TODO
         throw new UnsupportedOperationException();
     }

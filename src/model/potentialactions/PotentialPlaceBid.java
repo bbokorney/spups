@@ -1,7 +1,7 @@
 package model.potentialactions;
 
 import model.actions.ActionResult;
-import model.palacefestival.PalaceCard;
+import model.palacefestival.Card;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class PotentialPlaceBid {
 
-    private PalaceCard[] cardsValidForFestival;
+    private Card[] cardsValidForFestival;
     private ArrayList<Integer> indexOfCardsToBid;
 
     public boolean chooseCurrentCard() {

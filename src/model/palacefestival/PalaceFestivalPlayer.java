@@ -7,13 +7,13 @@ import java.util.Collection;
  */
 public interface PalaceFestivalPlayer {
 
-    public void playCard(PalaceCard card);
+    public void playCard(Card card);
 
-    public void takeCard(PalaceCard card);
+    public void takeCard(Card card);
 
     public void incrementScore();
 
-    public Collection<PalaceCard> getHand();
+    public Collection<Card> getHand();
 
     public int getScore();
 
