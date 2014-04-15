@@ -10,6 +10,13 @@ import model.actions.serialization.JsonObject;
  */
 public class PickUpDeckCard extends Action {
 
+
+
+    public PickUpDeckCard() {
+
+    }
+
+
     @Override
     public ActionResult tryAction(GameModel game) {
         // TODO: Sara

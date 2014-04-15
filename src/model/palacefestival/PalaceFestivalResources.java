@@ -5,33 +5,33 @@ import java.util.Stack;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PalaceFestivalResources implements CardGameResources<PalaceCard> {
+public class PalaceFestivalResources implements CardGameResources<Card> {
 
-    private Stack<PalaceCard> deck;
-    private Stack<PalaceCard> discard;
-    private PalaceCard festivalCard;
+    private Stack<Card> deck;
+    private Stack<Card> discard;
+    private Card festivalCard;
 
-    public PalaceFestivalResources(Stack<PalaceCard> deck) {
+    public PalaceFestivalResources(Stack<Card> deck) {
         this.deck = deck;
-        this.discard = new Stack<PalaceCard>();
+        this.discard = new Stack<Card>();
         this.festivalCard = this.deck.pop();
     }
 
     @Override
-    public PalaceCard peekAtFaceUpCard() {
+    public Card peekAtFaceUpCard() {
         return festivalCard;
     }
 
     @Override
-    public PalaceCard drawFaceUpCard() {
-        PalaceCard currentFestivalCard = festivalCard;
+    public Card drawFaceUpCard() {
+        Card currentFestivalCard = festivalCard;
         festivalCard = deck.pop();
         return currentFestivalCard;
     }
 
     @Override
-    public PalaceCard drawCardFromDeck() {
-        PalaceCard drawnCard = deck.pop();
+    public Card drawCardFromDeck() {
+        Card drawnCard = deck.pop();
         if (deck.isEmpty()) {
             deck.addAll(discard);
             discard.clear();
@@ -41,7 +41,7 @@ public class PalaceFestivalResources implements CardGameResources<PalaceCard> {
     }
 
     @Override
-    public void discard(PalaceCard card) {
+    public void discard(Card card) {
         discard.push(card);
     }
 
