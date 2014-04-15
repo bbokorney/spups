@@ -10,21 +10,26 @@ import model.tiles.VillageTileComponent;
  */
 public class RicePlacementRule implements Visitor {
     private boolean allowed;
+
+    public RicePlacementRule() {
+        allowed = false;
+    }
+
     public boolean allowed() { return allowed; }
 
     public void visit(VillageTileComponent component) {
-
+        allowed = true;
     }
 
     public void visit(RiceTileComponent component) {
-
+        allowed = true;
     }
 
     public void visit(PalaceCardComponent component) {
-
+        allowed = false;
     }
 
     public void visit(IrrigationTileComponent component) {
-
+        allowed = false;
     }
 }

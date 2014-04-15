@@ -11,23 +11,27 @@ import model.tiles.VillageTileComponent;
 public class VillagePlacementRule implements Visitor {
     private boolean allowed;
 
+    public VillagePlacementRule() {
+        allowed = false;
+    }
+
     public boolean allowed() {
         return allowed;
     }
 
     public void visit(VillageTileComponent component) {
-
+        allowed = true;
     }
 
     public void visit(RiceTileComponent component) {
-
+        allowed = true;
     }
 
     public void visit(PalaceCardComponent component) {
-
+        allowed = false;
     }
 
     public void visit(IrrigationTileComponent component) {
-
+        allowed = false;
     }
 }
