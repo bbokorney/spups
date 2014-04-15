@@ -15,7 +15,7 @@ public class HexLocation implements Location, PathNode {
         return false;
     }
 	
-		private List<Directions> pathFromOrigin; 
+	private List<Directions> pathFromOrigin;
 	
 	public HexLocation(List<Directions> path) {
 		pathFromOrigin = path;
@@ -43,7 +43,6 @@ public class HexLocation implements Location, PathNode {
 	//Returns an ordered list of all neighbors in clockwise direction, starting
 	//from up
 	public List<Location> getNeighbors() {
-		//TODO: ask if this is runtime type checking or whatever
 		List<Location> neighbors = new ArrayList<Location>();
 		
 		//For each direction, append our own path with that direction,
