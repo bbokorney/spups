@@ -3,7 +3,7 @@ package model.tiles;
 /**
  * Created by Baker on 4/14/2014.
  */
-abstract class TileComponent {
+public abstract class TileComponent {
 
 	int height;
 	

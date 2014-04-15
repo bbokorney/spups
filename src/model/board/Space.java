@@ -1,16 +1,17 @@
 package model.board;
 
+import model.tiles.TileComponent;
 /**
  * Created by Baker on 4/14/2014.
  */
-abstract class Space {
+public abstract class Space {
 
 	//Allows you to place a new tile component on this space
-	abstract void accept(TileComponent tile);
+	public abstract void accept(TileComponent tile);
 	
 	//Shows (but does not remove) top tile component at space
-	abstract TileComponent getTopTileComponent();
+	public abstract TileComponent getTopTileComponent();
 	
 	//Retrieves the height at the space
-	abstract int getHeight();
+	public abstract int getHeight();
 }

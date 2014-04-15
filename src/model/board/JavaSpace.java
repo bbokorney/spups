@@ -2,6 +2,7 @@ package model.board;
 
 import java.util.Stack;
 import java.util.Iterator;
+import model.tiles.TileComponent;
 
 /**
  * Created by Baker on 4/14/2014.

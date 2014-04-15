@@ -1,15 +1,16 @@
 package model.board;
 
 import java.util.HashMap;
+import model.tiles.TileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
  */
-abstract class Board {
+public abstract class Board {
 
 	private HashMap<Location, Space> board;
 	
-	public Board(int xSize, int ySize) {
+	public Board() {
 		board = new HashMap<Location, Space>(); 
 		
 		//TODO: add Locations (with pathFromOrigin lists) according to grid size

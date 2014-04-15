@@ -11,10 +11,6 @@ import java.util.Set;
  */
 public class HexLocation implements Location, PathNode {
 
-    public Set<PathEdge> getNeighbors() {
-        return null;
-    }
-
     public boolean equals(PathNode pathNode) {
         return false;
     }
@@ -36,14 +32,10 @@ public class HexLocation implements Location, PathNode {
 	}
 	
 	public boolean equals(Location loc) {
-		if (loc instanceof HexLocation)
-			HexLocation hexloc = loc;
-			//TODO: throw this off to helper method, a duplicate method which overloads this one to take a hex location, then do the code below
-		else
-			return false;
-			
-		if (pathFromOrigin == loc.getPathFromOrigin())
-			return true;
+		if (loc instanceof HexLocation) {
+			HexLocation hexloc = (HexLocation) loc;
+			return pathFromOrigin == hexloc.getPathFromOrigin();
+		}
 		else 
 			return false;
 	}
@@ -70,4 +62,6 @@ public class HexLocation implements Location, PathNode {
 	public List<Directions> getPathFromOrigin() {
 		return pathFromOrigin;
 	}
+
+    public List<PathEdge> getEdges() { return null; }
 }
