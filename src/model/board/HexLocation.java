@@ -64,4 +64,14 @@ public class HexLocation implements Location, PathNode {
 	}
 
     public List<PathEdge> getEdges() { return null; }
+
+    @Override
+    public String serialize() {
+        return null;
+    }
+
+    @Override
+    public Object restore(String serial) {
+        return null;
+    }
 }
