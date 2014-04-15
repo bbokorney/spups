@@ -15,4 +15,10 @@ public class Player {
         throw new UnsupportedOperationException();
     }
 
+    public int getScore() {
+        // TODO:sara
+        throw new UnsupportedOperationException();
+    }
+
+
 }

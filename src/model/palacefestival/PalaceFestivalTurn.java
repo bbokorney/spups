@@ -5,16 +5,25 @@ package model.palacefestival;
  */
 public class PalaceFestivalTurn extends CardGameTurn {
 
+    private int numberCardsDrawn;
+
+    public PalaceFestivalTurn() {
+        numberCardsDrawn = 0;
+    }
+
     @Override
     public void reset() {
-        // TODO
-        throw new UnsupportedOperationException();
+        numberCardsDrawn = 0;
     }
 
     @Override
     public boolean canDrawCard() {
-        // TODO
-        throw new UnsupportedOperationException();
+        return numberCardsDrawn < 2;
+    }
+
+    @Override
+    public void recordDrawCard() {
+        numberCardsDrawn++;
     }
 
 }

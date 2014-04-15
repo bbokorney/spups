@@ -1,5 +1,8 @@
 package model.palacefestival;
 
+import model.player.JavaPlayer;
+
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -7,34 +10,38 @@ import java.util.Collection;
  */
 public class JavaPlayerAdapter implements PalaceFestivalPlayer {
 
+    private JavaPlayer javaPlayer;
+    private ArrayList<Card> hand;
+
+    public JavaPlayerAdapter(JavaPlayer javaPlayer) {
+        this.javaPlayer = javaPlayer;
+        hand = new ArrayList<Card>();
+    }
+
     @Override
     public void playCard(Card card) {
-        // TODO
-        throw new UnsupportedOperationException();
+        if (hand.contains(card))
+            hand.remove(card);
     }
 
     @Override
     public void takeCard(Card card) {
-        // TODO
-        throw new UnsupportedOperationException();
+        hand.add(card);
     }
 
     @Override
     public void incrementScore() {
-        // TODO
-        throw new UnsupportedOperationException();
+        javaPlayer.adjustScore(1);
     }
 
     @Override
     public Collection<Card> getHand() {
-        // TODO
-        throw new UnsupportedOperationException();
+        return hand;
     }
 
     @Override
     public int getScore() {
-        // TODO
-        throw new UnsupportedOperationException();
+        return javaPlayer.getScore();
     }
 
 }
