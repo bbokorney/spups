@@ -3,23 +3,11 @@ package model.player;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class JavaPlayerResources {
+public class JavaPlayerResources extends Resources<JavaPlayerResourceType> {
 
-    private Resources<JavaPlayerResourceType> resources;
-
-    public int getCount(JavaPlayerResourceType resourceType) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
-    }
-
-    public void useResource(JavaPlayerResourceType resourceType) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
-    }
-
-    public void addResource(JavaPlayerResourceType resourceType, int count) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
+    public JavaPlayerResources() {
+        super();
+        // TODO: add resources once enum is completed
     }
 
 }
