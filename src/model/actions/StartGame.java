@@ -1,5 +1,9 @@
 package model.actions;
 
+import model.GameModel;
+import model.actions.serialization.Json;
+import model.actions.serialization.JsonObject;
+
 /**
  * Created by idinamenzel on 4/14/2014.
  */
@@ -69,12 +73,12 @@ public class StartGame extends Action {
         Utilizes Json and JsonObject to accomplish this.
      */
     public String serialize() {
-
-        return Json.jsonObject(Json.jsonElemets(
-                Json.jsonPair( "numberOfPlayers" , Json.jsonValue(numberOfPlayers + "")),
-                Json.jsonPair( "playerNames" , Json.serializeArray(playerNames)),
-                Json.jsonPair( "playerColors" , Json.serializeArray(playerColors))
-                ));
+        return null;
+//        return Json.wrapObject(Json.wrapElements(
+//                Json.wrapPair("numberOfPlayers", Json.wrapValue(numberOfPlayers + "")),
+//                Json.wrapPair("playerNames", Json.wrapArray(playerNames)),
+//                Json.wrapPair("playerColors", Json.wrapArray(playerColors))
+//        ));
     }
 
     @Override

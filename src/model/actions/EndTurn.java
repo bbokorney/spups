@@ -1,5 +1,8 @@
 package model.actions;
 
+import model.GameModel;
+import model.actions.serialization.JsonObject;
+
 /**
  * Created by idinamenzel on 4/14/14.
  */
