@@ -1,5 +1,7 @@
 package model;
 
+import model.board.Board;
+import model.board.JavaBoard;
 import model.board.Location;
 import model.player.Developer;
 import model.player.JavaPlayer;
@@ -60,7 +62,7 @@ public class JavaGameModel extends GameModel{
     }
 
     @Override
-    JavaPlayer getCurrentPlayer() {
+    public JavaPlayer getCurrentPlayer() {
         return null;
     }
 
@@ -86,6 +88,10 @@ public class JavaGameModel extends GameModel{
 
     @Override
     List<Developer> getDevelopers() {
+        return null;
+    }
+
+    public JavaBoard getJavaBoard() {
         return null;
     }
 }
