@@ -1,9 +1,16 @@
 package view;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import model.palacefestival.PalaceFestival;
+import view.actionpanel.ActionPanel;
+import view.gamepanel.GamePanel;
+import view.palacefestival.FestivalPanel;
 
 
 /**
@@ -33,6 +40,12 @@ public class GameFrame extends JFrame {
 
         menuBar.add(file);
         this.setJMenuBar(menuBar);
+        
+        GamePanel gamePanel = new GamePanel();
+        ActionPanel actionPanel = new ActionPanel(); 
+        FestivalPanel festivalPanel = new FestivalPanel();
+        gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT*2/3));
+        gamePanel.setVisible(true);
 		// todo addMenu
 	}
 }
