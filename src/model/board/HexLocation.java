@@ -63,4 +63,28 @@ public class HexLocation implements Location, PathNode {
 	}
 
     public List<PathEdge> getEdges() { return null; }
+
+    @Override
+    public String serialize() {
+        return null;
+    }
+
+    @Override
+    public HexLocation restore(String serial) {
+        return null;
+    }
+
+    public HexLocation getNeighbor(int i) {
+        /*
+            0 is north
+            1 is northeast
+            2 is southeast
+            3 is south
+            4 is southwest
+            5 is northwest
+         */
+
+        return null;
+    }
+
 }

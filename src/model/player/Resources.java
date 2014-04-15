@@ -1,5 +1,6 @@
 package model.player;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -7,21 +8,24 @@ import java.util.Map;
  */
 public class Resources<T> {
 
-    private Map<T, Integer> map;
+    private Map<T, Integer> resources;
+
+    public Resources() {
+        resources = new HashMap<T, Integer>();
+    }
 
     public int getCount(T resource) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
+        return resources.containsKey(resource) ? resources.get(resource) : 0;
     }
 
     public void useResource(T resource) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
+        int oldCount = resources.get(resource);
+        resources.remove(resource);
+        resources.put(resource, --oldCount);
     }
 
     public void addResource(T resource, int count) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
+        resources.put(resource, count);
     }
 
 }

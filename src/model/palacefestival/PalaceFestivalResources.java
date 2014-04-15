@@ -1,37 +1,48 @@
 package model.palacefestival;
 
-import java.util.Collection;
+import java.util.Stack;
 
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PalaceFestivalResources {
+public class PalaceFestivalResources implements CardGameResources<Card> {
 
-    private CardGameResources<PalaceCard> resources = new CardGameResources<PalaceCard>();
+    private Stack<Card> deck;
+    private Stack<Card> discard;
+    private Card festivalCard;
 
-    public PalaceFestivalResources(Collection<PalaceCard> deck) {
-        // TODO
-        throw new UnsupportedOperationException();
+    public PalaceFestivalResources(Stack<Card> deck) {
+        this.deck = deck;
+        this.discard = new Stack<Card>();
+        this.festivalCard = this.deck.pop();
     }
 
-    public PalaceCard peekAtFaceUpCard() {
-        // TODO
-        throw new UnsupportedOperationException();
+    @Override
+    public Card peekAtFaceUpCard() {
+        return festivalCard;
     }
 
-    public PalaceCard drawFaceUpCard() {
-        // TODO
-        throw new UnsupportedOperationException();
+    @Override
+    public Card drawFaceUpCard() {
+        Card currentFestivalCard = festivalCard;
+        festivalCard = deck.pop();
+        return currentFestivalCard;
     }
 
-    public PalaceCard drawCardFromDeck() {
-        // TODO
-        throw new UnsupportedOperationException();
+    @Override
+    public Card drawCardFromDeck() {
+        Card drawnCard = deck.pop();
+        if (deck.isEmpty()) {
+            deck.addAll(discard);
+            discard.clear();
+        }
+
+        return drawnCard;
     }
 
-    public void discard(PalaceCard card) {
-        // TODO
-        throw new UnsupportedOperationException();
+    @Override
+    public void discard(Card card) {
+        discard.push(card);
     }
 
 }

@@ -5,14 +5,25 @@ package model.player;
  */
 public class Player {
 
+    private String name;
+    private int score;
+
+    public Player(String name) {
+        this.name = name;
+        this.score = 0;
+    }
+
     public String getName() {
-        // TODO:sara
-        throw new UnsupportedOperationException();
+        return name;
     }
 
     public void adjustScore(int adjustment) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
+        score += adjustment;
     }
+
+    public int getScore() {
+        return score;
+    }
+
 
 }

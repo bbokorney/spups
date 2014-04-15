@@ -1,5 +1,6 @@
 package model.actions.tiles;
 
+
 import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
@@ -7,24 +8,28 @@ import model.actions.serialization.JsonObject;
 import model.board.Location;
 
 /**
- * Created by idinamenzel on 4/14/14.
+ * Created by idinamenzel on 4/13/14.
  */
-public class PlaceVillageTile extends Action {
+public class PlaceThreeSpaceTile extends Action {
 
 
     /*
         attributes
      */
-    Location placement;
+    Location villagePlacement;
+    Location[] ricePlacement = new Location[2];
+
 
     /*
         constructors
      */
-    public PlaceVillageTile(){
+    PlaceThreeSpaceTile(){
 
     }
-    public PlaceVillageTile(Location placement){
-        this.placement = placement;
+    PlaceThreeSpaceTile(Location villagePlacement, Location rice1Placement, Location rice2Placement) {
+        this.villagePlacement = villagePlacement;
+        this.ricePlacement[0] = rice1Placement;
+        this.ricePlacement[1] = rice2Placement;
     }
 
 
@@ -37,18 +42,18 @@ public class PlaceVillageTile extends Action {
                 false if invalid
      */
         boolean isSuccess = true;
-        int famePoints = 0;         //todo replace with body of water fame points
-        int actionPoints = 1;
+        int famePoints = 0;     //todo replace with surround body of water
+        int actionPoints = 1;   //todo plus however many placed outside of central java is extra.
         String message = "";
 
-        //see if there is a village tile to take from player
+        //see if there is a three space tile to take from shared
         if(true){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough village tiles.";
+            message += "Error: There are not have enough three space tiles.";
         }
 
         //Check if the player has enough action points
@@ -61,14 +66,14 @@ public class PlaceVillageTile extends Action {
             message += "Error: You do not have enough AP points.\n";
         }
 
-        //check if they are placing on another one tile
+        //check if they are placing on another three space tile
         if(true){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on top of another three space.\n";
+            message += "Error: You cannot place on top of another three space.\n";
         }
 
         //check if they are not placing outside of central java
@@ -78,7 +83,7 @@ public class PlaceVillageTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this outside Central Java.\n";
+            message += "Error: You cannot place outside Central Java.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
@@ -98,7 +103,7 @@ public class PlaceVillageTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place a village tile on this terrain.\n";
+            message += "Error: You cannot place a three space tile on this terrain.\n";
         }
 
         //see if they are placing on top of a developer
@@ -108,7 +113,7 @@ public class PlaceVillageTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this tile on top of a developer.\n";
+            message += "Error: You cannot place on top of a developer.\n";
         }
 
         //see if they are connecting two cities
@@ -121,10 +126,11 @@ public class PlaceVillageTile extends Action {
             message += "Error: You cannot connect two cities.\n";
         }
 
+
         //todo
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
-    }
+     }
 
     @Override
     public ActionResult doAction(GameModel game) {
@@ -138,11 +144,11 @@ public class PlaceVillageTile extends Action {
 
             //Decrememnt the AP points
 
-            // decrement the number of villages in player resources
+            //decrement a three space tile from shared resources
 
-            // place the village component on the placement location
+            //place the tile components down on three locations
 
-            //award the player the fame points earned
+            //set has placed land boolean to true
         }
         return result;
     }
@@ -172,4 +178,3 @@ public class PlaceVillageTile extends Action {
         return null;
     }
 }
-
