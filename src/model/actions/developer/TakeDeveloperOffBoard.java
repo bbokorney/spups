@@ -1,5 +1,11 @@
 package model.actions.developer;
 
+import model.GameModel;
+import model.actions.Action;
+import model.actions.ActionResult;
+import model.actions.serialization.JsonObject;
+import model.board.Location;
+
 /**
  * Created by idinamenzel on 4/14/14.
  */

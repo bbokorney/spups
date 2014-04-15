@@ -1,5 +1,12 @@
 package model.actions.developer;
 
+import model.GameModel;
+import model.actions.Action;
+import model.actions.ActionResult;
+import model.actions.serialization.Json;
+import model.actions.serialization.JsonObject;
+import model.board.Location;
+
 /**
  * Created by idinamenzel on 4/14/14.
  */
@@ -74,11 +81,17 @@ public class MoveDeveloperAroundBoard extends Action {
 
         Utilizes Json and JsonObject to accomplish this.
      */
+        //todo fix
 
-        return Json.jsonObject(Json.jsonElemets(
-                Json.jsonPair( "developerStartingLocation" , Json.serialize(developerStartinglocation)),
-                Json.jsonPair( "path" , Json.serializeArray(path))
-        ));
+        String[] pathToSerial = new String[path.length];
+        for(int i = 0; i < path.length; i++){
+            pathToSerial[i] = path[i].serialize();
+        }
+            return null;
+//        return Json.wrapObject(Json.wrapElements(
+//                Json.wrapPair("developerStartingLocation", developerStartinglocation.serialize()),
+//                Json.wrapPair("path", Json.serializeCollection(path))
+//        ));
 
     }
 
@@ -92,10 +105,11 @@ public class MoveDeveloperAroundBoard extends Action {
      */
 
         // get the developer starting location
-        developerStartinglocation = (new Location()).loadObject(actionToRestore.getJsonObject("developerStartingLocation"));
+        //todo restore shit
+        //developerStartinglocation = (new Location()).loadObject(actionToRestore.getJsonObject("developerStartingLocation"));
 
         //get the temporary path of JsonObjects which store locations?
-        //JsonObject[] temporaryPath = actionToRestore.getJsonObjectArray("path");
+        JsonObject[] temporaryPath = actionToRestore.getJsonObjectArray("path");
 
 //        path = new Location[temporaryPath.length];
 
