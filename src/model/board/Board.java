@@ -33,4 +33,7 @@ public abstract class Board {
 		Space space = board.get(loc);
 		return space.getTopTileComponent();
 	}
+
+    public boolean areLocationsOnBoard(Location... locations){ return false;}
+
 }
