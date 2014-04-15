@@ -36,11 +36,12 @@ public class PalaceFestivalPlayers implements TurnTracker<PalaceFestivalPlayer> 
 
     @Override
     public PalaceFestivalPlayer getCurrentPlayer() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return players.get(currentPlayerIndex);
     }
 
     @Override
     public void advanceTurn() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        currentPlayerIndex++;
+        currentPlayerIndex %= players.size();
     }
 }
