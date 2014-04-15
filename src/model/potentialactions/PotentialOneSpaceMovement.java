@@ -28,6 +28,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
             location = newLocation;
             this.setHoverBoard();
         }
+        return null;
     }
 
     @Override
