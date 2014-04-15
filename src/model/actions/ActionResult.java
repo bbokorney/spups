@@ -11,7 +11,7 @@ public class ActionResult {
     String message;
     Action actionPerformed;
 
-    ActionResult(boolean s, int fp, int ap, String m, Action action){
+    public ActionResult(boolean s, int fp, int ap, String m, Action action){
         success = s;
         famePoints = fp;
         actionPoints = ap;
