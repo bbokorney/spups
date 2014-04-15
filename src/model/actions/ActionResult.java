@@ -9,14 +9,12 @@ public class ActionResult {
     int famePoints;
     int actionPoints;
     String message;
-    Action actionPerformed;
 
     public ActionResult(boolean s, int fp, int ap, String m, Action action){
         success = s;
         famePoints = fp;
         actionPoints = ap;
         message = m;
-        actionPerformed = action;
     }
 
 
@@ -38,10 +36,6 @@ public class ActionResult {
         return message;
     }
 
-    public Action getActionPerformed() {
-        return actionPerformed;
-    }
-
 
     /*      Setters     */
     /*  these may be unnecessary */
@@ -60,10 +54,6 @@ public class ActionResult {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public void setActionPerformed(Action actionPerformed) {
-        this.actionPerformed = actionPerformed;
     }
 
 
