@@ -1,7 +1,13 @@
 package model.actions.serialization;
 
 /**
- * Created by Baker on 4/14/2014.
+ * Created by idinamenzel on 4/14/14.
  */
-public interface Serializable {
+public interface Serializable<E> {
+
+    public String serialize();
+
+    public E restore(String serial);
+
+
 }
