@@ -7,6 +7,7 @@ import model.board.Location;
  */
 public class PlacementOnSameSizeTileRule {
     public static boolean placingOnSameTile(Location... locations) {
+        
         return false;
     }
 }
