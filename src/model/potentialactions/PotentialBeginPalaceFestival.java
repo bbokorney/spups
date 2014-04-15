@@ -2,7 +2,7 @@ package model.potentialactions;
 
 import model.actions.ActionResult;
 import model.board.Location;
-import model.palacefestival.PalaceCard;
+import model.palacefestival.Card;
 import model.tiles.PalaceTileComponent;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class PotentialBeginPalaceFestival {
 
     private ArrayList<PalaceTileComponent> palacesValidForFestival;
     private ArrayList<Location> locationsValidForFestival;
-    private ArrayList<PalaceCard> cardsValidToBeginFestival;
+    private ArrayList<Card> cardsValidToBeginFestival;
     private ArrayList<Integer> indexOfCardsToBid;
 
     public boolean tabToNextElement() {

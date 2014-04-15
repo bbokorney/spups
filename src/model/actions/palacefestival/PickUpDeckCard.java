@@ -2,6 +2,7 @@ package model.actions.palacefestival;
 
 import model.GameModel;
 import model.actions.Action;
+import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 
 /**
@@ -9,20 +10,27 @@ import model.actions.serialization.JsonObject;
  */
 public class PickUpDeckCard extends Action {
 
+
+
+    public PickUpDeckCard() {
+
+    }
+
+
     @Override
-    public boolean tryAction(GameModel game) {
+    public ActionResult tryAction(GameModel game) {
         // TODO: Sara
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
 
     @Override
-    public boolean doAction(GameModel game) {
+    public ActionResult doAction(GameModel game) {
         // TODO: Sara
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
 
     @Override
-    public String serialize(GameModel game) {
+    public String serialize() {
         // TODO: Sara
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }

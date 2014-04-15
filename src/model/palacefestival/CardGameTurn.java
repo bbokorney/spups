@@ -9,4 +9,6 @@ public abstract class CardGameTurn {
 
     public abstract boolean canDrawCard();
 
+    public abstract void recordDrawCard();
+
 }

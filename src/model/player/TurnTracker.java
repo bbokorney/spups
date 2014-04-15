@@ -1,28 +1,18 @@
 package model.player;
 
+import java.util.ArrayList;
+
 /**
  * Created by Baker on 4/14/2014.
  */
-public class TurnTracker<T> {
+public interface TurnTracker<T> {
 
-    public void addPlayer(T player) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
-    }
+    public void addPlayer(T player);
 
-    public void removePlayer(T player) {
-        // TODO:sara
-        throw new UnsupportedOperationException();
-    }
+    public void removePlayer(T player);
 
-    public T getCurrentPlayer() {
-        // TODO:sara
-        throw new UnsupportedOperationException();
-    }
+    public T getCurrentPlayer();
 
-    public void advanceTurn() {
-        // TODO:sara
-        throw new UnsupportedOperationException();
-    }
+    public void advanceTurn();
 
 }

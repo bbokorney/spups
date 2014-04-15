@@ -4,18 +4,28 @@ import model.GameModel;
 import model.actions.serialization.JsonObject;
 
 /**
- * Created by Owner on 4/14/14.
+ * Created by idinamenzel on 4/14/14.
  */
 public abstract class Action {
 
-    public abstract boolean tryAction(GameModel game);
 
-    public abstract boolean doAction(GameModel game);
+    int actionID;
 
-    public abstract String serialize(GameModel game);
+    /*      Getters     */
+
+    public int getActionID(){
+        return actionID;
+    }
+
+    /*      Abstract Interface      */
+
+    public abstract ActionResult tryAction(GameModel game);
+
+    public abstract ActionResult doAction(GameModel game);
+
+    public abstract String serialize();
 
     public abstract Action restore(JsonObject actionToRestore);
 
-    public abstract int getActionID();
 
 }
