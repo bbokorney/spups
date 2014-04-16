@@ -1,5 +1,6 @@
 package model.board;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -7,6 +8,10 @@ import java.util.Collection;
  */
 public class Village {
     private Collection<Location> village;
+
+    public Village() {
+        village = new ArrayList<Location>();
+    }
 
     public int getSize() {
         return village.size();
