@@ -83,7 +83,7 @@ public class PlaceIrrigationTile extends Action {
     }
 
     @Override
-    public Pair<ActionResult, Action> doAction(GameModel game) {
+    public ActionResult doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -101,7 +101,7 @@ public class PlaceIrrigationTile extends Action {
             //place the tile on the board
 
         }
-        return new Pair(result, this);
+        return result;
     }
 
 

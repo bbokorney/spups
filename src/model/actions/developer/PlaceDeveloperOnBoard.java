@@ -57,7 +57,7 @@ public class PlaceDeveloperOnBoard extends Action {
     }
 
     @Override
-    public Pair<ActionResult, Action> doAction(GameModel game) {
+    public ActionResult doAction(GameModel game) {
 
         ActionResult result = tryAction(game);
         if(result.isSuccess()) {
@@ -66,7 +66,7 @@ public class PlaceDeveloperOnBoard extends Action {
             //place the developer on the ending of the path
             //increment the number of developers on the board
         }
-        return new Pair(result, this);
+        return result;
     }
 
 

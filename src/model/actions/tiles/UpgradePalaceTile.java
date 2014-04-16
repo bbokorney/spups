@@ -125,7 +125,7 @@ public class UpgradePalaceTile extends Action {
     }
 
     @Override
-    public Pair<ActionResult, Action> doAction(GameModel game) {
+    public ActionResult doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -138,7 +138,7 @@ public class UpgradePalaceTile extends Action {
             //Move the developer along the path
             //(change the developer location to the last place on the path)
         }
-        return new Pair(result, this);
+        return result;
     }
 
 
