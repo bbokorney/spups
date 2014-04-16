@@ -21,9 +21,7 @@ public class City {
     }
 
     public int getPalaceLevel() {
-        //TODO: fix the following when getLevel() exists
-        //palace.getLevel();
-        return 0; //for now
+        return palace.getLevel();
     }
 
     public Location getPalaceLocation() {
