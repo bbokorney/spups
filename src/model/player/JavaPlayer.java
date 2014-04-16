@@ -23,6 +23,6 @@ public class JavaPlayer {
         return player.getScore();
     }
 
-
+    //TODO: Add other stuff from UML
 
 }
