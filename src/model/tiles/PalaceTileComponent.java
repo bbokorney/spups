@@ -11,6 +11,11 @@ public class PalaceTileComponent extends TileComponent {
         super(parent);
         this.level = level;
     }
+
+    public PalaceTileComponent(int level) {
+        this.level = level;
+    }
+
     private void flip() {
         isFaceUp = !isFaceUp;
     }

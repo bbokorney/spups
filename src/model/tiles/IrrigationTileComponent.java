@@ -10,5 +10,9 @@ public class IrrigationTileComponent extends TileComponent {
         super(parent);
     }
 
+    public IrrigationTileComponent() {
+
+    }
+
 
 }
