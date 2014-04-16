@@ -13,6 +13,6 @@ public abstract class TileComponent {
 	}
 
     public Tile getParent() {
-        
+        return parent;
     }
 }
