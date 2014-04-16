@@ -24,4 +24,6 @@ public abstract class TileComponent implements Visitable {
     }
 
     public void accept(Visitor visitor) {}
+
+    public void nothing(){}
 }
