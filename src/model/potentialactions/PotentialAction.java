@@ -36,5 +36,9 @@ public abstract class PotentialAction {
         return this.game;
     }
 
+    protected Boolean isValid(){
+        return ((Boolean) getActionResult().isSuccess());
+    }
+
 
 }
