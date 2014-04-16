@@ -1,11 +1,13 @@
 package model.actions.developer;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.Json;
 import model.actions.serialization.JsonObject;
 import model.board.Location;
+import pathfinding.JavaPath;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -16,17 +18,17 @@ public class MoveDeveloperAroundBoard extends Action {
         attributes
      */
     private Location developerStartinglocation;
-    private Location[] path;
+    private JavaPath path;
 
     /*
         Constructors
      */
-    MoveDeveloperAroundBoard(){
+    public MoveDeveloperAroundBoard(){
         //Empty constructor
         //Most likely used for loading
     }
 
-    MoveDeveloperAroundBoard(Location developerStartinglocation, Location[] path){
+    public MoveDeveloperAroundBoard(Location developerStartinglocation, JavaPath path){
         this.developerStartinglocation = developerStartinglocation;
         this.path = path;
     }
@@ -55,7 +57,7 @@ public class MoveDeveloperAroundBoard extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -68,7 +70,7 @@ public class MoveDeveloperAroundBoard extends Action {
             //Move the developer along the path
             //(change the developer location to the last place on the path)
         }
-        return result;
+        return new Pair(result, this);
     }
 
 
@@ -81,12 +83,12 @@ public class MoveDeveloperAroundBoard extends Action {
 
         Utilizes Json and JsonObject to accomplish this.
      */
-        //todo fix
+        //todo fix since JavaPath and other stuff
 
-        String[] pathToSerial = new String[path.length];
-        for(int i = 0; i < path.length; i++){
-            pathToSerial[i] = path[i].serialize();
-        }
+//        String[] pathToSerial = new String[path.length];
+//        for(int i = 0; i < path.length; i++){
+//            pathToSerial[i] = path[i].serialize();
+//        }
             return null;
 //        return Json.wrapObject(Json.wrapElements(
 //                Json.wrapPair("developerStartingLocation", developerStartinglocation.serialize()),
@@ -109,13 +111,13 @@ public class MoveDeveloperAroundBoard extends Action {
         //developerStartinglocation = (new Location()).loadObject(actionToRestore.getJsonObject("developerStartingLocation"));
 
         //get the temporary path of JsonObjects which store locations?
-        JsonObject[] temporaryPath = actionToRestore.getJsonObjectArray("path");
+        //JsonObject[] temporaryPath = actionToRestore.getJsonObjectArray("path");
 
 //        path = new Location[temporaryPath.length];
 
-        for(int i = 0; i < temporaryPath.length; i++){
-//            path[i] = temporaryPath[i];
-        }
+//        for(int i = 0; i < temporaryPath.length; i++){
+////            path[i] = temporaryPath[i];
+//        }
 
 
 

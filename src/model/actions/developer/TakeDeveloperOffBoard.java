@@ -1,10 +1,12 @@
 package model.actions.developer;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Location;
+import pathfinding.JavaPath;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -16,14 +18,14 @@ public class TakeDeveloperOffBoard extends Action {
         attributes
      */
     Location developerLocationTakenOff;
-    Location[] path;
+    JavaPath path;
     /*
         constructors
      */
-    TakeDeveloperOffBoard(){
+    public TakeDeveloperOffBoard(){
 
     }
-    TakeDeveloperOffBoard(Location developerLocationTakenOff, Location[] path){
+    public TakeDeveloperOffBoard(Location developerLocationTakenOff, JavaPath path){
         this.path = path;
         this.developerLocationTakenOff = developerLocationTakenOff;
     }
@@ -52,7 +54,7 @@ public class TakeDeveloperOffBoard extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -65,7 +67,7 @@ public class TakeDeveloperOffBoard extends Action {
             //Move the developer along the path
             //(change the developer location to the last place on the path)
         }
-        return result;
+        return new Pair(result, this);
     }
 
 

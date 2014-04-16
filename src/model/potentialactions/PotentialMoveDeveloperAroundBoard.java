@@ -1,6 +1,9 @@
 package model.potentialactions;
 
+import model.GameModel;
 import model.JavaGameModel;
+import model.actions.ActionResult;
+import model.actions.developer.MoveDeveloperAroundBoard;
 import model.board.HexLocation;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
@@ -13,19 +16,27 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     HexLocation developerStartingLocation;
 
 
-    public PotentialMoveDeveloperAroundBoard(JavaGameModel game){
+    public PotentialMoveDeveloperAroundBoard(GameModel game){
+
         super(game);
     }
 
     private JavaPath getShortestLegalPath(){
-        return  new LeastCostPathFinder().findShortestPath(developerStartingLocation, location, game.getCurrentPlayer(), game.getJavaBoard());
+        return  new LeastCostPathFinder().findShortestPath(developerStartingLocation, getLocation(), game.getCurrentJavaPlayer(), game.getBoard());
 
     }
 
     @Override
-    public void setHoverBoard() {
-        hoverBoard.reset();
+    public void setComponentsOnHoverBoard() {
 
+        hoverBoard.reset();
+        //hoverBoard.placeTileComponent(getLocation(), null, ActionState.valueOf());
+
+    }
+
+    @Override
+    protected ActionResult getActionResult() {
+        return new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath()).tryAction(getGameModel());
     }
 
 }

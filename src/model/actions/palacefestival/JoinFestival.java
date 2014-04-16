@@ -1,6 +1,7 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -17,7 +18,7 @@ public class JoinFestival extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
         // TODO: Sara
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
