@@ -14,6 +14,11 @@ public abstract class TileComponent implements Visitable {
         height = 1; //default size
         this.parent = parent;
     }
+
+    public TileComponent () {
+        height = 1; //default size
+        this.parent = null;
+    }
 	
 	public int getHeight() {
 		return height;
