@@ -11,9 +11,15 @@ import model.tiles.TileComponent;
 public abstract class Board {
 
 	private Map<Location, Space> board;
+    private BodyOfWaterContainer bodyOfWaterContainer;
+    private CityContainer cityContainer;
+    private VillageContainer villageContainer;
 	
 	public Board() {
 		board = new HashMap<Location, Space>();
+        bodyOfWaterContainer = new BodyOfWaterContainer();
+        cityContainer = new CityContainer();
+        villageContainer = new VillageContainer();
 	}
 	
 	public void placeSpace(Location loc, Space space) {
