@@ -29,6 +29,6 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
         return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1)).tryAction(getGameModel());
     }
 
-    protected
+    //protected
 
 }
