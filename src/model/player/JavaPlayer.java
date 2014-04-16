@@ -5,19 +5,24 @@ package model.player;
  */
 public class JavaPlayer {
 
+    private Player player;
+
+    public JavaPlayer(String name) {
+        player = new Player(name);
+    }
+
     public String getName() {
-        // TODO:
-        throw new UnsupportedOperationException();
+        return player.getName();
     }
 
     public void adjustScore(int adjustment) {
-        // TODO:
-        throw new UnsupportedOperationException();
+        player.adjustScore(adjustment);
     }
 
     public int getScore() {
-        // TODO:
-        throw new UnsupportedOperationException();
+        return player.getScore();
     }
+
+
 
 }
