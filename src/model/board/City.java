@@ -32,4 +32,8 @@ public class City {
     public Location getPalaceLocation() {
         return palaceLocation;
     }
+
+    public Collection<Location> getCity() {
+        return city;
+    }
 }
