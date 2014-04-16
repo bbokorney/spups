@@ -2,6 +2,8 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.JavaGameModel;
+import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.developer.MoveDeveloperAroundBoard;
 import model.board.HexLocation;
@@ -37,6 +39,12 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     @Override
     protected ActionResult getActionResult() {
         return new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath()).tryAction(getGameModel());
+    }
+
+
+    protected Pair<ActionResult, Action> confirmMovement() {
+        MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath());
+        return new Pair<ActionResult, Action>(result.doAction(getGameModel()), result);
     }
 
 }

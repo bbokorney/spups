@@ -1,6 +1,8 @@
 package model.potentialactions;
 
 import model.GameModel;
+import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceThreeSpaceTile;
 import model.tiles.RiceTileComponent;
@@ -29,6 +31,9 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
         return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1)).tryAction(getGameModel());
     }
 
-    //protected
+    protected Pair<ActionResult, Action> confirmPlacement() {
+        PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1));
+        return new Pair<ActionResult, Action>(result.doAction(getGameModel()), result);
+    }
 
 }

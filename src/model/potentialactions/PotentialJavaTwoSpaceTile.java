@@ -1,6 +1,8 @@
 package model.potentialactions;
 
 import model.GameModel;
+import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceTwoSpaceTile;
 import model.tiles.RiceTileComponent;
@@ -27,6 +29,11 @@ public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
     @Override
     protected ActionResult getActionResult() {
         return new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation()).tryAction(getGameModel());
+    }
+
+    protected Pair<ActionResult, Action> confirmPlacement() {
+        PlaceTwoSpaceTile result = new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation());
+        return new Pair<ActionResult, Action>(result.doAction(getGameModel()), result);
     }
 
 }

@@ -96,7 +96,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
 
         HexLocation newOtherLocation = centerLocation.getNeighbor(newRotationState);
         if(game.getBoard().areLocationsOnBoard(newOtherLocation)){
-            this.otherLocation = newOtherLocation;        
+            this.otherLocation = newOtherLocation;
             this.rotationState = newRotationState;
             this.setComponentsOnHoverBoard();
         }

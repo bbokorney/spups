@@ -1,7 +1,6 @@
 package model.potentialactions;
 
 import model.GameModel;
-import model.JavaGameModel;
 import model.actions.ActionResult;
 
 /**
