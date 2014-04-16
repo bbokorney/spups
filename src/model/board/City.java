@@ -2,6 +2,7 @@ package model.board;
 
 import model.tiles.PalaceTileComponent;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -11,6 +12,10 @@ public class City {
     private Collection<Location> city;
     private Location palaceLocation;
     private PalaceTileComponent palace;
+
+    public City() {
+        city = new ArrayList<Location>();
+    }
 
     public int getSize() {
         return city.size();

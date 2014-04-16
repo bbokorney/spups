@@ -1,6 +1,8 @@
 package model.board;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import model.tiles.TileComponent;
 
 /**
@@ -8,7 +10,7 @@ import model.tiles.TileComponent;
  */
 public abstract class Board {
 
-	private HashMap<Location, Space> board;
+	private Map<Location, Space> board;
 	
 	public Board() {
 		board = new HashMap<Location, Space>();

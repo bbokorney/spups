@@ -1,5 +1,6 @@
 package model.board;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -8,6 +9,10 @@ import java.util.Collection;
 public class BodyOfWater {
 
     private Collection<Location> bodyOfWater;
+
+    public BodyOfWater() {
+        bodyOfWater = new ArrayList<Location>();
+    }
 
     public int getSize() {
         return bodyOfWater.size();
