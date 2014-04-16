@@ -7,14 +7,16 @@ import model.board.HexLocation;
 /**
  * Created by idinamenzel on 4/15/14.
  */
-public abstract class PotentialThreeSpaceMovement extends PotentialAction implements HexComponentMovement{
+public abstract class PotentialThreeSpaceMovement extends PotentialAction implements HexComponentMovement, HexComponentRotation{
 
 
     private HexLocation centerLocation;
     private HexLocation[] otherLocations;
+    private int rotationState;
 
     public PotentialThreeSpaceMovement(GameModel game){
         super(game);
+        this.rotationState = 0;
     }
 
     @Override
@@ -103,6 +105,18 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
             otherLocations[1] = newOtherLocation;
+            this.setComponentsOnHoverBoard();
+        }
+        return this.getActionResult();
+    }
+
+    public ActionResult rotateClockwise(){
+        int newRotationState = (rotationState + 1) % 6;
+
+        HexLocation[] newOtherLocations = { centerLocation.getNeighbor(newRotationState), centerLocation.getNeighbor((newRotationState + 1) % 6)};
+        if(game.getBoard().areLocationsOnBoard(newOtherLocations[0], newOtherLocations[1])){
+            this.otherLocations = newOtherLocations;        //todo check if this will work...
+            this.rotationState = newRotationState;
             this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
