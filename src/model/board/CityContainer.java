@@ -13,4 +13,8 @@ public class CityContainer {
     public CityContainer() {
         cityCollection = new ArrayList<City>();
     }
+
+    public Collection<City> getCityCollection() {
+        return cityCollection;
+    }
 }
