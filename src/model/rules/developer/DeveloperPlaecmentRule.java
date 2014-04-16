@@ -18,19 +18,23 @@ public class DeveloperPlaecmentRule implements Visitor {
         this.developer = developer;
     }
 
-    public void visit(VillageTileComponent component) {
+    public boolean allowed() {
+        return allowed;
+    }
 
+    public void visit(VillageTileComponent component) {
+        allowed = true;
     }
 
     public void visit(RiceTileComponent component) {
-
+        allowed = true;
     }
 
     public void visit(PalaceCardComponent component) {
-
+        allowed = false;
     }
 
     public void visit(IrrigationTileComponent component) {
-
+        allowed = false;
     }
 }
