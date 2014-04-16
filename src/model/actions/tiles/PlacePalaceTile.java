@@ -1,6 +1,7 @@
 package model.actions.tiles;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -21,12 +22,12 @@ public class PlacePalaceTile extends Action {
     /*
         constructors
      */
-    PlacePalaceTile(){
+    public PlacePalaceTile(){
         //Empty constructor
         //used for loading
     }
 
-    PlacePalaceTile(int value, Location placement){
+    public PlacePalaceTile(int value, Location placement){
         this.value = value;
         this.placement = placement;
     }
@@ -132,7 +133,7 @@ public class PlacePalaceTile extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -152,7 +153,7 @@ public class PlacePalaceTile extends Action {
             //decremenet the number of this valued palace in the shared resources
 
         }
-        return result;
+        return new Pair(result, this);
     }
 
 

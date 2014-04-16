@@ -1,6 +1,7 @@
 package model.actions;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.serialization.JsonObject;
 
 /**
@@ -41,7 +42,7 @@ public class PlanningToPlay extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -54,7 +55,7 @@ public class PlanningToPlay extends Action {
             //Move the developer along the path
             //(change the developer location to the last place on the path)
         }
-        return result;
+        return new Pair(result, this);
     }
 
 

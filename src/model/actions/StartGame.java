@@ -1,6 +1,7 @@
 package model.actions;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.serialization.Json;
 import model.actions.serialization.JsonObject;
 
@@ -50,7 +51,7 @@ public class StartGame extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -61,7 +62,7 @@ public class StartGame extends Action {
 
             //start the game...?
         }
-        return result;
+        return new Pair(result, this);
     }
 
     @Override

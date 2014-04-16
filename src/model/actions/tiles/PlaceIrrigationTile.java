@@ -1,6 +1,7 @@
 package model.actions.tiles;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -21,12 +22,12 @@ public class PlaceIrrigationTile extends Action {
     /*
         constructors
      */
-    PlaceIrrigationTile(){
+    public PlaceIrrigationTile(){
         //Empty constructor
         //used for loading
     }
 
-    PlaceIrrigationTile(Location placement){
+    public PlaceIrrigationTile(Location placement){
         this.placement = placement;
     }
 
@@ -82,7 +83,7 @@ public class PlaceIrrigationTile extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -100,7 +101,7 @@ public class PlaceIrrigationTile extends Action {
             //place the tile on the board
 
         }
-        return result;
+        return new Pair(result, this);
     }
 
 

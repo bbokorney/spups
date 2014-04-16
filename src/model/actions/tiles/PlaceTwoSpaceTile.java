@@ -1,6 +1,7 @@
 package model.actions.tiles;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -20,15 +21,13 @@ public class PlaceTwoSpaceTile extends Action {
     /*
         constructors
      */
-    PlaceTwoSpaceTile(){
+    public PlaceTwoSpaceTile(){
 
     }
-    PlaceTwoSpaceTile(Location villagePlacement, Location ricePlacement){
+    public PlaceTwoSpaceTile(Location villagePlacement, Location ricePlacement){
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
     }
-
-
 
     @Override
     public ActionResult tryAction(GameModel game) {
@@ -129,7 +128,7 @@ public class PlaceTwoSpaceTile extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public Pair<ActionResult, Action> doAction(GameModel game) {
     /*
         Check if the action is valid
         Do the action if is valid to so
@@ -146,7 +145,7 @@ public class PlaceTwoSpaceTile extends Action {
 
             //set has placed land boolean to true
         }
-        return result;
+        return new Pair(result, this);
     }
 
 
