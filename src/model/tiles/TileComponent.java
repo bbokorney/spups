@@ -5,9 +5,14 @@ package model.tiles;
  */
 public abstract class TileComponent {
 
-	int height;
+	private int height;
+    private Tile parent;
 	
 	public int getHeight() {
 		return height;
 	}
+
+    public Tile getParent() {
+        
+    }
 }
