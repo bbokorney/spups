@@ -31,9 +31,9 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
         return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1)).tryAction(getGameModel());
     }
 
-    protected Pair<ActionResult, Action> confirmPlacement() {
+    protected Pair<ActionResult, PlaceThreeSpaceTile> confirmPlacement() {
         PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1));
-        return new Pair<ActionResult, Action>(result.doAction(getGameModel()), result);
+        return new Pair<ActionResult, PlaceThreeSpaceTile>(result.doAction(getGameModel()), result);
     }
 
 }
