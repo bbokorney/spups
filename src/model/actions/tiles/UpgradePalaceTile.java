@@ -1,6 +1,7 @@
 package model.actions.tiles;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -21,10 +22,10 @@ public class UpgradePalaceTile extends Action {
     /*
         constructors
      */
-    UpgradePalaceTile(){
+    public UpgradePalaceTile(){
 
     }
-    UpgradePalaceTile(Location placement, int value){
+    public UpgradePalaceTile(Location placement, int value){
         this.value = value;
         this.placement = placement;
     }

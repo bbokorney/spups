@@ -1,5 +1,6 @@
 package model;
 
+import model.board.Board;
 import model.board.Location;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
@@ -31,6 +32,7 @@ public abstract class GameModel {
     public abstract String getName();
     public abstract void incrementScore(int score);
     public abstract List<Developer> getDevelopers();
+    public abstract Board getBoard();
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);

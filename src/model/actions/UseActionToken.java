@@ -1,6 +1,7 @@
 package model.actions;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.serialization.JsonObject;
 
 /**
@@ -17,7 +18,7 @@ public class UseActionToken extends Action {
     /*
         Constructors
      */
-    UseActionToken(){
+    public UseActionToken(){
         //Empty constructor
     }
 
