@@ -13,6 +13,14 @@ public class BoardRuleHelper {
         return new HashMap<Player, Integer>();
     }
 
+    public int pointsEarnedFromIrrigationPlacement(Location location) {
+        return 0;
+    }
+
+    public int pointsEarnedFromLandPlacement(Location... locations) {
+        return 0;
+    }
+
     public static boolean getSurroundingTiles(BodyOfWater bow, List<Location> locationsOutput) {
         return false;
     }

@@ -25,7 +25,7 @@ public class PickUpDeckCard extends Action {
     }
 
     @Override
-    public Pair<ActionResult, Action> doAction(GameModel game) {
+    public ActionResult doAction(GameModel game) {
         // TODO: Sara
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }

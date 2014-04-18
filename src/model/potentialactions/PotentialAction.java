@@ -1,7 +1,6 @@
 package model.potentialactions;
 
 import model.GameModel;
-import model.JavaGameModel;
 import model.actions.ActionResult;
 
 /**
@@ -34,6 +33,10 @@ public abstract class PotentialAction {
     protected GameModel getGameModel(){
 
         return this.game;
+    }
+
+    protected Boolean isValid(){
+        return ((Boolean) getActionResult().isSuccess());
     }
 
 
