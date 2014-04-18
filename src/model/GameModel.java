@@ -10,6 +10,7 @@ import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
 import model.tiles.TileComponent;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,6 +37,7 @@ public abstract class GameModel {
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
+    public abstract Collection<JavaPlayer> getPlayers();
     public abstract PalaceFestivalPlayer getCurrentPalaceFestivalPlayer();
     public abstract void advancePalaceFestivalTurn();
     public abstract boolean canDrawCard();

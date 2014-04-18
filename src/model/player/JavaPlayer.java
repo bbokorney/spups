@@ -1,5 +1,7 @@
 package model.player;
 
+import java.util.Collection;
+
 /**
  * Created by Baker on 4/14/2014.
  */
@@ -22,6 +24,8 @@ public class JavaPlayer {
     public int getScore() {
         return player.getScore();
     }
+
+    public Collection<Developer> getDevelopers() {return null;}
 
     //TODO: Add other stuff from UML
 
