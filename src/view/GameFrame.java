@@ -44,8 +44,6 @@ public class GameFrame extends JFrame {
         GamePanel gamePanel = new GamePanel();
         ActionPanel actionPanel = new ActionPanel(); 
         FestivalPanel festivalPanel = new FestivalPanel();
-        gamePanel.setPreferredSize(new Dimension(WIDTH, HEIGHT*2/3));
-        gamePanel.setVisible(true);
 		// todo addMenu
 	}
 }
