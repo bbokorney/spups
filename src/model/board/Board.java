@@ -53,6 +53,13 @@ public abstract class Board {
 		return space.getTopTileComponent();
 	}
 
-    public boolean areLocationsOnBoard(Location... locations){ return false;}
+    public boolean areLocationsOnBoard(Location... locations){
+        //Check that board contains each of these locations
+        for (Location loc : locations) {
+            if (!board.containsKey(loc))
+                return false;
+        }
+        return true;
+    }
 
 }
