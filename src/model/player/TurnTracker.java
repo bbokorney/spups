@@ -11,7 +11,7 @@ public interface TurnTracker<T> {
 
     public void removePlayer(T player);
 
-    public Collection<Player> getPlayers();
+    public Collection<T> getPlayers();
 
     public T getCurrentPlayer();
 
