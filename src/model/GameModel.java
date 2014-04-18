@@ -7,6 +7,7 @@ import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
+import model.player.Player;
 import model.sharedresources.SharedResourceType;
 import model.tiles.TileComponent;
 
@@ -44,5 +45,6 @@ public abstract class GameModel {
     public abstract Card drawFestivalCard();
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
+	public abstract Player[] getJavaPlayers();
 
 }

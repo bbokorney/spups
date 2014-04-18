@@ -1,5 +1,7 @@
 package view.palacefestival;
 
-public class FestivalPanel {
+import javax.swing.JPanel;
+
+public class FestivalPanel extends JPanel {
 
 }

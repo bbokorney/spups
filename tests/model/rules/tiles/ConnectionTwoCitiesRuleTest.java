@@ -1,4 +1,4 @@
-package model.rules.tiles;
+package tests.model.rules.tiles;
 
 /**
  * Created by Baker on 4/14/2014.
