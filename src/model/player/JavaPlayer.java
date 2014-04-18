@@ -8,9 +8,11 @@ import java.util.Collection;
 public class JavaPlayer {
 
     private Player player;
+    private JavaPlayerResources resources;
 
     public JavaPlayer(String name) {
         player = new Player(name);
+        resources = new JavaPlayerResources();
     }
 
     public String getName() {
@@ -27,6 +29,8 @@ public class JavaPlayer {
 
     public Collection<Developer> getDevelopers() {return null;}
 
-    //TODO: Add other stuff from UML
+    public void useResource(JavaPlayerResourceType type)  {
+        resources.useResource(type);
+    }
 
 }
