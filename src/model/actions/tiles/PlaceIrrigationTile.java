@@ -6,7 +6,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
-import model.board.Location;
+import model.board.HexLocation;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 
 /**
@@ -18,7 +18,7 @@ public class PlaceIrrigationTile extends Action {
     /*
         attributes
      */
-    private Location placement;
+    private HexLocation placement;
 
 
     /*
@@ -29,15 +29,13 @@ public class PlaceIrrigationTile extends Action {
         //used for loading
     }
 
-    public PlaceIrrigationTile(Location placement){
+    public PlaceIrrigationTile(HexLocation placement){
         this.placement = placement;
     }
 
 
     @Override
     public ActionResult tryAction(GameModel game) {
-        //todo
-
      /*
         Check if the action is valid to complete
         ...
@@ -45,16 +43,17 @@ public class PlaceIrrigationTile extends Action {
                 false if invalid
      */
 
-        boolean isSuccess = true;
-        int famePoints = 0;
-        int actionPoints = 1;
-        String message = "";
-
         Board board = game.getBoard();
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
+        boolean isSuccess = true;
+        int famePoints = 0; //this gets modified in this method
+        int actionPoints = 1;
+        String message = "";
+
+
+
         //Check if the player has enough AP points - 1
-        //if(game.canCurrentPlayerUseNumberOfActionPoints(1)){
         if(game.cauUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
@@ -65,12 +64,11 @@ public class PlaceIrrigationTile extends Action {
         }
 
         //check if required elevation is 0
-        if(game.getBoard().getSpace(placement).getHeight() == 0){
+        if(game.isHeightAtLocation(0)){
 
             isSuccess = isSuccess && true;
             //calculate the points earned by placing this
-            //famePoints += helperJunk
-
+            famePoints += helperJunk.pointsEarnedFromIrrigationPlacement(placement);
 
         }
         else{

@@ -6,9 +6,11 @@ import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
-import model.board.Location;
+import model.board.BoardRuleHelper;
+import model.board.HexLocation;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
+import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.rules.tiles.RicePlacementRule;
 
 /**
@@ -20,7 +22,7 @@ public class PlaceRiceTile extends Action {
     /*
         attributes
      */
-    Location placement;
+    HexLocation placement;
 
     /*
         constructors
@@ -29,7 +31,7 @@ public class PlaceRiceTile extends Action {
         //Empty constructor
         //mostly used for loading
     }
-    public PlaceRiceTile(Location placement){
+    public PlaceRiceTile(HexLocation placement){
         this.placement = placement;
     }
 
@@ -42,11 +44,16 @@ public class PlaceRiceTile extends Action {
         returns true if valid
                 false if invalid
      */
+
+        Board board = game.getBoard();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
+
         boolean isSuccess = true;
-        int famePoints = 0;         //todo replace with surround body of water
+        int famePoints = 0;         //this gets modified in this method
         int actionPoints = 1;       //will always cost 1 ap
         String message = "";
-        Board board = game.getBoard();
+
+
 
         //Check if the player has a rice tile to use
         if(true){
@@ -66,6 +73,17 @@ public class PlaceRiceTile extends Action {
         else{
             isSuccess = isSuccess && false;
             message += "Error: You do not have enough AP points.\n";
+        }
+
+        //check if they are not placing outside of central java
+        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+            isSuccess = isSuccess && true;
+            famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
+
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You cannot place outside Central Java.\n";
         }
 
         //Check if they are not placing on top of a one tile
