@@ -19,6 +19,8 @@ public class KeyListener implements java.awt.event.KeyListener{
         persistentEnabled = true;
         temporary = new ArrayList<InternalListener>();
         persistent = new ArrayList<InternalListener>();
+
+	    // Remember to tell view to run setFocusTraversalKeysEnabled(false)
     }
 
     @Override

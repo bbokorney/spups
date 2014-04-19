@@ -22,11 +22,11 @@ public class PotentialPlaceVillageTile extends PotentialOneSpaceMovement {
     }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return new PlaceVillageTile(getLocation()).tryAction(getGameModel());
     }
 
-    protected Pair<ActionResult, PlaceVillageTile> confirmPlacement(){
+    public Pair<ActionResult, PlaceVillageTile> confirmPlacement(){
         PlaceVillageTile result = new PlaceVillageTile(getLocation());
         return new Pair<ActionResult, PlaceVillageTile>(result.doAction(getGameModel()), result);
     }

@@ -24,12 +24,18 @@ public class PotentialPlacePalaceTile extends PotentialOneSpaceMovement{
         getHoverBoard().placeTileComponent(getLocation(), new PalaceTileComponent(value), ActionState.fromValue(isValid()));
     }
 
+	public int getValue() { return value; }
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return new PlacePalaceTile(value, getLocation()).tryAction(getGameModel());
     }
 
-    protected Pair<ActionResult, PlacePalaceTile> confirmPlacement(){
+    public Pair<ActionResult, PlacePalaceTile> confirmPlacement(){
         PlacePalaceTile result = new PlacePalaceTile(value, getLocation());
         return new Pair<ActionResult, PlacePalaceTile>(result.doAction(getGameModel()), result);
     }

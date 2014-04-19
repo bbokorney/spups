@@ -27,11 +27,11 @@ public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
     }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation()).tryAction(getGameModel());
     }
 
-    protected Pair<ActionResult, PlaceTwoSpaceTile> confirmPlacement() {
+    public Pair<ActionResult, PlaceTwoSpaceTile> confirmPlacement() {
         PlaceTwoSpaceTile result = new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation());
         return new Pair<ActionResult, PlaceTwoSpaceTile>(result.doAction(getGameModel()), result);
     }

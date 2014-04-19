@@ -122,11 +122,11 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         return this.getActionResult();
     }
 
-    protected HexLocation getCenterLocation(){
+    public HexLocation getCenterLocation(){
         return centerLocation;
     }
 
-    protected HexLocation getOtherLocation( int i){
+    public HexLocation getOtherLocation( int i){
         return otherLocations[i];
     }
 }

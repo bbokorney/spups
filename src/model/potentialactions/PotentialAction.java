@@ -28,7 +28,7 @@ public abstract class PotentialAction {
 
     protected abstract void setComponentsOnHoverBoard();
 
-    protected abstract ActionResult getActionResult();
+    public abstract ActionResult getActionResult();
 
     protected GameModel getGameModel(){
 

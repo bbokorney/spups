@@ -22,11 +22,11 @@ public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
     }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return new PlaceIrrigationTile(getLocation()).tryAction(getGameModel());
     }
 
-    protected Pair<ActionResult, PlaceIrrigationTile> confirmPlacement(){
+    public Pair<ActionResult, PlaceIrrigationTile> confirmPlacement(){
         PlaceIrrigationTile result = new PlaceIrrigationTile(getLocation());
         return new Pair<ActionResult, PlaceIrrigationTile>(result.doAction(getGameModel()), result);
     }
