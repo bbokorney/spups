@@ -51,7 +51,7 @@ public class PlaceThreeSpaceTile extends Action {
         int actionPoints = 1;
         String message = "";
 
-        BoardRuleHelper helperJunk = new BoardRuleHelper();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
         Board board = game.getBoard();
 
         //see if there is a three space tile to take from shared

@@ -50,4 +50,6 @@ public abstract class GameModel {
 
 
     public abstract void useActionPoints(int actionPoints);
+
+    public abstract boolean isHeightAtLocation(int i);
 }

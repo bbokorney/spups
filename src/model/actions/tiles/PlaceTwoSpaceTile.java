@@ -46,8 +46,11 @@ public class PlaceTwoSpaceTile extends Action {
         int actionPoints = 1;
         String message = "";
 
-        BoardRuleHelper helperJunk = new BoardRuleHelper();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
         Board board = game.getBoard();
+
+        //Check for the extra AP that this move will cost
+        if(game.isHeightAtLocation(0))
 
         //see if there is a two space tile to take from player
         if(true){

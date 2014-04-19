@@ -65,7 +65,7 @@ public class PlaceIrrigationTile extends Action {
         }
 
         //check if required elevation is 0
-        if(game.getBoard().getSpace(placement).getHeight() == 0){
+        if(game.isHeightAtLocation(0)){
 
             isSuccess = isSuccess && true;
             //calculate the points earned by placing this
