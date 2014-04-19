@@ -8,4 +8,7 @@ public abstract class Turn {
     public abstract boolean endTurn();
     public abstract int getAvailableAPPoints(boolean isLandTileAction);
     public abstract boolean hasUsedActionToken();
+    public boolean isFinalTurn() {
+        return isFinalTurn;
+    }
 }
