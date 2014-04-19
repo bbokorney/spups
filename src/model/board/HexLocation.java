@@ -125,7 +125,7 @@ public class HexLocation implements Location, PathNode {
         }
 
 
-        return null;
+        return loc;
     }
 
     /* This awesomely awesome algorithm will identify the distance from
