@@ -47,12 +47,20 @@ public class PlaceThreeSpaceTile extends Action {
      */
         boolean isSuccess = true;
         int famePoints = 0;     //todo replace with surround body of water
-        //int actionPoints = 1 + PlacementOutsideCentralJavaRule.;   //todo plus however many placed outside of central java is extra.
-        int actionPoints = 1;
+        int actionPoints = 1;   // this number may get incremented in the first if statement of this method
+                                //to account for placing outside of central java
         String message = "";
 
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
         Board board = game.getBoard();
+
+        //Check for the extra AP that this move will cost
+        //this only needs (and can only be checked) when the height is 0
+        // meaning the tile is being placed directly onto the board
+        if(game.isHeightAtLocation(0)){
+            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
+        }
+
 
         //see if there is a three space tile to take from shared
         if(true){
@@ -133,9 +141,6 @@ public class PlaceThreeSpaceTile extends Action {
             isSuccess = isSuccess && false;
             message += "Error: You cannot connect two cities.\n";
         }
-
-
-        //todo
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
      }
