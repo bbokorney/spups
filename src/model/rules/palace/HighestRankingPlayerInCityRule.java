@@ -17,7 +17,7 @@ public class HighestRankingPlayerInCityRule {
         City containingCity = null;
         for(City city : cities) {
             if(city.getCity().contains(location)) {
-                Map<Player, Integer> ranks = BoardRuleHelper.getPlayerRanksIn(city.getCity());
+                Map<Player, Integer> ranks = helper.getPlayerRanksIn(city.getCity());
                 // if this player doesn't have developers in this area or isn't ranked first
                 if(!ranks.containsKey(player) || ranks.get(player) != 1) {
                     return false;

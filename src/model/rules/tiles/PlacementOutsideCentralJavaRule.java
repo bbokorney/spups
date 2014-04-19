@@ -18,14 +18,17 @@ public class PlacementOutsideCentralJavaRule {
         if(min > 0) {
             return true;
         }
+        return locations.length - numberOutsideCentralJava(helper, locations) > 0;
+    }
 
+    public static int numberOutsideCentralJava(BoardRuleHelper helper, Location... locations) {
         int count = 0;
         for(Location loc: locations) {
-             if(BoardRuleHelper.getLocationType(loc) == LocationType.CentralJava) {
-                 count++;
-             }
+            if(helper.getLocationType(loc) == LocationType.Highlands ||
+                    helper.getLocationType(loc) == LocationType.Lowlands ) {
+                count++;
+            }
         }
-
-        return count > 0;
+        return count;
     }
 }
