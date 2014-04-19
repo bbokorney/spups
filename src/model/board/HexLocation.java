@@ -4,7 +4,6 @@ import pathfinding.PathEdge;
 import pathfinding.PathNode;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -40,7 +39,11 @@ public class HexLocation implements Location, PathNode {
 	public boolean equals(Location loc) {
 		if (loc instanceof HexLocation) {
 			HexLocation hexloc = (HexLocation) loc;
-			return pathFromOrigin == hexloc.getPathFromOrigin();
+            int[] myDistance = getDistanceFromOrigin();
+            int[] theirDistance = hexloc.getDistanceFromOrigin();
+			return ((myDistance[0] == theirDistance[0])
+                    &&
+                    (myDistance[1] == theirDistance[1]));
 		}
 		else 
 			return false;
@@ -70,6 +73,10 @@ public class HexLocation implements Location, PathNode {
 
     public List<PathEdge> getEdges() { return null; }
 
+    public void appendPath(Directions d) {
+        pathFromOrigin.add(d);
+    }
+
     @Override
     public String serialize() {
         return null;
@@ -89,8 +96,69 @@ public class HexLocation implements Location, PathNode {
             4 is southwest
             5 is northwest
          */
+        HexLocation loc = this;
+        switch (i) {
+            case 0:
+                loc.appendPath(Directions.NORTH);
+                break;
+            case 1:
+                loc.appendPath(Directions.NORTHEAST);
+                break;
+            case 2:
+                loc.appendPath(Directions.SOUTHEAST);
+                break;
+            case 3:
+                loc.appendPath(Directions.SOUTH);
+                break;
+            case 4:
+                loc.appendPath(Directions.SOUTHWEST);
+                break;
+            case 5:
+                loc.appendPath(Directions.NORTHWEST);
+                break;
+        }
+
 
         return null;
+    }
+
+    /* This awesomely awesome algorithm will identify the distance from
+     * this tile to the origin based on a magical mix of the current path
+     * and geometry. Prepare to be amazed.
+     */
+    private int[] getDistanceFromOrigin() {
+        int xdistance = 0;
+        int ydistance = 0;
+        for (Directions d : pathFromOrigin) {
+            switch (d) {
+                case SOUTH:
+                    ydistance-=60;
+                    break;
+                case NORTH:
+                    ydistance+=60;
+                    break;
+                case NORTHEAST:
+                    ydistance+=30;
+                    xdistance+=40;
+                    break;
+                case SOUTHEAST:
+                    ydistance-=30;
+                    xdistance+=40;
+                    break;
+                case SOUTHWEST:
+                    ydistance-=30;
+                    xdistance-=40;
+                    break;
+                case NORTHWEST:
+                    ydistance+=30;
+                    xdistance-=40;
+                    break;
+            }
+        }
+        int[] vectorDistance = new int[2];
+        vectorDistance[0] = xdistance;
+        vectorDistance[1] = ydistance;
+        return vectorDistance;
     }
 
 }
