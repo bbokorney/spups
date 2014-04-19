@@ -7,8 +7,6 @@ import model.actions.serialization.Serializable;
  */
 public interface Location extends Serializable{
 
-    public LocationType getLocationType();
-
 	public Location getOrigin();
 	
 	public int hashCode();

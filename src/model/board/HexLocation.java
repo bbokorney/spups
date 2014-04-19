@@ -10,7 +10,6 @@ import java.util.ArrayList;
  */
 public class HexLocation implements Location, PathNode {
 
-    private LocationType type;
     public boolean equals(PathNode pathNode) {
         return false;
     }
@@ -18,18 +17,13 @@ public class HexLocation implements Location, PathNode {
     //A unique list representing this location's semantic location
 	private List<Directions> pathFromOrigin;
 	
-	public HexLocation(List<Directions> path, LocationType type) {
+	public HexLocation(List<Directions> path) {
 		pathFromOrigin = path;
-        this.type = type;
 	}
 
-    public LocationType getLocationType() {
-        return type;
-    }
-	
 	//Return origin location (a location with empty path)
 	public Location getOrigin() {
-		return new HexLocation(new ArrayList<Directions>(), LocationType.CentralJava);
+		return new HexLocation(new ArrayList<Directions>());
 	}
 	
 	public int hashCode() {
