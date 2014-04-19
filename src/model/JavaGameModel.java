@@ -3,6 +3,8 @@ package model;
 import model.board.Board;
 import model.board.JavaBoard;
 import model.board.Location;
+import model.palacefestival.Card;
+import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayers;
@@ -14,15 +16,16 @@ import model.turn.FinalTurn;
 import model.turn.NonFinalTurn;
 import model.turn.Turn;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by Baker on 4/14/2014.
  */
-public class JavaGameModel {
+public class JavaGameModel extends GameModel {
 
     private SharedResources resources;
-    private JavaBoard board;
+    private Board board;
     private JavaPlayers players;
     private Turn turn;
     //The following value will be held at a sentinel value until the final
@@ -37,38 +40,38 @@ public class JavaGameModel {
         turn = new NonFinalTurn();
     }
 
-    int getCount(SharedResourceType res) {
+    public int getCount(SharedResourceType res) {
         return resources.getCount(res);
     }
 
     
-    void useResource(SharedResourceType res) {
+    public void useResource(SharedResourceType res) {
         resources.useResource(res);
     }
 
     
-    int getCount(JavaPlayerResourceType res) {
-        return getCurrentPlayer().getCount(res);
+    public int getCount(JavaPlayerResourceType res) {
+        return getCurrentJavaPlayer().getCount(res);
     }
 
     
-    void useResource(JavaPlayerResourceType res) {
-        getCurrentPlayer().useResource(res);
+    public void useResource(JavaPlayerResourceType res) {
+        getCurrentJavaPlayer().useResource(res);
     }
 
     
-    int getAvailableAPPoints(boolean isLandTileAction) {
+    public int getAvailableAPPoints(boolean isLandTileAction) {
         return turn.getAvailableAPPoints(isLandTileAction);
     }
 
     
-    boolean hasUsedActionToken() {
+    public boolean hasUsedActionToken() {
         return turn.hasUsedActionToken();
     }
 
     
-    void advanceTurn() {
-        if (canAdvanceTurn()) {
+    public void advanceJavaTurn() {
+        if (canAdvanceJavaTurn()) {
             //First check if we are in the final round, indicated by the
             //finalRoundTurns value being > 0
             if (finalRoundTurns > 0) {
@@ -81,7 +84,7 @@ public class JavaGameModel {
     }
 
     
-    boolean canAdvanceTurn() {
+    public boolean canAdvanceJavaTurn() {
         //If this is the last turn of the game, dont advance?
         if (turn.isFinalTurn() && finalRoundTurns <= 1)
             return false;
@@ -90,41 +93,54 @@ public class JavaGameModel {
     }
 
     
-    void beginFinalRound() {
+    public void beginFinalRound() {
         finalRoundTurns = players.getPlayers().size();
         turn = new FinalTurn();
     }
 
-    public JavaPlayer getCurrentPlayer() {
+    public JavaPlayer getCurrentJavaPlayer() {
         return players.getCurrentPlayer();
     }
 
     
-    void placeTopTileComponent(Location loc, TileComponent tile) {
+    public void placeTopTileComponent(Location loc, TileComponent tile) {
         board.placeTopTileComponent(loc, tile);
     }
 
     
-    void getTopTileComponent(Location loc) {
+    public void getTopTileComponent(Location loc) {
         board.getTopTileComponent(loc);
     }
 
     
-    String getName() {
+    public String getName() {
         return players.getCurrentPlayer().getName();
     }
 
     
-    void adjustScore(int score) {
-        getCurrentPlayer().adjustScore(score);
+    public void incrementScore(int score) {
+        int currentScore = getCurrentJavaPlayer().getScore();
+        getCurrentJavaPlayer().adjustScore(currentScore + score);
     }
 
     
-    List<Developer> getDevelopers() {
-        return getCurrentPlayer().getDevelopers();
+    public List<Developer> getDevelopers() {
+        return getCurrentJavaPlayer().getDevelopers();
     }
 
-    public JavaBoard getJavaBoard() {
+    public Board getBoard() {
         return board;
     }
+
+    public void addPlayer(PalaceFestivalPlayer player){}
+    public void removePlayer(PalaceFestivalPlayer player){}
+    public Collection<JavaPlayer> getPlayers() { return null; }
+    public PalaceFestivalPlayer getCurrentPalaceFestivalPlayer() { return null; }
+    public void advancePalaceFestivalTurn() {}
+    public boolean canDrawCard() { return false; }
+    public void recordDrawCard() {}
+    public Card peekAtFestivalCard() { return null; }
+    public Card drawFestivalCard() { return null; }
+    public Card drawDeckCard() { return null; }
+    public void discard(Card card) {}
 }

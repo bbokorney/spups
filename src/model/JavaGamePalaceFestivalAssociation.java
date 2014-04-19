@@ -31,14 +31,14 @@ public class JavaGamePalaceFestivalAssociation {
     public void useResource(JavaPlayerResourceType res) { javaGame.useResource(res); }
     public int getAvailableAPPoints(boolean isLandTileAction) { return javaGame.getAvailableAPPoints(isLandTileAction); }
     public boolean hasUsedActionToken() { return javaGame.hasUsedActionToken(); }
-    public void advanceJavaTurn() { javaGame.advanceTurn(); }
-    public boolean canAdvanceJavaTurn() { return javaGame.canAdvanceTurn(); }
+    public void advanceJavaTurn() { javaGame.advanceJavaTurn(); }
+    public boolean canAdvanceJavaTurn() { return javaGame.canAdvanceJavaTurn(); }
     public void beginFinalRound() { javaGame.beginFinalRound(); }
-    public JavaPlayer getCurrentJavaPlayer() { return javaGame.getCurrentPlayer(); }
+    public JavaPlayer getCurrentJavaPlayer() { return javaGame.getCurrentJavaPlayer(); }
     public void placeTopTileComponent(Location loc, TileComponent tile) { javaGame.placeTopTileComponent(loc, tile); }
     public void getTopTileComponent(Location loc) { javaGame.getTopTileComponent(loc); }
     public String getName() { return javaGame.getName(); }
-    public void incrementScore(int score) { javaGame.adjustScore(score); }
+    public void incrementScore(int score) { javaGame.incrementScore(score); }
     public List<Developer> getDevelopers() { return javaGame.getDevelopers(); }
 
     public void addPlayer(PalaceFestivalPlayer player) { palaceFestival.addPlayer(player); }
