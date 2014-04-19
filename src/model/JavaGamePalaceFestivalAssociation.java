@@ -35,7 +35,7 @@ public class JavaGamePalaceFestivalAssociation {
     public boolean canAdvanceJavaTurn() { return javaGame.canAdvanceTurn(); }
     public void beginFinalRound() { javaGame.beginFinalRound(); }
     public JavaPlayer getCurrentJavaPlayer() { return javaGame.getCurrentPlayer(); }
-    public boolean placeTopTileComponent(Location loc, TileComponent tile) { return javaGame.placeTopTileComponent(loc, tile); }
+    public void placeTopTileComponent(Location loc, TileComponent tile) { javaGame.placeTopTileComponent(loc, tile); }
     public void getTopTileComponent(Location loc) { javaGame.getTopTileComponent(loc); }
     public String getName() { return javaGame.getName(); }
     public void incrementScore(int score) { javaGame.adjustScore(score); }
