@@ -2,6 +2,7 @@ package model.rules.tiles;
 
 import model.palacefestival.PalaceCardComponent;
 import model.tiles.IrrigationTileComponent;
+import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
 
@@ -27,7 +28,7 @@ public class VillagePlacementRule implements Visitor {
         allowed = true;
     }
 
-    public void visit(PalaceCardComponent component) {
+    public void visit(PalaceTileComponent component) {
         allowed = false;
     }
 

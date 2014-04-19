@@ -1,19 +1,12 @@
 package model.rules.developer;
 
-import model.palacefestival.PalaceCardComponent;
 import model.rules.tiles.Visitor;
-import model.tiles.IrrigationTileComponent;
-import model.tiles.RiceTileComponent;
-import model.tiles.TileComponent;
-import model.tiles.VillageTileComponent;
-
-import javax.rmi.CORBA.Tie;
+import model.tiles.*;
 
 /**
  * Created by Baker on 4/14/2014.
  */
 public class DeveloperTraversalRule {
-    private int cost;
     private TileComponent source;
     private TileComponent destination;
 
@@ -23,28 +16,38 @@ public class DeveloperTraversalRule {
     }
 
     public int getCost() {
+        TraversalVisitor sourceVisitor = new TraversalVisitor();
+        TraversalVisitor destinationVisitor = new TraversalVisitor();
+        source.accept(sourceVisitor);
+        destination.accept(destinationVisitor);
 
-        return cost;
+        return sourceVisitor.getType() == destinationVisitor.getType() ? 0 : 1;
     }
 
     private class TraversalVisitor implements Visitor {
 
+        TileType type;
 
+        public TileType getType() { return type; }
 
         public void visit(VillageTileComponent component) {
-
+            type = TileType.Village;
         }
 
         public void visit(RiceTileComponent component) {
-
+            type = TileType.Rice;
         }
 
-        public void visit(PalaceCardComponent component) {
-
+        public void visit(PalaceTileComponent component) {
+            type = TileType.Palace;
         }
 
         public void visit(IrrigationTileComponent component) {
-
+            type = TileType.Irrigation;
         }
+    }
+
+    private enum TileType {
+        Village, Rice, Palace, Irrigation;
     }
 }

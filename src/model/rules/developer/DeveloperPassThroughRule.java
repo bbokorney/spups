@@ -7,10 +7,7 @@ import model.palacefestival.PalaceCardComponent;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.rules.tiles.Visitor;
-import model.tiles.IrrigationTileComponent;
-import model.tiles.RiceTileComponent;
-import model.tiles.TileComponent;
-import model.tiles.VillageTileComponent;
+import model.tiles.*;
 
 import java.util.Collection;
 
@@ -73,7 +70,7 @@ public class DeveloperPassThroughRule {
             tileTypeOk = true;
         }
 
-        public void visit(PalaceCardComponent component) {
+        public void visit(PalaceTileComponent component) {
             tileTypeOk = false;
         }
 
