@@ -17,6 +17,20 @@ public class PotentialBeginPalaceFestival {
     private ArrayList<Card> cardsValidToBeginFestival;
     private ArrayList<Integer> indexOfCardsToBid;
 
+    public PotentialBeginPalaceFestival(ArrayList<PalaceTileComponent> palacesValidForFestival, ArrayList<Location> locationsValidForFestival, ArrayList<Card> cardsValidToBeginFestival, ArrayList<Integer> indexOfCardsToBid) {
+        this.palacesValidForFestival = palacesValidForFestival;
+    }
+
+    public boolean canBeginPalaceFestival() {
+        // Player must have a developer in the city
+        // TODO: Should a rule be created for this?
+        // Player must have a viable bid
+        // TODO: Rule?
+        // Palace is eligible
+        // TODO: Rule?
+        throw new UnsupportedOperationException("Tell Sara to implement me!");
+    }
+
     public boolean tabToNextElement() {
         // TODO:Sara
         throw new UnsupportedOperationException("Tell Sara to implement me!");
