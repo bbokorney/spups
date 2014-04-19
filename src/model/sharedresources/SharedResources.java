@@ -17,7 +17,7 @@ public class SharedResources extends Resources<SharedResourceType> {
         super.addResource(SharedResourceType.PALACELEVELFOUR, 7);
         super.addResource(SharedResourceType.PALACELEVELSIX, 8);
         super.addResource(SharedResourceType.PALACELEVELEIGHT, 9);
-        super.addResource(SharedResourceType.PALACELEVELTEN, 10)
+        super.addResource(SharedResourceType.PALACELEVELTEN, 10);
         //TODO:Add palace card?
         //super.addResource();
     }
