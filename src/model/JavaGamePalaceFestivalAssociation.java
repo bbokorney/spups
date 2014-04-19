@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * Created by Owner on 4/15/14.
  */
-public class JavaGamePalaceFesitvalAssociation {
+public class JavaGamePalaceFestivalAssociation {
 
     private PalaceFestival palaceFestival;
     private JavaGameModel javaGame;
     
-    public JavaGamePalaceFesitvalAssociation(JavaGameModel javaGame, PalaceFestival palaceFestival) {
+    public JavaGamePalaceFestivalAssociation(JavaGameModel javaGame, PalaceFestival palaceFestival) {
         this.javaGame = javaGame;
         this.palaceFestival = palaceFestival;
     }
