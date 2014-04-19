@@ -1,10 +1,9 @@
 package view.gamepanel;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
+import java.awt.Graphics;
+import java.awt.Image;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import view.JavaImageLoader;
 import model.board.Board;
@@ -12,19 +11,22 @@ import model.board.Board;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class BoardPanel extends JFrame {
-	private BufferedImage board;
-	private Graphics2D g2d;
+@SuppressWarnings("serial")
+public class BoardPanel extends JPanel {
+	private Image boardBackground;
+	//private Graphics2D g2d;
 	public BoardPanel() {
-        this.setPreferredSize(new Dimension(WIDTH, HEIGHT*2/3));
-        this.setVisible(true);
-		BufferedImage board = JavaImageLoader.getImage("resources/BoardBackground.jpg");
-		g2d.drawImage(board, null, 0, 0);
-	}
+		boardBackground = JavaImageLoader.getImage("/Users/maumau/spups/resources/BoardBackground.jpg").getScaledInstance(510, 660, Image.SCALE_SMOOTH);
+		this.setVisible(true);
+	} 
 	
-	public void refreshView(Board board2) {
+	protected void paintComponent(Graphics g) {
+        g.drawImage(boardBackground, 0, 0, null);
+    }
+	
+	public void refreshView(Board board) {
 		// TODO Auto-generated method stub
-		
+		repaint();
 	}
 	
 }
