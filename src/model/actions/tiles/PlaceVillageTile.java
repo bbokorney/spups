@@ -7,6 +7,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
+import model.board.HexLocation;
 import model.board.Location;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 
@@ -19,7 +20,7 @@ public class PlaceVillageTile extends Action {
     /*
         attributes
      */
-    Location placement;
+    HexLocation placement;
 
     /*
         constructors
@@ -27,7 +28,7 @@ public class PlaceVillageTile extends Action {
     public PlaceVillageTile(){
 
     }
-    public PlaceVillageTile(Location placement){
+    public PlaceVillageTile(HexLocation placement){
         this.placement = placement;
     }
 
@@ -41,7 +42,7 @@ public class PlaceVillageTile extends Action {
                 false if invalid
      */
         boolean isSuccess = true;
-        int famePoints = 0;         //todo replace with body of water fame points
+        int famePoints = 0;         //this gets modified in this method
         int actionPoints = 1;
         String message = "";
 
@@ -76,16 +77,6 @@ public class PlaceVillageTile extends Action {
         else{
             isSuccess = isSuccess && false;
             message += "Error: You cannot place this on top of another three space.\n";
-        }
-
-        //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
-            isSuccess = isSuccess && true;
-
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place outside Central Java.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation

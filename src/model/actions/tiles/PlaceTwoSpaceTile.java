@@ -40,20 +40,30 @@ public class PlaceTwoSpaceTile extends Action {
         returns true if valid
                 false if invalid
      */
-        boolean isSuccess = true;
-        int famePoints = 0;     //todo replace with surround body of water
-        int actionPoints = 1;   // this number may get incremented in the first if statement of this method
-                                //to account for placing outside of central java
-        String message = "";
 
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
         Board board = game.getBoard();
 
+        boolean isSuccess = true;
+        int famePoints = 0;     //this number may get incremented in the first if statement of this method
+        int actionPoints = 1;   // this number may get incremented in the first if statement of this method
+                                //to account for placing outside of central java
+        String message = "";
+
         //Check for the extra AP that this move will cost
         //this only needs (and can only be checked) when the height is 0
         // meaning the tile is being placed directly onto the board
-        if(game.isHeightAtLocation(0)){
+
+        //check if they are not placing outside of central java
+        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)){
+            isSuccess = isSuccess && true;
             actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
+            famePoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
+
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You cannot place this outside Central Java.\n";
         }
 
         //see if there is a two space tile to take from player
@@ -84,16 +94,6 @@ public class PlaceTwoSpaceTile extends Action {
         else{
             isSuccess = isSuccess && false;
             message += "Error: You cannot place this on top of another three space.\n";
-        }
-
-        //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)){
-            isSuccess = isSuccess && true;
-
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place this outside Central Java.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
