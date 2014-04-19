@@ -12,4 +12,8 @@ public class BodyOfWaterContainer {
     public BodyOfWaterContainer() {
         bodyOfWaterCollection = new ArrayList<BodyOfWater>();
     }
+
+    public Collection<BodyOfWater> getBodiesOfWater() {
+        return bodyOfWaterCollection;
+    }
 }

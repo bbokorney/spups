@@ -11,6 +11,7 @@ import model.player.Player;
 import model.sharedresources.SharedResourceType;
 import model.tiles.TileComponent;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -22,13 +23,15 @@ public abstract class GameModel {
     public abstract void useResource(SharedResourceType res);
     public abstract int getCount(JavaPlayerResourceType res);
     public abstract void useResource(JavaPlayerResourceType res);
-    public abstract int getAvailableAPPoints(boolean isLandTileAction);
+    public abstract boolean canUseAPForLandTileAction(int pointsToSpend);
+    public abstract boolean cauUseAPForNonLandTileAction(int pointsToSpend);
     public abstract boolean hasUsedActionToken();
     public abstract void advanceJavaTurn();
     public abstract boolean canAdvanceJavaTurn();
     public abstract void beginFinalRound();
     public abstract JavaPlayer getCurrentJavaPlayer();
-    public abstract boolean placeTopTileComponent(Location loc, TileComponent tile);
+    public abstract Collection<JavaPlayer> getJavaPlayers();
+    public abstract void placeTopTileComponent(Location loc, TileComponent tile);
     public abstract void getTopTileComponent(Location loc);
     public abstract String getName();
     public abstract void incrementScore(int score);
@@ -38,6 +41,7 @@ public abstract class GameModel {
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
     public abstract PalaceFestivalPlayer getCurrentPalaceFestivalPlayer();
+    public abstract Collection<PalaceFestivalPlayer> getFestivalPlayers();
     public abstract void advancePalaceFestivalTurn();
     public abstract boolean canDrawCard();
     public abstract void recordDrawCard();
@@ -47,4 +51,8 @@ public abstract class GameModel {
     public abstract void discard(Card card);
 	public abstract Player[] getJavaPlayers();
 
+
+    public abstract void useActionPoints(int actionPoints);
+
+    public abstract boolean isHeightAtLocation(int i);
 }

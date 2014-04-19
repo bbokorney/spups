@@ -6,7 +6,11 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.board.Board;
+import model.board.BoardRuleHelper;
+import model.board.HexLocation;
 import model.board.Location;
+import model.rules.tiles.PlacementOutsideCentralJavaRule;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -17,8 +21,8 @@ public class PlaceThreeSpaceTile extends Action {
     /*
         attributes
      */
-    Location villagePlacement;
-    Location[] ricePlacement = new Location[2];
+    HexLocation villagePlacement;
+    HexLocation[] ricePlacement = new HexLocation[2];
 
 
     /*
@@ -27,7 +31,7 @@ public class PlaceThreeSpaceTile extends Action {
     public PlaceThreeSpaceTile(){
 
     }
-    public PlaceThreeSpaceTile(Location villagePlacement, Location rice1Placement, Location rice2Placement) {
+    public PlaceThreeSpaceTile(HexLocation villagePlacement, HexLocation rice1Placement, HexLocation rice2Placement) {
         this.villagePlacement = villagePlacement;
         this.ricePlacement[0] = rice1Placement;
         this.ricePlacement[1] = rice2Placement;
@@ -42,10 +46,35 @@ public class PlaceThreeSpaceTile extends Action {
         returns true if valid
                 false if invalid
      */
+
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
+        Board board = game.getBoard();
+
         boolean isSuccess = true;
-        int famePoints = 0;     //todo replace with surround body of water
-        int actionPoints = 1;   //todo plus however many placed outside of central java is extra.
+        int famePoints = 0;     //this number may get incremented in the first if statement of this method
+        int actionPoints = 1;   // this number may get incremented in the first if statement of this method
+                                //to account for placing outside of central java
         String message = "";
+
+
+
+        //Check for the extra AP that this move will cost
+        //this only needs (and can only be checked) when the height is 0
+        // meaning the tile is being placed directly onto the board
+
+
+        //check if they are not placing outside of central java
+        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
+            isSuccess = isSuccess && true;
+            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
+            famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
+
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You cannot place outside Central Java.\n";
+        }
+
 
         //see if there is a three space tile to take from shared
         if(true){
@@ -58,7 +87,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //Check if the player has enough action points
-        if(true){
+        if(game.canUseAPForLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
@@ -75,16 +104,6 @@ public class PlaceThreeSpaceTile extends Action {
         else{
             isSuccess = isSuccess && false;
             message += "Error: You cannot place on top of another three space.\n";
-        }
-
-        //check if they are not placing outside of central java
-        if(true){
-            isSuccess = isSuccess && true;
-
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place outside Central Java.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
@@ -126,9 +145,6 @@ public class PlaceThreeSpaceTile extends Action {
             isSuccess = isSuccess && false;
             message += "Error: You cannot connect two cities.\n";
         }
-
-
-        //todo
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
      }

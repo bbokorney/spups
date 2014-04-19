@@ -8,18 +8,22 @@ import java.util.Collection;
  */
 public class BodyOfWater {
 
-    private Collection<Location> bodyOfWater;
+    private Collection<HexLocation> bodyOfWater;
 
     public BodyOfWater() {
-        bodyOfWater = new ArrayList<Location>();
+        bodyOfWater = new ArrayList<HexLocation>();
     }
 
     public int getSize() {
         return bodyOfWater.size();
     }
 
-    public void add(Location loc) {
+    public void add(HexLocation loc) {
         bodyOfWater.add(loc);
+    }
+
+    public Collection<HexLocation> getLocations() {
+        return bodyOfWater;
     }
 
 }

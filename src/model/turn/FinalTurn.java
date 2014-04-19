@@ -4,6 +4,7 @@ package model.turn;
  * Created by Baker on 4/14/2014.
  */
 public class FinalTurn extends Turn {
+    private final boolean isFinalTurn = true;
     private final int startingAP;
     private boolean actionTokenUsed;
     private int ap;
@@ -21,23 +22,28 @@ public class FinalTurn extends Turn {
     }
 
     @Override
-    public boolean endTurn() {
-        if(!actionTokenUsed) {
-            return false;
-        }
-        ap = startingAP;
-        actionTokenUsed = true;
+    public boolean canEndTurn() {
         return true;
     }
 
-    // Why does the turn object ask whether a land tile has been placed this turn? It should be the one who knows that. - Jonathan
-    @Override
-    public int getAvailableAPPoints(boolean isLandTileAction) {
-        return ap;
-    }
 
     @Override
     public boolean hasUsedActionToken() {
         return actionTokenUsed;
+    }
+
+    @Override
+    public void useActionPoints(int actionPoints) {
+        ap -= actionPoints;
+    }
+
+    @Override
+    public boolean canUseAPForLandTileAction(int pointsToSpend) {
+        return ap >= pointsToSpend;
+    }
+
+    @Override
+    public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
+        return ap >= pointsToSpend;
     }
 }
