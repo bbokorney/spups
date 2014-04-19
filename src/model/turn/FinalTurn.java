@@ -4,6 +4,7 @@ package model.turn;
  * Created by Baker on 4/14/2014.
  */
 public class FinalTurn extends Turn {
+    private final boolean isFinalTurn = true;
     private final int startingAP;
     private boolean actionTokenUsed;
     private int ap;
