@@ -84,8 +84,9 @@ public abstract class Board {
         return true;
     }
 
-    public boolean isHeightAtLocation(int i){
-        //todo for Sachit, my love
-        return false;
+    public boolean isHeightAtLocation(int i, Location loc){
+        Space space = this.getSpace(loc);
+        int height = space.getHeight();
+        return height == i;
     }
 }
