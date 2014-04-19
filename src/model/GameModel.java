@@ -22,7 +22,6 @@ public abstract class GameModel {
     public abstract void useResource(SharedResourceType res);
     public abstract int getCount(JavaPlayerResourceType res);
     public abstract void useResource(JavaPlayerResourceType res);
-    public abstract int getAvailableActionPoints(boolean isLandTileAction);
     public abstract boolean canUseAPForLandTileAction(int pointsToSpend);
     public abstract boolean cauUseAPForNonLandTileAction(int pointsToSpend);
     public abstract boolean hasUsedActionToken();
