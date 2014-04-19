@@ -6,7 +6,10 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.board.Board;
+import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.rules.tiles.PlacementOutsideCentralJavaRule;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -44,8 +47,12 @@ public class PlaceThreeSpaceTile extends Action {
      */
         boolean isSuccess = true;
         int famePoints = 0;     //todo replace with surround body of water
-        int actionPoints = 1;   //todo plus however many placed outside of central java is extra.
+        //int actionPoints = 1 + PlacementOutsideCentralJavaRule.;   //todo plus however many placed outside of central java is extra.
+        int actionPoints = 1;
         String message = "";
+
+        BoardRuleHelper helperJunk = new BoardRuleHelper();
+        Board board = game.getBoard();
 
         //see if there is a three space tile to take from shared
         if(true){
@@ -78,7 +85,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //check if they are not placing outside of central java
-        if(true){
+        if(true){ //PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])
             isSuccess = isSuccess && true;
 
         }

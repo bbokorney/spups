@@ -46,6 +46,7 @@ public class PlaceRiceTile extends Action {
         int famePoints = 0;         //todo replace with surround body of water
         int actionPoints = 1;       //will always cost 1 ap
         String message = "";
+
         Board board = game.getBoard();
 
         //Check if the player has a rice tile to use
