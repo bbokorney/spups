@@ -37,6 +37,14 @@ public abstract class Board {
             return LocationType.CentralJava;
     }
 
+    public void addToLowlands(Location loc) {
+        lowlands.add(loc);
+    }
+
+    public void addToHighlands(Location loc) {
+        highlands.add(loc);
+    }
+
     public BodyOfWaterContainer getBodyOfWaterContainer() {
         return bodyOfWaterContainer;
     }
