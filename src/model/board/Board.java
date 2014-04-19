@@ -1,5 +1,6 @@
 package model.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import model.tiles.TileComponent;
 public abstract class Board {
 
 	private Map<Location, Space> board;
+    private ArrayList<Location> highlands;
+    private ArrayList<Location> lowlands;
 
     private BodyOfWaterContainer bodyOfWaterContainer;
     private CityContainer cityContainer;
@@ -21,7 +24,18 @@ public abstract class Board {
         bodyOfWaterContainer = new BodyOfWaterContainer();
         cityContainer = new CityContainer();
         villageContainer = new VillageContainer();
+        highlands = new ArrayList<Location>();
+        lowlands = new ArrayList<Location>();
 	}
+
+    public LocationType getLocationType(Location loc) {
+        if (highlands.contains(loc))
+            return LocationType.Highlands;
+        else if (lowlands.contains(loc))
+            return LocationType.Lowlands;
+        else
+            return LocationType.CentralJava;
+    }
 
     public BodyOfWaterContainer getBodyOfWaterContainer() {
         return bodyOfWaterContainer;
