@@ -26,21 +26,21 @@ public class JavaGameModel extends GameModel {
 
     private SharedResources resources;
     private Board board;
-    private JavaPlayers players;
+    private JavaPlayers javaPlayers;
     private Turn turn;
     private PalaceFestival festival;
     //The following value will be held at a sentinel value until the final
-    //round, at which point it will decrement from the number of players to 0.
+    //round, at which point it will decrement from the number of jplayers to 0.
     private int finalRoundTurns;
 
     public JavaGameModel(int numPlayers) {
         resources = new SharedResources();
         board = new JavaBoard();
-        players = new JavaPlayers(numPlayers);
+        javaPlayers = new JavaPlayers(numPlayers);
         finalRoundTurns = -1;
         turn = new NonFinalTurn();
 
-        //Instantiate the palace festival deck of cards
+        //Instantiate the palace festival and its deck of cards
         Stack<Card> deck = new Stack<Card>();
         for (int i = 0; i < 5; i++) {
             PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM);
@@ -116,7 +116,7 @@ public class JavaGameModel extends GameModel {
                 turn = new FinalTurn();
             } else
                 turn = new NonFinalTurn();
-            players.advanceTurn();
+            javaPlayers.advanceTurn();
         }
     }
 
@@ -131,15 +131,18 @@ public class JavaGameModel extends GameModel {
 
     
     public void beginFinalRound() {
-        finalRoundTurns = players.getPlayers().size();
+        finalRoundTurns = javaPlayers.getPlayers().size();
         turn = new FinalTurn();
     }
 
     public JavaPlayer getCurrentJavaPlayer() {
-        return players.getCurrentPlayer();
+        return javaPlayers.getCurrentPlayer();
     }
 
-    
+    public Collection<JavaPlayer> getJavaPlayers() {
+        return javaPlayers.getPlayers();
+    }
+
     public void placeTopTileComponent(Location loc, TileComponent tile) {
         board.placeTopTileComponent(loc, tile);
     }
@@ -151,7 +154,7 @@ public class JavaGameModel extends GameModel {
 
     
     public String getName() {
-        return players.getCurrentPlayer().getName();
+        return javaPlayers.getCurrentPlayer().getName();
     }
 
     
@@ -169,18 +172,40 @@ public class JavaGameModel extends GameModel {
         return board;
     }
 
-    //TODO: implement these senor
-    public void addPlayer(PalaceFestivalPlayer player){}
-    public void removePlayer(PalaceFestivalPlayer player){}
-    public Collection<JavaPlayer> getPlayers() { return null; }
-    public PalaceFestivalPlayer getCurrentPalaceFestivalPlayer() { return null; }
-    public void advancePalaceFestivalTurn() {}
-    public boolean canDrawCard() { return false; }
-    public void recordDrawCard() {}
-    public Card peekAtFestivalCard() { return null; }
-    public Card drawFestivalCard() { return null; }
-    public Card drawDeckCard() { return null; }
-    public void discard(Card card) {}
+    public void addPlayer(PalaceFestivalPlayer player){
+        festival.addPlayer(player);
+    }
+
+    public void removePlayer(PalaceFestivalPlayer player){
+        festival.removePlayer(player);
+    }
+
+    public PalaceFestivalPlayer getCurrentPalaceFestivalPlayer() {
+        return festival.getCurrentPlayer();
+    }
+
+    public Collection<PalaceFestivalPlayer> getFestivalPlayers() {
+        return festival.getPlayers();
+    }
+
+    public void advancePalaceFestivalTurn() {
+        festival.advanceTurn();
+    }
+    public boolean canDrawCard() {
+        return festival.canDrawCard();
+    }
+
+    public void recordDrawCard() {
+        festival.recordDrawCard();
+    }
+
+    public Card peekAtFestivalCard() {
+        return festival.peekAtFestivalCard();
+    }
+
+    public Card drawFestivalCard() { return festival.drawFestivalCard(); }
+    public Card drawDeckCard() { return festival.drawDeckCard(); }
+    public void discard(Card card) { festival.discard(card); }
 
     @Override
     public void useActionPoints(int actionPoints) {

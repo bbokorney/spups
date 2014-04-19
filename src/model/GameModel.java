@@ -29,6 +29,7 @@ public abstract class GameModel {
     public abstract boolean canAdvanceJavaTurn();
     public abstract void beginFinalRound();
     public abstract JavaPlayer getCurrentJavaPlayer();
+    public abstract Collection<JavaPlayer> getJavaPlayers();
     public abstract void placeTopTileComponent(Location loc, TileComponent tile);
     public abstract void getTopTileComponent(Location loc);
     public abstract String getName();
@@ -38,8 +39,8 @@ public abstract class GameModel {
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
-    public abstract Collection<JavaPlayer> getPlayers();
     public abstract PalaceFestivalPlayer getCurrentPalaceFestivalPlayer();
+    public abstract Collection<PalaceFestivalPlayer> getFestivalPlayers();
     public abstract void advancePalaceFestivalTurn();
     public abstract boolean canDrawCard();
     public abstract void recordDrawCard();
