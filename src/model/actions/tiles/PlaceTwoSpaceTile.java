@@ -87,7 +87,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //check if they are not placing outside of central java
-        if(true){ //PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)
+        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)){
             isSuccess = isSuccess && true;
 
         }

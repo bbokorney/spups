@@ -6,9 +6,11 @@ import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
+import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
+import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.rules.tiles.RicePlacementRule;
 
 /**
@@ -48,6 +50,7 @@ public class PlaceRiceTile extends Action {
         String message = "";
 
         Board board = game.getBoard();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //Check if the player has a rice tile to use
         if(true){
@@ -67,6 +70,16 @@ public class PlaceRiceTile extends Action {
         else{
             isSuccess = isSuccess && false;
             message += "Error: You do not have enough AP points.\n";
+        }
+
+        //check if they are not placing outside of central java
+        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+            isSuccess = isSuccess && true;
+
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You cannot place outside Central Java.\n";
         }
 
         //Check if they are not placing on top of a one tile

@@ -5,7 +5,10 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.board.Board;
+import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.rules.tiles.PlacementOutsideCentralJavaRule;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -42,6 +45,9 @@ public class PlaceVillageTile extends Action {
         int actionPoints = 1;
         String message = "";
 
+        Board board = game.getBoard();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
+
         //see if there is a village tile to take from player
         if(true){
             isSuccess = isSuccess && true;
@@ -73,13 +79,13 @@ public class PlaceVillageTile extends Action {
         }
 
         //check if they are not placing outside of central java
-        if(true){
+        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this outside Central Java.\n";
+            message += "Error: You cannot place outside Central Java.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
