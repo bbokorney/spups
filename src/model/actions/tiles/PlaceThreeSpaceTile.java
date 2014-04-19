@@ -58,7 +58,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //Check if the player has enough action points
-        if(true){
+        if(game.canUseAPForLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
