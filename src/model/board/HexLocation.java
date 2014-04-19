@@ -20,7 +20,7 @@ public class HexLocation implements Location, PathNode {
 	public HexLocation(List<Directions> path) {
 		pathFromOrigin = path;
 	}
-	
+
 	//Return origin location (a location with empty path)
 	public Location getOrigin() {
 		return new HexLocation(new ArrayList<Directions>());
@@ -119,7 +119,7 @@ public class HexLocation implements Location, PathNode {
         }
 
 
-        return null;
+        return loc;
     }
 
     /* This awesomely awesome algorithm will identify the distance from
