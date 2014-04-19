@@ -3,8 +3,7 @@ package model;
 import model.board.Board;
 import model.board.JavaBoard;
 import model.board.Location;
-import model.palacefestival.Card;
-import model.palacefestival.PalaceFestivalPlayer;
+import model.palacefestival.*;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayers;
@@ -18,6 +17,7 @@ import model.turn.Turn;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -28,6 +28,7 @@ public class JavaGameModel extends GameModel {
     private Board board;
     private JavaPlayers players;
     private Turn turn;
+    private PalaceFestival festival;
     //The following value will be held at a sentinel value until the final
     //round, at which point it will decrement from the number of players to 0.
     private int finalRoundTurns;
@@ -38,6 +39,37 @@ public class JavaGameModel extends GameModel {
         players = new JavaPlayers(numPlayers);
         finalRoundTurns = -1;
         turn = new NonFinalTurn();
+
+        //Instantiate the palace festival deck of cards
+        Stack<Card> deck = new Stack<Card>();
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.MASK);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.PUPPET);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.MASK,
+                                             PalaceCardComponent.PUPPET);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM,
+                                             PalaceCardComponent.MASK);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM,
+                                             PalaceCardComponent.PUPPET);
+            deck.add(card);
+        }
+        festival = new PalaceFestival(null, deck);
     }
 
     public int getCount(SharedResourceType res) {
