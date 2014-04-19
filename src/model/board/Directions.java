@@ -5,6 +5,6 @@ package model.board;
  * from origin to this HexLocation. Note that this convention
  * (clockwise) will be used throughout path storage in this system. */
 public enum Directions {
-	UP, UPRIGHT, RIGHT, RIGHTDOWN, DOWN, 
-	DOWNLEFT, LEFT, LEFTUP
+	UP, UPRIGHT, RIGHTDOWN, DOWN,
+	DOWNLEFT, LEFTUP
 }
