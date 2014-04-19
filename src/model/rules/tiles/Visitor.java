@@ -1,7 +1,7 @@
 package model.rules.tiles;
 
-import model.palacefestival.PalaceCardComponent;
 import model.tiles.IrrigationTileComponent;
+import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
 
@@ -11,6 +11,6 @@ import model.tiles.VillageTileComponent;
 public interface Visitor {
     void visit(VillageTileComponent component);
     void visit(RiceTileComponent component);
-    void visit(PalaceCardComponent component);
+    void visit(PalaceTileComponent component);
     void visit(IrrigationTileComponent component);
 }

@@ -4,6 +4,7 @@ import model.palacefestival.PalaceCardComponent;
 import model.player.Developer;
 import model.rules.tiles.Visitor;
 import model.tiles.IrrigationTileComponent;
+import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
 
@@ -30,7 +31,7 @@ public class DeveloperPlaecmentRule implements Visitor {
         allowed = true;
     }
 
-    public void visit(PalaceCardComponent component) {
+    public void visit(PalaceTileComponent component) {
         allowed = false;
     }
 
