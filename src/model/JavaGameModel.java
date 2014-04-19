@@ -212,4 +212,9 @@ public class JavaGameModel extends GameModel {
         turn.useActionPoints(actionPoints);
     }
 
+    @Override
+    public boolean isHeightAtLocation(int i) {
+        return board.isHeightAtLocation(i);
+    }
+
 }

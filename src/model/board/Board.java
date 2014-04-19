@@ -83,4 +83,9 @@ public abstract class Board {
         }
         return true;
     }
+
+    public boolean isHeightAtLocation(int i){
+        //todo for Sachit, my love
+        return false;
+    }
 }

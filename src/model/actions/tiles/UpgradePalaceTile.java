@@ -55,7 +55,7 @@ public class UpgradePalaceTile extends Action {
         }
 
         //check if the player has enough action points, 1
-        if(true){
+        if(game.cauUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
