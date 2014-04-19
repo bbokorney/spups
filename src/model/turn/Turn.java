@@ -5,7 +5,7 @@ package model.turn;
  */
 public abstract class Turn {
     private boolean isFinalTurn;
-    public abstract boolean endTurn();
+    public abstract boolean canEndTurn();
     public abstract int getAvailableAPPoints(boolean isLandTileAction);
     public abstract boolean hasUsedActionToken();
     public boolean isFinalTurn() {

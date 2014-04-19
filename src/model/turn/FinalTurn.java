@@ -22,12 +22,7 @@ public class FinalTurn extends Turn {
     }
 
     @Override
-    public boolean endTurn() {
-        if(!actionTokenUsed) {
-            return false;
-        }
-        ap = startingAP;
-        actionTokenUsed = true;
+    public boolean canEndTurn() {
         return true;
     }
 

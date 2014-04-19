@@ -23,12 +23,10 @@ public class NonFinalTurn extends Turn {
     }
 
     @Override
-    public boolean endTurn() {
-        if(!actionTokenUsed) {
+    public boolean canEndTurn() {
+        if(!hasPlacedLandTile()) {
             return false;
         }
-        ap = startingAP;
-        actionTokenUsed = true;
         return true;
     }
 
@@ -43,7 +41,7 @@ public class NonFinalTurn extends Turn {
         return actionTokenUsed;
     }
 
-    public boolean hasPlacedLandTile() {
+    private boolean hasPlacedLandTile() {
         return landTilePlaced;
     }
 }
