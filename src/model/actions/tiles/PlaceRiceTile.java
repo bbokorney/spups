@@ -5,7 +5,11 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.board.Board;
 import model.board.Location;
+import model.rules.tiles.PlaceTileOnDeveloperRule;
+import model.rules.tiles.PlacementOnSameSizeTileRule;
+import model.rules.tiles.RicePlacementRule;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -42,6 +46,7 @@ public class PlaceRiceTile extends Action {
         int famePoints = 0;         //todo replace with surround body of water
         int actionPoints = 1;       //will always cost 1 ap
         String message = "";
+        Board board = game.getBoard();
 
         //Check if the player has a rice tile to use
         if(true){
@@ -54,7 +59,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //check if the player has enough AP, 1
-        if(true){
+        if(game.canUseAPForLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
@@ -64,7 +69,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if they are not placing on top of a one tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
             isSuccess = isSuccess && true;
 
         }
@@ -74,7 +79,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if they are placing this directly on the board or on another land tile
-        if(true){
+        if(new RicePlacementRule().allowed()){
             isSuccess = isSuccess && true;
 
         }
@@ -84,7 +89,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if the player is placing on top of a developer
-        if(true){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game, placement)){
             isSuccess = isSuccess && true;
 
         }

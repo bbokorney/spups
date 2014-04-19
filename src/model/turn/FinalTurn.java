@@ -26,14 +26,24 @@ public class FinalTurn extends Turn {
         return true;
     }
 
-    // Why does the turn object ask whether a land tile has been placed this turn? It should be the one who knows that. - Jonathan
-    @Override
-    public int getAvailableAPPoints(boolean isLandTileAction) {
-        return ap;
-    }
 
     @Override
     public boolean hasUsedActionToken() {
         return actionTokenUsed;
+    }
+
+    @Override
+    public void useActionPoints(int actionPoints) {
+        ap -= actionPoints;
+    }
+
+    @Override
+    public boolean canUseAPForLandTileAction(int pointsToSpend) {
+        return ap >= pointsToSpend;
+    }
+
+    @Override
+    public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
+        return ap >= pointsToSpend;
     }
 }
