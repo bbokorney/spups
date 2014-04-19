@@ -36,4 +36,8 @@ public class City {
     public Collection<Location> getCity() {
         return city;
     }
+
+    public PalaceTileComponent getPalaceTile() {
+        return palace;
+    }
 }
