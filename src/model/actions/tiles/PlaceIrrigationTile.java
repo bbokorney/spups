@@ -50,8 +50,8 @@ public class PlaceIrrigationTile extends Action {
         int actionPoints = 1;
         String message = "";
 
-        BoardRuleHelper helperJunk = new BoardRuleHelper();
         Board board = game.getBoard();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //Check if the player has enough AP points - 1
         //if(game.canCurrentPlayerUseNumberOfActionPoints(1)){

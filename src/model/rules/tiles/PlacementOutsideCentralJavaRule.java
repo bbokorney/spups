@@ -10,7 +10,7 @@ import model.board.LocationType;
  * Created by Baker on 4/14/2014.
  */
 public class PlacementOutsideCentralJavaRule {
-    public boolean canPlaceOutsideCentralJava(Board board, BoardRuleHelper helper, Location... locations) {
+    public static boolean canPlaceOutsideCentralJava(Board board, BoardRuleHelper helper, Location... locations) {
         int min = Integer.MAX_VALUE;
         for(Location loc : locations) {
             min = Math.min(min, board.getSpace(loc).getHeight());
@@ -21,7 +21,7 @@ public class PlacementOutsideCentralJavaRule {
         return locations.length - numberOutsideCentralJava(helper, locations) > 0;
     }
 
-    public int numberOutsideCentralJava(BoardRuleHelper helper, Location... locations) {
+    public static int numberOutsideCentralJava(BoardRuleHelper helper, Location... locations) {
         int count = 0;
         for(Location loc: locations) {
             if(helper.getLocationType(loc) == LocationType.Highlands ||
