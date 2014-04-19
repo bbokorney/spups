@@ -137,6 +137,7 @@ public class JavaGameModel extends GameModel {
         return board;
     }
 
+    //TODO: implement these senor
     public void addPlayer(PalaceFestivalPlayer player){}
     public void removePlayer(PalaceFestivalPlayer player){}
     public Collection<JavaPlayer> getPlayers() { return null; }
