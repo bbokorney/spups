@@ -59,9 +59,14 @@ public class JavaGameModel extends GameModel {
         getCurrentJavaPlayer().useResource(res);
     }
 
-    
-    public int getAvailableAPPoints(boolean isLandTileAction) {
-        return turn.getAvailableAPPoints(isLandTileAction);
+    @Override
+    public boolean canUseAPForLandTileAction(int pointsToSpend) {
+        return turn.canUseAPForLandTileAction(pointsToSpend);
+    }
+
+    @Override
+    public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
+        return turn.cauUseAPForNonLandTileAction(pointsToSpend);
     }
 
     
@@ -144,4 +149,10 @@ public class JavaGameModel extends GameModel {
     public Card drawFestivalCard() { return null; }
     public Card drawDeckCard() { return null; }
     public void discard(Card card) {}
+
+    @Override
+    public void useActionPoints(int actionPoints) {
+        turn.useActionPoints(actionPoints);
+    }
+
 }

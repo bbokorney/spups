@@ -29,7 +29,14 @@ public class JavaGamePalaceFestivalAssociation {
     public void useResource(SharedResourceType res) { javaGame.useResource(res); }
     public int getCount(JavaPlayerResourceType res) { return javaGame.getCount(res); }
     public void useResource(JavaPlayerResourceType res) { javaGame.useResource(res); }
-    public int getAvailableAPPoints(boolean isLandTileAction) { return javaGame.getAvailableAPPoints(isLandTileAction); }
+
+    //public int getAvailableAPPoints(boolean isLandTileAction) { return javaGame.getAvailableAPPoints(isLandTileAction); }
+    /*  todo changed interface in game model and java game model to not have
+        LOD and alternate anti-cohesion dealing with Action Points
+        talk to meghan for clarification. Sorry to whoever is coding this!
+        
+    */
+
     public boolean hasUsedActionToken() { return javaGame.hasUsedActionToken(); }
     public void advanceJavaTurn() { javaGame.advanceJavaTurn(); }
     public boolean canAdvanceJavaTurn() { return javaGame.canAdvanceJavaTurn(); }

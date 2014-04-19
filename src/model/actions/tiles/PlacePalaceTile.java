@@ -60,7 +60,7 @@ public class PlacePalaceTile extends Action {
         //Check if the player has enough AP points to complete this - 1 AP
         //ActionPointsRule
 
-        if(true){
+        if(game.cauUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }

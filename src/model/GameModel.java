@@ -22,7 +22,8 @@ public abstract class GameModel {
     public abstract void useResource(SharedResourceType res);
     public abstract int getCount(JavaPlayerResourceType res);
     public abstract void useResource(JavaPlayerResourceType res);
-    public abstract int getAvailableAPPoints(boolean isLandTileAction);
+    public abstract boolean canUseAPForLandTileAction(int pointsToSpend);
+    public abstract boolean cauUseAPForNonLandTileAction(int pointsToSpend);
     public abstract boolean hasUsedActionToken();
     public abstract void advanceJavaTurn();
     public abstract boolean canAdvanceJavaTurn();
@@ -47,4 +48,6 @@ public abstract class GameModel {
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
 
+
+    public abstract void useActionPoints(int actionPoints);
 }
