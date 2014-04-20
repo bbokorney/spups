@@ -8,6 +8,7 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
+import model.player.JavaPlayerResourceType;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
@@ -56,7 +57,7 @@ public class PlaceRiceTile extends Action {
 
 
         //Check if the player has a rice tile to use
-        if(true){
+        if(game.getCount(JavaPlayerResourceType.RICE) > 1){
             isSuccess = isSuccess && true;
 
         }
@@ -76,7 +77,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+        if(game.isHeightAtLocation(0, placement) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
             isSuccess = isSuccess && true;
             famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
 
@@ -97,7 +98,9 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if they are placing this directly on the board or on another land tile
-        if(new RicePlacementRule().allowed()){
+        RicePlacementRule terrainRule = new RicePlacementRule(placement, board);
+
+        if(terrainRule.allowed()){
             isSuccess = isSuccess && true;
 
         }
@@ -107,7 +110,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if the player is placing on top of a developer
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game, placement)){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(), placement)){
             isSuccess = isSuccess && true;
 
         }

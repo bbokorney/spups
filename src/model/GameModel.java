@@ -1,7 +1,9 @@
 package model;
 
 import model.board.Board;
+import model.board.HexLocation;
 import model.board.Location;
+import model.board.Space;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
@@ -56,5 +58,7 @@ public abstract class GameModel {
 
     public abstract void useActionPoints(int actionPoints);
 
-    public abstract boolean isHeightAtLocation(int i);
+    public abstract boolean isHeightAtLocation(int i, Location location);
+
+    public abstract Space getSpaceAtLocation(Location location);
 }

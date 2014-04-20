@@ -10,7 +10,8 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
+import model.rules.tiles.*;
+import model.sharedresources.SharedResourceType;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -64,20 +65,36 @@ public class PlaceThreeSpaceTile extends Action {
 
 
         //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
+        if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement),game.getSpaceAtLocation(ricePlacement[0]), game.getSpaceAtLocation(ricePlacement[1])) ){
             isSuccess = isSuccess && true;
-            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
-            famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
+
+            /*
+                Check if the
+            */
+            if(game.isHeightAtLocation(0, villagePlacement) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
+                isSuccess = isSuccess && true;
+                actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
+                famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
+
+            }
+            else{
+                isSuccess = isSuccess && false;
+                message += "Error: You cannot place outside Central Java.\n";
+            }
+
+
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place outside Central Java.\n";
+            message += "Error: You cannot place on spaces with different elevations.\n";
         }
 
 
+
+
         //see if there is a three space tile to take from shared
-        if(true){
+        if(game.getCount(SharedResourceType.THREE) > 1){
             isSuccess = isSuccess && true;
 
         }
@@ -97,7 +114,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //check if they are placing on another three space tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement[0], ricePlacement[1])){
             isSuccess = isSuccess && true;
 
         }
@@ -107,17 +124,16 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if all the spaces they are placing on are the same elevation
-        if(true){
-            isSuccess = isSuccess && true;
 
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place on spaces with different elevations.\n";
-        }
+
 
         //see if all the spaces they are placing on are the correct terrain
-        if(true){
+        VillagePlacementRule villageTerrainRule = new VillagePlacementRule(villagePlacement, board);
+        RicePlacementRule rice1TerrainRule = new RicePlacementRule(ricePlacement[0], board);
+        RicePlacementRule rice2TerrainRule = new RicePlacementRule(ricePlacement[1], board);
+
+
+        if(villageTerrainRule.allowed() && rice1TerrainRule.allowed() && rice2TerrainRule.allowed()){
             isSuccess = isSuccess && true;
 
         }
@@ -127,7 +143,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(true){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(), villagePlacement, ricePlacement[0], ricePlacement[1])){
             isSuccess = isSuccess && true;
 
         }
@@ -137,13 +153,13 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(true){
+        if(ConnectionTwoCitiesRule.connectsCities(villagePlacement,helperJunk)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot connect two cities.\n";
+            message += "Error: You cannot connect cities.\n";
         }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message, this);

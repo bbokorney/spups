@@ -16,21 +16,21 @@ import java.util.Collection;
  */
 public class DeveloperPassThroughRule {
     private boolean tileTypeOk;
-    private Developer developer;
     private Location location;
     private Board board;
-    private GameModel model;
+    private Collection<JavaPlayer> players;
+    private JavaPlayer currentPlayer;
 
-    public DeveloperPassThroughRule(Developer developer, Location location, Board board, GameModel model) {
-        this.developer = developer;
+    public DeveloperPassThroughRule(Location location, Board board, Collection<JavaPlayer> players, JavaPlayer currentPlayer ) {
         this.location = location;
         this.board = board;
+        this.players = players;
+        this.currentPlayer = currentPlayer;
     }
 
     public boolean allowed() {
         // check to see if there are any Developers on this location
         boolean devOnSpaceOk;
-        Collection<JavaPlayer> players = model.getPlayers();
         JavaPlayer playerWithDev = null;
         Developer devOnSpace = null;
         for(JavaPlayer player : players) {
@@ -43,7 +43,7 @@ public class DeveloperPassThroughRule {
         }
 
         if(devOnSpace != null) {
-            if(playerWithDev.equals(model.getCurrentJavaPlayer())) {
+            if(playerWithDev.equals(currentPlayer)) {
                 devOnSpaceOk = true;
             }
             else {

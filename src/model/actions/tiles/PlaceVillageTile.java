@@ -9,7 +9,8 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
+import model.player.JavaPlayerResourceType;
+import model.rules.tiles.*;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -50,7 +51,7 @@ public class PlaceVillageTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //see if there is a village tile to take from player
-        if(true){
+        if(game.getCount(JavaPlayerResourceType.VILLAGE) > 1){
             isSuccess = isSuccess && true;
 
         }
@@ -70,13 +71,13 @@ public class PlaceVillageTile extends Action {
         }
 
         //check if they are placing on another one tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on top of another three space.\n";
+            message += "Error: You cannot place this on top of another one space tile.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
@@ -90,7 +91,9 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if all the spaces they are placing on are the correct terrain
-        if(true){
+        VillagePlacementRule terrainRule = new VillagePlacementRule(placement, board);
+
+        if(terrainRule.allowed()){
             isSuccess = isSuccess && true;
 
         }
@@ -100,7 +103,7 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(true){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),placement) ){
             isSuccess = isSuccess && true;
 
         }
@@ -110,13 +113,13 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(true){
+        if(ConnectionTwoCitiesRule.connectsCities(placement,helperJunk)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot connect two cities.\n";
+            message += "Error: You cannot connect cities.\n";
         }
 
         //todo
