@@ -100,7 +100,7 @@ public class JavaGameModel extends GameModel {
 
     @Override
     public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
-        return turn.cauUseAPForNonLandTileAction(pointsToSpend);
+        return turn.canUseAPForNonLandTileAction(pointsToSpend);
     }
 
     
@@ -172,6 +172,14 @@ public class JavaGameModel extends GameModel {
 
     public Board getBoard() {
         return board;
+    }
+
+    public void addPalaceToCurrentTurnList(Location loc) {
+        turn.addPalaceToList(loc);
+    }
+
+    public boolean hasPalaceLocationBeenUsedThisTurn(Location loc) {
+        return turn.hasPalaceBeenUsed(loc);
     }
 
     public void addPlayer(PalaceFestivalPlayer player){
