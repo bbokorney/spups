@@ -9,6 +9,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
+import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
 
 /**
@@ -68,13 +69,13 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if there is a two space tile to take from player
-        if(true){
+        if(game.getCount(JavaPlayerResourceType.TWO) > 1){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: There are not have enough three space tiles.";
+            message += "Error: There are not have enough two space tiles.";
         }
 
         //Check if the player has enough action points
@@ -94,11 +95,10 @@ public class PlaceTwoSpaceTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on top of another three space.\n";
+            message += "Error: You cannot place this on top of another two space tile.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
-        //todo tell baker I sending you locai
         if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement), game.getSpaceAtLocation(ricePlacement))){
             isSuccess = isSuccess && true;
 

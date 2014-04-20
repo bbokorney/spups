@@ -11,6 +11,7 @@ import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
 import model.rules.tiles.*;
+import model.sharedresources.SharedResourceType;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -77,7 +78,7 @@ public class PlaceThreeSpaceTile extends Action {
 
 
         //see if there is a three space tile to take from shared
-        if(true){
+        if(game.getCount(SharedResourceType.THREE) > 1){
             isSuccess = isSuccess && true;
 
         }
@@ -107,6 +108,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if all the spaces they are placing on are the same elevation
+
         if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement),game.getSpaceAtLocation(ricePlacement[0]), game.getSpaceAtLocation(ricePlacement[1])) ){
             isSuccess = isSuccess && true;
 
@@ -133,7 +135,7 @@ public class PlaceThreeSpaceTile extends Action {
 
         //see if they are placing on top of a developer
         //todo ask baker if i can send him the list of developers?
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game, villagePlacement, ricePlacement[0], ricePlacement[1])){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(), villagePlacement, ricePlacement[0], ricePlacement[1])){
             isSuccess = isSuccess && true;
 
         }

@@ -9,6 +9,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
+import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
 
 /**
@@ -50,7 +51,7 @@ public class PlaceVillageTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //see if there is a village tile to take from player
-        if(true){
+        if(game.getCount(JavaPlayerResourceType.VILLAGE) > 1){
             isSuccess = isSuccess && true;
 
         }

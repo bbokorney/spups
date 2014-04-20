@@ -8,6 +8,7 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
+import model.player.JavaPlayerResourceType;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
@@ -56,7 +57,7 @@ public class PlaceRiceTile extends Action {
 
 
         //Check if the player has a rice tile to use
-        if(true){
+        if(game.getCount(JavaPlayerResourceType.RICE) > 1){
             isSuccess = isSuccess && true;
 
         }

@@ -1,15 +1,15 @@
 package model.actions.tiles;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
-import model.board.Location;
+import model.board.HexLocation;
 import model.rules.tiles.PalacePlacementRule;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
+import model.sharedresources.SharedResourceType;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -21,7 +21,7 @@ public class PlacePalaceTile extends Action {
         attributes
      */
     private int value;
-    private Location placement;
+    private HexLocation placement;
 
     /*
         constructors
@@ -31,7 +31,7 @@ public class PlacePalaceTile extends Action {
         //used for loading
     }
 
-    public PlacePalaceTile(int value, Location placement){
+    public PlacePalaceTile(int value, HexLocation placement){
         this.value = value;
         this.placement = placement;
     }
@@ -54,7 +54,7 @@ public class PlacePalaceTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //Check if there are any palace tiles of this value in shared resources
-        if(true){
+        if(game.getCount(SharedResourceType.valueOf("PALACE" + value)) > 1){
             isSuccess = isSuccess && true;
 
         }
