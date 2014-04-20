@@ -50,4 +50,5 @@ public abstract class GameModel {
 
 
     public abstract void useActionPoints(int actionPoints);
+	public abstract void resetGame();
 }
