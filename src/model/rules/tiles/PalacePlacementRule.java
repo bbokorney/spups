@@ -26,7 +26,7 @@ public class PalacePlacementRule {
         return allowed;
     }
 
-    public boolean upgradeAllowed() {
+    public boolean upgradeAllowed(int value) {
         board.getSpace(location).getTopTileComponent().accept(new UpgradeVisitor());
         return allowed;
     }
