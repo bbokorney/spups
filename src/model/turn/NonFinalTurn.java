@@ -22,10 +22,12 @@ public class NonFinalTurn extends Turn {
         palacesInteracted = new ArrayList<Location>();
     }
 
+    //Never used
     public NonFinalTurn(int startingAP) {
         this.startingAP = startingAP;
         ap = startingAP;
         actionTokenUsed = false;
+        palacesInteracted = new ArrayList<Location>();
     }
 
     @Override
