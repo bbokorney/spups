@@ -49,6 +49,7 @@ public class City {
         this.palace = palace;
     }
 
+    //If this city holds this location, remove it. Otherwise, nothing.
     public void removeLocation(Location loc) {
         if (city.contains(loc))
             city.remove(loc);
