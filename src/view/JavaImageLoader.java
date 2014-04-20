@@ -14,7 +14,7 @@ public class JavaImageLoader {
 	public static BufferedImage getImage(String source){
 		BufferedImage returnImage = null;
 		try{
-			System.out.println(source);
+//			System.out.println(source);
 			returnImage = ImageIO.read(new File(source));
 		} catch(IOException e){
 			System.out.println("Image couldn't be loaded.");
