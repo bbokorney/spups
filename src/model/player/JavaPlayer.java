@@ -32,11 +32,7 @@ public class JavaPlayer {
         return player.getScore();
     }
 
-    public void addDeveloper(Location loc){
-        resources.useResource(JavaPlayerResourceType.DEVELOPER);
-        Developer dev = new Developer(loc);
-        developers.add(dev);
-    };
+
 
     public List<Developer> getDevelopers() {return developers;}
 
@@ -51,8 +47,24 @@ public class JavaPlayer {
         resources.useResource(type);
     }
 
+    public void addDeveloper(Location loc){
+        /*
+            This will place the developer on the board at the location given
+            This will account for a developer being taken out of the player's resources
+            and will then that developer to the Player's developer container
+         */
+        resources.useResource(JavaPlayerResourceType.DEVELOPER);
+        Developer dev = new Developer(loc);
+        developers.add(dev);
+    }
+
 
     public void moveDeveloper(Location developerStartinglocation, Location developerEndingLocation) {
+        /*
+            This will move the developer around the board from the first location to the second location
+            This will loop through all the developer's in the players container
+            and change a developer's location accordingly
+         */
         for(Developer d: developers){
             if(d.getLocation().equals(developerStartinglocation)){
                 d.setLocation(developerEndingLocation);
@@ -62,6 +74,11 @@ public class JavaPlayer {
     }
 
     public void removeDeveloper(Location developerLocationTakenOff) {
+        /*
+            This will remove the developer off the board that is at the location given
+            This will remove the developer from the container that is at the given location
+            and add a developer to their resources since they are now off the board
+         */
         for(Developer d: developers){
             if(d.getLocation().equals(developerLocationTakenOff)){
                 developers.remove(d);

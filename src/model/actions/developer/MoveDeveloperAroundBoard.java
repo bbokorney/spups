@@ -47,8 +47,8 @@ public class MoveDeveloperAroundBoard extends Action {
                 false if invalid
      */
         boolean isSuccess = true;
-        int famePoints = 0;         //will always be 0
-        int actionPoints = path.getCost();       //todo add the cost of the path here
+        int famePoints = 0;
+        int actionPoints = path.getCost();
         String message = "";
 
         Board board = game.getBoard();
@@ -92,9 +92,9 @@ public class MoveDeveloperAroundBoard extends Action {
             game.useActionPoints(result.getActionPoints());
 
             //Move the developer along the path
-            game.moveDeveloperAroundBoard(developerStartinglocation, developerEndingLocation);
-            //Move the developer along the path
             //(change the developer location to the last place on the path)
+            game.moveDeveloperAroundBoard(developerStartinglocation, developerEndingLocation);
+
         }
         return result;
     }
