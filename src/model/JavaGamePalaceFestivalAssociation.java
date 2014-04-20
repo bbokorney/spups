@@ -90,13 +90,19 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     public void discard(Card card) { palaceFestival.discard(card); }
 
     @Override
-    public void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid) {
-        palaceFestival.beginPalaceFestival(palaceTileComponent, bid);
+    public void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player) {
+        palaceFestival.beginPalaceFestival(palaceTileComponent, bid, player);
     }
 
     @Override
     public void setHighestBid(int bid) {
         palaceFestival.setHighestBid(bid);
+    }
+
+    @Override
+    public int getHighestBid() {
+        // TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override

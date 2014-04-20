@@ -8,7 +8,7 @@ import model.board.*;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
-import model.player.Player;
+import model.rules.palace.BidRequirementsRule;
 import model.rules.palace.CardValues;
 import model.rules.palace.HasDeveloperInCityRule;
 import model.rules.palace.PalaceHasNotAlreadyHostedFestivalRule;
@@ -57,7 +57,8 @@ public class BeginPalaceFestival extends Action {
         }
 
         boolean hasDeveloperInCity = HasDeveloperInCityRule.hasDeveloperInCity(currentJavaPlayer, palaceLocation, new BoardRuleHelper(game), game.getBoard());
-
+        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(),game.peekAtFestivalCard(), cardsBidded);
+        boolean canBegin = palaceIsEligible && hasDeveloperInCity && bidMeetsRequirements;
         String message = canBegin ? "starting palace festival..." : "not eligible to begin festival";
         return new ActionResult(false, 0, 0, message, this);
     }
@@ -76,9 +77,10 @@ public class BeginPalaceFestival extends Action {
                 totalBid += bid;
             }
 
-            game.beginPalaceFestival(palace, totalBid);
+            game.beginPalaceFestival(palace, totalBid, player);
         }
 
+        game.advancePalaceFestivalTurn();
         return result;
     }
 

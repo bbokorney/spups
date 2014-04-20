@@ -73,11 +73,11 @@ public class PalaceFestival {
         return currentState.getPlayers();
     }
 
-    public void beginPalaceFestival(PalaceTileComponent palace, int bid) {
+    public void beginPalaceFestival(PalaceTileComponent palace, int bid, PalaceFestivalPlayer player) {
         palace.flip();
         this.palace = palace;
         setHighestBid(bid);
-        this.currentState = new FestivalState();
+        this.currentState = new FestivalState(player);
     }
 
     public void endPalaceFestival() {
@@ -99,7 +99,17 @@ public class PalaceFestival {
 
     private class FestivalState implements State {
 
-        PalaceFestivalPlayers festivalPlayers = new PalaceFestivalPlayers();
+        private PalaceFestivalPlayers festivalPlayers;
+
+        public FestivalState(PalaceFestivalPlayer initiator) {
+            festivalPlayers = new PalaceFestivalPlayers();
+            for (PalaceFestivalPlayer player : festivalPlayers.getPlayers()) {
+                festivalPlayers.addPlayer(player);
+            }
+            while (festivalPlayers.getCurrentPlayer() != initiator) {
+                festivalPlayers.advanceTurn();
+            }
+        }
 
         public void addPlayer(PalaceFestivalPlayer player) {
             festivalPlayers.addPlayer(player);
