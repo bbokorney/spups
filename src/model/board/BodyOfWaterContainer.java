@@ -20,4 +20,9 @@ public class BodyOfWaterContainer {
     public void addBodyOfWater(BodyOfWater b) {
         bodyOfWaterCollection.add(b);
     }
+
+    public void removeBodyOfWater(BodyOfWater... b) {
+        for (BodyOfWater body : b)
+            bodyOfWaterCollection.remove(body);
+    }
 }
