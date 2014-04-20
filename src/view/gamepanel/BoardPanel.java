@@ -85,11 +85,11 @@ public class BoardPanel extends JPanel {
 		System.out.println("number of duplicates " + duplicates);
 
 
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.orange);
-        g2.setStroke(new BasicStroke(20));
-    	g2.drawLine(origin[0]+50, origin[1]+40, origin[0]+3+50, origin[1]+3+40);
-    	System.out.println(origin[0] + " " + origin[1]);
+//        Graphics2D g2 = (Graphics2D) g;
+//        g.setColor(Color.orange);
+//        g.setStroke(new BasicStroke(20));
+//    	g2.drawLine(origin[0]+50, origin[1]+40, origin[0]+3+50, origin[1]+3+40);
+//    	System.out.println(origin[0] + " " + origin[1]);
 		
 //		drawHex(g, origin[0]+50, -240+origin[1]+40, false, locations[0]);
 //		System.out.println(hexSideLength());
@@ -144,7 +144,7 @@ public class BoardPanel extends JPanel {
 //        Graphics2D g2 = (Graphics2D) g;
 //        g2.setColor(Color.orange);
 //        g2.setStroke(new BasicStroke(20));
-//    	g2.drawLine(posWidth[0]+50, origin[1]+40, origin[0]+3+50, origin[1]+3+40);
+//    	g2.drawLine(posWidth, posHeight, posWidth, posHeight);
 //    	System.out.println(origin[0] + " " + origin[1]);
 
 
