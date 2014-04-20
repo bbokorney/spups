@@ -67,13 +67,13 @@ public class UpgradePalaceTile extends Action {
         }
 
         //check if the player has enough action points, 1
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(game.canUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough action points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
         //Check if the placement is a palace tile

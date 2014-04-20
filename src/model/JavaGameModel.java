@@ -63,7 +63,7 @@ public class JavaGameModel extends GameModel{
         return turn.canUseAPForLandTileAction(pointsToSpend);
     }
 
-    public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
+    public boolean canUseAPForNonLandTileAction(int pointsToSpend) {
         return turn.canUseAPForNonLandTileAction(pointsToSpend);
     }
 
@@ -179,14 +179,23 @@ public class JavaGameModel extends GameModel{
     }
 
     @Override
+    public void takeDeveloperOffBoard(Location developerLocationTakenOff) {
+        getCurrentJavaPlayer().removeDeveloper(developerLocationTakenOff);
+    }
+
+    @Override
+    public void moveDeveloperAroundBoard(Location developerStartinglocation, Location developerEndingLocation) {
+            getCurrentJavaPlayer().moveDeveloper(developerStartinglocation, developerEndingLocation);
+    }
+
+    @Override
     public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
         turn.setHasPlacedLandTile(hasPlacedLandTile);
     }
 
     @Override
     public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
-            getCurrentJavaPlayer().addDeveloper(new Developer(locationOfDeveloperPlaced));
-
+            getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
     }
 
     public boolean isLocationInCity(Location loc) {

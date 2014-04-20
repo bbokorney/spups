@@ -5,6 +5,7 @@ import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Location;
+import model.player.JavaPlayerResourceType;
 import pathfinding.JavaPath;
 
 /**
@@ -41,16 +42,25 @@ public class TakeDeveloperOffBoard extends Action {
         returns true if valid
                 false if invalid
      */
-        boolean isSuccess = false;
-        int famePoints = 0;
-        int actionPoints = 0;
+        boolean isSuccess = true;
+        int famePoints = 0;         //will never gain fame points
+        int actionPoints = 1 + path.getCost();       //todo add the cost of the path
         String message = "";
 
-        //Check if the path is valid
-
-        //Check if the player has enough AP points to travel the path
-
-        //todo
+        if(path.valid()){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You cannot travel an invalid path.\n";
+        }
+        if( game.canUseAPForNonLandTileAction(actionPoints)){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You do not have enough AP.";
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
@@ -66,8 +76,11 @@ public class TakeDeveloperOffBoard extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP points the path cost
+            game.useActionPoints(result.getActionPoints());
+
             //Move the developer along the path
-            //(change the developer location to the last place on the path)
+            game.takeDeveloperOffBoard(developerLocationTakenOff);
+
         }
         return result;
     }

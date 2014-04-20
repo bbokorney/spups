@@ -72,13 +72,13 @@ public class PlacePalaceTile extends Action {
         //Check if the player has enough AP points to complete this - 1 AP
         //ActionPointsRule
 
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(game.canUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough AP points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
 
