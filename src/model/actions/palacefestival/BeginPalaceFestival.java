@@ -1,21 +1,19 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
-import model.board.Board;
-import model.board.City;
-import model.board.CityContainer;
-import model.board.Location;
+import model.board.*;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
+import model.player.JavaPlayer;
+import model.player.Player;
 import model.rules.palace.CardValues;
-import model.rules.palace.HostPalaceFestivalEligibilityRule;
+import model.rules.palace.HasDeveloperInCityRule;
+import model.rules.palace.PalaceHasNotAlreadyHostedFestivalRule;
 import model.tiles.PalaceTileComponent;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,7 +47,17 @@ public class BeginPalaceFestival extends Action {
     @Override
     public ActionResult tryAction(GameModel game) {
         PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
-        boolean canBegin = HostPalaceFestivalEligibilityRule.hostPalaceFestivalEligibilityRule(player, palaceLocation, game.peekAtFestivalCard());
+        boolean palaceIsEligible = PalaceHasNotAlreadyHostedFestivalRule.palaceHasNotAlreadyHostedFestival(getPalace(game, palaceLocation));
+        Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
+        JavaPlayer currentJavaPlayer = null;
+        for (JavaPlayer javaPlayer : javaPlayers) {
+            if(player.equals(javaPlayer)) {
+                currentJavaPlayer = javaPlayer;
+            }
+        }
+
+        boolean hasDeveloperInCity = HasDeveloperInCityRule.hasDeveloperInCity(currentJavaPlayer, palaceLocation, new BoardRuleHelper(game), game.getBoard());
+
         String message = canBegin ? "starting palace festival..." : "not eligible to begin festival";
         return new ActionResult(false, 0, 0, message, this);
     }
