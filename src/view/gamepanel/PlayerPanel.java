@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import model.player.Player;
+import model.player.JavaPlayer;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -55,7 +55,7 @@ public class PlayerPanel extends JPanel {
 		return label;
 	}
 	
-	public void refreshView(Player player) {
+	public void refreshView(JavaPlayer player) {
 		// TODO Auto-generated method stub
 		
 	}
