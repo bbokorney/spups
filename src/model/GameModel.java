@@ -8,6 +8,7 @@ import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 
 import java.util.Collection;
@@ -48,6 +49,8 @@ public abstract class GameModel {
     public abstract Card drawFestivalCard();
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
+    public abstract void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid);
+    public abstract void setHighestBid(int bid);
 
 
     public abstract void useActionPoints(int actionPoints);
