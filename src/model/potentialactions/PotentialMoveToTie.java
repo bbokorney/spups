@@ -32,10 +32,10 @@ public class PotentialMoveToTie extends PotentialAction {
         return new EndPalaceFestival(festival).tryAction();
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
-        // nothing to set
-    }
+//    @Override
+//    protected void setComponentsOnHoverBoard() {
+//        // nothing to set
+//    }
 
     @Override
     protected ActionResult getActionResult() {

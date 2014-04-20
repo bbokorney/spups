@@ -26,7 +26,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocation = newOtherLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -38,7 +38,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocation = newOtherLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -50,7 +50,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocation = newOtherLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -62,7 +62,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocation = newOtherLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -74,7 +74,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocation = newOtherLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -87,7 +87,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocation = newOtherLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -99,7 +99,7 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
         if(getGameModel().getBoard().areLocationsOnBoard(newOtherLocation)){
             this.otherLocation = newOtherLocation;
             this.rotationState = newRotationState;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }

@@ -20,12 +20,6 @@ public class PotentialPlacePalaceTile extends PotentialOneSpaceMovement{
     }
 
     @Override
-    protected void setComponentsOnHoverBoard() {
-        getHoverBoard().reset();
-        getHoverBoard().placeTileComponent(getLocation(), new PalaceTileComponent(value), ActionState.fromValue(isValid()));
-    }
-
-    @Override
     protected ActionResult getActionResult() {
         return new PlacePalaceTile(value, getLocation(), getGameModel()).tryAction();
     }
