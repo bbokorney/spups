@@ -163,10 +163,6 @@ public class JavaGameModel extends GameModel{
         return turn.hasPalaceBeenUsed(loc);
     }
 
-    @Override
-    public PalaceTileComponent getFestivalPalace() {
-        return null; //todo added methods from GameModel
-    }
 
     @Override
     public void useActionPoints(int actionPoints) {
