@@ -188,4 +188,5 @@ public class BoardRuleHelper {
         }
         return false;
     }
+
 }

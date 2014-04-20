@@ -66,4 +66,9 @@ public class PotentialJoinFestival extends PotentialAction {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    @Override
+    protected ActionResult getActionResult() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

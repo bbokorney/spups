@@ -31,6 +31,8 @@ public abstract class PotentialAction {
 
     protected abstract void setComponentsOnHoverBoard();
 
+    protected abstract ActionResult getActionResult();
+
     protected GameModel getGameModel(){
 
         return this.game;
@@ -40,5 +42,10 @@ public abstract class PotentialAction {
 
         return this.festival;
     }
+
+    protected boolean isValid(){
+        return getActionResult().isSuccess();
+    }
+
 
 }

@@ -37,4 +37,9 @@ public class PotentialMoveToTie extends PotentialAction {
         // nothing to set
     }
 
+    @Override
+    protected ActionResult getActionResult() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }
