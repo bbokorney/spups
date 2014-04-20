@@ -29,25 +29,20 @@ import model.tiles.VillageTileComponent;
  */
 @SuppressWarnings("serial")
 public class BoardPanel extends JPanel {
-	private static double hexScaling = 2.0/3;
+	public static double hexScaling = 2.0/3;
 	private Image boardBackground;
 	//private Graphics2D g2d;
 	HexLocation[] locations;
 	Board board;
 	public BoardPanel(Board board) {
 		this.board = board;
-//		boardBackground = JavaImageLoader.getImage("/Users/maumau/spups/resources/BoardBackground.jpg").getScaledInstance(510, 660, Image.SCALE_SMOOTH);
 		this.setVisible(true);
 		
 		locations = board.getAllLocations().toArray(new HexLocation[0]);
-//		HexLocation[] locations = new HexLocation[]{};
 		
 		System.out.println(locations.length);
 		int[] origin = getBoardOrigin(locations);
 		System.out.println(Arrays.toString(origin));
-		for(int x = 0; x < locations.length; ++x) { 
-//			System.out.println(Arrays.toString(locations[x].getDistanceFromOrigin()));
-		}
 
 	} 
 	
@@ -140,6 +135,28 @@ public class BoardPanel extends JPanel {
 	public void refreshView(Board board) {
 		// TODO Auto-generated method stub
 		repaint();
+	}
+	
+	public static void drawIrrigationWave(Graphics g, int width, int height, int yOffset) {
+	    System.out.println("FJDKLSJ");
+	    g.setColor(Color.blue);
+		int lastX = (int)(width*BoardPanel.hexScaling)-12; 
+		int lastY = (int)(height*BoardPanel.hexScaling)-yOffset;
+	    for(int i = -1; i < 8; i++) {
+	        int pixelX = lastX + 3;
+	        int pixelY = lastY + (int) (Math.sin(Math.PI/3*i)*5);
+			g.drawLine(lastX, lastY, pixelX, pixelY);
+			lastX = pixelX; 
+			lastY = pixelY;
+	    }
+	}
+	
+	public static void drawRiceLines(Graphics g, int width, int height, int yOffset, int length) {
+	    System.out.println("FJDKLSJ");
+	    g.setColor(new Color(20, 84, 1));
+		int startX = (int)(width*BoardPanel.hexScaling)-(length/2); 
+		int startY = (int)(height*BoardPanel.hexScaling)-yOffset;
+		g.drawLine(startX, startY, startX+length, startY);
 	}
 	
 }

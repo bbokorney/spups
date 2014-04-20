@@ -2,6 +2,8 @@ package view.gamepanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
 
 import model.rules.tiles.Visitor;
 import model.tiles.IrrigationTileComponent;
@@ -30,32 +32,24 @@ public class TileVisitor implements Visitor {
 	@Override
 	public void visit(RiceTileComponent component) {
 		BoardPanel.drawHex(g, width, height, new Color(30, 128, 2));
+		BoardPanel.drawRiceLines(g, width, height, -14,26);
+		BoardPanel.drawRiceLines(g, width, height, -7,34);
+		BoardPanel.drawRiceLines(g, width, height, 0,40);
+		BoardPanel.drawRiceLines(g, width, height, 7,34);
+		BoardPanel.drawRiceLines(g, width, height, 14,26);
 	}
 
 	@Override
 	public void visit(PalaceTileComponent component) {
-		// TODO Auto-generated method stub
-		
+		BoardPanel.drawHex(g, width, height, new Color(128, 109, 41));
 	}
 
 	@Override
 	public void visit(IrrigationTileComponent component) {
+		System.out.println(width + " " + height);
 		BoardPanel.drawHex(g, width, height, new Color(8, 128, 255));
-		drawWave();
+		BoardPanel.drawIrrigationWave(g, width, height, -8);
+		BoardPanel.drawIrrigationWave(g, width, height, 8);
 		
-	}
-//	private void drawWave(int yPos, int xPos, int colour, int length, int amplitude, int alpha) {
-	private void drawWave() {
-//	    int pixelY, pixelX;
-////
-//		int lastX = width; 
-//		int lastY = height;
-//	    for(int i = 0; i < 100; i++) {
-//	        pixelX = lastX + i;
-//	        pixelY = (int) (Math.sin(Math.PI/10*i));
-//				g.drawLine(lastX, lastY, pixelX, pixelY);
-//			lastX = pixelX; 
-//			lastY = pixelY;
-//	    }
 	}
 }
