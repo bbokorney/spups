@@ -10,10 +10,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
-import model.rules.tiles.PlaceTileOnDeveloperRule;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
-import model.rules.tiles.RicePlacementRule;
-import model.rules.tiles.VillagePlacementRule;
+import model.rules.tiles.*;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -145,13 +142,13 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(true){
+        if(ConnectionTwoCitiesRule.connectsCities(villagePlacement,helperJunk)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot connect two cities.\n";
+            message += "Error: You cannot connect cities.\n";
         }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message, this);

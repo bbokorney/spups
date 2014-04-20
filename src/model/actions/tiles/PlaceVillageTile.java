@@ -9,6 +9,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
+import model.rules.tiles.ConnectionTwoCitiesRule;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.rules.tiles.VillagePlacementRule;
 
@@ -113,13 +114,13 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(true){
+        if(ConnectionTwoCitiesRule.connectsCities(placement,helperJunk)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot connect two cities.\n";
+            message += "Error: You cannot connect cities.\n";
         }
 
         //todo

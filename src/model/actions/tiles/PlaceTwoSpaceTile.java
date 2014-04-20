@@ -7,7 +7,9 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
+import model.board.HexLocation;
 import model.board.Location;
+import model.rules.tiles.ConnectionTwoCitiesRule;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.rules.tiles.RicePlacementRule;
 import model.rules.tiles.VillagePlacementRule;
@@ -21,15 +23,15 @@ public class PlaceTwoSpaceTile extends Action {
      /*
         attributes
      */
-    Location villagePlacement;
-    Location ricePlacement;
+    HexLocation villagePlacement;
+    HexLocation ricePlacement;
     /*
         constructors
      */
     public PlaceTwoSpaceTile(){
 
     }
-    public PlaceTwoSpaceTile(Location villagePlacement, Location ricePlacement){
+    public PlaceTwoSpaceTile(HexLocation villagePlacement, HexLocation ricePlacement){
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
     }
@@ -132,13 +134,13 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(true){
+        if(ConnectionTwoCitiesRule.connectsCities(villagePlacement, helperJunk)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot connect two cities.\n";
+            message += "Error: You cannot connect cities.\n";
         }
 
         //todo
