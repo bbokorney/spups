@@ -128,7 +128,7 @@ public class HexLocation implements Location, PathNode {
      * this tile to the origin based on a magical mix of the current path
      * and geometry. Prepare to be amazed.
      */
-    private int[] getDistanceFromOrigin() {
+    public int[] getDistanceFromOrigin() {
         int xdistance = 0;
         int ydistance = 0;
         for (Directions d : pathFromOrigin) {
