@@ -44,6 +44,8 @@ public abstract class GameModel {
     public abstract void placeIrrigationTileComponent(Location loc, TileComponent tile);
     public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
     public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
+    public abstract void buildPalace(Location loc, TileComponent tile);
+    public abstract void upgradePalace(Location loc, TileComponent tile);
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
