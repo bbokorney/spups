@@ -141,19 +141,19 @@ public class HexLocation implements Location, PathNode {
                     break;
                 case NORTHEAST:
                     ydistance+=30;
-                    xdistance+=50;
+                    xdistance+=52;
                     break;
                 case SOUTHEAST:
                     ydistance-=30;
-                    xdistance+=50;
+                    xdistance+=52;
                     break;
                 case SOUTHWEST:
                     ydistance-=30;
-                    xdistance-=50;
+                    xdistance-=52;
                     break;
                 case NORTHWEST:
                     ydistance+=30;
-                    xdistance-=50;
+                    xdistance-=52;
                     break;
             }
         }
