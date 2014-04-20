@@ -1,4 +1,4 @@
-package model;
+package model.board;
 
 /**
  * Created by Sachit on 4/19/2014.
