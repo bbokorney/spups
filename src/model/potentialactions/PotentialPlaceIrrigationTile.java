@@ -5,7 +5,6 @@ import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceIrrigationTile;
 import model.palacefestival.PalaceFestival;
-import model.tiles.IrrigationTileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -22,7 +21,7 @@ public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
 //    }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return new PlaceIrrigationTile(getLocation(), getGameModel()).tryAction();
     }
 

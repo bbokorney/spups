@@ -22,7 +22,7 @@ public abstract class PotentialAction {
 
     }
 
-    protected abstract ActionResult getActionResult();
+    public abstract ActionResult getActionResult();
 
     protected GameModel getGameModel(){
 

@@ -5,8 +5,6 @@ import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceThreeSpaceTile;
 import model.palacefestival.PalaceFestival;
-import model.tiles.RiceTileComponent;
-import model.tiles.VillageTileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -26,7 +24,7 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
     }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), getGameModel()).tryAction();
     }
 
