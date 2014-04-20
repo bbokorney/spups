@@ -26,11 +26,11 @@ public class EndPalaceFestival extends Action {
         int numberOfWinners = winners.size();
         boolean atLeastOneWinner = numberOfWinners >= 1;
         if (!atLeastOneWinner) {
-            return new ActionResult(true, 0, 0, "error: there are no players left in the festival", this);
+            return new ActionResult(true, 0, 0, "error: there are no players left in the festival");
         }
 
         int famePoints = new FestivalWinnerRule().pointsToAward(numberOfWinners > 1, festival.getPalace().getLevel());
-        return new ActionResult(true, 0, famePoints, "palace festival over", this);
+        return new ActionResult(true, 0, famePoints, "palace festival over");
     }
 
     @Override

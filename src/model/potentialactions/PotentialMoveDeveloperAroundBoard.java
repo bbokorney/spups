@@ -36,12 +36,12 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
 
     @Override
     protected ActionResult getActionResult() {
-        return new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath()).tryAction();
+        return new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), game).tryAction();
     }
 
 
     protected Pair<ActionResult, MoveDeveloperAroundBoard> confirmMovement() {
-        MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath());
+        MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), game);
         return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(), result);
     }
 

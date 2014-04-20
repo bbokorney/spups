@@ -21,7 +21,7 @@ public class Withdraw extends Action {
 
     @Override
     public ActionResult tryAction() {
-        return new ActionResult(true, 0, 0, "player withdrawn", this);
+        return new ActionResult(true, 0, 0, "player withdrawn");
     }
 
     @Override

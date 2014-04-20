@@ -162,11 +162,6 @@ public class JavaGameModel extends GameModel{
     public boolean hasPalaceLocationBeenUsedThisTurn(Location loc) {
         return turn.hasPalaceBeenUsed(loc);
     }
-//
-//    @Override
-//    public PalaceTileComponent getFestivalPalace() {
-//        return null; //todo added methods from GameModel
-//    }
 
     @Override
     public void useActionPoints(int actionPoints) {
@@ -194,4 +189,7 @@ public class JavaGameModel extends GameModel{
 
     }
 
+    public boolean isLocationInCity(Location loc) {
+        return board.isLocationInCity(loc);
+    }
 }

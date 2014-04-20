@@ -9,6 +9,7 @@ import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
+import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
 
 /**
@@ -145,7 +146,7 @@ public class PlaceTwoSpaceTile extends Action {
 
         //todo
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
@@ -169,8 +170,8 @@ public class PlaceTwoSpaceTile extends Action {
 
             //place the tile components down on three locations
             Tile twoSpaceTile = new Tile(2);
-            game.placeVillageTileComponent(villagePlacement, twoSpaceTile);
-            game.placeRiceTileComponent(ricePlacement, twoSpaceTile);
+            game.placeVillageTileComponent(villagePlacement, new RiceTileComponent(twoSpaceTile));
+            game.placeRiceTileComponent(ricePlacement, new RiceTileComponent(twoSpaceTile));
 
             //set has placed land boolean to true
             game.setHasPlacedLandTile(true);

@@ -1,5 +1,6 @@
 package model.actions.tiles;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -99,7 +100,7 @@ public class PlaceIrrigationTile extends Action {
         }
 
 
-      return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+      return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override

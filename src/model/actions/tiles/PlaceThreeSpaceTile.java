@@ -10,7 +10,9 @@ import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.rules.tiles.*;
 import model.sharedresources.SharedResourceType;
+import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
+import model.tiles.VillageTileComponent;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -163,7 +165,7 @@ public class PlaceThreeSpaceTile extends Action {
             message += "Error: You cannot connect cities.\n";
         }
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
      }
 
     @Override
@@ -184,9 +186,9 @@ public class PlaceThreeSpaceTile extends Action {
 
             //place the tile components down on three locations
             Tile threeSpaceTile = new Tile(3);
-            game.placeVillageTileComponent(villagePlacement, threeSpaceTile);
-            game.placeRiceTileComponent(ricePlacement[0], threeSpaceTile);
-            game.placeRiceTileComponent(ricePlacement[1], threeSpaceTile);
+            game.placeVillageTileComponent(villagePlacement, new VillageTileComponent(threeSpaceTile));
+            game.placeRiceTileComponent(ricePlacement[0], new RiceTileComponent(threeSpaceTile));
+            game.placeRiceTileComponent(ricePlacement[1], new RiceTileComponent(threeSpaceTile));
 
             //award the player fame points as needed
             game.incrementScore(result.getFamePoints());

@@ -24,7 +24,7 @@ public class PickUpDeckCard extends Action {
         boolean cardExists = festival.drawDeckCard() != null;
         boolean success = true;//canPickUpFestivalCard && festivalCardExists;
         String message = success ? "action successful" : "action failed";
-        return new ActionResult(success, 0, 1, message, this);
+        return new ActionResult(success, 0, 1, message);
     }
 
     @Override

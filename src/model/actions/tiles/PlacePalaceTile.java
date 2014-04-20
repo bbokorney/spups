@@ -140,7 +140,7 @@ public class PlacePalaceTile extends Action {
 
         //todo
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class PlacePalaceTile extends Action {
             game.useActionPoints(result.getActionPoints());
 
             //place the palace on this location of the board
-            game.placePalaceTileComponent(placement, new PalaceTileComponent(new Tile(1), value));
+            game.buildPalace(placement, new PalaceTileComponent(new Tile(1), value));
 
             //award the player fame points
             game.incrementScore(result.getFamePoints());
