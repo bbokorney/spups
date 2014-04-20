@@ -12,6 +12,7 @@ import model.board.HexLocation;
 import model.board.Location;
 import model.rules.tiles.*;
 import model.sharedresources.SharedResourceType;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -176,12 +177,22 @@ public class PlaceThreeSpaceTile extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP points
+            game.useActionPoints(result.getActionPoints());
 
             //decrement a three space tile from shared resources
+            game.useResource(SharedResourceType.THREE);
 
             //place the tile components down on three locations
+            Tile threeSpaceTile = new Tile(3);
+            game.placeVillageTileComponent(villagePlacement, threeSpaceTile);
+            game.placeRiceTileComponent(ricePlacement[0], threeSpaceTile);
+            game.placeRiceTileComponent(ricePlacement[1], threeSpaceTile);
+
+            //award the player fame points as needed
+            game.incrementScore(result.getFamePoints());
 
             //set has placed land boolean to true
+            game.setHasPlacedLandTile(true);
         }
         return result;
     }
