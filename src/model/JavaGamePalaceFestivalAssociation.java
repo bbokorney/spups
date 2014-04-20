@@ -56,6 +56,24 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     public boolean canAdvanceJavaTurn() { return javaGame.canAdvanceJavaTurn(); }
     public void beginFinalRound() { javaGame.beginFinalRound(); }
     public JavaPlayer getCurrentJavaPlayer() { return javaGame.getCurrentJavaPlayer(); }
+    public void placeIrrigationTileComponent(Location loc, TileComponent tile) {
+        javaGame.placeIrrigationTileComponent(loc, tile);
+    }
+
+    public void placeRiceTileComponent(Location loc, TileComponent tile) {
+        javaGame.placeRiceTileComponent(loc, tile);
+    }
+
+    public void placeVillageTileComponent(Location loc, TileComponent tile) {
+        javaGame.placeVillageTileComponent(loc, tile);
+    }
+
+    public void buildPalace(Location loc, TileComponent tile) {
+        javaGame.buildPalace(loc, tile);
+    }
+    public void upgradePalace(Location loc, TileComponent tile) {
+        javaGame.upgradePalace(loc, tile);
+    }
 
     @Override
     public Collection<JavaPlayer> getJavaPlayers() {
@@ -106,6 +124,11 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     }
 
     @Override
+    public void endPalaceFestival() {
+        palaceFestival.endPalaceFestival();
+    }
+
+    @Override
     public void setHighestBid(int bid) {
         palaceFestival.setHighestBid(bid);
     }
@@ -114,6 +137,11 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     public int getHighestBid() {
         // TODO
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public PalaceTileComponent getFestivalPalace() {
+        return palaceFestival.getPalace();
     }
 
     @Override

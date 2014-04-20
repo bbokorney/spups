@@ -41,6 +41,11 @@ public abstract class GameModel {
     public abstract Board getBoard();
     public abstract void addPalaceToCurrentTurnList(Location loc);
     public abstract boolean hasPalaceLocationBeenUsedThisTurn(Location loc);
+    public abstract void placeIrrigationTileComponent(Location loc, TileComponent tile);
+    public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
+    public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
+    public abstract void buildPalace(Location loc, TileComponent tile);
+    public abstract void upgradePalace(Location loc, TileComponent tile);
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
@@ -54,8 +59,10 @@ public abstract class GameModel {
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
     public abstract void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player);
+    public abstract void endPalaceFestival();
     public abstract void setHighestBid(int bid);
     public abstract int getHighestBid();
+    public abstract PalaceTileComponent getFestivalPalace();
 
 
     public abstract void useActionPoints(int actionPoints);

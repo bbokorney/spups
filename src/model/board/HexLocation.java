@@ -53,8 +53,8 @@ public class HexLocation implements Location, PathNode {
 	
 	//Returns an ordered list of all neighbors in clockwise direction, starting
 	//from up
-	public List<HexLocation> getNeighbors() {
-		List<HexLocation> neighbors = new ArrayList<HexLocation>();
+	public List<Location> getNeighbors() {
+		List<Location> neighbors = new ArrayList<Location>();
 		
 		//For each direction, append our own path with that direction,
 		//create a new Location object with that new path, and add it to our
@@ -62,7 +62,7 @@ public class HexLocation implements Location, PathNode {
 		for (Directions direction : Directions.values()) {
 			List<Directions> path = pathFromOrigin;
 			path.add(direction);
-            HexLocation neighbor = new HexLocation(path);
+            Location neighbor = new HexLocation(path);
 			neighbors.add(neighbor);
 		}
 		
@@ -141,19 +141,19 @@ public class HexLocation implements Location, PathNode {
                     break;
                 case NORTHEAST:
                     ydistance+=30;
-                    xdistance+=40;
+                    xdistance+=52;
                     break;
                 case SOUTHEAST:
                     ydistance-=30;
-                    xdistance+=40;
+                    xdistance+=52;
                     break;
                 case SOUTHWEST:
                     ydistance-=30;
-                    xdistance-=40;
+                    xdistance-=52;
                     break;
                 case NORTHWEST:
                     ydistance+=30;
-                    xdistance-=40;
+                    xdistance-=52;
                     break;
             }
         }
