@@ -5,6 +5,9 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.PalaceFestivalPlayer;
+
+import java.util.Collection;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -21,9 +24,15 @@ public class Withdraw extends Action {
         ActionResult result = tryAction(game);
         if(result.isSuccess()) {
             game.removePlayer(game.getCurrentPalaceFestivalPlayer());
+            game.advancePalaceFestivalTurn();
+            Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
+            if (players.size() == 1) {
+                ActionResult endResult = new EndPalaceFestival().doAction(game);
+                if (endResult.isSuccess())
+                    result = endResult;
+            }
         }
 
-        game.advancePalaceFestivalTurn();
         return result;
     }
 

@@ -106,6 +106,11 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     }
 
     @Override
+    public void endPalaceFestival() {
+        palaceFestival.endPalaceFestival();
+    }
+
+    @Override
     public void setHighestBid(int bid) {
         palaceFestival.setHighestBid(bid);
     }
@@ -114,6 +119,11 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     public int getHighestBid() {
         // TODO
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public PalaceTileComponent getFestivalPalace() {
+        return palaceFestival.getPalace();
     }
 
     @Override
