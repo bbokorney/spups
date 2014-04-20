@@ -1,7 +1,9 @@
 package model;
 
 import model.board.Board;
+import model.board.HexLocation;
 import model.board.Location;
+import model.board.Space;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
@@ -37,6 +39,8 @@ public abstract class GameModel {
     public abstract void incrementScore(int score);
     public abstract List<Developer> getDevelopers();
     public abstract Board getBoard();
+    public abstract void addPalaceToCurrentTurnList(Location loc);
+    public abstract boolean hasPalaceLocationBeenUsedThisTurn(Location loc);
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
@@ -56,5 +60,7 @@ public abstract class GameModel {
 
     public abstract void useActionPoints(int actionPoints);
 
-    public abstract boolean isHeightAtLocation(int i);
+    public abstract boolean isHeightAtLocation(int i, Location location);
+
+    public abstract Space getSpaceAtLocation(Location location);
 }

@@ -8,6 +8,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
+import model.sharedresources.SharedResourceType;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -51,7 +52,16 @@ public class PlaceIrrigationTile extends Action {
         int actionPoints = 1;
         String message = "";
 
+    //
 
+        if(game.getCount(SharedResourceType.IRRIGATION) > 1){
+            isSuccess = isSuccess && true;
+
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: There are not have enough irrigation tiles.";
+        }
 
         //Check if the player has enough AP points - 1
         if(game.cauUseAPForNonLandTileAction(actionPoints)){
@@ -64,7 +74,7 @@ public class PlaceIrrigationTile extends Action {
         }
 
         //check if required elevation is 0
-        if(game.isHeightAtLocation(0)){
+        if(game.isHeightAtLocation(0, placement)){
 
             isSuccess = isSuccess && true;
             //calculate the points earned by placing this

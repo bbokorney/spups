@@ -7,8 +7,10 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
+import model.board.HexLocation;
 import model.board.Location;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
+import model.player.JavaPlayerResourceType;
+import model.rules.tiles.*;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -19,15 +21,15 @@ public class PlaceTwoSpaceTile extends Action {
      /*
         attributes
      */
-    Location villagePlacement;
-    Location ricePlacement;
+    HexLocation villagePlacement;
+    HexLocation ricePlacement;
     /*
         constructors
      */
     public PlaceTwoSpaceTile(){
 
     }
-    public PlaceTwoSpaceTile(Location villagePlacement, Location ricePlacement){
+    public PlaceTwoSpaceTile(HexLocation villagePlacement, HexLocation ricePlacement){
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
     }
@@ -54,26 +56,37 @@ public class PlaceTwoSpaceTile extends Action {
         //this only needs (and can only be checked) when the height is 0
         // meaning the tile is being placed directly onto the board
 
-        //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)){
-            isSuccess = isSuccess && true;
-            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
-            famePoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
-
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place this outside Central Java.\n";
-        }
 
         //see if there is a two space tile to take from player
-        if(true){
+        if(game.getCount(JavaPlayerResourceType.TWO) > 1){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: There are not have enough three space tiles.";
+            message += "Error: There are not have enough two space tiles.";
+        }
+
+        //see if all the spaces they are placing on are the same elevation
+        if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement), game.getSpaceAtLocation(ricePlacement))){
+            isSuccess = isSuccess && true;
+
+            //check if they are not placing outside of central java
+            if(game.isHeightAtLocation(0, villagePlacement) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)){
+                isSuccess = isSuccess && true;
+                actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
+                famePoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
+
+            }
+            else{
+                isSuccess = isSuccess && false;
+                message += "Error: You cannot place this outside Central Java.\n";
+            }
+
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You cannot place on spaces with different elevations.\n";
         }
 
         //Check if the player has enough action points
@@ -87,27 +100,20 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //check if they are placing on another two space tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on top of another three space.\n";
-        }
-
-        //see if all the spaces they are placing on are the same elevation
-        if(true){
-            isSuccess = isSuccess && true;
-
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place on spaces with different elevations.\n";
+            message += "Error: You cannot place this on top of another two space tile.\n";
         }
 
         //see if all the spaces they are placing on are the correct terrain
-        if(true){
+        VillagePlacementRule villageTerrainRule = new VillagePlacementRule(villagePlacement, board);
+        RicePlacementRule riceTerrainRule = new RicePlacementRule(ricePlacement, board);
+
+        if(villageTerrainRule.allowed() && riceTerrainRule.allowed()){
             isSuccess = isSuccess && true;
 
         }
@@ -117,7 +123,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(true){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),villagePlacement,ricePlacement) ){
             isSuccess = isSuccess && true;
 
         }
@@ -127,13 +133,13 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(true){
+        if(ConnectionTwoCitiesRule.connectsCities(villagePlacement, helperJunk)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot connect two cities.\n";
+            message += "Error: You cannot connect cities.\n";
         }
 
         //todo
