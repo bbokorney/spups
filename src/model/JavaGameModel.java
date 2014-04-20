@@ -34,7 +34,7 @@ public class JavaGameModel extends GameModel{
     public JavaGameModel(int numPlayers) {
         resources = new SharedResources();
         BoardCreator creator = new BoardCreator();
-//        board = creator.createBoard();
+        board = creator.createBoard();
         javaPlayers = new JavaPlayers(numPlayers);
         finalRoundTurns = -1;
         turn = new NonFinalTurn();
@@ -162,11 +162,11 @@ public class JavaGameModel extends GameModel{
     public boolean hasPalaceLocationBeenUsedThisTurn(Location loc) {
         return turn.hasPalaceBeenUsed(loc);
     }
-
-    @Override
-    public PalaceTileComponent getFestivalPalace() {
-        return null; //todo added methods from GameModel
-    }
+//
+//    @Override
+//    public PalaceTileComponent getFestivalPalace() {
+//        return null; //todo added methods from GameModel
+//    }
 
     @Override
     public void useActionPoints(int actionPoints) {

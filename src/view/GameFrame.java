@@ -15,8 +15,8 @@ import view.palacefestival.FestivalPanel;
 
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
-    private final static int WIDTH = 1000; // 1300;
-    private final static int HEIGHT = 800; // 850;
+    private final static int WIDTH = 1040; // 1300;
+    private final static int HEIGHT = 820; // 850;
     JavaMenu menu;
     GamePanel gamePanel;
     ActionPanel actionPanel;

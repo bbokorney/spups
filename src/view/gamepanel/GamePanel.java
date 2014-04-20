@@ -46,7 +46,7 @@ public class GamePanel extends JPanel {
 		for(int x = 0; x < numOfPlayerPanels; ++x) 
 			playerPanel[x].setBackground(Color.RED);
 		
-		boardPanel.setPreferredSize(new Dimension(510, 200));
+		boardPanel.setPreferredSize(new Dimension(600, 200));
 		cardsPanel.setPreferredSize(new Dimension(245, 200));
 		commonPanel.setPreferredSize(new Dimension(245, 200));
 		for(int x = 0; x < numOfPlayerPanels; ++x) 
