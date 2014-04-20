@@ -1,8 +1,6 @@
 package model.board;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import model.tiles.TileComponent;
 
@@ -113,5 +111,14 @@ public abstract class Board {
         Space space = this.getSpace(loc);
         int height = space.getHeight();
         return height == i;
+    }
+
+    public Collection<Location> getAllLocations() {
+        ArrayList<Location> locations = new ArrayList<Location>();
+        Iterator<Location> iter = board.keySet().iterator();
+        while(iter.hasNext()) {
+            locations.add(iter.next());
+        }
+        return locations;
     }
 }
