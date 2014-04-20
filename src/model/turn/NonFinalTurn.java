@@ -19,6 +19,7 @@ public class NonFinalTurn extends Turn {
         startingAP = 6;
         ap = startingAP;
         actionTokenUsed = false;
+        palacesInteracted = new ArrayList<Location>();
     }
 
     public NonFinalTurn(int startingAP) {

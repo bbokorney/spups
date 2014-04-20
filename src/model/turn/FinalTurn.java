@@ -18,6 +18,7 @@ public class FinalTurn extends Turn {
         startingAP = 6;
         ap = startingAP;
         actionTokenUsed = false;
+        palacesInteracted = new ArrayList<Location>();
     }
 
     public FinalTurn(int startingAP) {
