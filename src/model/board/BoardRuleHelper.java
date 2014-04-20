@@ -219,4 +219,13 @@ public class BoardRuleHelper {
         return false;
     }
 
+    public List<Location> getPalacesLegalForUpgrading() {
+        return null;
+        //todo needed for PotentialUpgradePalace
+        //exclude palaces by the following criteria
+        //The current player must be the highest in the city
+        //the city must not have been interacted with during this turn
+        //the city must be large enough city size) to support a larger palace (atleast current value + 2)
+
+    }
 }
