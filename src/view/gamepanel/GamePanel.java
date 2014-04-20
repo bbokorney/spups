@@ -64,8 +64,8 @@ public class GamePanel extends JPanel {
 		cardsPanel.refreshView(model);
 		commonPanel.refreshView(model);
 		int x = 0;
-		for(Player player : model.getJavaPlayers())
-			playerPanel[x++].refreshView(player);
-		repaint();
+//		for(Player player : model.getJavaPlayers())
+//			playerPanel[x++].refreshView(player);
+//		repaint();
 	}
 }

@@ -5,6 +5,8 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.Card;
+import model.palacefestival.PalaceFestivalPlayer;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -26,8 +28,13 @@ public class PickUpDeckCard extends Action {
 
     @Override
     public ActionResult doAction(GameModel game) {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        ActionResult result = tryAction(game);
+        if (result.isSuccess()) {
+            PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+            player.takeCard(game.drawDeckCard());
+        }
+
+        return result;
     }
 
     @Override
