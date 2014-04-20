@@ -32,14 +32,9 @@ public class PotentialMoveToTie extends PotentialAction {
         return new EndPalaceFestival(festival).tryAction();
     }
 
-//    @Override
-//    protected void setComponentsOnHoverBoard() {
-//        // nothing to set
-//    }
-
     @Override
     protected ActionResult getActionResult() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return tieAgreed();
     }
 
 }
