@@ -8,7 +8,11 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.rules.palace.PalaceLevelCitySizeRule;
 import model.rules.tiles.PalacePlacementRule;
+import model.sharedresources.SharedResourceType;
+
+import java.util.Collection;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -51,7 +55,7 @@ public class UpgradePalaceTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //check if there are any palaces left in shared resources
-        if(true){
+        if(game.getCount(SharedResourceType.valueOf("PALACE" + value)) > 1){
             isSuccess = isSuccess && true;
 
         }
@@ -71,7 +75,7 @@ public class UpgradePalaceTile extends Action {
         }
 
         //Check if the placement is a palace tile
-        PalacePlacementRule terrainRule = new PalacePlacementRule(placement, board); //todo wait for Baker
+        PalacePlacementRule terrainRule = new PalacePlacementRule(placement, board);
         if(terrainRule.buildAllowed()){
             isSuccess = isSuccess && true;
 
@@ -79,6 +83,8 @@ public class UpgradePalaceTile extends Action {
             /*
             All these after should only be done if the thingy is a palace tile
              */
+
+
 
             //See if the tile has been interacted with this turn
             if(true){

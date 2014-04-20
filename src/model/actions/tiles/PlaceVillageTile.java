@@ -103,7 +103,7 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game,placement) ){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),placement) ){
             isSuccess = isSuccess && true;
 
         }

@@ -65,16 +65,32 @@ public class PlaceThreeSpaceTile extends Action {
 
 
         //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
+        if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement),game.getSpaceAtLocation(ricePlacement[0]), game.getSpaceAtLocation(ricePlacement[1])) ){
             isSuccess = isSuccess && true;
-            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
-            famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
+
+            /*
+                Check if the
+            */
+            if(game.isHeightAtLocation(0, villagePlacement) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
+                isSuccess = isSuccess && true;
+                actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
+                famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
+
+            }
+            else{
+                isSuccess = isSuccess && false;
+                message += "Error: You cannot place outside Central Java.\n";
+            }
+
+
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place outside Central Java.\n";
+            message += "Error: You cannot place on spaces with different elevations.\n";
         }
+
+
 
 
         //see if there is a three space tile to take from shared
@@ -109,14 +125,7 @@ public class PlaceThreeSpaceTile extends Action {
 
         //see if all the spaces they are placing on are the same elevation
 
-        if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement),game.getSpaceAtLocation(ricePlacement[0]), game.getSpaceAtLocation(ricePlacement[1])) ){
-            isSuccess = isSuccess && true;
 
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place on spaces with different elevations.\n";
-        }
 
         //see if all the spaces they are placing on are the correct terrain
         VillagePlacementRule villageTerrainRule = new VillagePlacementRule(villagePlacement, board);
@@ -134,7 +143,6 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        //todo ask baker if i can send him the list of developers?
         if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(), villagePlacement, ricePlacement[0], ricePlacement[1])){
             isSuccess = isSuccess && true;
 

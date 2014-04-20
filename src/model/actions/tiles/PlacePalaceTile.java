@@ -79,7 +79,7 @@ public class PlacePalaceTile extends Action {
 
         //see if you are placing this on top of a village
 
-        PalacePlacementRule terrainRule = new PalacePlacementRule(placement, board); //todo wait for Baker
+        PalacePlacementRule terrainRule = new PalacePlacementRule(placement, board);
         if(terrainRule.buildAllowed()){
             isSuccess = isSuccess && true;
 
@@ -124,9 +124,9 @@ public class PlacePalaceTile extends Action {
             message += "Error: Palaces need to be built on villages.\n";
         }
 
-        //Check if the player has enough AP points to complete this - 1 AP
+        //Check if the player is attempting to place this tile on a
         //PlaceTileOnDeveloperRule
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game,placement) ){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),placement) ){
             isSuccess = isSuccess && true;
 
         }
