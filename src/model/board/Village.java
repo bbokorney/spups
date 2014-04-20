@@ -20,4 +20,8 @@ public class Village {
     public void add(Location loc) {
         village.add(loc);
     }
+
+    public Collection<Location> getLocations() {
+        return village;
+    }
 }

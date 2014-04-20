@@ -17,4 +17,6 @@ public class CityContainer {
     public Collection<City> getCityCollection() {
         return cityCollection;
     }
+
+    //TODO: add upgradePalace(Location, PalaceTileComponent)
 }
