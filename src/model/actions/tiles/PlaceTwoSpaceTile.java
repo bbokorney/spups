@@ -88,7 +88,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //check if they are placing on another two space tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement)){
             isSuccess = isSuccess && true;
 
         }

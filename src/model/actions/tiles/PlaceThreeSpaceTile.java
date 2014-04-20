@@ -97,7 +97,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //check if they are placing on another three space tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement[0], ricePlacement[1])){
             isSuccess = isSuccess && true;
 
         }

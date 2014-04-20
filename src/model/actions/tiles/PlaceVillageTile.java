@@ -9,10 +9,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
-import model.rules.tiles.ConnectionTwoCitiesRule;
-import model.rules.tiles.PlaceTileOnDeveloperRule;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
-import model.rules.tiles.VillagePlacementRule;
+import model.rules.tiles.*;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -73,13 +70,13 @@ public class PlaceVillageTile extends Action {
         }
 
         //check if they are placing on another one tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on top of another three space.\n";
+            message += "Error: You cannot place this on top of another one space tile.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
