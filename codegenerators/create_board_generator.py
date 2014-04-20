@@ -37,7 +37,6 @@ for line in lines:
         output += "directions.add(Directions.SOUTHWEST);\n"
         output += add_new_space()
     elif line == "IRRIGATION":
-        output += add_new_space()
         output += "board.placeIrrigationTileComponent(loc, new IrrigationTileComponent(new Tile(1)));\n"
     elif line == "HIGHLANDS":
         output += add_new_space()
