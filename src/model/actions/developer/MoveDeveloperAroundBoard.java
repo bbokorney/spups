@@ -48,7 +48,7 @@ public class MoveDeveloperAroundBoard extends Action {
      */
         boolean isSuccess = true;
         int famePoints = 0;         //will always be 0
-        int actionPoints = 0;       //todo add the cost of the path here
+        int actionPoints = path.getCost();       //todo add the cost of the path here
         String message = "";
 
         Board board = game.getBoard();
@@ -62,7 +62,7 @@ public class MoveDeveloperAroundBoard extends Action {
             isSuccess = isSuccess && false;
             message += "You cannot travel an invalid path.\n";
         }
-        if(game.canUseAPForNonLandTileAction(path.getCost())){
+        if(game.canUseAPForNonLandTileAction(actionPoints)){
 
             isSuccess = isSuccess && true;
         }

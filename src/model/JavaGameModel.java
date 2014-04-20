@@ -195,8 +195,7 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
-            getCurrentJavaPlayer().addDeveloper(new Developer(locationOfDeveloperPlaced));
-
+            getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
     }
 
     public boolean isLocationInCity(Location loc) {
