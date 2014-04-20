@@ -114,8 +114,6 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
 
     @Override
     public ActionResult getActionResult() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    protected ActionResult getActionResult() {
         return confirmBid();
     }
 

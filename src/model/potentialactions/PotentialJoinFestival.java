@@ -62,7 +62,7 @@ public class PotentialJoinFestival extends PotentialAction {
     }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return confirmBid();
     }
 
