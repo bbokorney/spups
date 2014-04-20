@@ -13,14 +13,18 @@ public class Withdraw extends Action {
 
     @Override
     public ActionResult tryAction(GameModel game) {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        return new ActionResult(true, 0, 0, "player withdrawn", this);
     }
 
     @Override
     public ActionResult doAction(GameModel game) {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        ActionResult result = tryAction(game);
+        if(result.isSuccess()) {
+            game.removePlayer(game.getCurrentPalaceFestivalPlayer());
+        }
+
+        game.advancePalaceFestivalTurn();
+        return result;
     }
 
     @Override
