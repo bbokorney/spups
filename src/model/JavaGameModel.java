@@ -243,7 +243,7 @@ public class JavaGameModel extends GameModel {
 
     @Override
     public int getHighestBid() {
-        return 0;  //todo added methods from GameModel
+        return festival.getHighestBid();  //todo added methods from GameModel
     }
 
     @Override
@@ -258,8 +258,15 @@ public class JavaGameModel extends GameModel {
 
     @Override
     public Space getSpaceAtLocation(Location location) {
-        //todo for Sachit, my sweetie
-        return null;
+        return board.getSpace(location);
+    }
+
+    public void endPalaceFestival() {
+        festival.endPalaceFestival();
+    }
+
+    public PalaceTileComponent getFestivalPalace() {
+        return festival.getPalace();
     }
 
 }
