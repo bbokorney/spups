@@ -1,7 +1,6 @@
 package model.actions;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.serialization.JsonObject;
 
 /**

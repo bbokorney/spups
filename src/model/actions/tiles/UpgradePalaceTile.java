@@ -1,7 +1,6 @@
 package model.actions.tiles;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -22,10 +21,10 @@ public class UpgradePalaceTile extends Action {
     /*
         constructors
      */
-    public UpgradePalaceTile(){
+    UpgradePalaceTile(){
 
     }
-    public UpgradePalaceTile(Location placement, int value){
+    UpgradePalaceTile(Location placement, int value){
         this.value = value;
         this.placement = placement;
     }
@@ -55,7 +54,7 @@ public class UpgradePalaceTile extends Action {
         }
 
         //check if the player has enough action points, 1
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(true){
             isSuccess = isSuccess && true;
 
         }

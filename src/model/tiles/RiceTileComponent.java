@@ -1,22 +1,7 @@
 package model.tiles;
 
-import model.rules.tiles.Visitor;
-
 /**
  * Created by Baker on 4/14/2014.
  */
-public class RiceTileComponent extends TileComponent{
-
-
-    public RiceTileComponent(Tile parent) {
-        super(parent);
-    }
-
-    public RiceTileComponent() {
-
-    }
-
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
+public class RiceTileComponent {
 }

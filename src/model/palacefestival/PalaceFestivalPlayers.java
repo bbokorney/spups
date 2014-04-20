@@ -1,11 +1,8 @@
 package model.palacefestival;
 
-import model.player.JavaPlayer;
-import model.player.Player;
 import model.player.TurnTracker;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -40,10 +37,6 @@ public class PalaceFestivalPlayers implements TurnTracker<PalaceFestivalPlayer> 
     @Override
     public PalaceFestivalPlayer getCurrentPlayer() {
         return players.get(currentPlayerIndex);
-    }
-
-    public Collection<PalaceFestivalPlayer> getPlayers() {
-        return players;
     }
 
     @Override

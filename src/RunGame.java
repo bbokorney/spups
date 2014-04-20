@@ -1,7 +1,6 @@
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import model.GameModel;
-import model.JavaGameModel;
 import controller.Controller;
 import view.GameFrame;
 
@@ -18,11 +17,10 @@ public class RunGame {
     public RunGame() {
         SwingUtilities.invokeLater(new Runnable(){
             public void run(){
-            	GameModel game = new JavaGameModel();
-                GameFrame frame = new GameFrame(game);
+                GameFrame frame = new GameFrame();
                 @SuppressWarnings("unused")
                 Controller controller = new Controller(frame);
-                //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
             }
         });

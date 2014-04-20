@@ -4,7 +4,6 @@ import model.palacefestival.PalaceCardComponent;
 import model.player.Developer;
 import model.rules.tiles.Visitor;
 import model.tiles.IrrigationTileComponent;
-import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
 
@@ -19,23 +18,19 @@ public class DeveloperPlaecmentRule implements Visitor {
         this.developer = developer;
     }
 
-    public boolean allowed() {
-        return allowed;
-    }
-
     public void visit(VillageTileComponent component) {
-        allowed = true;
+
     }
 
     public void visit(RiceTileComponent component) {
-        allowed = true;
+
     }
 
-    public void visit(PalaceTileComponent component) {
-        allowed = false;
+    public void visit(PalaceCardComponent component) {
+
     }
 
     public void visit(IrrigationTileComponent component) {
-        allowed = false;
+
     }
 }

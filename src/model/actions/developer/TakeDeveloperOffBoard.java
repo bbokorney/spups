@@ -1,12 +1,10 @@
 package model.actions.developer;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Location;
-import pathfinding.JavaPath;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -18,14 +16,14 @@ public class TakeDeveloperOffBoard extends Action {
         attributes
      */
     Location developerLocationTakenOff;
-    JavaPath path;
+    Location[] path;
     /*
         constructors
      */
-    public TakeDeveloperOffBoard(){
+    TakeDeveloperOffBoard(){
 
     }
-    public TakeDeveloperOffBoard(Location developerLocationTakenOff, JavaPath path){
+    TakeDeveloperOffBoard(Location developerLocationTakenOff, Location[] path){
         this.path = path;
         this.developerLocationTakenOff = developerLocationTakenOff;
     }

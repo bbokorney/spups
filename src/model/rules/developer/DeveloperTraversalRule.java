@@ -1,53 +1,41 @@
 package model.rules.developer;
 
+import model.palacefestival.PalaceCardComponent;
 import model.rules.tiles.Visitor;
-import model.tiles.*;
+import model.tiles.IrrigationTileComponent;
+import model.tiles.RiceTileComponent;
+import model.tiles.TileComponent;
+import model.tiles.VillageTileComponent;
+
+import javax.rmi.CORBA.Tie;
 
 /**
  * Created by Baker on 4/14/2014.
  */
-public class DeveloperTraversalRule {
+public class DeveloperTraversalRule implements Visitor {
+    private int cost;
     private TileComponent source;
     private TileComponent destination;
-
     public DeveloperTraversalRule(TileComponent source, TileComponent destination) {
         this.source = source;
         this.destination = destination;
     }
 
-    public int getCost() {
-        TraversalVisitor sourceVisitor = new TraversalVisitor();
-        TraversalVisitor destinationVisitor = new TraversalVisitor();
-        source.accept(sourceVisitor);
-        destination.accept(destinationVisitor);
+    public int getCost() { return cost; }
 
-        return sourceVisitor.getType() == destinationVisitor.getType() ? 0 : 1;
+    public void visit(VillageTileComponent component) {
+
     }
 
-    private class TraversalVisitor implements Visitor {
+    public void visit(RiceTileComponent component) {
 
-        TileType type;
-
-        public TileType getType() { return type; }
-
-        public void visit(VillageTileComponent component) {
-            type = TileType.Village;
-        }
-
-        public void visit(RiceTileComponent component) {
-            type = TileType.Rice;
-        }
-
-        public void visit(PalaceTileComponent component) {
-            type = TileType.Palace;
-        }
-
-        public void visit(IrrigationTileComponent component) {
-            type = TileType.Irrigation;
-        }
     }
 
-    private enum TileType {
-        Village, Rice, Palace, Irrigation;
+    public void visit(PalaceCardComponent component) {
+
+    }
+
+    public void visit(IrrigationTileComponent component) {
+
     }
 }

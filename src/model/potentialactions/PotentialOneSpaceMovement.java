@@ -1,6 +1,5 @@
 package model.potentialactions;
 
-import model.GameModel;
 import model.JavaGameModel;
 import model.actions.ActionResult;
 import model.board.HexLocation;
@@ -16,76 +15,67 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
                 to game.areLocationsOnBoard(newLocation)
      */
 
-    private HexLocation location;
+    HexLocation location;
 
-    public PotentialOneSpaceMovement(GameModel game){
+    public PotentialOneSpaceMovement(JavaGameModel game){
         super(game);
     }
 
     @Override
     public ActionResult moveNorth() {
         HexLocation newLocation = location.getNeighbor(0);
-        if (game.getBoard().areLocationsOnBoard(newLocation)) {
+        if (game.getJavaBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
+            this.setHoverBoard();
         }
-        return this.getActionResult();
+        return null;
     }
 
     @Override
     public ActionResult moveNortheast() {
         HexLocation newLocation = location.getNeighbor(1);
-        if (game.getBoard().areLocationsOnBoard(newLocation)) {
+        if (game.getJavaBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
         }
-        return this.getActionResult();
+        return null;
     }
 
     @Override
     public ActionResult moveSoutheast() {
         HexLocation newLocation = location.getNeighbor(2);
-        if (game.getBoard().areLocationsOnBoard(newLocation)) {
+        if (game.getJavaBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
         }
-        return this.getActionResult();
+        return null;
     }
 
     @Override
     public ActionResult moveSouth() {
         HexLocation newLocation = location.getNeighbor(3);
-        if (game.getBoard().areLocationsOnBoard(newLocation)) {
+        if (game.getJavaBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
         }
 
-        return this.getActionResult();
+        return null;
     }
 
     @Override
     public ActionResult moveSouthwest() {
         HexLocation newLocation = location.getNeighbor(4);
-        if (game.getBoard().areLocationsOnBoard(newLocation)) {
+        if (game.getJavaBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
         }
-        return this.getActionResult();
+        return null;
     }
 
 
     @Override
     public ActionResult moveNorthwest() {
         HexLocation newLocation = location.getNeighbor(5);
-        if (game.getBoard().areLocationsOnBoard(newLocation)) {
+        if (game.getJavaBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
         }
-        return this.getActionResult();
-    }
-
-    public HexLocation getLocation(){
-        return location;
+        return null;
     }
 
 

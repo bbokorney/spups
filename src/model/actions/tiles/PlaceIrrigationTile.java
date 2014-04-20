@@ -4,10 +4,7 @@ import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
-import model.board.Board;
-import model.board.BoardRuleHelper;
-import model.board.HexLocation;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
+import model.board.Location;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -18,43 +15,39 @@ public class PlaceIrrigationTile extends Action {
     /*
         attributes
      */
-    private HexLocation placement;
+    private Location placement;
 
 
     /*
         constructors
      */
-    public PlaceIrrigationTile(){
+    PlaceIrrigationTile(){
         //Empty constructor
         //used for loading
     }
 
-    public PlaceIrrigationTile(HexLocation placement){
+    PlaceIrrigationTile(Location placement){
         this.placement = placement;
     }
 
 
     @Override
     public ActionResult tryAction(GameModel game) {
+        //todo
+
      /*
         Check if the action is valid to complete
         ...
         returns true if valid
                 false if invalid
      */
-
-        Board board = game.getBoard();
-        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
-
         boolean isSuccess = true;
-        int famePoints = 0; //this gets modified in this method
-        int actionPoints = 1;
+        int famePoints = 0;
+        int actionPoints = 0;
         String message = "";
 
-
-
         //Check if the player has enough AP points - 1
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(true){
             isSuccess = isSuccess && true;
 
         }
@@ -64,12 +57,8 @@ public class PlaceIrrigationTile extends Action {
         }
 
         //check if required elevation is 0
-        if(game.isHeightAtLocation(0)){
-
+        if(true){
             isSuccess = isSuccess && true;
-            //calculate the points earned by placing this
-            famePoints += helperJunk.pointsEarnedFromIrrigationPlacement(placement);
-
         }
         else{
             isSuccess = isSuccess && false;
@@ -77,7 +66,7 @@ public class PlaceIrrigationTile extends Action {
         }
 
         //checks if the player is placing outside of central java
-        if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+        if(true){
             isSuccess = isSuccess && true;
         }
         else{
@@ -85,8 +74,11 @@ public class PlaceIrrigationTile extends Action {
             message += "Error: This tile cannot be placed outside Central Java.\n";
         }
 
+        //check if the player would surround a body of water by placing this tile
+        //this would only gain the player fame points.
 
-      return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+
+        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
     }
 
     @Override
@@ -100,7 +92,6 @@ public class PlaceIrrigationTile extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP points it cost
-            game.useActionPoints(result.getActionPoints());
 
             //Award the fame points to the player
 

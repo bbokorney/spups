@@ -1,7 +1,6 @@
 package model.actions.tiles;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -22,12 +21,12 @@ public class PlacePalaceTile extends Action {
     /*
         constructors
      */
-    public PlacePalaceTile(){
+    PlacePalaceTile(){
         //Empty constructor
         //used for loading
     }
 
-    public PlacePalaceTile(int value, Location placement){
+    PlacePalaceTile(int value, Location placement){
         this.value = value;
         this.placement = placement;
     }
@@ -60,7 +59,7 @@ public class PlacePalaceTile extends Action {
         //Check if the player has enough AP points to complete this - 1 AP
         //ActionPointsRule
 
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(true){
             isSuccess = isSuccess && true;
 
         }

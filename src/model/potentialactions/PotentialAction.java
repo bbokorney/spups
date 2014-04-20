@@ -1,7 +1,7 @@
 package model.potentialactions;
 
 import model.GameModel;
-import model.actions.ActionResult;
+import model.JavaGameModel;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -9,35 +9,21 @@ import model.actions.ActionResult;
 public abstract class PotentialAction {
 
     HoverBoard hoverBoard;
-    GameModel game;
+    JavaGameModel game;
 
-    public PotentialAction(GameModel game){
-
+    public PotentialAction(JavaGameModel game){
         this.game = game;
     }
 
     public PotentialAction(){
-
-        this.hoverBoard = new HoverBoard();
+        hoverBoard = new HoverBoard();
     }
 
     public HoverBoard getHoverBoard(){
-
         return this.hoverBoard;
     }
 
-    protected abstract void setComponentsOnHoverBoard();
-
-    protected abstract ActionResult getActionResult();
-
-    protected GameModel getGameModel(){
-
-        return this.game;
-    }
-
-    protected Boolean isValid(){
-        return ((Boolean) getActionResult().isSuccess());
-    }
+    public abstract void setHoverBoard();
 
 
 }

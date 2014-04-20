@@ -1,14 +1,10 @@
 package model.actions.tiles;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
-import model.board.Board;
-import model.board.BoardRuleHelper;
 import model.board.Location;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -24,13 +20,15 @@ public class PlaceTwoSpaceTile extends Action {
     /*
         constructors
      */
-    public PlaceTwoSpaceTile(){
+    PlaceTwoSpaceTile(){
 
     }
-    public PlaceTwoSpaceTile(Location villagePlacement, Location ricePlacement){
+    PlaceTwoSpaceTile(Location villagePlacement, Location ricePlacement){
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
     }
+
+
 
     @Override
     public ActionResult tryAction(GameModel game) {
@@ -40,31 +38,10 @@ public class PlaceTwoSpaceTile extends Action {
         returns true if valid
                 false if invalid
      */
-
-        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
-        Board board = game.getBoard();
-
         boolean isSuccess = true;
-        int famePoints = 0;     //this number may get incremented in the first if statement of this method
-        int actionPoints = 1;   // this number may get incremented in the first if statement of this method
-                                //to account for placing outside of central java
+        int famePoints = 0;     //todo replace with surround body of water
+        int actionPoints = 1;   //todo plus however many placed outside of central java is extra.
         String message = "";
-
-        //Check for the extra AP that this move will cost
-        //this only needs (and can only be checked) when the height is 0
-        // meaning the tile is being placed directly onto the board
-
-        //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)){
-            isSuccess = isSuccess && true;
-            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
-            famePoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement);
-
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place this outside Central Java.\n";
-        }
 
         //see if there is a two space tile to take from player
         if(true){
@@ -77,7 +54,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //Check if the player has enough action points
-        if(game.canUseAPForLandTileAction(actionPoints)){
+        if(true){
             isSuccess = isSuccess && true;
 
         }
@@ -94,6 +71,16 @@ public class PlaceTwoSpaceTile extends Action {
         else{
             isSuccess = isSuccess && false;
             message += "Error: You cannot place this on top of another three space.\n";
+        }
+
+        //check if they are not placing outside of central java
+        if(true){
+            isSuccess = isSuccess && true;
+
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You cannot place this outside Central Java.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation

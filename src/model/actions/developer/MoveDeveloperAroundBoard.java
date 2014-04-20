@@ -1,13 +1,11 @@
 package model.actions.developer;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.Json;
 import model.actions.serialization.JsonObject;
 import model.board.Location;
-import pathfinding.JavaPath;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -18,17 +16,17 @@ public class MoveDeveloperAroundBoard extends Action {
         attributes
      */
     private Location developerStartinglocation;
-    private JavaPath path;
+    private Location[] path;
 
     /*
         Constructors
      */
-    public MoveDeveloperAroundBoard(){
+    MoveDeveloperAroundBoard(){
         //Empty constructor
         //Most likely used for loading
     }
 
-    public MoveDeveloperAroundBoard(Location developerStartinglocation, JavaPath path){
+    MoveDeveloperAroundBoard(Location developerStartinglocation, Location[] path){
         this.developerStartinglocation = developerStartinglocation;
         this.path = path;
     }
@@ -83,12 +81,12 @@ public class MoveDeveloperAroundBoard extends Action {
 
         Utilizes Json and JsonObject to accomplish this.
      */
-        //todo fix since JavaPath and other stuff
+        //todo fix
 
-//        String[] pathToSerial = new String[path.length];
-//        for(int i = 0; i < path.length; i++){
-//            pathToSerial[i] = path[i].serialize();
-//        }
+        String[] pathToSerial = new String[path.length];
+        for(int i = 0; i < path.length; i++){
+            pathToSerial[i] = path[i].serialize();
+        }
             return null;
 //        return Json.wrapObject(Json.wrapElements(
 //                Json.wrapPair("developerStartingLocation", developerStartinglocation.serialize()),
@@ -111,13 +109,13 @@ public class MoveDeveloperAroundBoard extends Action {
         //developerStartinglocation = (new Location()).loadObject(actionToRestore.getJsonObject("developerStartingLocation"));
 
         //get the temporary path of JsonObjects which store locations?
-        //JsonObject[] temporaryPath = actionToRestore.getJsonObjectArray("path");
+        JsonObject[] temporaryPath = actionToRestore.getJsonObjectArray("path");
 
 //        path = new Location[temporaryPath.length];
 
-//        for(int i = 0; i < temporaryPath.length; i++){
-////            path[i] = temporaryPath[i];
-//        }
+        for(int i = 0; i < temporaryPath.length; i++){
+//            path[i] = temporaryPath[i];
+        }
 
 
 

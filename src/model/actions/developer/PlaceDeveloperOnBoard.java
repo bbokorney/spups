@@ -1,14 +1,11 @@
 package model.actions.developer;
 
 
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
-import model.board.JavaBoard;
 import model.board.Location;
 import model.GameModel;
 import model.actions.serialization.JsonObject;
-import pathfinding.JavaPath;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -20,18 +17,18 @@ public class PlaceDeveloperOnBoard extends Action {
         attributes
      */
     private Location locationOfDeveloperPlaced;
-    private JavaPath path;
+    private Location[] path;
 
 
     /*
         constructors
      */
-    public PlaceDeveloperOnBoard(){
+    PlaceDeveloperOnBoard(){
         //Empty constructor
         //mostly used for loading
     }
 
-    public PlaceDeveloperOnBoard(Location locationOfDeveloperPlaced, JavaPath path){
+    PlaceDeveloperOnBoard(Location locationOfDeveloperPlaced, Location[] path){
         this.locationOfDeveloperPlaced = locationOfDeveloperPlaced;
         this.path = path;
     }
