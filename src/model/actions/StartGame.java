@@ -1,5 +1,6 @@
 package model.actions;
 
+import model.GameModel;
 import model.actions.serialization.JsonObject;
 
 /**
@@ -11,19 +12,22 @@ public class StartGame extends Action {
     int numberOfPlayers;
     String[] playerNames;
     String[] playerColors;
+    GameModel game;
 
     /*
         Constructors
      */
-    StartGame(){
+    StartGame(GameModel game){
+        this.game = game;
         //Empty constructor
         //Most likely used during loading
     }
 
-    StartGame(int numberOfPlayers, String[] playerNames, String[] playerColors){
+    StartGame(int numberOfPlayers, String[] playerNames, String[] playerColors, GameModel game){
         this.numberOfPlayers = numberOfPlayers;
         this.playerNames = playerNames;
         this.playerColors = playerColors;
+        this.game = game;
     }
 
 
