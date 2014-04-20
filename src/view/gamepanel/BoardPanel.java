@@ -18,8 +18,11 @@ import model.board.JavaBoard;
 import model.board.Location;
 import model.board.LocationType;
 import model.board.Space;
+import model.tiles.IrrigationTileComponent;
+import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
 import model.tiles.TileComponent;
+import model.tiles.VillageTileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -56,8 +59,6 @@ public class BoardPanel extends JPanel {
 				width = locations[x].getDistanceFromOrigin()[0];
 			if(height > locations[x].getDistanceFromOrigin()[1])
 				height = locations[x].getDistanceFromOrigin()[1];
-//			System.out.println(Arrays.toString(locations[x].getDistanceFromOrigin()));
-			
 		}
 		return new int[] {width*-1, height*-1};
 	}
@@ -67,6 +68,14 @@ public class BoardPanel extends JPanel {
 
 		for(HexLocation location : locations) { 
 			int[] distance = location.getDistanceFromOrigin();
+			
+			if(distance[0] == 0 && distance[1] == 0) 
+				board.getSpace(location).accept(new VillageTileComponent());
+			if(distance[0] == 0 && distance[1] == 60) 
+				board.getSpace(location).accept(new IrrigationTileComponent());
+			if(distance[0] == 0 && distance[1] == 120) 
+				board.getSpace(location).accept(new RiceTileComponent());
+			
 			int width = distance[0]+origin[0]+50;
 			int height = distance[1]+origin[1]+40;
 
@@ -78,15 +87,17 @@ public class BoardPanel extends JPanel {
 	    		color = Color.green;
 			
 			drawHex(g, width, height, color);
+			TileComponent tile = board.getSpace(location).getTopTileComponent();
 			TileVisitor visitor = new TileVisitor(g, width, height);
-			board.getSpace(location).getTopTileComponent().accept(visitor);
+			if(tile != null) 
+				board.getSpace(location).getTopTileComponent().accept(visitor);
 		}
 		System.out.println("Size " + locations.length);
     }
 	
-	public static void drawHouses(Graphics g, int i, int j) {
+	public static void drawHouses(Graphics g, int i, int j, Color color) {
 		int[] xHouse = {-4, -4, -7, 0, 7, 4, 4};
-		int[] yHouse = {4, 0, 0, -6, 0, 0, 4};
+		int[] yHouse = {4, 0, 0, -9, 0, 0, 4};
 		int[] xx = {-12, 0, 12, 0};
 		int[] yy = {0, -12, 0, 12};
 		for(int x = 0; x < xx.length; ++x) {
@@ -96,7 +107,7 @@ public class BoardPanel extends JPanel {
 				int height = j+yy[x]+yHouse[y];
 	            house.addPoint((int)(width*(hexScaling)), (int)(height*(hexScaling)));
 			}
-			((Graphics2D) g).setColor(Color.magenta);
+			((Graphics2D) g).setColor(color);
 			g.fillPolygon(house);
 		}
 	}

@@ -1,5 +1,6 @@
 package view.gamepanel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import model.rules.tiles.Visitor;
@@ -21,13 +22,14 @@ public class TileVisitor implements Visitor {
 
 	@Override
 	public void visit(VillageTileComponent component) {
-		BoardPanel.drawHouses(g, width, height);
+		BoardPanel.drawHex(g, width, height, Color.yellow);
+		BoardPanel.drawHouses(g, width, height, Color.black);
+		
 	}
 
 	@Override
 	public void visit(RiceTileComponent component) {
-		// TODO Auto-generated method stub
-		
+		BoardPanel.drawHex(g, width, height, new Color(30, 128, 2));
 	}
 
 	@Override
@@ -38,8 +40,22 @@ public class TileVisitor implements Visitor {
 
 	@Override
 	public void visit(IrrigationTileComponent component) {
-		// TODO Auto-generated method stub
+		BoardPanel.drawHex(g, width, height, new Color(8, 128, 255));
+		drawWave();
 		
 	}
-
+//	private void drawWave(int yPos, int xPos, int colour, int length, int amplitude, int alpha) {
+	private void drawWave() {
+//	    int pixelY, pixelX;
+////
+//		int lastX = width; 
+//		int lastY = height;
+//	    for(int i = 0; i < 100; i++) {
+//	        pixelX = lastX + i;
+//	        pixelY = (int) (Math.sin(Math.PI/10*i));
+//				g.drawLine(lastX, lastY, pixelX, pixelY);
+//			lastX = pixelX; 
+//			lastY = pixelY;
+//	    }
+	}
 }
