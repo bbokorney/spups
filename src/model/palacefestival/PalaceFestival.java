@@ -41,6 +41,10 @@ public class PalaceFestival {
         highestBid = bid;
     }
 
+    public int getHighestBid() {
+        return highestBid;
+    }
+
     public void advanceTurn() {
         currentState.advanceTurn();
     }

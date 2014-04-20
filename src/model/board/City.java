@@ -43,4 +43,8 @@ public class City {
     public PalaceTileComponent getPalaceTile() {
         return palace;
     }
+
+    public void placePalaceTile(PalaceTileComponent palace) {
+        this.palace = palace;
+    }
 }

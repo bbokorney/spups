@@ -41,8 +41,17 @@ public abstract class GameModel {
     public abstract Board getBoard();
     public abstract void addPalaceToCurrentTurnList(Location loc);
     public abstract boolean hasPalaceLocationBeenUsedThisTurn(Location loc);
+    public abstract void placeIrrigationTileComponent(Location loc, TileComponent tile);
+    public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
+    public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
+    public abstract void buildPalace(Location loc, TileComponent tile);
+    public abstract void upgradePalace(Location loc, TileComponent tile);
+    public abstract void useActionPoints(int actionPoints);
+    public abstract boolean isHeightAtLocation(int i, Location location);
+    public abstract Space getSpaceAtLocation(Location location);
 
-    public abstract void addPlayer(PalaceFestivalPlayer player);
+    //Okay this was some old stuff from when we
+/*    public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
     public abstract PalaceFestivalPlayer getCurrentPalaceFestivalPlayer();
     public abstract Collection<PalaceFestivalPlayer> getFestivalPlayers();
@@ -57,16 +66,13 @@ public abstract class GameModel {
     public abstract void endPalaceFestival();
     public abstract void setHighestBid(int bid);
     public abstract int getHighestBid();
-    public abstract PalaceTileComponent getFestivalPalace();
+    public abstract PalaceTileComponent getFestivalPalace();*/
 
-
-    public abstract void useActionPoints(int actionPoints);
-
-    public abstract boolean isHeightAtLocation(int i, Location location);
 
     public abstract Space getSpaceAtLocation(Location location);
 
     public abstract void setHasPlacedLandTile(boolean hasPlacedLandTile);
 
     public abstract void placeDeveloperOnBoard(Location locationOfDeveloperPlaced);
+
 }
