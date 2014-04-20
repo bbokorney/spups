@@ -163,7 +163,6 @@ public class JavaGameModel extends GameModel{
         return turn.hasPalaceBeenUsed(loc);
     }
 
-
     @Override
     public void useActionPoints(int actionPoints) {
         turn.useActionPoints(actionPoints);

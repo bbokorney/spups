@@ -26,11 +26,11 @@ public class PotentialPlacePalaceTile extends PotentialOneSpaceMovement{
 
     @Override
     protected ActionResult getActionResult() {
-        return new PlacePalaceTile(value, getLocation()).tryAction();
+        return new PlacePalaceTile(value, getLocation(), game).tryAction();
     }
 
     protected Pair<ActionResult, PlacePalaceTile> confirmPlacement(){
-        PlacePalaceTile result = new PlacePalaceTile(value, getLocation());
+        PlacePalaceTile result = new PlacePalaceTile(value, getLocation(), game);
         return new Pair<ActionResult, PlacePalaceTile>(result.doAction(), result);
     }
 }
