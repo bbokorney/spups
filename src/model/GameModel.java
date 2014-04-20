@@ -71,4 +71,5 @@ public abstract class GameModel {
 
     public abstract void placeDeveloperOnBoard(Location locationOfDeveloperPlaced);
 
+    public abstract Space getSpaceAtLocation(Location villagePlacement);
 }
