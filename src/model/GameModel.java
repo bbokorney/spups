@@ -63,4 +63,7 @@ public abstract class GameModel {
     public abstract boolean isHeightAtLocation(int i, Location location);
 
     public abstract Space getSpaceAtLocation(Location location);
+
+	public abstract void resetGame();
+
 }

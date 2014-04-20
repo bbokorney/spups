@@ -248,4 +248,15 @@ public class JavaGameModel extends GameModel {
         return null;
     }
 
+	@Override
+	public void resetGame() {
+		int numPlayers = javaPlayers.getPlayers().size();
+
+		resources = new SharedResources();
+		board = new JavaBoard();
+		javaPlayers = new JavaPlayers(numPlayers);
+		finalRoundTurns = -1;
+		turn = new NonFinalTurn();
+	}
+
 }
