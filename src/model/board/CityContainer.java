@@ -44,5 +44,9 @@ public class CityContainer {
             cityCollection.remove(city);
     }
 
+    public void removeCity(City city) {
+        cityCollection.remove(city);
+    }
+
     //TODO: add upgradePalace(Location, PalaceTileComponent)
 }
