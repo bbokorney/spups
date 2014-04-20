@@ -41,6 +41,11 @@ public class FinalTurn extends Turn {
     }
 
     @Override
+    public boolean isFinalTurn() {
+        return true;
+    }
+
+    @Override
     public void useActionPoints(int actionPoints) {
         ap -= actionPoints;
     }

@@ -19,9 +19,9 @@ public abstract class Action {
 
     /*      Abstract Interface      */
 
-    public abstract ActionResult tryAction(GameModel game);
+    public abstract ActionResult tryAction();
 
-    public abstract ActionResult doAction(GameModel game);
+    public abstract ActionResult doAction();
 
     public abstract String serialize();
 
