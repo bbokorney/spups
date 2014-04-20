@@ -47,4 +47,20 @@ public class City {
     public void placePalaceTile(PalaceTileComponent palace) {
         this.palace = palace;
     }
+
+    //Actually don't think I need this
+/*    @Override
+    public boolean equals(City city) {
+        //Check sizes are the same
+        if (this.getSize() != city.getSize())
+            return false;
+        //Check it holds the same locations as us
+        for (Location loc : getCity()) {
+            if (!city.getCity().contains(loc))
+                return false;
+        }
+        if (!getPalaceLocation().equals(city.getPalaceLocation())
+            return false;
+        else if (!getPalaceTile().equals())
+    }*/
 }
