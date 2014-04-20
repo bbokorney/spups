@@ -2,7 +2,9 @@ package model.board;
 
 import model.tiles.TileComponent;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -67,6 +69,43 @@ public class JavaBoard extends Board {
     public void placeRiceTileComponent(Location loc, TileComponent tile){
         Space space = board.get(loc);
         space.accept(tile);
+
+        //Get all neighbors which are in a city
+        List<Location> cityNeighbors = new ArrayList<Location>();
+        for (Location neighbor: loc.getNeighbors()) {
+            for (City city : cityContainer.getCityCollection()) {
+                if (city.getCity().contains(neighbor))
+                    cityNeighbors.add(neighbor);
+            }
+        }
+
+        //Remove this location from a city if it was in one
+        if (isLocationInCity(loc))
+            cityContainer.removeLocationFromCity(loc);
+
+        //Okay so here's the tough part. We're gonna go through each of our
+        //city neighbors and basically make a new city out of it and its city
+        //neighbors (found successively in a graph search). As we do this for
+        //each city neighbor, all the cities which need to be split based
+        //on this new rice tile placement will be split, and all the cities
+        //which should not be split will be rejoined.
+        for (Location neighbor : cityNeighbors) {
+            //First get the original city to which this neighbor belonged
+            City oldCity = cityContainer.getCityFromLocation(neighbor);
+
+            //Now create a new city
+            City newCity = new City(oldCity.getPalaceLocation(),
+                                    oldCity.getPalaceTile());
+            ArrayList<Location> city = makeCity(loc, oldCity.getPalaceLocation()
+                                           , new HashMap<Location, Boolean>());
+            newCity.add(city.toArray(new Location[0]));
+
+            //Add this new city to citycontainer
+            cityContainer.addCity(newCity);
+
+            //Now we can safely remove the old city
+            cityContainer.removeCity(oldCity);
+        }
     }
 
     public void placeVillageTileComponent(Location loc, TileComponent tile){
@@ -108,6 +147,24 @@ public class JavaBoard extends Board {
             villageContainer.removeVillage(villagesToJoin.toArray(new Village[0]));
             villageContainer.addVillage(newVillage);
         }
+
+        //TODO: What about expanding a city?
+    }
+
+    //This method will construct a City given a single location (which is
+    //already in a city) and branch out to find all its city neighbors
+    private ArrayList<Location> makeCity(Location loc, Location palaceLoc,
+                                         HashMap<Location, Boolean> visited) {
+        ArrayList<Location> locations = new ArrayList<Location>();
+        if ((loc.equals(palaceLoc) || isLocationInCity(loc) &&
+             !visited.get(loc))) {
+            locations.add(loc);
+            visited.put(loc, true);
+            for (Location neighbor : loc.getNeighbors()) {
+                locations.addAll(makeCity(neighbor, palaceLoc, visited));
+            }
+        }
+        return locations;
     }
 
 }
