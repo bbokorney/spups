@@ -1,8 +1,10 @@
-package model.rules.tiles;
+package model.rules.developer;
 
 import model.board.Board;
 import model.board.Location;
 import model.palacefestival.PalaceCardComponent;
+import model.player.Developer;
+import model.rules.tiles.Visitor;
 import model.tiles.IrrigationTileComponent;
 import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
@@ -11,19 +13,21 @@ import model.tiles.VillageTileComponent;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class RicePlacementRule {
+public class DeveloperPlacementRule {
     private boolean allowed;
     private Location location;
     private Board board;
+    private Developer developer;
 
-    public RicePlacementRule(Location location, Board board) {
+    public DeveloperPlacementRule(Location location, Board board, Developer developer) {
         allowed = false;
         this.location = location;
         this.board = board;
+        this.developer = developer;
     }
 
     public boolean allowed() {
-
+        board.getSpace(location).getTopTileComponent().accept(new PlacementVisitor());
         return allowed;
     }
 

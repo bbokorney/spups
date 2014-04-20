@@ -12,4 +12,5 @@ public class VillageContainer {
     public VillageContainer() {
         villageCollection = new ArrayList<Village>();
     }
+
 }

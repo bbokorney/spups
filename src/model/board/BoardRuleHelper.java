@@ -2,6 +2,7 @@ package model.board;
 
 import model.GameModel;
 import model.player.Developer;
+import model.player.JavaPlayer;
 import model.player.Player;
 
 import java.awt.*;
@@ -18,10 +19,10 @@ public class BoardRuleHelper {
         this.model = model;
     }
 
-    public Map<Player, Integer> getPlayerRanksIn(Collection<Location> locations) {
+    public Map<JavaPlayer, Integer> getPlayerRanksIn(Collection<Location> locations) {
         List<Developer> developers = model.getDevelopers();
 
-        return new HashMap<Player, Integer>();
+        return new HashMap<JavaPlayer, Integer>();
     }
 
     public Collection<HexLocation> getSurroundingTiles(Collection<HexLocation> waterLocations) {

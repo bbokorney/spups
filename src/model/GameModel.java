@@ -1,13 +1,16 @@
 package model;
 
 import model.board.Board;
+import model.board.HexLocation;
 import model.board.Location;
+import model.board.Space;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 
 import java.util.Collection;
@@ -29,17 +32,20 @@ public abstract class GameModel {
     public abstract boolean canAdvanceJavaTurn();
     public abstract void beginFinalRound();
     public abstract JavaPlayer getCurrentJavaPlayer();
+    public abstract Collection<JavaPlayer> getJavaPlayers();
     public abstract void placeTopTileComponent(Location loc, TileComponent tile);
     public abstract void getTopTileComponent(Location loc);
     public abstract String getName();
     public abstract void incrementScore(int score);
     public abstract List<Developer> getDevelopers();
     public abstract Board getBoard();
+    public abstract void addPalaceToCurrentTurnList(Location loc);
+    public abstract boolean hasPalaceLocationBeenUsedThisTurn(Location loc);
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
-    public abstract Collection<JavaPlayer> getPlayers();
     public abstract PalaceFestivalPlayer getCurrentPalaceFestivalPlayer();
+    public abstract Collection<PalaceFestivalPlayer> getFestivalPlayers();
     public abstract void advancePalaceFestivalTurn();
     public abstract boolean canDrawCard();
     public abstract void recordDrawCard();
@@ -47,8 +53,18 @@ public abstract class GameModel {
     public abstract Card drawFestivalCard();
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
+    public abstract void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player);
+    public abstract void endPalaceFestival();
+    public abstract void setHighestBid(int bid);
+    public abstract int getHighestBid();
+    public abstract PalaceTileComponent getFestivalPalace();
 
 
     public abstract void useActionPoints(int actionPoints);
+
 	public abstract void resetGame();
+
+    public abstract boolean isHeightAtLocation(int i, Location location);
+
+    public abstract Space getSpaceAtLocation(Location location);
 }

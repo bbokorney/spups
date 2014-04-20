@@ -1,35 +1,45 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
-import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
+
+import java.util.Collection;
 
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PickUpDeckCard extends Action {
-
-    private Card drawnCard = null;
+public class RequestTie extends Action {
 
     @Override
     public ActionResult tryAction(GameModel game) {
-        boolean canPickUpCard = game.canDrawCard();
-        boolean cardExists = game.drawDeckCard() != null;
-        boolean success = true;//canPickUpFestivalCard && festivalCardExists;
-        String message = success ? "action successful" : "action failed";
-        return new ActionResult(success, 0, 1, message, this);
+        Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
+        int score = -1;
+        boolean tie = true;
+        for (PalaceFestivalPlayer player : players) {
+            int playerScore = player.getScore();
+            if(score == -1) {
+                score = playerScore;
+            }
+            else if (playerScore != score) {
+                tie = false;
+                break;
+            }
+        }
+
+        String message = tie ? "success" : "players are not tied";
+
+        // TODO: send the FP they would win if the tie went through
+        return new ActionResult(tie, 0,0, message, this);
     }
 
     @Override
     public ActionResult doAction(GameModel game) {
         ActionResult result = tryAction(game);
         if (result.isSuccess()) {
-            PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
-            player.takeCard(game.drawDeckCard());
+            game.advancePalaceFestivalTurn();
         }
 
         return result;

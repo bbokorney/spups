@@ -5,6 +5,9 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.PalaceFestivalPlayer;
+
+import java.util.Collection;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -13,14 +16,24 @@ public class Withdraw extends Action {
 
     @Override
     public ActionResult tryAction(GameModel game) {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        return new ActionResult(true, 0, 0, "player withdrawn", this);
     }
 
     @Override
     public ActionResult doAction(GameModel game) {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        ActionResult result = tryAction(game);
+        if(result.isSuccess()) {
+            game.removePlayer(game.getCurrentPalaceFestivalPlayer());
+            game.advancePalaceFestivalTurn();
+            Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
+            if (players.size() == 1) {
+                ActionResult endResult = new EndPalaceFestival().doAction(game);
+                if (endResult.isSuccess())
+                    result = endResult;
+            }
+        }
+
+        return result;
     }
 
     @Override

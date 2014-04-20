@@ -27,14 +27,16 @@ public class HexLocation implements Location, PathNode {
 	}
 	
 	public int hashCode() {
-        String directions = "";
-        int hashCode = 0;
-	    for (Directions d : pathFromOrigin) {
-            directions = directions.concat(d.toString());
-        }
-        hashCode = directions.hashCode();
-		return hashCode;
-	}
+//        String directions = "";
+//        int hashCode = 0;
+//	    for (Directions d : pathFromOrigin) {
+//            directions = directions.concat(d.toString());
+//        }
+//        hashCode = directions.hashCode();
+//		return hashCode;
+        return (getDistanceFromOrigin()[0] + "," + getDistanceFromOrigin()[1])
+                .hashCode();
+    }
 	
 	public boolean equals(Location loc) {
 		if (loc instanceof HexLocation) {

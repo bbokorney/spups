@@ -3,14 +3,15 @@ package model;
 import model.board.Board;
 import model.board.JavaBoard;
 import model.board.Location;
-import model.palacefestival.Card;
-import model.palacefestival.PalaceFestivalPlayer;
+import model.board.Space;
+import model.palacefestival.*;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayers;
 import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
 import model.sharedresources.SharedResources;
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 import model.turn.FinalTurn;
 import model.turn.NonFinalTurn;
@@ -18,6 +19,7 @@ import model.turn.Turn;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -26,18 +28,50 @@ public class JavaGameModel extends GameModel {
 
     private SharedResources resources;
     private Board board;
-    private JavaPlayers players;
+    private JavaPlayers javaPlayers;
     private Turn turn;
+    private PalaceFestival festival;
     //The following value will be held at a sentinel value until the final
-    //round, at which point it will decrement from the number of players to 0.
+    //round, at which point it will decrement from the number of jplayers to 0.
     private int finalRoundTurns;
 
     public JavaGameModel(int numPlayers) {
         resources = new SharedResources();
         board = new JavaBoard();
-        players = new JavaPlayers(numPlayers);
+        javaPlayers = new JavaPlayers(numPlayers);
         finalRoundTurns = -1;
         turn = new NonFinalTurn();
+
+        //Instantiate the palace festival and its deck of cards
+        Stack<Card> deck = new Stack<Card>();
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.MASK);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.PUPPET);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.MASK,
+                                             PalaceCardComponent.PUPPET);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM,
+                                             PalaceCardComponent.MASK);
+            deck.add(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM,
+                                             PalaceCardComponent.PUPPET);
+            deck.add(card);
+        }
+        festival = new PalaceFestival(null, deck);
     }
 
     public int getCount(SharedResourceType res) {
@@ -66,7 +100,7 @@ public class JavaGameModel extends GameModel {
 
     @Override
     public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
-        return turn.cauUseAPForNonLandTileAction(pointsToSpend);
+        return turn.canUseAPForNonLandTileAction(pointsToSpend);
     }
 
     
@@ -84,7 +118,7 @@ public class JavaGameModel extends GameModel {
                 turn = new FinalTurn();
             } else
                 turn = new NonFinalTurn();
-            players.advanceTurn();
+            javaPlayers.advanceTurn();
         }
     }
 
@@ -99,15 +133,18 @@ public class JavaGameModel extends GameModel {
 
     
     public void beginFinalRound() {
-        finalRoundTurns = players.getPlayers().size();
+        finalRoundTurns = javaPlayers.getPlayers().size();
         turn = new FinalTurn();
     }
 
     public JavaPlayer getCurrentJavaPlayer() {
-        return players.getCurrentPlayer();
+        return javaPlayers.getCurrentPlayer();
     }
 
-    
+    public Collection<JavaPlayer> getJavaPlayers() {
+        return javaPlayers.getPlayers();
+    }
+
     public void placeTopTileComponent(Location loc, TileComponent tile) {
         board.placeTopTileComponent(loc, tile);
     }
@@ -119,7 +156,7 @@ public class JavaGameModel extends GameModel {
 
     
     public String getName() {
-        return players.getCurrentPlayer().getName();
+        return javaPlayers.getCurrentPlayer().getName();
     }
 
     
@@ -137,18 +174,63 @@ public class JavaGameModel extends GameModel {
         return board;
     }
 
-    //TODO: implement these senor
-    public void addPlayer(PalaceFestivalPlayer player){}
-    public void removePlayer(PalaceFestivalPlayer player){}
-    public Collection<JavaPlayer> getPlayers() { return null; }
-    public PalaceFestivalPlayer getCurrentPalaceFestivalPlayer() { return null; }
-    public void advancePalaceFestivalTurn() {}
-    public boolean canDrawCard() { return false; }
-    public void recordDrawCard() {}
-    public Card peekAtFestivalCard() { return null; }
-    public Card drawFestivalCard() { return null; }
-    public Card drawDeckCard() { return null; }
-    public void discard(Card card) {}
+    public void addPalaceToCurrentTurnList(Location loc) {
+        turn.addPalaceToList(loc);
+    }
+
+    public boolean hasPalaceLocationBeenUsedThisTurn(Location loc) {
+        return turn.hasPalaceBeenUsed(loc);
+    }
+
+    public void addPlayer(PalaceFestivalPlayer player){
+        festival.addPlayer(player);
+    }
+
+    public void removePlayer(PalaceFestivalPlayer player){
+        festival.removePlayer(player);
+    }
+
+    public PalaceFestivalPlayer getCurrentPalaceFestivalPlayer() {
+        return festival.getCurrentPlayer();
+    }
+
+    public Collection<PalaceFestivalPlayer> getFestivalPlayers() {
+        return festival.getPlayers();
+    }
+
+    public void advancePalaceFestivalTurn() {
+        festival.advanceTurn();
+    }
+    public boolean canDrawCard() {
+        return festival.canDrawCard();
+    }
+
+    public void recordDrawCard() {
+        festival.recordDrawCard();
+    }
+
+    public Card peekAtFestivalCard() {
+        return festival.peekAtFestivalCard();
+    }
+
+    public Card drawFestivalCard() { return festival.drawFestivalCard(); }
+    public Card drawDeckCard() { return festival.drawDeckCard(); }
+    public void discard(Card card) { festival.discard(card); }
+
+    @Override
+    public void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player) {
+        //todo added methods from GameModel
+    }
+
+    @Override
+    public void setHighestBid(int bid) {
+        //todo added methods from GameModel
+    }
+
+    @Override
+    public int getHighestBid() {
+        return 0;  //todo added methods from GameModel
+    }
 
     @Override
     public void useActionPoints(int actionPoints) {
@@ -164,5 +246,16 @@ public class JavaGameModel extends GameModel {
 		finalRoundTurns = -1;
 		turn = new NonFinalTurn();
 	}
+
+    @Override
+    public boolean isHeightAtLocation(int i, Location location) {
+        return board.isHeightAtLocation(i, location);
+    }
+
+    @Override
+    public Space getSpaceAtLocation(Location location) {
+        //todo for Sachit, my sweetie
+        return null;
+    }
 
 }
