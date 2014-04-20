@@ -189,6 +189,11 @@ public class JavaGameModel extends GameModel{
     }
 
     @Override
+    public List<Location> getLocationsOfCurrentPlayersDevelopers() {
+        return getCurrentJavaPlayer().getDeveloperLocations();
+    }
+
+    @Override
     public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
         turn.setHasPlacedLandTile(hasPlacedLandTile);
     }

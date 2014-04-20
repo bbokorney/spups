@@ -88,4 +88,12 @@ public class JavaPlayer {
         }
 
     }
+
+    public List<Location> getDeveloperLocations() {
+        ArrayList<Location> developerLocations = new ArrayList<Location>();
+        for(int i = 0; i < developers.size(); i++){
+            developerLocations.add(i, developers.get(i).getLocation());
+        }
+        return developerLocations;
+    }
 }
