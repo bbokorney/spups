@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class ReplayRoundUIState {
+public class ReplayRoundUIState extends PotentialJavaUIState {
 	private final int KEY_NEXT = KeyEvent.VK_RIGHT;
 	private final int KEY_BACK = KeyEvent.VK_LEFT;
 	private final int KEY_TIMED = KeyEvent.VK_TAB;

@@ -8,6 +8,8 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.MoveDeveloperAroundBoard;
+import model.board.HexLocation;
+import model.player.Developer;
 import model.potentialactions.PotentialAction;
 import model.potentialactions.PotentialMoveDeveloperAroundBoard;
 
@@ -33,12 +35,12 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
     GameModel model;
     PotentialMoveDeveloperAroundBoard potentialAction;
 
-    public MoveDeveloperAroundBoardUIState(Controller controller, KeyListener keyListener, GameModel model){
+    public MoveDeveloperAroundBoardUIState(Controller controller, KeyListener keyListener, GameModel model, HexLocation developer){
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
 
-        potentialAction = new PotentialMoveDeveloperAroundBoard(model);
+        potentialAction = new PotentialMoveDeveloperAroundBoard(model, developer);
 
         initListeners();
     }

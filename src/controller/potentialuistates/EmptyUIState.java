@@ -1,6 +1,7 @@
 package controller.potentialuistates;
 
 import controller.Controller;
+import controller.history.TimeTraveler;
 import controller.keylistener.Funktor;
 import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
@@ -118,11 +119,11 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void replayRound() {
-
+	    controller.setCurrentState(new ReplayRoundUIState(controller, keyListener, model, controller.startRoundReplay()));
     }
 
     public void replaySinceBeginningOfGame() {
-
+	    controller.setCurrentState(new ReplayRoundUIState(controller, keyListener, model, controller.startGameReplay()));
     }
 
     private void initListeners() {

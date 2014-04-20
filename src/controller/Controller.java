@@ -1,6 +1,7 @@
 package controller;
 
 import controller.history.History;
+import controller.history.TimeTraveler;
 import controller.keylistener.KeyListener;
 import controller.potentialuistates.EmptyUIState;
 import controller.potentialuistates.PotentialJavaUIState;
@@ -55,12 +56,12 @@ public class Controller {
 
     }
 
-    public void startRoundReplay() {
-
+    public TimeTraveler startRoundReplay() {
+		return history.rewindTurns(3);
     }
 
-    public void startGameReplay() {
-
+    public TimeTraveler startGameReplay() {
+		return history.rewindToBeginning();
     }
 
 	public java.awt.event.KeyListener getKeyListener() {
