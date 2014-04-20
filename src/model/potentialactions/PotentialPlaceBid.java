@@ -33,7 +33,7 @@ public class PotentialPlaceBid extends PotentialAction {
     }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -63,7 +63,7 @@ public class PotentialJoinFestival extends PotentialAction {
     }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         ArrayList<Card> bid = new ArrayList<Card>();
         for (int i : indexOfCardsToBid) {
             bid.add(cardsValidToBeginFestival.get(i));
