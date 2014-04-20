@@ -1,9 +1,6 @@
 package model;
 
-import model.board.Board;
-import model.board.JavaBoard;
-import model.board.Location;
-import model.board.Space;
+import model.board.*;
 import model.palacefestival.*;
 import model.player.Developer;
 import model.player.JavaPlayer;
@@ -37,7 +34,8 @@ public class JavaGameModel extends GameModel {
 
     public JavaGameModel(int numPlayers) {
         resources = new SharedResources();
-        board = new JavaBoard();
+        BoardCreator creator = new BoardCreator();
+        board = creator.createBoard();
         javaPlayers = new JavaPlayers(numPlayers);
         finalRoundTurns = -1;
         turn = new NonFinalTurn();
@@ -185,6 +183,10 @@ public class JavaGameModel extends GameModel {
     public void placeVillageTileComponent(Location loc, TileComponent tile) {
         board.placeVillageTileComponent(loc, tile);
     }
+
+    //TODO:
+    //public void buildPalace(Location loc, TileComponent tile)
+    //public void upgradePalace(Location loc, TileComponent tile)
 
     public void addPalaceToCurrentTurnList(Location loc) {
         turn.addPalaceToList(loc);
