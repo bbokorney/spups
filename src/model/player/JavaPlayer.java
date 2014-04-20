@@ -32,7 +32,9 @@ public class JavaPlayer {
         return player.getScore();
     }
 
-    public void addDeveloper(Developer dev){
+    public void addDeveloper(Location loc){
+        resources.useResource(JavaPlayerResourceType.DEVELOPER);
+        Developer dev = new Developer(loc);
         developers.add(dev);
     };
 
@@ -49,10 +51,24 @@ public class JavaPlayer {
         resources.useResource(type);
     }
 
-    public void useDeveloper(Location loc) {
-        resources.useResource(JavaPlayerResourceType.DEVELOPER);
-        Developer dev = new Developer(loc);
-        developers.add(dev);
+
+    public void moveDeveloper(Location developerStartinglocation, Location developerEndingLocation) {
+        for(Developer d: developers){
+            if(d.getLocation().equals(developerStartinglocation)){
+                d.setLocation(developerEndingLocation);
+                return;
+            }
+        }
     }
 
+    public void removeDeveloper(Location developerLocationTakenOff) {
+        for(Developer d: developers){
+            if(d.getLocation().equals(developerLocationTakenOff)){
+                developers.remove(d);
+                resources.addResource(JavaPlayerResourceType.DEVELOPER, 1);
+                return;
+            }
+        }
+
+    }
 }
