@@ -3,6 +3,7 @@ package model;
 import model.board.Board;
 import model.board.JavaBoard;
 import model.board.Location;
+import model.board.Space;
 import model.palacefestival.*;
 import model.player.Developer;
 import model.player.JavaPlayer;
@@ -213,8 +214,14 @@ public class JavaGameModel extends GameModel {
     }
 
     @Override
-    public boolean isHeightAtLocation(int i) {
-        return board.isHeightAtLocation(i);
+    public boolean isHeightAtLocation(int i, Location location) {
+        return board.isHeightAtLocation(i, location);
+    }
+
+    @Override
+    public Space getSpaceAtLocation(Location location) {
+        //todo for Sachit, my sweetie
+        return null;
     }
 
 }
