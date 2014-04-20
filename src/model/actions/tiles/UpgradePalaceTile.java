@@ -7,6 +7,8 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.rules.palace.HighestRankingPlayerInCityRule;
+import model.rules.palace.PalaceLevelCitySizeRule;
 import model.rules.tiles.PalacePlacementRule;
 import model.sharedresources.SharedResourceType;
 import model.tiles.PalaceTileComponent;
@@ -96,18 +98,8 @@ public class UpgradePalaceTile extends Action {
                 message += "Error: This palace has already been interacted with this turn.\n";
             }
 
-            //see if the value is less than the palace underneath
-            if(){
-                isSuccess = isSuccess && true;
-
-            }
-            else{
-                isSuccess = isSuccess && false;
-                message += "Error: You may only upgrade to a higher-valued palace.\n";
-            }
-
             //check if the player is the highest ranked in the city
-            if(true){
+            if(HighestRankingPlayerInCityRule.highestRankingPlayerInCityRule(game.getCurrentJavaPlayer(), placement, helperJunk, board)){
                 isSuccess = isSuccess && true;
 
             }
@@ -117,7 +109,7 @@ public class UpgradePalaceTile extends Action {
             }
 
             //check if there are enough villages in the city to support a palace of this value
-            if(true){
+            if(PalaceLevelCitySizeRule.palaceLevelSizeAllowed(placement, board, value)){
                 isSuccess = isSuccess && true;
 
             }
@@ -129,10 +121,8 @@ public class UpgradePalaceTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: Only current palaces can be upgraded.";
+            message += "Error: This palace cannot be upgraded.\n";
         }
-
-        //todo
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

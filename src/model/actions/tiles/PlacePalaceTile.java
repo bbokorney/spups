@@ -93,7 +93,7 @@ public class PlacePalaceTile extends Action {
              */
 
             //Check if there is not already a palace in that city/village
-            if(game.isLocationInACity(placement)){
+            if(game.isLocationInCity(placement)){
                 isSuccess = isSuccess && true;
 
             }
