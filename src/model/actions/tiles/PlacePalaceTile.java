@@ -9,18 +9,20 @@ import model.board.HexLocation;
 import model.rules.tiles.PalacePlacementRule;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.sharedresources.SharedResourceType;
+import model.tiles.PalaceTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
  */
 public class PlacePalaceTile extends Action {
 
-
     /*
         attributes
      */
     private int value;
     private HexLocation placement;
+    GameModel game;
 
     /*
         constructors
@@ -30,9 +32,10 @@ public class PlacePalaceTile extends Action {
         //used for loading
     }
 
-    public PlacePalaceTile(int value, HexLocation placement){
+    public PlacePalaceTile(int value, HexLocation placement, GameModel game){
         this.value = value;
         this.placement = placement;
+        this.game = game;
     }
 
 
@@ -150,14 +153,19 @@ public class PlacePalaceTile extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP point
+            game.useActionPoints(result.getActionPoints());
 
             //place the palace on this location of the board
+            game.placePalaceTileComponent(placement, new PalaceTileComponent(new Tile(1), value));
 
             //award the player fame points
+            game.incrementScore(result.getFamePoints());
 
             //set this location to palacesinteractedwith in the turn object
+            game.addPalaceToCurrentTurnList(placement);
 
             //decremenet the number of this valued palace in the shared resources
+            game.useResource(SharedResourceType.valueOf("PALACE" + value));
 
         }
         return result;

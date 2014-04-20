@@ -1,5 +1,6 @@
 package model.actions.tiles;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -8,6 +9,8 @@ import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
+import model.tiles.Tile;
+import model.tiles.VillageTileComponent;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -19,6 +22,7 @@ public class PlaceVillageTile extends Action {
         attributes
      */
     HexLocation placement;
+    GameModel game;
 
     /*
         constructors
@@ -26,8 +30,9 @@ public class PlaceVillageTile extends Action {
     public PlaceVillageTile(){
 
     }
-    public PlaceVillageTile(HexLocation placement){
+    public PlaceVillageTile(HexLocation placement, GameModel game){
         this.placement = placement;
+        this.game = game;
     }
 
 
@@ -135,12 +140,20 @@ public class PlaceVillageTile extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP points
+            game.useActionPoints(result.getActionPoints());
 
             // decrement the number of villages in player resources
+            game.useResource(JavaPlayerResourceType.VILLAGE);
 
             // place the village component on the placement location
+            game.placeVillageTileComponent(placement, new VillageTileComponent(new Tile(1)));
+
 
             //award the player the fame points earned
+            game.incrementScore(result.getFamePoints());
+
+            //set has placed land tile to true
+            game.setHasPlacedLandTile(true);
         }
         return result;
     }

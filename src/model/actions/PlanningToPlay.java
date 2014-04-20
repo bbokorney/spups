@@ -1,5 +1,6 @@
 package model.actions;
 
+import model.GameModel;
 import model.actions.serialization.JsonObject;
 
 /**
@@ -16,6 +17,11 @@ public class PlanningToPlay extends Action {
         constructors
      */
 
+    GameModel game;
+
+    public PlanningToPlay(GameModel game){
+        this.game = game;
+    }
 
     @Override
     public ActionResult tryAction() {

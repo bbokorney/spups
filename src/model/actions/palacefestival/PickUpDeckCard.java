@@ -4,7 +4,6 @@ import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.palacefestival.Card;
-import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 
 /**
@@ -12,16 +11,12 @@ import model.palacefestival.PalaceFestivalPlayer;
  */
 public class PickUpDeckCard extends Action {
 
-    private PalaceFestival festival;
-
-    public PickUpDeckCard(PalaceFestival festival) {
-        this.festival = festival;
-    }
+    private Card drawnCard = null;
 
     @Override
     public ActionResult tryAction() {
-        boolean canPickUpCard = festival.canDrawCard();
-        boolean cardExists = festival.drawDeckCard() != null;
+        boolean canPickUpCard = game.canDrawCard();
+        boolean cardExists = game.drawDeckCard() != null;
         boolean success = true;//canPickUpFestivalCard && festivalCardExists;
         String message = success ? "action successful" : "action failed";
         return new ActionResult(success, 0, 1, message, this);
@@ -31,8 +26,8 @@ public class PickUpDeckCard extends Action {
     public ActionResult doAction() {
         ActionResult result = tryAction();
         if (result.isSuccess()) {
-            PalaceFestivalPlayer player = festival.getCurrentPlayer();
-            player.takeCard(festival.drawDeckCard());
+            PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+            player.takeCard(game.drawDeckCard());
         }
 
         return result;

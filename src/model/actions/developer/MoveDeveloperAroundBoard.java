@@ -1,5 +1,6 @@
 package model.actions.developer;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -16,18 +17,21 @@ public class MoveDeveloperAroundBoard extends Action {
      */
     private Location developerStartinglocation;
     private JavaPath path;
+    GameModel game;
 
     /*
         Constructors
      */
-    public MoveDeveloperAroundBoard(){
+    public MoveDeveloperAroundBoard(GameModel game){
         //Empty constructor
         //Most likely used for loading
+        this.game = game;
     }
 
-    public MoveDeveloperAroundBoard(Location developerStartinglocation, JavaPath path){
+    public MoveDeveloperAroundBoard(Location developerStartinglocation, JavaPath path, GameModel game){
         this.developerStartinglocation = developerStartinglocation;
         this.path = path;
+        this.game = game;
     }
 
 
