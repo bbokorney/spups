@@ -44,4 +44,14 @@ public class JavaPlayerAdapter implements PalaceFestivalPlayer {
         return javaPlayer.getScore();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof JavaPlayer) {
+            JavaPlayer otherPlayer = (JavaPlayer)other;
+            return otherPlayer.equals(this.javaPlayer);
+        }
+
+        return this == other;
+    }
+
 }

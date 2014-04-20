@@ -1,13 +1,16 @@
 package model;
 
 import model.board.Board;
+import model.board.HexLocation;
 import model.board.Location;
+import model.board.Space;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 
 import java.util.Collection;
@@ -50,9 +53,14 @@ public abstract class GameModel {
     public abstract Card drawFestivalCard();
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
+    public abstract void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player);
+    public abstract void setHighestBid(int bid);
+    public abstract int getHighestBid();
 
 
     public abstract void useActionPoints(int actionPoints);
 
-    public abstract boolean isHeightAtLocation(int i);
+    public abstract boolean isHeightAtLocation(int i, Location location);
+
+    public abstract Space getSpaceAtLocation(Location location);
 }

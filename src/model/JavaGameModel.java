@@ -3,6 +3,7 @@ package model;
 import model.board.Board;
 import model.board.JavaBoard;
 import model.board.Location;
+import model.board.Space;
 import model.palacefestival.*;
 import model.player.Developer;
 import model.player.JavaPlayer;
@@ -10,6 +11,7 @@ import model.player.JavaPlayers;
 import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
 import model.sharedresources.SharedResources;
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 import model.turn.FinalTurn;
 import model.turn.NonFinalTurn;
@@ -216,13 +218,34 @@ public class JavaGameModel extends GameModel {
     public void discard(Card card) { festival.discard(card); }
 
     @Override
+    public void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player) {
+        //todo added methods from GameModel
+    }
+
+    @Override
+    public void setHighestBid(int bid) {
+        //todo added methods from GameModel
+    }
+
+    @Override
+    public int getHighestBid() {
+        return 0;  //todo added methods from GameModel
+    }
+
+    @Override
     public void useActionPoints(int actionPoints) {
         turn.useActionPoints(actionPoints);
     }
 
     @Override
-    public boolean isHeightAtLocation(int i) {
-        return board.isHeightAtLocation(i);
+    public boolean isHeightAtLocation(int i, Location location) {
+        return board.isHeightAtLocation(i, location);
+    }
+
+    @Override
+    public Space getSpaceAtLocation(Location location) {
+        //todo for Sachit, my sweetie
+        return null;
     }
 
 }
