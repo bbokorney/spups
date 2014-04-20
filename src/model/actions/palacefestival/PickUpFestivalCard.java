@@ -1,12 +1,9 @@
 package model.actions.palacefestival;
 
-import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.palacefestival.Card;
-import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceFestivalPlayer;
 
 /**
@@ -15,7 +12,7 @@ import model.palacefestival.PalaceFestivalPlayer;
 public class PickUpFestivalCard extends Action {
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         boolean canPickUpFestivalCard = game.canDrawCard();
         boolean festivalCardExists = game.peekAtFestivalCard() != null;
         boolean success = canPickUpFestivalCard && festivalCardExists;
@@ -24,8 +21,8 @@ public class PickUpFestivalCard extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+    public ActionResult doAction() {
+        ActionResult result = tryAction();
 
         if(result.isSuccess()) {
             Card festivalCard = game.drawFestivalCard();

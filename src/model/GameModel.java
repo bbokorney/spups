@@ -67,4 +67,6 @@ public abstract class GameModel {
     public abstract Space getSpaceAtLocation(Location location);
 
     public abstract void setHasPlacedLandTile(boolean hasPlacedLandTile);
+
+    public abstract void placeDeveloperOnBoard(Location locationOfDeveloperPlaced);
 }

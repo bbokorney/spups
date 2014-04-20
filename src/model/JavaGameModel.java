@@ -223,6 +223,11 @@ public class JavaGameModel extends GameModel {
     }
 
     @Override
+    public void endPalaceFestival() {
+        //todo added methods from GameModel
+    }
+
+    @Override
     public void setHighestBid(int bid) {
         //todo added methods from GameModel
     }
@@ -230,6 +235,11 @@ public class JavaGameModel extends GameModel {
     @Override
     public int getHighestBid() {
         return 0;  //todo added methods from GameModel
+    }
+
+    @Override
+    public PalaceTileComponent getFestivalPalace() {
+        return null; //todo added methods from GameModel
     }
 
     @Override
@@ -251,6 +261,12 @@ public class JavaGameModel extends GameModel {
     @Override
     public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
         turn.setHasPlacedLandTile(hasPlacedLandTile);
+    }
+
+    @Override
+    public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
+            getCurrentJavaPlayer().addDeveloper(new Developer(locationOfDeveloperPlaced));
+
     }
 
 }

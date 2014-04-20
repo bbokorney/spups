@@ -1,7 +1,5 @@
 package model.actions.developer;
 
-import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -32,7 +30,7 @@ public class TakeDeveloperOffBoard extends Action {
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -54,13 +52,13 @@ public class TakeDeveloperOffBoard extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points the path cost

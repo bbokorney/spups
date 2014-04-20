@@ -1,12 +1,9 @@
 package model.actions.developer;
 
 
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
-import model.board.JavaBoard;
 import model.board.Location;
-import model.GameModel;
 import model.actions.serialization.JsonObject;
 import pathfinding.JavaPath;
 
@@ -37,7 +34,7 @@ public class PlaceDeveloperOnBoard extends Action {
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
 
         boolean isSuccess = true;
         int famePoints = 0;         //will never gain fame points
@@ -57,14 +54,21 @@ public class PlaceDeveloperOnBoard extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
 
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points the path cost
+            game.useActionPoints(result.getActionPoints());
+
             //place the developer on the ending of the path
+            game.placeDeveloperOnBoard(locationOfDeveloperPlaced);
+
             //increment the number of developers on the board
+            game.incrementScore(result.getFamePoints());
+
+
         }
         return result;
     }

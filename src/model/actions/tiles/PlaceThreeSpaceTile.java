@@ -2,14 +2,12 @@ package model.actions.tiles;
 
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
-import model.board.Location;
 import model.rules.tiles.*;
 import model.sharedresources.SharedResourceType;
 import model.tiles.Tile;
@@ -25,6 +23,7 @@ public class PlaceThreeSpaceTile extends Action {
      */
     HexLocation villagePlacement;
     HexLocation[] ricePlacement = new HexLocation[2];
+    GameModel game;
 
 
     /*
@@ -33,15 +32,16 @@ public class PlaceThreeSpaceTile extends Action {
     public PlaceThreeSpaceTile(){
 
     }
-    public PlaceThreeSpaceTile(HexLocation villagePlacement, HexLocation rice1Placement, HexLocation rice2Placement) {
+    public PlaceThreeSpaceTile(HexLocation villagePlacement, HexLocation rice1Placement, HexLocation rice2Placement, GameModel game) {
         this.villagePlacement = villagePlacement;
         this.ricePlacement[0] = rice1Placement;
         this.ricePlacement[1] = rice2Placement;
+        this.game = game;
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -167,13 +167,13 @@ public class PlaceThreeSpaceTile extends Action {
      }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points

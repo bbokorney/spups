@@ -1,6 +1,5 @@
 package model.actions.tiles;
 
-import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -40,7 +39,7 @@ public class PlacePalaceTile extends Action {
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -143,13 +142,13 @@ public class PlacePalaceTile extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP point

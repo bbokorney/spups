@@ -141,4 +141,14 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
         return null;   //todo added methods from GameModel
     }
 
+    @Override
+    public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
+        //todo added methods from GameModel
+    }
+
+    @Override
+    public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
+        //todo Sachit figuring this out
+    }
+
 }
