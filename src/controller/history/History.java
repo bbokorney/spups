@@ -51,6 +51,10 @@ public class History {
 	public TimeTraveler rewindTurns(int turns) {
 		for(int i = 0; i < turns; i++) {
 			undoneActions.add(actions.remove());
+			if(actions.isEmpty()) {
+				actions.add(new LinkedList<Pair>());
+				break;
+			}
 		}
 		redoActions();
 		return new TimeTraveler(this, undoneActions, actions, model);

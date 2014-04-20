@@ -13,7 +13,7 @@ import java.util.Queue;
  */
 public class TimeTraveler {
 	Queue<Queue<Pair>> undoneActions;
-	Queue<Queue<Pair>> doneActions;
+	Queue<Pair> doneActions;
 	Queue<Queue<Pair>> actions;
 	GameModel model;
 	History history;
@@ -32,6 +32,7 @@ public class TimeTraveler {
 	public void next() {
 		Queue<Pair> latestTurn = undoneActions.peek();
 		Pair<ActionResult, Action> pair = latestTurn.poll();
+		doneActions.add(pair);
 		pair.getSecond().doAction(model);
 
 		if(latestTurn.size() < 1) {
@@ -40,6 +41,13 @@ public class TimeTraveler {
 		}
 		else {
 			history.addAction(pair);
+		}
+	}
+
+	public void back() {
+		if(!doneActions.isEmpty()) {
+			history.rewindAction();
+			doneActions.poll();
 		}
 	}
 }
