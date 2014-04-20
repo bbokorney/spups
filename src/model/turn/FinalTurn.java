@@ -18,12 +18,15 @@ public class FinalTurn extends Turn {
         startingAP = 6;
         ap = startingAP;
         actionTokenUsed = false;
+        palacesInteracted = new ArrayList<Location>();
     }
 
+    //Never used
     public FinalTurn(int startingAP) {
         this.startingAP = startingAP;
         ap = startingAP;
         actionTokenUsed = false;
+        palacesInteracted = new ArrayList<Location>();
     }
 
     @Override
