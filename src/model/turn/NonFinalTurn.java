@@ -8,16 +8,15 @@ import java.util.ArrayList;
  * Created by Baker on 4/14/2014.
  */
 public class NonFinalTurn extends Turn {
-    private final boolean isFinalTurn = false;
     private final int startingAP;
     private boolean actionTokenUsed;
-    private boolean landTilePlaced;
     private int ap;
     private ArrayList<Location> palacesInteracted;
 
     public NonFinalTurn() {
         startingAP = 6;
         ap = startingAP;
+        this.setHasPlacedLandTile(false);
         actionTokenUsed = false;
         palacesInteracted = new ArrayList<Location>();
     }
@@ -45,6 +44,11 @@ public class NonFinalTurn extends Turn {
     }
 
     @Override
+    public boolean isFinalTurn() {
+        return false;
+    }
+
+    @Override
     public void useActionPoints(int actionPoints) {
         ap -= actionPoints;
     }
@@ -56,14 +60,10 @@ public class NonFinalTurn extends Turn {
 
     @Override
     public boolean canUseAPForNonLandTileAction(int pointsToSpend) {
-        if(landTilePlaced){
+        if(hasPlacedLandTile()){
             return ap >= pointsToSpend;
         }
         return (ap-1) >= pointsToSpend;
-    }
-
-    private boolean hasPlacedLandTile() {
-        return landTilePlaced;
     }
 
     public void addPalaceToList(Location loc) {

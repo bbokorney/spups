@@ -1,6 +1,5 @@
 package model.actions.palacefestival;
 
-import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -18,15 +17,15 @@ public class AgreeToTie extends Action {
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         boolean success = requester != null;
         // TODO put real FPs
         return new ActionResult(success, 0, 0, "success", this);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+    public ActionResult doAction() {
+        ActionResult result = tryAction();
         if (result.isSuccess()) {
             game.advancePalaceFestivalTurn();
         }

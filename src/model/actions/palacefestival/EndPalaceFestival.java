@@ -1,7 +1,5 @@
 package model.actions.palacefestival;
 
-import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -9,7 +7,6 @@ import model.palacefestival.PalaceFestivalPlayer;
 import model.rules.palace.FestivalWinnerRule;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -17,7 +14,7 @@ import java.util.Map;
 public class EndPalaceFestival extends Action {
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         Collection<PalaceFestivalPlayer> winners = game.getFestivalPlayers();
         int numberOfWinners = winners.size();
         boolean atLeastOneWinner = numberOfWinners >= 1;
@@ -30,8 +27,8 @@ public class EndPalaceFestival extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+    public ActionResult doAction() {
+        ActionResult result = tryAction();
         if (result.isSuccess()) {
             Collection<PalaceFestivalPlayer> winners = game.getFestivalPlayers();
             int famePoints = new FestivalWinnerRule().pointsToAward(winners.size() > 1, game.getFestivalPalace().getLevel());

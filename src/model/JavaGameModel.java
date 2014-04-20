@@ -164,6 +164,11 @@ public class JavaGameModel extends GameModel{
     }
 
     @Override
+    public PalaceTileComponent getFestivalPalace() {
+        return null; //todo added methods from GameModel
+    }
+
+    @Override
     public void useActionPoints(int actionPoints) {
         turn.useActionPoints(actionPoints);
     }
@@ -176,6 +181,17 @@ public class JavaGameModel extends GameModel{
     @Override
     public Space getSpaceAtLocation(Location location) {
         return board.getSpace(location);
+    }
+
+    @Override
+    public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
+        turn.setHasPlacedLandTile(hasPlacedLandTile);
+    }
+
+    @Override
+    public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
+            getCurrentJavaPlayer().addDeveloper(new Developer(locationOfDeveloperPlaced));
+
     }
 
 }

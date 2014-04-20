@@ -1,6 +1,5 @@
 package model.actions.palacefestival;
 
-import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -23,15 +22,15 @@ public class PlaceBid extends Action {
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         boolean valid = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(), game.peekAtFestivalCard(), bid);
         String message = valid ? "bid successful" : "bid unsuccessful";
         return new ActionResult(valid, 0, 0, message, this);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+    public ActionResult doAction() {
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
             PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
             int total = 0;
