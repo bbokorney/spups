@@ -108,8 +108,7 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
         return new BeginPalaceFestival(getGameModel(), getPalaceFestival(), selectedPalace.getLevel(), selectedPalaceLocation ,bid).tryAction();
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
+    private void setComponentsOnHoverBoard() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

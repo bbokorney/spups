@@ -53,9 +53,8 @@ public class PotentialPlaceBid extends PotentialAction {
         return new PlaceBid(getPalaceFestival(), bid).tryAction();
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
-        // nothing to set
+    private void setComponentsOnHoverBoard() {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

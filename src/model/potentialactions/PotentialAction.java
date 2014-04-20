@@ -9,7 +9,6 @@ import model.palacefestival.PalaceFestival;
  */
 public abstract class PotentialAction {
 
-    private HoverBoard hoverBoard;
     private GameModel game;
     private PalaceFestival festival;
 
@@ -21,15 +20,7 @@ public abstract class PotentialAction {
 
     public PotentialAction(){
 
-        this.hoverBoard = new HoverBoard();
     }
-
-    public HoverBoard getHoverBoard(){
-
-        return this.hoverBoard;
-    }
-
-    protected abstract void setComponentsOnHoverBoard();
 
     protected abstract ActionResult getActionResult();
 

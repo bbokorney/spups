@@ -61,8 +61,7 @@ public class PotentialJoinFestival extends PotentialAction {
         return new JoinFestival(palaceLoc, bid, getGameModel(), getPalaceFestival()).tryAction();
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
+    private void setComponentsOnHoverBoard() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

@@ -16,11 +16,6 @@ public class PotentialPlaceRiceTile extends PotentialOneSpaceMovement {
         super(game, festival);
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
-        getHoverBoard().reset();
-        getHoverBoard().placeTileComponent(getLocation(), new RiceTileComponent(), ActionState.fromValue(isValid()));
-    }
 
     @Override
     protected ActionResult getActionResult() {
