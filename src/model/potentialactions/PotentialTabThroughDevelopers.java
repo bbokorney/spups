@@ -1,7 +1,69 @@
 package model.potentialactions;
 
+import model.GameModel;
+import model.Pair;
+import model.actions.ActionResult;
+import model.actions.developer.TakeDeveloperOffBoard;
+import model.palacefestival.PalaceFestival;
+import model.player.Developer;
+import pathfinding.JavaPath;
+import pathfinding.LeastCostPathFinder;
+
+import java.util.List;
+
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PotentialTabThroughDevelopers {
+public class PotentialTabThroughDevelopers extends PotentialAction {
+
+
+    List<Developer> developerList;
+    int indexOfCurrentDeveloper;
+
+    public PotentialTabThroughDevelopers (GameModel game, PalaceFestival festival){
+        super(game, festival);
+        developerList = game.getCurrentJavaPlayer().getDevelopers();
+        indexOfCurrentDeveloper = 0;
+    }
+
+
+    @Override
+    public ActionResult getActionResult() {
+        return new TakeDeveloperOffBoard(developerList.get(indexOfCurrentDeveloper).getLocation(), getShortestLegalPath(), getGameModel()).tryAction();
+    }
+
+    public void tabToNextDeveloper(){
+        indexOfCurrentDeveloper += 1;
+        indexOfCurrentDeveloper %= developerList.size();
+
+    }
+
+    /*
+        This method below is a change from the design doc.
+        It was functionality discussed in the responsibilities but was a method signature forgotten in the UML.
+        This class is needed not to help OO design, but for the functionality of the game.
+        A player, while tabbing through their developers, may then select a developer to move around the board,
+        which requires a transition between this PotentialAction and the PotentialMoveDeveloperAroundBoard Action.
+     */
+
+    public PotentialMoveDeveloperAroundBoard selectDeveloperToMoveAroundBoard() {
+        return new PotentialMoveDeveloperAroundBoard(getGameModel(), getPalaceFestival(),developerList.get(indexOfCurrentDeveloper).getLocation());
+    }
+
+    /*
+        This method's return type has been changed, as many PotentialActions have due to
+        the modification of ActionResult. At first, ActionResult had Action as an aggregate,
+        which coupled them. We separated them to not force an ActionResult to have an Action.
+        This change was for the OO purposes.
+        To return both, the Pair class was implemented, taking these two as it's parameterizing types
+     */
+    public Pair<ActionResult, TakeDeveloperOffBoard> confirmDeletion() {
+        TakeDeveloperOffBoard result = new TakeDeveloperOffBoard(developerList.get(indexOfCurrentDeveloper).getLocation(), getShortestLegalPath(), getGameModel());
+        return new Pair<ActionResult, TakeDeveloperOffBoard>(result.doAction(), result);
+    }
+
+    private JavaPath getShortestLegalPath(){
+        return  new LeastCostPathFinder().findShortestRemovalPath(developerList.get(indexOfCurrentDeveloper).getLocation(), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
+
+    }
 }
