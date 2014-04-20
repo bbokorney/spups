@@ -258,5 +258,4 @@ public class JavaGameModel extends GameModel {
 		finalRoundTurns = -1;
 		turn = new NonFinalTurn();
 	}
-
 }
