@@ -1,11 +1,13 @@
 package model;
 
+import model.board.Board;
 import model.board.Location;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
+import model.player.Player;
 import model.sharedresources.SharedResourceType;
 import model.tiles.TileComponent;
 
@@ -31,6 +33,7 @@ public abstract class GameModel {
     public abstract String getName();
     public abstract void incrementScore(int score);
     public abstract List<Developer> getDevelopers();
+    public abstract Board getBoard();
 
     public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
@@ -42,5 +45,6 @@ public abstract class GameModel {
     public abstract Card drawFestivalCard();
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
+	public abstract Player[] getJavaPlayers();
 
 }

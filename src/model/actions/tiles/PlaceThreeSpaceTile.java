@@ -2,6 +2,7 @@ package model.actions.tiles;
 
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -23,10 +24,10 @@ public class PlaceThreeSpaceTile extends Action {
     /*
         constructors
      */
-    PlaceThreeSpaceTile(){
+    public PlaceThreeSpaceTile(){
 
     }
-    PlaceThreeSpaceTile(Location villagePlacement, Location rice1Placement, Location rice2Placement) {
+    public PlaceThreeSpaceTile(Location villagePlacement, Location rice1Placement, Location rice2Placement) {
         this.villagePlacement = villagePlacement;
         this.ricePlacement[0] = rice1Placement;
         this.ricePlacement[1] = rice2Placement;

@@ -9,7 +9,7 @@ public interface Location extends Serializable{
 
 	public Location getOrigin();
 	
-	public int hashcode();
+	public int hashCode();
 	
 	public boolean equals(Location loc);
 

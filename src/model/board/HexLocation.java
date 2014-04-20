@@ -14,8 +14,9 @@ public class HexLocation implements Location, PathNode {
     public boolean equals(PathNode pathNode) {
         return false;
     }
-	
-		private List<Directions> pathFromOrigin; 
+
+    //A unique list representing this location's semantic location
+	private List<Directions> pathFromOrigin;
 	
 	public HexLocation(List<Directions> path) {
 		pathFromOrigin = path;
@@ -26,9 +27,14 @@ public class HexLocation implements Location, PathNode {
 		return new HexLocation(new ArrayList<Directions>());
 	}
 	
-	public int hashcode() {
-	
-		return 0; //for testing
+	public int hashCode() {
+        String directions = "";
+        int hashCode = 0;
+	    for (Directions d : pathFromOrigin) {
+            directions = directions.concat(d.toString());
+        }
+        hashCode = directions.hashCode();
+		return hashCode;
 	}
 	
 	public boolean equals(Location loc) {
@@ -43,7 +49,6 @@ public class HexLocation implements Location, PathNode {
 	//Returns an ordered list of all neighbors in clockwise direction, starting
 	//from up
 	public List<Location> getNeighbors() {
-		//TODO: ask if this is runtime type checking or whatever
 		List<Location> neighbors = new ArrayList<Location>();
 		
 		//For each direction, append our own path with that direction,

@@ -1,6 +1,7 @@
 package model.actions.tiles;
 
 import model.GameModel;
+import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -21,12 +22,12 @@ public class PlaceIrrigationTile extends Action {
     /*
         constructors
      */
-    PlaceIrrigationTile(){
+    public PlaceIrrigationTile(){
         //Empty constructor
         //used for loading
     }
 
-    PlaceIrrigationTile(Location placement){
+    public PlaceIrrigationTile(Location placement){
         this.placement = placement;
     }
 
