@@ -75,4 +75,6 @@ public abstract class GameModel {
     public abstract Space getSpaceAtLocation(Location villagePlacement);
 
     public abstract void takeDeveloperOffBoard(Location developerLocationTakenOff);
+
+    public abstract void moveDeveloperAroundBoard(Location developerStartinglocation, Location developerEndingLocation);
 }
