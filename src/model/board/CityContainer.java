@@ -29,5 +29,14 @@ public class CityContainer {
         return null;
     }
 
+    //Returns the city in which this location exists. If location
+    //is not in a city, return null.
+    public City getCityFromLocation(Location loc) {
+        for (City city : cityCollection)
+            if (city.getCity().contains(loc))
+                return city;
+        return null;
+    }
+
     //TODO: add upgradePalace(Location, PalaceTileComponent)
 }
