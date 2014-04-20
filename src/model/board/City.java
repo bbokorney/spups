@@ -49,6 +49,11 @@ public class City {
         this.palace = palace;
     }
 
+    public void removeLocation(Location loc) {
+        if (city.contains(loc))
+            city.remove(loc);
+    }
+
     //Actually don't think I need this
 /*    @Override
     public boolean equals(City city) {
