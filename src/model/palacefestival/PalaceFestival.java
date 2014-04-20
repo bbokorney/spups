@@ -2,6 +2,7 @@ package model.palacefestival;
 
 import model.tiles.PalaceTileComponent;
 
+import java.util.Collection;
 import java.util.Stack;
 
 /**
@@ -59,6 +60,10 @@ public class PalaceFestival {
 
     public void discard(Card card) {
         resources.discard(card);
+    }
+
+    public Collection<PalaceFestivalPlayer> getPlayers() {
+        return players.getPlayers();
     }
 
 }
