@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
 	private CommonPanel commonPanel;
 	private PlayerPanel[] playerPanel;
 	public GamePanel(GameModel model) {
-		boardPanel = new BoardPanel();
+		boardPanel = new BoardPanel(model.getBoard());
 		cardsPanel = new CardsPanel();
 		commonPanel = new CommonPanel(); 
 		playerPanel = new PlayerPanel[numOfPlayerPanels];
