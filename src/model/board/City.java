@@ -24,8 +24,9 @@ public class City {
         return city.size();
     }
 
-    public void add(Location loc) {
-        city.add(loc);
+    public void add(Location... locations) {
+        for (Location location : locations)
+            city.add(location);
     }
 
     public int getPalaceLevel() {
