@@ -18,6 +18,8 @@ import model.board.JavaBoard;
 import model.board.Location;
 import model.board.LocationType;
 import model.board.Space;
+import model.tiles.Tile;
+import model.tiles.TileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -61,96 +63,65 @@ public class BoardPanel extends JPanel {
 	}
 	
 	protected void paintComponent(Graphics g) {
-        g.drawImage(boardBackground, 0, 0, null);
 		int[] origin = getBoardOrigin(locations);
-		HashSet set = new HashSet<Integer>();
-		int duplicates = 0;
 
-		
-		for(int x = 0; x < locations.length; ++x) { 
-//			if(x % 2 != 0){
-				int[] distance = locations[x].getDistanceFromOrigin();
-				if(set.contains(distance[0]*100000 + distance[1])) {
-//					System.out.println("DUPLICATES");
-//					System.out.println(distance[0] + " " + distance[1]);
-					duplicates++;
-					drawHex(g, distance[0]+origin[0]+50, distance[1]+origin[1]+40, distance[0] == 0 && distance[1] == 0, locations[x], true);
-				}
-				else
-					drawHex(g, distance[0]+origin[0]+50, distance[1]+origin[1]+40, distance[0] == 0 && distance[1] == 0, locations[x], false);
-				set.add(distance[0]*100000 + distance[1]);
-//			}
+		for(HexLocation location : locations) { 
+			int[] distance = location.getDistanceFromOrigin();
+			int width = distance[0]+origin[0]+50;
+			int height = distance[1]+origin[1]+40;
+
+	    	LocationType type = board.getLocationType(location);
+	    	Color color = Color.white;
+	    	if(type == LocationType.Highlands)
+	    		color = Color.red;
+	    	if(type == LocationType.Lowlands)
+	    		color = Color.green;
+			
+			drawHex(g, width, height, color);
+			TileVisitor visitor = new TileVisitor(g, width, height);
+			board.getSpace(location).getTopTileComponent().accept(visitor);
 		}
 		System.out.println("Size " + locations.length);
-		System.out.println("number of duplicates " + duplicates);
-
-
-//        Graphics2D g2 = (Graphics2D) g;
-//        g.setColor(Color.orange);
-//        g.setStroke(new BasicStroke(20));
-//    	g2.drawLine(origin[0]+50, origin[1]+40, origin[0]+3+50, origin[1]+3+40);
-//    	System.out.println(origin[0] + " " + origin[1]);
-		
-//		drawHex(g, origin[0]+50, -240+origin[1]+40, false, locations[0]);
-//		System.out.println(hexSideLength());
-//		int wStart = 100; 
-//		int hStart = 100;
-//		for(int x = 0; x < 10; ++x) { 
-//			if(x % 2 == 0)
-//				hStart += 30;
-//			else
-//				hStart -= 30;
-//			for(int y = 0; y < 10; ++y) { 
-//				drawHex(g, wStart+(x*52), hStart+(y*60));
-//			}
-//		}
-//		drawHex(g, 100, 100);
-//		drawHex(g, 150, 130);
-//		drawHex(g, 100, 160);
     }
 	
+	public static void drawHouses(Graphics g, int i, int j) {
+		int[] xHouse = {-4, -4, -7, 0, 7, 4, 4};
+		int[] yHouse = {4, 0, 0, -6, 0, 0, 4};
+		int[] xx = {-12, 0, 12, 0};
+		int[] yy = {0, -12, 0, 12};
+		for(int x = 0; x < xx.length; ++x) {
+			Polygon house = new Polygon();
+			for(int y = 0; y < xHouse.length; ++y) {
+				int width = i+xx[x]+xHouse[y];
+				int height = j+yy[x]+yHouse[y];
+	            house.addPoint((int)(width*(hexScaling)), (int)(height*(hexScaling)));
+			}
+			((Graphics2D) g).setColor(Color.magenta);
+			g.fillPolygon(house);
+		}
+	}
+
 	public enum TileType {
 		Rice, Village, Palace, Irrigation, Highlands;
 	}
 	
-	public void drawHex(Graphics g, int posWidth, int posHeight, boolean fill, Location location, boolean duplicate) {
+	public static void drawHex(Graphics g, int posWidth, int posHeight, Color color) {
         Polygon tile = new Polygon();
         for (int x = 0; x < 6; x++) {
         	int height = (int) (posHeight + hexSideLength()*Math.sin(x*2*Math.PI/6));
         	int width = (int) (posWidth + hexSideLength()*Math.cos(x*2*Math.PI/6));
             tile.addPoint((int)(width*(hexScaling)), (int)(height*(hexScaling)));
         }
-        g.drawPolygon(tile);
-        g.setColor(Color.white);
-        if(fill) 
-            g.setColor(Color.black);
-        if(duplicate)
-            g.setColor(Color.MAGENTA);
-    	
-    	LocationType type = board.getLocationType(location);
-    	if(type == LocationType.Highlands)
-    		g.setColor(Color.red);
-    	if(type == LocationType.Lowlands)
-    		g.setColor(Color.green);
-    	g.fillPolygon(tile);
-    		
-    	
-        Graphics2D g2 = (Graphics2D) g;
-        g.setColor(Color.black);
-        g2.setStroke(new BasicStroke(2));
-        g.drawPolygon(tile);
         
-
-//        Graphics2D g2 = (Graphics2D) g;
-//        g2.setColor(Color.orange);
-//        g2.setStroke(new BasicStroke(20));
-//    	g2.drawLine(posWidth, posHeight, posWidth, posHeight);
-//    	System.out.println(origin[0] + " " + origin[1]);
-
-
+        g.setColor(color);
+    	g.fillPolygon(tile);
+    	
+        ((Graphics2D) g).setColor(Color.black);
+        ((Graphics2D) g).setStroke(new BasicStroke(2));
+        g.drawPolygon(tile);
     }
 	
-	public int hexSideLength() { 
+	private static int hexSideLength() { 
 		return (int) (30*Math.sin(Math.PI/2) / Math.sin(Math.PI/3));
 	}
 
