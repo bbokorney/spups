@@ -13,6 +13,8 @@ import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.rules.tiles.RicePlacementRule;
+import model.tiles.RiceTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -136,14 +138,19 @@ public class PlaceRiceTile extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP points
+            game.useActionPoints(result.getActionPoints());
 
             // decrement rice tiles in the players resources
+            game.useResource(JavaPlayerResourceType.RICE);
 
             //award them with the fame points, if anything
+            game.incrementScore(result.getFamePoints());
 
             //place the tile on the board
+            game.placeRiceTileComponent(placement, new RiceTileComponent(new Tile(1)));
 
             //set has placed land tile to true
+            game.setHasPlacedLandTile(true);
         }
         return result;
     }
