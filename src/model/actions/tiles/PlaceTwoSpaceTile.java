@@ -9,10 +9,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
-import model.rules.tiles.ConnectionTwoCitiesRule;
-import model.rules.tiles.PlacementOutsideCentralJavaRule;
-import model.rules.tiles.RicePlacementRule;
-import model.rules.tiles.VillagePlacementRule;
+import model.rules.tiles.*;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -124,7 +121,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game,villagePlacement,ricePlacement) ){
             isSuccess = isSuccess && true;
 
         }

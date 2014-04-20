@@ -132,7 +132,8 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(){
+        //todo ask baker if i can send him the list of developers?
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game, villagePlacement, ricePlacement[0], ricePlacement[1])){
             isSuccess = isSuccess && true;
 
         }

@@ -9,6 +9,7 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.rules.tiles.PalacePlacementRule;
+import model.rules.tiles.PlaceTileOnDeveloperRule;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -125,7 +126,7 @@ public class PlacePalaceTile extends Action {
 
         //Check if the player has enough AP points to complete this - 1 AP
         //PlaceTileOnDeveloperRule
-        if(true){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game,placement) ){
             isSuccess = isSuccess && true;
 
         }
