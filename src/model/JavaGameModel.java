@@ -174,6 +174,18 @@ public class JavaGameModel extends GameModel {
         return board;
     }
 
+    public void placeIrrigationTileComponent(Location loc, TileComponent tile) {
+        board.placeIrrigationTileComponent(loc, tile);
+    }
+
+    public void placeRiceTileComponent(Location loc, TileComponent tile) {
+        board.placeRiceTileComponent(loc, tile);
+    }
+
+    public void placeVillageTileComponent(Location loc, TileComponent tile) {
+        board.placeVillageTileComponent(loc, tile);
+    }
+
     public void addPalaceToCurrentTurnList(Location loc) {
         turn.addPalaceToList(loc);
     }
