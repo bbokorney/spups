@@ -248,4 +248,9 @@ public class JavaGameModel extends GameModel {
         return null;
     }
 
+    @Override
+    public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
+        turn.setHasPlacedLandTile(hasPlacedLandTile);
+    }
+
 }
