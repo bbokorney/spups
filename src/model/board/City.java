@@ -55,8 +55,6 @@ public class City {
             city.remove(loc);
     }
 
-    //Actually don't think I need this
-/*    @Override
     public boolean equals(City city) {
         //Check sizes are the same
         if (this.getSize() != city.getSize())
@@ -66,8 +64,8 @@ public class City {
             if (!city.getCity().contains(loc))
                 return false;
         }
-        if (!getPalaceLocation().equals(city.getPalaceLocation())
-            return false;
-        else if (!getPalaceTile().equals())
-    }*/
+
+        return (!getPalaceLocation().equals(city.getPalaceLocation())
+                && !getPalaceTile().equals(city.getPalaceTile()));
+    }
 }
