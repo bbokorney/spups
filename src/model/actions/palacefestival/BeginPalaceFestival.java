@@ -6,6 +6,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.*;
 import model.palacefestival.Card;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
 import model.rules.palace.BidRequirementsRule;
@@ -22,11 +23,15 @@ import java.util.List;
  */
 public class BeginPalaceFestival extends Action {
 
+    private GameModel game;
+    private PalaceFestival festival;
     private int palaceValueForFestival;
     private Location palaceLocation;
     private List<Card> cardsBidded;
 
-    public BeginPalaceFestival(int palaceValueForFestival, Location palaceLocation, List<Card> cardsBidded) {
+    public BeginPalaceFestival(GameModel game, PalaceFestival festival, int palaceValueForFestival, Location palaceLocation, List<Card> cardsBidded) {
+        this.game = game;
+        this.festival = festival;
         this.palaceValueForFestival = palaceValueForFestival;
         this.palaceLocation = palaceLocation;
         this.cardsBidded = cardsBidded;
@@ -46,7 +51,7 @@ public class BeginPalaceFestival extends Action {
 
     @Override
     public ActionResult tryAction() {
-        PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+        PalaceFestivalPlayer player = festival.getCurrentPlayer();
         boolean palaceIsEligible = PalaceHasNotAlreadyHostedFestivalRule.palaceHasNotAlreadyHostedFestival(getPalace(game, palaceLocation));
         Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
         JavaPlayer currentJavaPlayer = null;
@@ -57,7 +62,7 @@ public class BeginPalaceFestival extends Action {
         }
 
         boolean hasDeveloperInCity = HasDeveloperInCityRule.hasDeveloperInCity(currentJavaPlayer, palaceLocation, new BoardRuleHelper(game), game.getBoard());
-        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(),game.peekAtFestivalCard(), cardsBidded);
+        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(festival.getHighestBid(),festival.peekAtFestivalCard(), cardsBidded);
         boolean canBegin = palaceIsEligible && hasDeveloperInCity && bidMeetsRequirements;
         String message = canBegin ? "starting palace festival..." : "not eligible to begin festival";
         return new ActionResult(false, 0, 0, message, this);
@@ -68,19 +73,19 @@ public class BeginPalaceFestival extends Action {
         ActionResult result = tryAction();
         if (result.isSuccess()) {
             PalaceTileComponent palace = getPalace(game, palaceLocation);
-            PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+            PalaceFestivalPlayer player = festival.getCurrentPlayer();
             int totalBid = 0;
             for (Card card : cardsBidded) {
                 player.playCard(card);
-                game.discard(card);
-                int bid = CardValues.getMatchValue(card, game.peekAtFestivalCard());
+                festival.discard(card);
+                int bid = CardValues.getMatchValue(card, festival.peekAtFestivalCard());
                 totalBid += bid;
             }
 
-            game.beginPalaceFestival(palace, totalBid, player);
+            festival.beginPalaceFestival(palace, totalBid, player);
         }
 
-        game.advancePalaceFestivalTurn();
+        festival.advanceTurn();
         return result;
     }
 

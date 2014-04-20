@@ -27,11 +27,11 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
 
     @Override
     protected ActionResult getActionResult() {
-        return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), ).tryAction();
+        return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), game).tryAction();
     }
 
     protected Pair<ActionResult, PlaceThreeSpaceTile> confirmPlacement() {
-        PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), );
+        PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), game );
         return new Pair<ActionResult, PlaceThreeSpaceTile>(result.doAction(), result);
     }
 

@@ -3,6 +3,7 @@ package model.actions.palacefestival;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 
 /**
@@ -11,9 +12,11 @@ import model.palacefestival.PalaceFestivalPlayer;
 public class AgreeToTie extends Action {
 
     private PalaceFestivalPlayer requester;
+    private PalaceFestival festival;
 
-    public AgreeToTie(PalaceFestivalPlayer requester) {
+    public AgreeToTie(PalaceFestivalPlayer requester, PalaceFestival palaceFestival) {
         this.requester = requester;
+        this.festival = palaceFestival;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class AgreeToTie extends Action {
     public ActionResult doAction() {
         ActionResult result = tryAction();
         if (result.isSuccess()) {
-            game.advancePalaceFestivalTurn();
+            festival.advanceTurn();
         }
 
         return result;
