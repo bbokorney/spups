@@ -38,5 +38,11 @@ public class CityContainer {
         return null;
     }
 
+    public void removeLocationFromCity(Location loc, City city) {
+        city.getCity().remove(loc);
+        if (city.getCity().size() == 0)
+            cityCollection.remove(city);
+    }
+
     //TODO: add upgradePalace(Location, PalaceTileComponent)
 }
