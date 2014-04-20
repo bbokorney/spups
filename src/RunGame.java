@@ -1,6 +1,9 @@
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
+import model.GameModel;
+import model.JavaGameModel;
 import controller.Controller;
 import view.GameFrame;
 
@@ -15,14 +18,32 @@ public class RunGame {
     }
     
     public RunGame() {
-        SwingUtilities.invokeLater(new Runnable(){
-            public void run(){
-                GameFrame frame = new GameFrame();
-                @SuppressWarnings("unused")
-                Controller controller = new Controller(frame);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
-            }
-        });
+    	SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				SwingUtilities.invokeLater(new Runnable(){
+		            public void run(){
+		            	GameModel model = new JavaGameModel(3);
+		                GameFrame frame = new GameFrame(model);
+		                @SuppressWarnings("unused")
+		                Controller controller = new Controller(frame);
+		                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		                frame.setVisible(true);
+		            }
+		        });
+					return null;
+			}
+		};
+		worker.execute();
+//        SwingUtilities.invokeLater(new Runnable(){
+//            public void run(){
+//            	GameModel model = new JavaGameModel(3);
+//                GameFrame frame = new GameFrame(model);
+//                @SuppressWarnings("unused")
+//                Controller controller = new Controller(frame);
+//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                frame.setVisible(true);
+//            }
+//        });
     }    
 }
