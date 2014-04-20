@@ -1,11 +1,14 @@
 package view.gamepanel;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
-import view.JavaImageLoader;
 import model.GameModel;
 
 /**
@@ -13,34 +16,43 @@ import model.GameModel;
  */
 @SuppressWarnings("serial")
 public class CommonPanel extends JPanel {
-	Image p2;
-	Image p4;
-	Image p6;
-	Image p8;
-	Image p10;
-	Image irrigation;
-	Image threetile;
+	JLabel p2;
+	JLabel p4;
+	JLabel p6;
+	JLabel p8;
+	JLabel p10;
+	JLabel irrigation;
+	JLabel threetile;
 	
 	public CommonPanel() {
-		
-	    p2 = JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace2.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-	    p4 = JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace4.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-	    p6 = JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace6.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-	    p8 = JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace8.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-	    p10 = JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace10.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-	    threetile = JavaImageLoader.getImage("/Users/maumau/spups/resources/Threetile.png").getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-	    irrigation = JavaImageLoader.getImage("/Users/maumau/spups/resources/Irrigation.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		p2 = newJLabel("3", "/Users/maumau/spups/resources/Palace2.png", 50, 80);
+		p4 = newJLabel("3", "/Users/maumau/spups/resources/Palace4.png", 50, 80);
+		p6 = newJLabel("3", "/Users/maumau/spups/resources/Palace6.png", 50, 80);
+		p8 = newJLabel("3", "/Users/maumau/spups/resources/Palace8.png", 50, 80);
+		p10 = newJLabel("3", "/Users/maumau/spups/resources/Palace10.png", 50, 80);
+		threetile = newJLabel("3", "/Users/maumau/spups/resources/Threetile.png", 100, 100);
+		irrigation = newJLabel("3", "/Users/maumau/spups/resources/Irrigation.png", 50, 80);
+
+		this.add(p2);
+		this.add(p4);
+		this.add(p6);
+		this.add(p8);
+		this.add(p10);
+		this.add(threetile);
+		this.add(irrigation);
 	}
 
-	protected void paintComponent(Graphics g) {
-        g.drawImage(p2, 0, 160, null);
-        g.drawImage(p4, 50, 160, null);
-        g.drawImage(p6, 100, 160, null);
-        g.drawImage(p8, 150, 160, null);
-        g.drawImage(p10, 200, 160, null);
-        g.drawImage(irrigation, 160, 20, null);
-        g.drawImage(threetile, 0, 20, null);
-    }
+	private JLabel newJLabel(String value, String src, int width, int height){
+		JLabel label= new JLabel(value);
+		label.setIcon(new ImageIcon(src));
+		label.setFont(new Font("Lucida Grande", 0, 14));
+		label.setPreferredSize(new Dimension(width, height));
+		label.setHorizontalTextPosition(SwingConstants.CENTER);
+		label.setVerticalTextPosition(SwingConstants.BOTTOM);
+		label.setVerticalAlignment(SwingConstants.BOTTOM);
+		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		return label;
+	}
 
 	public void refreshView(GameModel model) {
 		// TODO Auto-generated method stub

@@ -42,7 +42,7 @@ public class GamePanel extends JPanel {
 		left.add(playerPanel[3], BorderLayout.SOUTH);
 
 		cardsPanel.setBackground(Color.BLUE);
-		commonPanel.setBackground(Color.BLACK);
+		commonPanel.setBackground(Color.BLUE);
 		for(int x = 0; x < numOfPlayerPanels; ++x) 
 			playerPanel[x].setBackground(Color.RED);
 		
