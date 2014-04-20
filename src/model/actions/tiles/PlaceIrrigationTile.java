@@ -9,6 +9,8 @@ import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.sharedresources.SharedResourceType;
+import model.tiles.IrrigationTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -113,10 +115,13 @@ public class PlaceIrrigationTile extends Action {
             game.useActionPoints(result.getActionPoints());
 
             //Award the fame points to the player
+            game.incrementScore(result.getFamePoints());
 
             //decrement the number of irrigation tiles from shared resources
+            game.useResource(SharedResourceType.IRRIGATION);
 
             //place the tile on the board
+            game.placeIrrigationTileComponent(placement, new IrrigationTileComponent(new Tile(1)));
 
         }
         return result;
