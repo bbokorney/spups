@@ -5,6 +5,7 @@ import controller.keylistener.Funktor;
 import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
 import model.GameModel;
+import model.actions.EndTurn;
 import model.actions.UseActionToken;
 import model.potentialactions.PotentialBeginPalaceFestival;
 
@@ -89,7 +90,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void endTurn() {
-
+	    EndTurn action = new EndTurn(model);
     }
 
     public void startPalaceFestival() {
@@ -180,7 +181,7 @@ public class EmptyUIState extends PotentialJavaUIState {
         });
         listeners.add(i);
 
-        i = new InternalListener(KEY_UPGRADEPALCE, new Funktor() {
+        i = new InternalListener(KEY_UPGRADEPALACE, new Funktor() {
             @Override
             public void call() {
                 switchToUpgradePalaceState();
