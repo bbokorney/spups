@@ -75,9 +75,9 @@ public class BoardRuleHelper {
     }
 
 
-    public Collection<Location> getSurroundingTiles(Collection<HexLocation> waterLocations) {
+    public Collection<Location> getSurroundingTiles(Collection<Location> waterLocations) {
         Set<Location> surroundingLocations = new HashSet<Location>();
-        for(HexLocation location : waterLocations) {
+        for(Location location : waterLocations) {
             for(Location neighbor : location.getNeighbors()) {
                 surroundingLocations.add(neighbor);
             }
@@ -87,9 +87,9 @@ public class BoardRuleHelper {
 
     public int pointsEarnedFromIrrigationPlacement(HexLocation location) {
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
-            for(HexLocation water : body.getLocations()) {
+            for(Location water : body.getLocations()) {
                 if(neighbors(water, location)) {
-                    ArrayList<HexLocation> newBody = new ArrayList<HexLocation>();
+                    ArrayList<Location> newBody = new ArrayList<Location>();
                     newBody.add(location);
                     newBody.addAll(body.getLocations());
                     int enclosingTileCount = 0;
@@ -180,7 +180,7 @@ public class BoardRuleHelper {
         return false;
     }
 
-    private boolean neighbors(HexLocation location1, Location location2) {
+    private boolean neighbors(Location location1, Location location2) {
         for(Location neighbor : location1.getNeighbors()) {
             if(location2.equals(neighbor)) {
                 return true;

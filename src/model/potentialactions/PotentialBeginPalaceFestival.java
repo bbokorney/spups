@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PotentialBeginPalaceFestival {
+public class PotentialBeginPalaceFestival extends PotentialAction {
 
     private ArrayList<PalaceTileComponent> palacesValidForFestival;
     private ArrayList<Location> locationsValidForFestival;
@@ -19,16 +19,6 @@ public class PotentialBeginPalaceFestival {
 
     public PotentialBeginPalaceFestival(ArrayList<PalaceTileComponent> palacesValidForFestival, ArrayList<Location> locationsValidForFestival, ArrayList<Card> cardsValidToBeginFestival, ArrayList<Integer> indexOfCardsToBid) {
         this.palacesValidForFestival = palacesValidForFestival;
-    }
-
-    public boolean canBeginPalaceFestival() {
-        // Player must have a developer in the city
-        // TODO: Should a rule be created for this?
-        // Player must have a viable bid
-        // TODO: Rule?
-        // Palace is eligible
-        // TODO: Rule?
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
 
     public boolean tabToNextElement() {
@@ -56,4 +46,13 @@ public class PotentialBeginPalaceFestival {
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
 
+    @Override
+    protected void setComponentsOnHoverBoard() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    protected ActionResult getActionResult() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

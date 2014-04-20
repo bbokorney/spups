@@ -7,6 +7,8 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
+import model.rules.palace.HighestRankingPlayerInCityRule;
+import model.rules.palace.PalaceLevelCitySizeRule;
 import model.rules.tiles.PalacePlacementRule;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.sharedresources.SharedResourceType;
@@ -91,7 +93,7 @@ public class PlacePalaceTile extends Action {
              */
 
             //Check if there is not already a palace in that city/village
-            if(true){
+            if(game.isLocationInCity(placement)){
                 isSuccess = isSuccess && true;
 
             }
@@ -101,7 +103,7 @@ public class PlacePalaceTile extends Action {
             }
 
             //Check if there are enough villages to make it a city
-            if(true){
+            if(PalaceLevelCitySizeRule.palaceLevelSizeAllowed(placement, board, value)){
                 isSuccess = isSuccess && true;
 
             }
@@ -112,7 +114,7 @@ public class PlacePalaceTile extends Action {
 
             //Check if the player is the highest ranked player in this city
             //HighestRankedPlayerInCityRule
-            if(true){
+            if(HighestRankingPlayerInCityRule.highestRankingPlayerInCityRule(game.getCurrentJavaPlayer(), placement, helperJunk, board)){
                 isSuccess = isSuccess && true;
 
             }

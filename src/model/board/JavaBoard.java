@@ -72,6 +72,42 @@ public class JavaBoard extends Board {
     public void placeVillageTileComponent(Location loc, TileComponent tile){
         Space space = board.get(loc);
         space.accept(tile);
+
+        //Check neighbors for n villages
+        List<Location> neighbors = loc.getNeighbors();
+        ArrayList<Village> villagesToJoin = new ArrayList<Village>();
+        for (Location neighbor: neighbors) {
+            for (Village village : villageContainer.getVillages()) {
+                if (village.getLocations().contains(neighbor)) {
+                    if (!villagesToJoin.contains(village))
+                        villagesToJoin.add(village);
+                }
+            }
+        }
+
+        //If this is its own village
+        if (villagesToJoin.size() == 0) {
+            Village village = new Village();
+            village.add(loc);
+            villageContainer.addVillage(village);
+    }
+        //If this joins 1 village
+        else if (villagesToJoin.size() == 1) {
+            Village village = villagesToJoin.get(0);
+            village.add(loc);
+        }
+        //If this joins > 1 village
+        else {
+            Village newVillage = new Village();
+            for (Village village : villagesToJoin) {
+                for (Location villageLoc : village.getLocations()) {
+                    newVillage.add(loc);
+                }
+            }
+            newVillage.add(loc);
+            villageContainer.removeVillage(villagesToJoin.toArray(new Village[0]));
+            villageContainer.addVillage(newVillage);
+        }
     }
 
 }
