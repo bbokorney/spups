@@ -39,6 +39,9 @@ public class Controller {
 	public void addToHistory(Pair action) {
 		history.addAction(action);
 	}
+	public void addEndTurnToHistory(Pair action) {
+		history.
+	}
 
     public void askForUserConfirmation(Action actionMessage) {
 

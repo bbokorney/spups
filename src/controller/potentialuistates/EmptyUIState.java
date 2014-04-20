@@ -5,6 +5,8 @@ import controller.keylistener.Funktor;
 import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
 import model.GameModel;
+import model.Pair;
+import model.actions.ActionResult;
 import model.actions.EndTurn;
 import model.actions.UseActionToken;
 import model.potentialactions.PotentialBeginPalaceFestival;
@@ -90,7 +92,12 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void endTurn() {
-	    EndTurn action = new EndTurn(model);
+	    EndTurn action = new EndTurn();
+	    ActionResult result = action.tryAction(model);
+	    if(result.isSuccess()) {
+			action.doAction(model);
+		    controller.addEndTurnToHistory(new Pair<ActionResult, EndTurn>(result, action));
+	    }
     }
 
     public void startPalaceFestival() {
@@ -98,9 +105,12 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void useActionToken() {
-        UseActionToken at = new UseActionToken();
-        at.doAction(model);
-        controller.addToHistory(at);
+        UseActionToken action = new UseActionToken();
+	    ActionResult result = action.tryAction(model);
+	    if(result.isSuccess()) {
+		    action.doAction(model);
+		    controller.addToHistory(new Pair<ActionResult, UseActionToken>(result, action));
+	    }
     }
 
     public void switchBetweenPlanningAndPlayModes() {

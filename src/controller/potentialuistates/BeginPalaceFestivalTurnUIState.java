@@ -20,7 +20,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
         this.controller = controller;
         this.keyListener = keyListener;
 	    this.model = model;
-	    
+
 
 
         initListeners();
