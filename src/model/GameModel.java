@@ -59,8 +59,10 @@ public abstract class GameModel {
     public abstract Card drawDeckCard();
     public abstract void discard(Card card);
     public abstract void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player);
+    public abstract void endPalaceFestival();
     public abstract void setHighestBid(int bid);
     public abstract int getHighestBid();
+    public abstract PalaceTileComponent getFestivalPalace();
 
 
     public abstract void useActionPoints(int actionPoints);

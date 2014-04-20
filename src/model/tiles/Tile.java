@@ -6,6 +6,10 @@ package model.tiles;
 public class Tile {
     private int numberOfComponents;
 
+    public Tile(int numberOfComponents){
+        this.numberOfComponents = numberOfComponents;
+    }
+
     public int getNumberOfComponents() {
         return numberOfComponents;
     }

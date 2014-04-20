@@ -73,6 +73,10 @@ public class PalaceFestival {
         return currentState.getPlayers();
     }
 
+    public PalaceTileComponent getPalace() {
+        return palace;
+    }
+
     public void beginPalaceFestival(PalaceTileComponent palace, int bid, PalaceFestivalPlayer player) {
         palace.flip();
         this.palace = palace;

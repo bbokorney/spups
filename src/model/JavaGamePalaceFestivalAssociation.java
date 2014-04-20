@@ -91,6 +91,16 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    @Override
+    public void addPalaceToCurrentTurnList(Location loc) {
+        //todo changed interface in parent class
+    }
+
+    @Override
+    public boolean hasPalaceLocationBeenUsedThisTurn(Location loc) {
+        return false; //todo changed interface in parent class
+    }
+
     public void addPlayer(PalaceFestivalPlayer player) { palaceFestival.addPlayer(player); }
     public void removePlayer(PalaceFestivalPlayer player) { palaceFestival.removePlayer(player); }
     public PalaceFestivalPlayer getCurrentPalaceFestivalPlayer() { return palaceFestival.getCurrentPlayer(); }
@@ -114,6 +124,11 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     }
 
     @Override
+    public void endPalaceFestival() {
+        palaceFestival.endPalaceFestival();
+    }
+
+    @Override
     public void setHighestBid(int bid) {
         palaceFestival.setHighestBid(bid);
     }
@@ -122,6 +137,11 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     public int getHighestBid() {
         // TODO
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public PalaceTileComponent getFestivalPalace() {
+        return palaceFestival.getPalace();
     }
 
     @Override

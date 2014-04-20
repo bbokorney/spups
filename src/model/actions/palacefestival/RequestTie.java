@@ -1,7 +1,6 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -12,25 +11,35 @@ import java.util.Collection;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class Withdraw extends Action {
+public class RequestTie extends Action {
 
     @Override
     public ActionResult tryAction(GameModel game) {
-        return new ActionResult(true, 0, 0, "player withdrawn", this);
+        Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
+        int score = -1;
+        boolean tie = true;
+        for (PalaceFestivalPlayer player : players) {
+            int playerScore = player.getScore();
+            if(score == -1) {
+                score = playerScore;
+            }
+            else if (playerScore != score) {
+                tie = false;
+                break;
+            }
+        }
+
+        String message = tie ? "success" : "players are not tied";
+
+        // TODO: send the FP they would win if the tie went through
+        return new ActionResult(tie, 0,0, message, this);
     }
 
     @Override
     public ActionResult doAction(GameModel game) {
         ActionResult result = tryAction(game);
-        if(result.isSuccess()) {
-            game.removePlayer(game.getCurrentPalaceFestivalPlayer());
+        if (result.isSuccess()) {
             game.advancePalaceFestivalTurn();
-            Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
-            if (players.size() == 1) {
-                ActionResult endResult = new EndPalaceFestival().doAction(game);
-                if (endResult.isSuccess())
-                    result = endResult;
-            }
         }
 
         return result;
