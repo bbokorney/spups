@@ -58,11 +58,11 @@ public class History {
 
 	public TimeTraveler rewindAction() {
 		Queue<Pair> latestTurn = actions.peek();
-		undoneActions.peek().add(latestTurn.remove());
 		if(latestTurn.size() <= 0) {
 			actions.poll();
 			undoneActions.add(new LinkedList<Pair>());
 		}
+		undoneActions.peek().add(latestTurn.remove());
 		redoActions();
 		return new TimeTraveler(this, undoneActions, actions, model);
 	}
