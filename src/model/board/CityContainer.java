@@ -48,5 +48,9 @@ public class CityContainer {
         cityCollection.remove(city);
     }
 
+    public void addCity(City city) {
+        this.cityCollection.add(city);
+    }
+
     //TODO: add upgradePalace(Location, PalaceTileComponent)
 }
