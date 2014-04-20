@@ -11,6 +11,7 @@ import model.board.HexLocation;
 import model.board.Location;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -158,12 +159,21 @@ public class PlaceTwoSpaceTile extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP points
+            game.useActionPoints(result.getActionPoints());
+
+            //award the player fame points
+            game.incrementScore(result.getFamePoints());
 
             //decrement a two space tile from player resources
+            game.useResource(JavaPlayerResourceType.TWO);
 
             //place the tile components down on three locations
+            Tile twoSpaceTile = new Tile(2);
+            game.placeVillageTileComponent(villagePlacement, twoSpaceTile);
+            game.placeRiceTileComponent(ricePlacement, twoSpaceTile);
 
             //set has placed land boolean to true
+            game.setHasPlacedLandTile(true);
         }
         return result;
     }
