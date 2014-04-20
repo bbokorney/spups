@@ -33,7 +33,7 @@ public abstract class GameModel {
     public abstract void beginFinalRound();
     public abstract JavaPlayer getCurrentJavaPlayer();
     public abstract Collection<JavaPlayer> getJavaPlayers();
-    public abstract void placeTopTileComponent(Location loc, TileComponent tile);
+    //public abstract void placeTopTileComponent(Location loc, TileComponent tile);
     public abstract void getTopTileComponent(Location loc);
     public abstract String getName();
     public abstract void incrementScore(int score);

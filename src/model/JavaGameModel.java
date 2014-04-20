@@ -109,9 +109,10 @@ public class JavaGameModel extends GameModel{
         return javaPlayers.getPlayers();
     }
 
-    public void placeTopTileComponent(Location loc, TileComponent tile) {
+    //NEVER USED.
+/*    public void placeTopTileComponent(Location loc, TileComponent tile) {
         board.placeTopTileComponent(loc, tile);
-    }
+    }*/
 
     
     public void getTopTileComponent(Location loc) {
