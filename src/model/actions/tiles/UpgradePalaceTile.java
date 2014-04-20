@@ -9,6 +9,8 @@ import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.rules.tiles.PalacePlacementRule;
 import model.sharedresources.SharedResourceType;
+import model.tiles.PalaceTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -74,7 +76,7 @@ public class UpgradePalaceTile extends Action {
 
         //Check if the placement is a palace tile
         PalacePlacementRule terrainRule = new PalacePlacementRule(placement, board);
-        if(terrainRule.buildAllowed()){
+        if(terrainRule.upgradeAllowed(value)){
             isSuccess = isSuccess && true;
 
 
@@ -85,7 +87,7 @@ public class UpgradePalaceTile extends Action {
 
 
             //See if the tile has been interacted with this turn
-            if(true){
+            if(game.hasPalaceLocationBeenUsedThisTurn(placement)){
                 isSuccess = isSuccess && true;
 
             }
@@ -95,7 +97,7 @@ public class UpgradePalaceTile extends Action {
             }
 
             //see if the value is less than the palace underneath
-            if(true){
+            if(){
                 isSuccess = isSuccess && true;
 
             }
@@ -145,9 +147,20 @@ public class UpgradePalaceTile extends Action {
         ActionResult result = tryAction();
         if(result.isSuccess()) {
 
-            //Decrememnt the AP points the path cost
-            //Move the developer along the path
-            //(change the developer location to the last place on the path)
+            //Decrememnt the AP point
+            game.useActionPoints(result.getActionPoints());
+
+            //place the palace on this location of the board
+            game.upgradePalace(placement, new PalaceTileComponent(new Tile(1), value));
+
+            //award the player fame points
+            game.incrementScore(result.getFamePoints());
+
+            //set this location to palacesinteractedwith in the turn object
+            game.addPalaceToCurrentTurnList(placement);
+
+            //decremenet the number of this valued palace in the shared resources
+            game.useResource(SharedResourceType.valueOf("PALACE" + value));
         }
         return result;
     }
