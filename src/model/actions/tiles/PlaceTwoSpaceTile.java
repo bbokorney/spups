@@ -98,7 +98,8 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if all the spaces they are placing on are the same elevation
-        if(true){
+        //todo tell baker I sending you locai
+        if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement), game.getSpaceAtLocation(ricePlacement))){
             isSuccess = isSuccess && true;
 
         }

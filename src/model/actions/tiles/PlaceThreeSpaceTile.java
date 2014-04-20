@@ -107,7 +107,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if all the spaces they are placing on are the same elevation
-        if(true){
+        if(SameElevationRule.sameElevation(game.getSpaceAtLocation(villagePlacement),game.getSpaceAtLocation(ricePlacement[0]), game.getSpaceAtLocation(ricePlacement[1])) ){
             isSuccess = isSuccess && true;
 
         }
