@@ -3,6 +3,7 @@ package model.potentialactions;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.HexLocation;
+import model.palacefestival.PalaceFestival;
 
 /**
  * Created by idinamenzel on 4/15/14.
@@ -14,8 +15,8 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
     private HexLocation[] otherLocations;
     private int rotationState;
 
-    public PotentialThreeSpaceMovement(GameModel game){
-        super(game);
+    public PotentialThreeSpaceMovement(GameModel game, PalaceFestival palaceFestival){
+        super(game, palaceFestival);
         this.rotationState = 0;
     }
 
@@ -25,7 +26,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         HexLocation newOtherLocation = otherLocations[0].getNeighbor(0);
         HexLocation newOtherOtherLocation = otherLocations[1].getNeighbor(0);
 
-        if (game.getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
+        if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
             otherLocations[1] = newOtherLocation;
@@ -40,7 +41,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         HexLocation newOtherLocation = otherLocations[0].getNeighbor(1);
         HexLocation newOtherOtherLocation = otherLocations[1].getNeighbor(1);
 
-        if (game.getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
+        if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
             otherLocations[1] = newOtherLocation;
@@ -55,7 +56,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         HexLocation newOtherLocation = otherLocations[0].getNeighbor(2);
         HexLocation newOtherOtherLocation = otherLocations[1].getNeighbor(2);
 
-        if (game.getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
+        if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
             otherLocations[1] = newOtherLocation;
@@ -70,7 +71,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         HexLocation newOtherLocation = otherLocations[0].getNeighbor(3);
         HexLocation newOtherOtherLocation = otherLocations[1].getNeighbor(3);
 
-        if (game.getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
+        if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
             otherLocations[1] = newOtherLocation;
@@ -85,7 +86,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         HexLocation newOtherLocation = otherLocations[0].getNeighbor(4);
         HexLocation newOtherOtherLocation = otherLocations[1].getNeighbor(4);
 
-        if (game.getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
+        if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
             otherLocations[1] = newOtherLocation;
@@ -101,7 +102,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         HexLocation newOtherLocation = otherLocations[0].getNeighbor(5);
         HexLocation newOtherOtherLocation = otherLocations[1].getNeighbor(5);
 
-        if (game.getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
+        if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
             otherLocations[1] = newOtherLocation;
@@ -114,7 +115,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         int newRotationState = (rotationState + 1) % 6;
 
         HexLocation[] newOtherLocations = { centerLocation.getNeighbor(newRotationState), centerLocation.getNeighbor((newRotationState + 1) % 6)};
-        if(game.getBoard().areLocationsOnBoard(newOtherLocations[0], newOtherLocations[1])){
+        if(getGameModel().getBoard().areLocationsOnBoard(newOtherLocations[0], newOtherLocations[1])){
             this.otherLocations = newOtherLocations;        //todo check if this will work...
             this.rotationState = newRotationState;
             this.setComponentsOnHoverBoard();
