@@ -5,7 +5,12 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.board.Board;
+import model.board.BoardRuleHelper;
+import model.board.HexLocation;
 import model.board.Location;
+import model.player.JavaPlayerResourceType;
+import model.rules.tiles.*;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -16,7 +21,7 @@ public class PlaceVillageTile extends Action {
     /*
         attributes
      */
-    Location placement;
+    HexLocation placement;
 
     /*
         constructors
@@ -24,7 +29,7 @@ public class PlaceVillageTile extends Action {
     public PlaceVillageTile(){
 
     }
-    public PlaceVillageTile(Location placement){
+    public PlaceVillageTile(HexLocation placement){
         this.placement = placement;
     }
 
@@ -38,12 +43,15 @@ public class PlaceVillageTile extends Action {
                 false if invalid
      */
         boolean isSuccess = true;
-        int famePoints = 0;         //todo replace with body of water fame points
+        int famePoints = 0;         //this gets modified in this method
         int actionPoints = 1;
         String message = "";
 
+        Board board = game.getBoard();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
+
         //see if there is a village tile to take from player
-        if(true){
+        if(game.getCount(JavaPlayerResourceType.VILLAGE) > 1){
             isSuccess = isSuccess && true;
 
         }
@@ -53,7 +61,7 @@ public class PlaceVillageTile extends Action {
         }
 
         //Check if the player has enough action points
-        if(true){
+        if(game.canUseAPForLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
@@ -63,23 +71,13 @@ public class PlaceVillageTile extends Action {
         }
 
         //check if they are placing on another one tile
-        if(true){
+        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on top of another three space.\n";
-        }
-
-        //check if they are not placing outside of central java
-        if(true){
-            isSuccess = isSuccess && true;
-
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place this outside Central Java.\n";
+            message += "Error: You cannot place this on top of another one space tile.\n";
         }
 
         //see if all the spaces they are placing on are the same elevation
@@ -93,7 +91,9 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if all the spaces they are placing on are the correct terrain
-        if(true){
+        VillagePlacementRule terrainRule = new VillagePlacementRule(placement, board);
+
+        if(terrainRule.allowed()){
             isSuccess = isSuccess && true;
 
         }
@@ -103,7 +103,7 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(true){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),placement) ){
             isSuccess = isSuccess && true;
 
         }
@@ -113,13 +113,13 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(true){
+        if(ConnectionTwoCitiesRule.connectsCities(placement,helperJunk)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot connect two cities.\n";
+            message += "Error: You cannot connect cities.\n";
         }
 
         //todo

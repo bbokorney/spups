@@ -18,7 +18,7 @@ public class PalaceTileComponent extends TileComponent {
         this.level = level;
     }
 
-    private void flip() {
+    public void flip() {
         isFaceUp = !isFaceUp;
     }
 

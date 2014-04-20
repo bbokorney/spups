@@ -9,12 +9,15 @@ import java.util.Collection;
  * Created by Sachit on 4/15/2014.
  */
 public class City {
+
     private Collection<Location> city;
     private Location palaceLocation;
     private PalaceTileComponent palace;
 
-    public City() {
+    public City(Location palaceLocation, PalaceTileComponent palace) {
         city = new ArrayList<Location>();
+        this.palaceLocation = palaceLocation;
+        this.palace = palace;
     }
 
     public int getSize() {
@@ -35,5 +38,9 @@ public class City {
 
     public Collection<Location> getCity() {
         return city;
+    }
+
+    public PalaceTileComponent getPalaceTile() {
+        return palace;
     }
 }
