@@ -2,6 +2,7 @@ package model.potentialactions;
 
 import model.actions.ActionResult;
 import model.actions.palacefestival.JoinFestival;
+import model.actions.palacefestival.Withdraw;
 import model.board.Location;
 import model.palacefestival.Card;
 import model.rules.palace.CardValues;
@@ -48,23 +49,10 @@ public class PotentialJoinFestival extends PotentialAction {
     }
 
     public ActionResult withdraw() {
-        // TODO:Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        return new Withdraw(getPalaceFestival()).tryAction();
     }
 
     public ActionResult confirmBid() {
-        // TODO:Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
-    }
-
-
-    @Override
-    protected void setComponentsOnHoverBoard() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    protected ActionResult getActionResult() {
         ArrayList<Card> bid = new ArrayList<Card>();
         for (int i : indexOfCardsToBid) {
             bid.add(cardsValidToBeginFestival.get(i));
@@ -72,4 +60,10 @@ public class PotentialJoinFestival extends PotentialAction {
 
         return new JoinFestival(palaceLoc, bid, getGameModel(), getPalaceFestival()).tryAction();
     }
+
+    @Override
+    protected void setComponentsOnHoverBoard() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

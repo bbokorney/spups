@@ -37,8 +37,4 @@ public class PotentialMoveToTie extends PotentialAction {
         // nothing to set
     }
 
-    @Override
-    protected ActionResult getActionResult() {
-        return playerWhoRequestedTie == null ? tieRequested() : tieAgreed();
-    }
 }

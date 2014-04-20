@@ -1,6 +1,7 @@
 package model.potentialactions;
 
 import model.actions.ActionResult;
+import model.actions.palacefestival.BeginPalaceFestival;
 import model.board.Location;
 import model.palacefestival.Card;
 import model.tiles.PalaceTileComponent;
@@ -19,6 +20,9 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
 
     public PotentialBeginPalaceFestival(ArrayList<PalaceTileComponent> palacesValidForFestival, ArrayList<Location> locationsValidForFestival, ArrayList<Card> cardsValidToBeginFestival, ArrayList<Integer> indexOfCardsToBid) {
         this.palacesValidForFestival = palacesValidForFestival;
+        this.locationsValidForFestival = locationsValidForFestival;
+        this.cardsValidToBeginFestival = cardsValidToBeginFestival;
+        this.indexOfCardsToBid = indexOfCardsToBid;
     }
 
     public boolean tabToNextElement() {
@@ -42,7 +46,7 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
     }
 
     public ActionResult confirmBid() {
-        // TODO:Sara
+        //return new BeginPalaceFestival(getGameModel(), getPalaceFestival(), );
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
 
@@ -51,8 +55,4 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
-    protected ActionResult getActionResult() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 }
