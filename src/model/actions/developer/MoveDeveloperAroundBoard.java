@@ -4,6 +4,8 @@ import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.board.Board;
+import model.board.BoardRuleHelper;
 import model.board.Location;
 import pathfinding.JavaPath;
 
@@ -16,6 +18,7 @@ public class MoveDeveloperAroundBoard extends Action {
         attributes
      */
     private Location developerStartinglocation;
+    private Location developerEndingLocation;
     private JavaPath path;
     GameModel game;
 
@@ -48,7 +51,25 @@ public class MoveDeveloperAroundBoard extends Action {
         int actionPoints = 0;       //todo add the cost of the path here
         String message = "";
 
+        Board board = game.getBoard();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
+
         //Check if the path is valid
+        if(path.valid()){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You cannot travel an invalid path.\n";
+        }
+        if(game.canUseAPForNonLandTileAction(path.getCost())){
+
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You do not have enough AP.\n";
+        }
 
         //Check if the player has enough AP points to travel the path
 
@@ -68,6 +89,10 @@ public class MoveDeveloperAroundBoard extends Action {
         if(result.isSuccess()) {
 
             //Decrememnt the AP points the path cost
+            game.useActionPoints(result.getActionPoints());
+
+            //Move the developer along the path
+            game.moveDeveloperAroundBoard(developerStartinglocation, developerEndingLocation);
             //Move the developer along the path
             //(change the developer location to the last place on the path)
         }

@@ -6,6 +6,7 @@ import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Location;
 import model.actions.serialization.JsonObject;
+import model.player.JavaPlayerResourceType;
 import pathfinding.JavaPath;
 
 /**
@@ -41,17 +42,33 @@ public class PlaceDeveloperOnBoard extends Action {
 
         boolean isSuccess = true;
         int famePoints = 0;         //will never gain fame points
-        int actionPoints = 1;       //todo add the cost of the path
+        int actionPoints = 1 + path.getCost();       //todo add the cost of the path
         String message = "";
 
         //check if the player has a developer off the board
+        if(game.getCount(JavaPlayerResourceType.DEVELOPER) > 0){//todo figure out if these are developers off the board
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You do not have any more developers.\n";
+        }
 
-        //Check if the path is valid
+        if(path.valid()){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You cannot travel an invalid path.\n";
+        }
 
-        //Check if the player has enough AP points to travel the path
-
-
-        //todo
+        if( game.canUseAPForNonLandTileAction(actionPoints)){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You do not have enough AP.";
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
@@ -67,9 +84,6 @@ public class PlaceDeveloperOnBoard extends Action {
 
             //place the developer on the ending of the path
             game.placeDeveloperOnBoard(locationOfDeveloperPlaced);
-
-            //increment the number of developers on the board
-            game.incrementScore(result.getFamePoints());
 
 
         }
