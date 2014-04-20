@@ -11,6 +11,7 @@ import model.player.JavaPlayers;
 import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
 import model.sharedresources.SharedResources;
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 import model.turn.FinalTurn;
 import model.turn.NonFinalTurn;
@@ -207,6 +208,21 @@ public class JavaGameModel extends GameModel {
     public Card drawFestivalCard() { return festival.drawFestivalCard(); }
     public Card drawDeckCard() { return festival.drawDeckCard(); }
     public void discard(Card card) { festival.discard(card); }
+
+    @Override
+    public void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player) {
+        //todo added methods from GameModel
+    }
+
+    @Override
+    public void setHighestBid(int bid) {
+        //todo added methods from GameModel
+    }
+
+    @Override
+    public int getHighestBid() {
+        return 0;  //todo added methods from GameModel
+    }
 
     @Override
     public void useActionPoints(int actionPoints) {

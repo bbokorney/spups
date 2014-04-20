@@ -2,6 +2,7 @@ package model;
 
 import model.board.Board;
 import model.board.Location;
+import model.board.Space;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
@@ -111,7 +112,13 @@ public class JavaGamePalaceFestivalAssociation extends GameModel {
     }
 
     @Override
-    public boolean isHeightAtLocation(int i) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean isHeightAtLocation(int i, Location location) {
+        return false;   //todo added methods from GameModel
     }
+
+    @Override
+    public Space getSpaceAtLocation(Location location) {
+        return null;   //todo added methods from GameModel
+    }
+
 }
