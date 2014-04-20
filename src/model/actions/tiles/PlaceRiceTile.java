@@ -97,7 +97,9 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if they are placing this directly on the board or on another land tile
-        if(new RicePlacementRule().allowed()){
+        RicePlacementRule terrainRule = new RicePlacementRule(placement, board);
+
+        if(terrainRule.allowed()){
             isSuccess = isSuccess && true;
 
         }

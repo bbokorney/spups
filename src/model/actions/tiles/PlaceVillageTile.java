@@ -10,6 +10,7 @@ import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.board.Location;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
+import model.rules.tiles.VillagePlacementRule;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -90,7 +91,9 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if all the spaces they are placing on are the correct terrain
-        if(true){
+        VillagePlacementRule terrainRule = new VillagePlacementRule(placement, board);
+
+        if(terrainRule.allowed()){
             isSuccess = isSuccess && true;
 
         }

@@ -5,7 +5,10 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.board.Board;
+import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.rules.tiles.PalacePlacementRule;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -46,6 +49,9 @@ public class PlacePalaceTile extends Action {
         int actionPoints = 1;
         String message = "";
 
+        Board board = game.getBoard();
+        BoardRuleHelper helperJunk = new BoardRuleHelper(game);
+
         //Check if there are any palace tiles of this value in shared resources
         if(true){
             isSuccess = isSuccess && true;
@@ -71,8 +77,9 @@ public class PlacePalaceTile extends Action {
 
 
         //see if you are placing this on top of a village
-        //PalacePlacementRule
-        if(true){
+
+        PalacePlacementRule terrainRule = new PalacePlacementRule(placement, board); //todo wait for Baker
+        if(terrainRule.buildAllowed()){
             isSuccess = isSuccess && true;
 
             /*

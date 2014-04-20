@@ -9,6 +9,8 @@ import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
+import model.rules.tiles.RicePlacementRule;
+import model.rules.tiles.VillagePlacementRule;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -107,7 +109,10 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if all the spaces they are placing on are the correct terrain
-        if(true){
+        VillagePlacementRule villageTerrainRule = new VillagePlacementRule(villagePlacement, board);
+        RicePlacementRule riceTerrainRule = new RicePlacementRule(ricePlacement, board);
+
+        if(villageTerrainRule.allowed() && riceTerrainRule.allowed(){
             isSuccess = isSuccess && true;
 
         }
@@ -117,7 +122,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(true){
+        if(){
             isSuccess = isSuccess && true;
 
         }
