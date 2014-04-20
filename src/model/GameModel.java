@@ -26,7 +26,7 @@ public abstract class GameModel {
     public abstract int getCount(JavaPlayerResourceType res);
     public abstract void useResource(JavaPlayerResourceType res);
     public abstract boolean canUseAPForLandTileAction(int pointsToSpend);
-    public abstract boolean cauUseAPForNonLandTileAction(int pointsToSpend);
+    public abstract boolean canUseAPForNonLandTileAction(int pointsToSpend);
     public abstract boolean hasUsedActionToken();
     public abstract void advanceJavaTurn();
     public abstract boolean canAdvanceJavaTurn();
@@ -73,4 +73,6 @@ public abstract class GameModel {
     public abstract void placeDeveloperOnBoard(Location locationOfDeveloperPlaced);
 
     public abstract Space getSpaceAtLocation(Location villagePlacement);
+
+    public abstract void takeDeveloperOffBoard(Location developerLocationTakenOff);
 }

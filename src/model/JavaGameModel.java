@@ -63,7 +63,7 @@ public class JavaGameModel extends GameModel{
         return turn.canUseAPForLandTileAction(pointsToSpend);
     }
 
-    public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
+    public boolean canUseAPForNonLandTileAction(int pointsToSpend) {
         return turn.canUseAPForNonLandTileAction(pointsToSpend);
     }
 
