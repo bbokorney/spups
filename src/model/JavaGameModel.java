@@ -178,4 +178,15 @@ public class JavaGameModel extends GameModel{
         return board.getSpace(location);
     }
 
+    @Override
+    public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
+        turn.setHasPlacedLandTile(hasPlacedLandTile);
+    }
+
+    @Override
+    public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
+            getCurrentJavaPlayer().addDeveloper(new Developer(locationOfDeveloperPlaced));
+
+    }
+
 }

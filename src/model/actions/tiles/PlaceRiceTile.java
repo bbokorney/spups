@@ -1,7 +1,6 @@
 package model.actions.tiles;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -13,6 +12,8 @@ import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.rules.tiles.RicePlacementRule;
+import model.tiles.RiceTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -24,6 +25,7 @@ public class PlaceRiceTile extends Action {
         attributes
      */
     HexLocation placement;
+    GameModel game;
 
     /*
         constructors
@@ -32,13 +34,14 @@ public class PlaceRiceTile extends Action {
         //Empty constructor
         //mostly used for loading
     }
-    public PlaceRiceTile(HexLocation placement){
+    public PlaceRiceTile(HexLocation placement, GameModel game){
         this.placement = placement;
+        this.game = game;
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -122,28 +125,33 @@ public class PlaceRiceTile extends Action {
 
         //todo
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points
+            game.useActionPoints(result.getActionPoints());
 
             // decrement rice tiles in the players resources
+            game.useResource(JavaPlayerResourceType.RICE);
 
             //award them with the fame points, if anything
+            game.incrementScore(result.getFamePoints());
 
             //place the tile on the board
+            game.placeRiceTileComponent(placement, new RiceTileComponent(new Tile(1)));
 
             //set has placed land tile to true
+            game.setHasPlacedLandTile(true);
         }
         return result;
     }

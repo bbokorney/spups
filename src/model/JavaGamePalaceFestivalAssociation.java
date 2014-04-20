@@ -113,7 +113,6 @@ public class JavaGamePalaceFestivalAssociation  {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public void placeTopTileComponent(Location loc, TileComponent tile) { javaGame.placeTopTileComponent(loc, tile); }
     public void getTopTileComponent(Location loc) { javaGame.getTopTileComponent(loc); }
     public String getName() { return javaGame.getName(); }
     public void incrementScore(int score) { javaGame.incrementScore(score); }

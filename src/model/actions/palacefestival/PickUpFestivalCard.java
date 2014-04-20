@@ -1,12 +1,11 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.palacefestival.Card;
-import model.palacefestival.PalaceCard;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 
 /**
@@ -14,22 +13,28 @@ import model.palacefestival.PalaceFestivalPlayer;
  */
 public class PickUpFestivalCard extends Action {
 
-    @Override
-    public ActionResult tryAction(GameModel game) {
-        boolean canPickUpFestivalCard = game.canDrawCard();
-        boolean festivalCardExists = game.peekAtFestivalCard() != null;
-        boolean success = canPickUpFestivalCard && festivalCardExists;
-        String message = success ? "action successful" : "action failed";
-        return new ActionResult(success, 0, 1, message, this);
+    private PalaceFestival festival;
+
+    public PickUpFestivalCard(PalaceFestival festival) {
+        this.festival = festival;
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+    public ActionResult tryAction() {
+        boolean canPickUpFestivalCard = festival.canDrawCard();
+        boolean festivalCardExists = festival.peekAtFestivalCard() != null;
+        boolean success = canPickUpFestivalCard && festivalCardExists;
+        String message = success ? "action successful" : "action failed";
+        return new ActionResult(success, 0, 1, message);
+    }
+
+    @Override
+    public ActionResult doAction() {
+        ActionResult result = tryAction();
 
         if(result.isSuccess()) {
-            Card festivalCard = game.drawFestivalCard();
-            PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+            Card festivalCard = festival.drawFestivalCard();
+            PalaceFestivalPlayer player = festival.getCurrentPlayer();
             player.takeCard(festivalCard);
         }
 
