@@ -50,7 +50,12 @@ public class History {
 
 	public TimeTraveler rewindTurns(int turns) {
 		for(int i = 0; i < turns; i++) {
-			undoneActions.add(actions.remove());
+			Queue<Pair> reconstructedTurn = new LinkedList<Pair>();
+			Queue<Pair> turn = actions.poll();
+			while(!turn.isEmpty()) {
+				reconstructedTurn.add(turn.poll());
+			}
+			undoneActions.add(reconstructedTurn);
 			if(actions.isEmpty()) {
 				actions.add(new LinkedList<Pair>());
 				break;
@@ -64,9 +69,12 @@ public class History {
 		Queue<Pair> latestTurn = actions.peek();
 		if(latestTurn.size() <= 0) {
 			actions.poll();
+			if(actions.isEmpty()) {
+				actions.add(new LinkedList<Pair>());
+			}
 			undoneActions.add(new LinkedList<Pair>());
 		}
-		undoneActions.peek().add(latestTurn.remove());
+		if(!latestTurn.isEmpty()) undoneActions.peek().add(latestTurn.remove());
 		redoActions();
 		return new TimeTraveler(this, undoneActions, actions, model);
 	}
