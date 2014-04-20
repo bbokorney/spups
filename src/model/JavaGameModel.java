@@ -189,4 +189,7 @@ public class JavaGameModel extends GameModel{
 
     }
 
+    public boolean isLocationInCity(Location loc) {
+        return board.isLocationInCity(loc);
+    }
 }
