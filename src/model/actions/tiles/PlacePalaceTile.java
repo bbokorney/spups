@@ -1,5 +1,6 @@
 package model.actions.tiles;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -17,12 +18,12 @@ import model.tiles.Tile;
  */
 public class PlacePalaceTile extends Action {
 
-
     /*
         attributes
      */
     private int value;
     private HexLocation placement;
+    GameModel game;
 
     /*
         constructors
@@ -32,9 +33,10 @@ public class PlacePalaceTile extends Action {
         //used for loading
     }
 
-    public PlacePalaceTile(int value, HexLocation placement){
+    public PlacePalaceTile(int value, HexLocation placement, GameModel game){
         this.value = value;
         this.placement = placement;
+        this.game = game;
     }
 
 

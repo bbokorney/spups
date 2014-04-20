@@ -1,5 +1,6 @@
 package model.actions.tiles;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -21,15 +22,17 @@ public class PlaceTwoSpaceTile extends Action {
      */
     HexLocation villagePlacement;
     HexLocation ricePlacement;
+    GameModel game;
     /*
         constructors
      */
     public PlaceTwoSpaceTile(){
 
     }
-    public PlaceTwoSpaceTile(HexLocation villagePlacement, HexLocation ricePlacement){
+    public PlaceTwoSpaceTile(HexLocation villagePlacement, HexLocation ricePlacement, GameModel game){
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
+        this.game = game;
     }
 
     @Override

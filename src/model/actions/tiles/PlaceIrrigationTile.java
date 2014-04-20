@@ -1,5 +1,6 @@
 package model.actions.tiles;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -21,6 +22,7 @@ public class PlaceIrrigationTile extends Action {
         attributes
      */
     private HexLocation placement;
+    GameModel game;
 
 
     /*
@@ -31,8 +33,9 @@ public class PlaceIrrigationTile extends Action {
         //used for loading
     }
 
-    public PlaceIrrigationTile(HexLocation placement){
+    public PlaceIrrigationTile(HexLocation placement, GameModel game){
         this.placement = placement;
+        this.game = game;
     }
 
 

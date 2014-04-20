@@ -148,6 +148,7 @@ public class PlaceVillageTile extends Action {
             // place the village component on the placement location
             game.placeVillageTileComponent(placement, new VillageTileComponent(new Tile(1)));
 
+
             //award the player the fame points earned
             game.incrementScore(result.getFamePoints());
 

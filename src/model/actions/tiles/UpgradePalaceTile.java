@@ -1,5 +1,6 @@
 package model.actions.tiles;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -20,6 +21,7 @@ public class UpgradePalaceTile extends Action {
      */
     int value;
     Location placement;
+    GameModel game;
 
     /*
         constructors
@@ -27,9 +29,10 @@ public class UpgradePalaceTile extends Action {
     public UpgradePalaceTile(){
 
     }
-    public UpgradePalaceTile(Location placement, int value){
+    public UpgradePalaceTile(Location placement, int value, GameModel game){
         this.value = value;
         this.placement = placement;
+        this.game = game;
     }
 
 
