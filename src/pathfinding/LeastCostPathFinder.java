@@ -10,15 +10,15 @@ import model.player.JavaPlayer;
  * Created by Baker on 4/14/2014.
  */
 public class LeastCostPathFinder {
-    public JavaPath findShortestPath(HexLocation src, HexLocation destination, JavaPlayer player, Board board) {
+    public JavaPath findShortestPath(Location src, Location destination, JavaPlayer player, Board board) {
         return null;
     }
 
-    public JavaPath findShortestPlacementPath(HexLocation placementLocation, JavaPlayer player, Board board) {
+    public JavaPath findShortestPlacementPath(Location placementLocation, JavaPlayer player, Board board) {
         return null;
     }
 
-    public JavaPath findShortestRemovalPath(HexLocation removalLocation, JavaPlayer player, Board board) {
+    public JavaPath findShortestRemovalPath(Location removalLocation, JavaPlayer player, Board board) {
         return null;
     }
 }
