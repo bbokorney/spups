@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import javax.swing.JPanel;
 
@@ -62,11 +63,27 @@ public class BoardPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
         g.drawImage(boardBackground, 0, 0, null);
 		int[] origin = getBoardOrigin(locations);
+		HashSet set = new HashSet<Integer>();
+		int duplicates = 0;
 		
 		for(int x = 0; x < locations.length; ++x) { 
-			int[] distance = locations[x].getDistanceFromOrigin();
-			drawHex(g, distance[0]+origin[0]+50, distance[1]+origin[1]+40, distance[0] == 0 && distance[1] == 0, locations[x]);
+//			if(x % 2 != 0){
+				int[] distance = locations[x].getDistanceFromOrigin();
+				if(set.contains(distance[0]*100000 + distance[1])) {
+					System.out.println("DUPLICATES");
+					System.out.println(distance[0] + " " + distance[1]);
+					duplicates++;
+					drawHex(g, distance[0]+origin[0]+50, distance[1]+origin[1]+40, distance[0] == 0 && distance[1] == 0, locations[x], true);
+				}
+				else
+					drawHex(g, distance[0]+origin[0]+50, distance[1]+origin[1]+40, distance[0] == 0 && distance[1] == 0, locations[x], false);
+				set.add(distance[0]*100000 + distance[1]);
+//			}
 		}
+		System.out.println("Size " + locations.length);
+		System.out.println("number of duplicates " + duplicates);
+
+//		drawHex(g, origin[0]+50, -240+origin[1]+40, false, locations[0]);
 //		System.out.println(hexSideLength());
 //		int wStart = 100; 
 //		int hStart = 100;
@@ -84,7 +101,11 @@ public class BoardPanel extends JPanel {
 //		drawHex(g, 100, 160);
     }
 	
-	public void drawHex(Graphics g, int posWidth, int posHeight, boolean fill, Location location) {
+	public enum TileType {
+		RICE, VILLAGE, PALACE, IRRIGATION;
+	}
+	
+	public void drawHex(Graphics g, int posWidth, int posHeight, boolean fill, Location location, boolean duplicate) {
         Polygon tile = new Polygon();
         for (int x = 0; x < 6; x++) {
         	int height = (int) (posHeight + hexSideLength()*Math.sin(x*2*Math.PI/6));
@@ -95,6 +116,8 @@ public class BoardPanel extends JPanel {
         g.setColor(Color.white);
         if(fill) 
             g.setColor(Color.black);
+        if(duplicate)
+            g.setColor(Color.MAGENTA);
     	
     	LocationType type = board.getLocationType(location);
     	if(type == LocationType.Highlands)
@@ -108,6 +131,14 @@ public class BoardPanel extends JPanel {
         g.setColor(Color.black);
         g2.setStroke(new BasicStroke(2));
         g.drawPolygon(tile);
+        if(fill) {
+
+            g.setColor(Color.orange);
+            g2.setStroke(new BasicStroke(2));
+        	g2.drawLine(posWidth, posHeight, posWidth+3, posWidth+3);
+        }
+
+
     }
 	
 	public int hexSideLength() { 
