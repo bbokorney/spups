@@ -47,7 +47,7 @@ public class JoinFestival extends Action {
         // check if the player has a developer in the city
         boolean hasDeveloperInCity = HasDeveloperInCityRule.hasDeveloperInCity(currentJavaPlayer, palaceLocation, new BoardRuleHelper(game), game.getBoard());
         // check if the player's bid is high enough
-        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(), game.peekAtFestivalCard(), cardsBidded);
+        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(festival.getHighestBid(), festival.peekAtFestivalCard(), cardsBidded);
 
         boolean canBegin = hasDeveloperInCity && bidMeetsRequirements;
         String message = canBegin ? "action successful" : "not eligible to join festival";
@@ -59,10 +59,10 @@ public class JoinFestival extends Action {
         ActionResult result = tryAction();
 
         if (!result.isSuccess()) {
-            game.removePlayer(game.getCurrentPalaceFestivalPlayer());
+            festival.removePlayer(festival.getCurrentPlayer());
         }
 
-        game.advancePalaceFestivalTurn();
+        festival.advanceTurn();
         return result;
     }
 

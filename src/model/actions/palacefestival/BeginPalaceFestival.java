@@ -62,7 +62,7 @@ public class BeginPalaceFestival extends Action {
         }
 
         boolean hasDeveloperInCity = HasDeveloperInCityRule.hasDeveloperInCity(currentJavaPlayer, palaceLocation, new BoardRuleHelper(game), game.getBoard());
-        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(),game.peekAtFestivalCard(), cardsBidded);
+        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(festival.getHighestBid(),festival.peekAtFestivalCard(), cardsBidded);
         boolean canBegin = palaceIsEligible && hasDeveloperInCity && bidMeetsRequirements;
         String message = canBegin ? "starting palace festival..." : "not eligible to begin festival";
         return new ActionResult(false, 0, 0, message, this);
@@ -73,19 +73,19 @@ public class BeginPalaceFestival extends Action {
         ActionResult result = tryAction();
         if (result.isSuccess()) {
             PalaceTileComponent palace = getPalace(game, palaceLocation);
-            PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+            PalaceFestivalPlayer player = festival.getCurrentPlayer();
             int totalBid = 0;
             for (Card card : cardsBidded) {
                 player.playCard(card);
-                game.discard(card);
-                int bid = CardValues.getMatchValue(card, game.peekAtFestivalCard());
+                festival.discard(card);
+                int bid = CardValues.getMatchValue(card, festival.peekAtFestivalCard());
                 totalBid += bid;
             }
 
-            game.beginPalaceFestival(palace, totalBid, player);
+            festival.beginPalaceFestival(palace, totalBid, player);
         }
 
-        game.advancePalaceFestivalTurn();
+        festival.advanceTurn();
         return result;
     }
 
