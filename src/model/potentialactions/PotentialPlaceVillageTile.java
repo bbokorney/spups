@@ -17,12 +17,6 @@ public class PotentialPlaceVillageTile extends PotentialOneSpaceMovement {
     }
 
     @Override
-    protected void setComponentsOnHoverBoard() {
-        getHoverBoard().reset();
-        getHoverBoard().placeTileComponent(getLocation(), new VillageTileComponent(), ActionState.fromValue(isValid()));
-    }
-
-    @Override
     protected ActionResult getActionResult() {
         return new PlaceVillageTile(getLocation(), getGameModel()).tryAction();
     }

@@ -28,8 +28,7 @@ public class PotentialPlaceBid extends PotentialAction {
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
+    private void setComponentsOnHoverBoard() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 

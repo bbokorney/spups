@@ -18,13 +18,12 @@ public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
         super(game, festival);
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
-       Boolean validity = isValid();
-       getHoverBoard().reset();
-       getHoverBoard().placeTileComponent(getOtherLocation(), new RiceTileComponent(), ActionState.fromValue(validity) );
-       getHoverBoard().placeTileComponent(getCenterLocation(), new VillageTileComponent(), ActionState.fromValue(validity) );
-    }
+//    private void setComponentsOnHoverBoard() {
+//       Boolean validity = isValid();
+//       getHoverBoard().reset();
+//       getHoverBoard().placeTileComponent(getOtherLocation(), new RiceTileComponent(), ActionState.fromValue(validity) );
+//       getHoverBoard().placeTileComponent(getCenterLocation(), new VillageTileComponent(), ActionState.fromValue(validity) );
+//    }
 
     @Override
     protected ActionResult getActionResult() {

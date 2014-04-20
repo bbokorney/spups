@@ -16,11 +16,10 @@ public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
         super(game, festival);
     }
 
-    @Override
-    protected void setComponentsOnHoverBoard() {
-        getHoverBoard().reset();
-        getHoverBoard().placeTileComponent(getLocation(), new IrrigationTileComponent(), ActionState.fromValue(isValid()));
-    }
+//    private void setComponentsOnHoverBoard() {
+//        //getHoverBoard().reset();
+//        //getHoverBoard().placeTileComponent(getLocation(), new IrrigationTileComponent(), ActionState.fromValue(isValid()));
+//    }
 
     @Override
     protected ActionResult getActionResult() {
