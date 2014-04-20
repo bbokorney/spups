@@ -2,7 +2,6 @@ package model.rules.tiles;
 
 import model.board.Board;
 import model.board.Location;
-import model.palacefestival.PalaceCardComponent;
 import model.tiles.IrrigationTileComponent;
 import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
