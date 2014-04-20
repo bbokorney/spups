@@ -1,6 +1,7 @@
 package model.actions.developer;
 
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Location;
@@ -18,6 +19,7 @@ public class PlaceDeveloperOnBoard extends Action {
      */
     private Location locationOfDeveloperPlaced;
     private JavaPath path;
+    GameModel game;
 
 
     /*
@@ -28,9 +30,10 @@ public class PlaceDeveloperOnBoard extends Action {
         //mostly used for loading
     }
 
-    public PlaceDeveloperOnBoard(Location locationOfDeveloperPlaced, JavaPath path){
+    public PlaceDeveloperOnBoard(Location locationOfDeveloperPlaced, JavaPath path, GameModel game){
         this.locationOfDeveloperPlaced = locationOfDeveloperPlaced;
         this.path = path;
+        this.game = game;
     }
 
     @Override

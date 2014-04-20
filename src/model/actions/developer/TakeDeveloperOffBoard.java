@@ -1,5 +1,6 @@
 package model.actions.developer;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -17,15 +18,18 @@ public class TakeDeveloperOffBoard extends Action {
      */
     Location developerLocationTakenOff;
     JavaPath path;
+    GameModel game;
     /*
         constructors
      */
-    public TakeDeveloperOffBoard(){
+    public TakeDeveloperOffBoard(GameModel game){
+        this.game = game;
 
     }
-    public TakeDeveloperOffBoard(Location developerLocationTakenOff, JavaPath path){
+    public TakeDeveloperOffBoard(Location developerLocationTakenOff, JavaPath path, GameModel game){
         this.path = path;
         this.developerLocationTakenOff = developerLocationTakenOff;
+        this.game = game;
     }
 
 
