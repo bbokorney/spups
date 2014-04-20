@@ -13,4 +13,17 @@ public class VillageContainer {
         villageCollection = new ArrayList<Village>();
     }
 
+    public Collection<Village> getVillages() {
+        return villageCollection;
+    }
+
+    public void addVillage(Village v) {
+        villageCollection.add(v);
+    }
+
+    public void removeVillage(Village... v) {
+        for (Village village : v)
+            villageCollection.remove(village);
+    }
+
 }

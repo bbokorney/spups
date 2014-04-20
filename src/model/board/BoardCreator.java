@@ -173,6 +173,10 @@ public class BoardCreator {
         loc = new HexLocation(new ArrayList<Directions>(directions));
         space = new JavaSpace();
         board.placeSpace(loc, space);
+        directions.add(Directions.NORTH);
+        loc = new HexLocation(new ArrayList<Directions>(directions));
+        space = new JavaSpace();
+        board.placeSpace(loc, space);
         directions.add(Directions.NORTHWEST);
         loc = new HexLocation(new ArrayList<Directions>(directions));
         space = new JavaSpace();
@@ -209,6 +213,10 @@ public class BoardCreator {
         loc = new HexLocation(new ArrayList<Directions>(directions));
         space = new JavaSpace();
         board.placeSpace(loc, space);
+        loc = new HexLocation(new ArrayList<Directions>(directions));
+        space = new JavaSpace();
+        board.placeSpace(loc, space);
+        board.addToHighlands(loc);
         directions.add(Directions.SOUTH);
         loc = new HexLocation(new ArrayList<Directions>(directions));
         space = new JavaSpace();
