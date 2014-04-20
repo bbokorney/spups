@@ -65,13 +65,14 @@ public class BoardPanel extends JPanel {
 		int[] origin = getBoardOrigin(locations);
 		HashSet set = new HashSet<Integer>();
 		int duplicates = 0;
+
 		
 		for(int x = 0; x < locations.length; ++x) { 
 //			if(x % 2 != 0){
 				int[] distance = locations[x].getDistanceFromOrigin();
 				if(set.contains(distance[0]*100000 + distance[1])) {
-					System.out.println("DUPLICATES");
-					System.out.println(distance[0] + " " + distance[1]);
+//					System.out.println("DUPLICATES");
+//					System.out.println(distance[0] + " " + distance[1]);
 					duplicates++;
 					drawHex(g, distance[0]+origin[0]+50, distance[1]+origin[1]+40, distance[0] == 0 && distance[1] == 0, locations[x], true);
 				}
@@ -83,6 +84,13 @@ public class BoardPanel extends JPanel {
 		System.out.println("Size " + locations.length);
 		System.out.println("number of duplicates " + duplicates);
 
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.orange);
+        g2.setStroke(new BasicStroke(20));
+    	g2.drawLine(origin[0]+50, origin[1]+40, origin[0]+3+50, origin[1]+3+40);
+    	System.out.println(origin[0] + " " + origin[1]);
+		
 //		drawHex(g, origin[0]+50, -240+origin[1]+40, false, locations[0]);
 //		System.out.println(hexSideLength());
 //		int wStart = 100; 
@@ -102,7 +110,7 @@ public class BoardPanel extends JPanel {
     }
 	
 	public enum TileType {
-		RICE, VILLAGE, PALACE, IRRIGATION;
+		Rice, Village, Palace, Irrigation, Highlands;
 	}
 	
 	public void drawHex(Graphics g, int posWidth, int posHeight, boolean fill, Location location, boolean duplicate) {
@@ -131,12 +139,13 @@ public class BoardPanel extends JPanel {
         g.setColor(Color.black);
         g2.setStroke(new BasicStroke(2));
         g.drawPolygon(tile);
-        if(fill) {
+        
 
-            g.setColor(Color.orange);
-            g2.setStroke(new BasicStroke(2));
-        	g2.drawLine(posWidth, posHeight, posWidth+3, posWidth+3);
-        }
+//        Graphics2D g2 = (Graphics2D) g;
+//        g2.setColor(Color.orange);
+//        g2.setStroke(new BasicStroke(20));
+//    	g2.drawLine(posWidth[0]+50, origin[1]+40, origin[0]+3+50, origin[1]+3+40);
+//    	System.out.println(origin[0] + " " + origin[1]);
 
 
     }
