@@ -14,7 +14,7 @@ import java.util.Collection;
 public class RequestTie extends Action {
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
         int score = -1;
         boolean tie = true;
@@ -37,7 +37,7 @@ public class RequestTie extends Action {
 
     @Override
     public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if (result.isSuccess()) {
             game.advancePalaceFestivalTurn();
         }

@@ -1,7 +1,6 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -15,13 +14,13 @@ import java.util.Collection;
 public class Withdraw extends Action {
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         return new ActionResult(true, 0, 0, "player withdrawn", this);
     }
 
     @Override
     public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
             game.removePlayer(game.getCurrentPalaceFestivalPlayer());
             game.advancePalaceFestivalTurn();

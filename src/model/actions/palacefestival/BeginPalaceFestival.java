@@ -45,7 +45,7 @@ public class BeginPalaceFestival extends Action {
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
         boolean palaceIsEligible = PalaceHasNotAlreadyHostedFestivalRule.palaceHasNotAlreadyHostedFestival(getPalace(game, palaceLocation));
         Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
@@ -65,7 +65,7 @@ public class BeginPalaceFestival extends Action {
 
     @Override
     public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if (result.isSuccess()) {
             PalaceTileComponent palace = getPalace(game, palaceLocation);
             PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();

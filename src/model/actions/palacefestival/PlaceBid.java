@@ -23,7 +23,7 @@ public class PlaceBid extends Action {
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         boolean valid = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(), game.peekAtFestivalCard(), bid);
         String message = valid ? "bid successful" : "bid unsuccessful";
         return new ActionResult(valid, 0, 0, message, this);
@@ -31,7 +31,7 @@ public class PlaceBid extends Action {
 
     @Override
     public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
             PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
             int total = 0;

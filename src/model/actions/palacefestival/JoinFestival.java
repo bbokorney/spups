@@ -1,7 +1,6 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -12,7 +11,6 @@ import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
 import model.rules.palace.BidRequirementsRule;
 import model.rules.palace.HasDeveloperInCityRule;
-import model.rules.palace.PalaceHasNotAlreadyHostedFestivalRule;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,7 +29,7 @@ public class JoinFestival extends Action {
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
         PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
         Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
         JavaPlayer currentJavaPlayer = null;
@@ -53,7 +51,7 @@ public class JoinFestival extends Action {
 
     @Override
     public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
 
         if (!result.isSuccess()) {
             game.removePlayer(game.getCurrentPalaceFestivalPlayer());

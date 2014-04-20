@@ -15,15 +15,15 @@ public class PotentialMoveToTie extends PotentialAction {
 
     private ActionResult tieRequested() {
         playerWhoRequestedTie = getGameModel().getCurrentPalaceFestivalPlayer();
-        return new RequestTie().tryAction(getGameModel());
+        return new RequestTie().tryAction();
     }
 
     private ActionResult tieAgreed() {
-        ActionResult tieActionResult = new AgreeToTie(playerWhoRequestedTie).tryAction(getGameModel());
+        ActionResult tieActionResult = new AgreeToTie(playerWhoRequestedTie).tryAction();
         if (!tieActionResult.isSuccess() || !getGameModel().getCurrentPalaceFestivalPlayer().equals(playerWhoRequestedTie))
             return tieActionResult;
 
-        return new EndPalaceFestival().tryAction(getGameModel());
+        return new EndPalaceFestival().tryAction();
     }
 
     @Override
