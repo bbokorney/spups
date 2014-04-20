@@ -23,8 +23,9 @@ public class AgreeToTie extends Action {
     public ActionResult tryAction() {
         boolean success = requester != null;
         // TODO put real FPs
-        return new ActionResult(success, 0, 0, "success", this);
+        return new ActionResult(success, 0, 0, "success");
     }
+
 
     @Override
     public ActionResult doAction() {

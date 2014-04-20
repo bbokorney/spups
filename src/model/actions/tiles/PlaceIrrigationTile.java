@@ -100,7 +100,7 @@ public class PlaceIrrigationTile extends Action {
         }
 
 
-      return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+      return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override

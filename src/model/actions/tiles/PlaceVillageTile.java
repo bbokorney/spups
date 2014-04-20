@@ -126,7 +126,7 @@ public class PlaceVillageTile extends Action {
 
         //todo
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override

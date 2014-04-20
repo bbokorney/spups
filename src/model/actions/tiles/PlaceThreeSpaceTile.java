@@ -165,7 +165,7 @@ public class PlaceThreeSpaceTile extends Action {
             message += "Error: You cannot connect cities.\n";
         }
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
      }
 
     @Override

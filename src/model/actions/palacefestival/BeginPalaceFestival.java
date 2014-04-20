@@ -65,7 +65,7 @@ public class BeginPalaceFestival extends Action {
         boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(festival.getHighestBid(),festival.peekAtFestivalCard(), cardsBidded);
         boolean canBegin = palaceIsEligible && hasDeveloperInCity && bidMeetsRequirements;
         String message = canBegin ? "starting palace festival..." : "not eligible to begin festival";
-        return new ActionResult(false, 0, 0, message, this);
+        return new ActionResult(false, 0, 0, message);
     }
 
     @Override

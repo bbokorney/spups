@@ -28,7 +28,7 @@ public class PlaceBid extends Action {
     public ActionResult tryAction() {
         boolean valid = BidRequirementsRule.bidMeetsRequirements(festival.getHighestBid(), festival.peekAtFestivalCard(), bid);
         String message = valid ? "bid successful" : "bid unsuccessful";
-        return new ActionResult(valid, 0, 0, message, this);
+        return new ActionResult(valid, 0, 0, message);
     }
 
     @Override
