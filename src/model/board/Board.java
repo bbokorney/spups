@@ -55,4 +55,9 @@ public abstract class Board {
 
     public boolean areLocationsOnBoard(Location... locations){ return false;}
 
+    public boolean isHeightAtLocation(int i, Location loc){
+        Space space = this.getSpace(loc);
+        int height = space.getHeight();
+        return height == i;
+    }
 }
