@@ -4,6 +4,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceIrrigationTile;
+import model.palacefestival.PalaceFestival;
 import model.tiles.IrrigationTileComponent;
 
 /**
@@ -11,8 +12,8 @@ import model.tiles.IrrigationTileComponent;
  */
 public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
 
-    public PotentialPlaceIrrigationTile(GameModel game) {
-        super(game);
+    public PotentialPlaceIrrigationTile(GameModel game, PalaceFestival festival) {
+        super(game, festival);
     }
 
     @Override
@@ -23,11 +24,11 @@ public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
 
     @Override
     protected ActionResult getActionResult() {
-        return new PlaceIrrigationTile(getLocation(), game).tryAction();
+        return new PlaceIrrigationTile(getLocation(), getGameModel()).tryAction();
     }
 
     protected Pair<ActionResult, PlaceIrrigationTile> confirmPlacement(){
-        PlaceIrrigationTile result = new PlaceIrrigationTile(getLocation(), game);
+        PlaceIrrigationTile result = new PlaceIrrigationTile(getLocation(), getGameModel());
         return new Pair<ActionResult, PlaceIrrigationTile>(result.doAction(), result);
     }
 }

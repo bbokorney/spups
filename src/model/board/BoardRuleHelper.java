@@ -20,7 +20,7 @@ public class BoardRuleHelper {
         this.model = model;
     }
 
-    public Map<JavaPlayer, Integer> getPlayerRanksIn(Collection<HexLocation> locations) {
+    public Map<JavaPlayer, Integer> getPlayerRanksIn(Collection<Location> locations) {
         final Map<JavaPlayer, Map<Integer, Integer>> heightMap = new HashMap<JavaPlayer, Map<Integer, Integer>>();
         int maxHeight = 0;
         JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[model.getJavaPlayers().size()]);

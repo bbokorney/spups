@@ -4,6 +4,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceThreeSpaceTile;
+import model.palacefestival.PalaceFestival;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
 
@@ -12,8 +13,8 @@ import model.tiles.VillageTileComponent;
  */
 public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
 
-    public PotentialJavaThreeSpaceTile(GameModel game) {
-        super(game);
+    public PotentialJavaThreeSpaceTile(GameModel game, PalaceFestival festival) {
+        super(game, festival);
     }
 
     @Override
@@ -27,11 +28,11 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
 
     @Override
     protected ActionResult getActionResult() {
-        return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), game).tryAction();
+        return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), getGameModel()).tryAction();
     }
 
     protected Pair<ActionResult, PlaceThreeSpaceTile> confirmPlacement() {
-        PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), game );
+        PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), getGameModel() );
         return new Pair<ActionResult, PlaceThreeSpaceTile>(result.doAction(), result);
     }
 

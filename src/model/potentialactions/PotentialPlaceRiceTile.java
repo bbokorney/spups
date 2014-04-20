@@ -4,6 +4,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceRiceTile;
+import model.palacefestival.PalaceFestival;
 import model.tiles.RiceTileComponent;
 
 /**
@@ -11,8 +12,8 @@ import model.tiles.RiceTileComponent;
  */
 public class PotentialPlaceRiceTile extends PotentialOneSpaceMovement {
 
-    public PotentialPlaceRiceTile(GameModel game) {
-        super(game);
+    public PotentialPlaceRiceTile(GameModel game, PalaceFestival festival) {
+        super(game, festival);
     }
 
     @Override
@@ -23,11 +24,11 @@ public class PotentialPlaceRiceTile extends PotentialOneSpaceMovement {
 
     @Override
     protected ActionResult getActionResult() {
-        return new PlaceRiceTile(getLocation(), game).tryAction();
+        return new PlaceRiceTile(getLocation(), getGameModel()).tryAction();
     }
 
     protected Pair<ActionResult, PlaceRiceTile> confirmPlacement(){
-        PlaceRiceTile result = new PlaceRiceTile(getLocation(), game);
+        PlaceRiceTile result = new PlaceRiceTile(getLocation(), getGameModel());
         return new Pair<ActionResult, PlaceRiceTile>(result.doAction(), result);
     }
 }
