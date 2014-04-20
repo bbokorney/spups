@@ -1,9 +1,9 @@
 package model.actions.palacefestival;
 
-import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 
 import java.util.Collection;
@@ -13,20 +13,26 @@ import java.util.Collection;
  */
 public class Withdraw extends Action {
 
+    private PalaceFestival festival;
+
+    public Withdraw(PalaceFestival festival) {
+        this.festival = festival;
+    }
+
     @Override
     public ActionResult tryAction() {
         return new ActionResult(true, 0, 0, "player withdrawn", this);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
         ActionResult result = tryAction();
         if(result.isSuccess()) {
-            game.removePlayer(game.getCurrentPalaceFestivalPlayer());
-            game.advancePalaceFestivalTurn();
-            Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
+            festival.removePlayer(festival.getCurrentPlayer());
+            festival.advanceTurn();
+            Collection<PalaceFestivalPlayer> players = festival.getPlayers();
             if (players.size() == 1) {
-                ActionResult endResult = new EndPalaceFestival().doAction(game);
+                ActionResult endResult = new EndPalaceFestival(festival).doAction();
                 if (endResult.isSuccess())
                     result = endResult;
             }

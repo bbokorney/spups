@@ -1,9 +1,9 @@
 package model.actions.palacefestival;
 
-import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 
 import java.util.Collection;
@@ -13,9 +13,15 @@ import java.util.Collection;
  */
 public class RequestTie extends Action {
 
+    private PalaceFestival festival;
+
+    public RequestTie(PalaceFestival festival) {
+        this.festival = festival;
+    }
+
     @Override
     public ActionResult tryAction() {
-        Collection<PalaceFestivalPlayer> players = game.getFestivalPlayers();
+        Collection<PalaceFestivalPlayer> players = festival.getPlayers();
         int score = -1;
         boolean tie = true;
         for (PalaceFestivalPlayer player : players) {
@@ -36,10 +42,10 @@ public class RequestTie extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
         ActionResult result = tryAction();
         if (result.isSuccess()) {
-            game.advancePalaceFestivalTurn();
+            festival.advanceTurn();
         }
 
         return result;

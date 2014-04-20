@@ -21,7 +21,7 @@ public abstract class Action {
 
     public abstract ActionResult tryAction();
 
-    public abstract ActionResult doAction(GameModel game);
+    public abstract ActionResult doAction();
 
     public abstract String serialize();
 

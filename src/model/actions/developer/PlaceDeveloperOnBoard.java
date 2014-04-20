@@ -4,7 +4,6 @@ package model.actions.developer;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Location;
-import model.GameModel;
 import model.actions.serialization.JsonObject;
 import pathfinding.JavaPath;
 
@@ -55,7 +54,7 @@ public class PlaceDeveloperOnBoard extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
 
         ActionResult result = tryAction();
         if(result.isSuccess()) {

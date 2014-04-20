@@ -1,6 +1,5 @@
 package model.actions;
 
-import model.GameModel;
 import model.actions.serialization.JsonObject;
 
 /**
@@ -45,7 +44,7 @@ public class UseActionToken extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so

@@ -28,6 +28,6 @@ public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
 
     protected Pair<ActionResult, PlaceIrrigationTile> confirmPlacement(){
         PlaceIrrigationTile result = new PlaceIrrigationTile(getLocation());
-        return new Pair<ActionResult, PlaceIrrigationTile>(result.doAction(getGameModel()), result);
+        return new Pair<ActionResult, PlaceIrrigationTile>(result.doAction(), result);
     }
 }

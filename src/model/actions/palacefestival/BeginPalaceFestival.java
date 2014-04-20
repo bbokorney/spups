@@ -6,6 +6,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.*;
 import model.palacefestival.Card;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
 import model.rules.palace.BidRequirementsRule;
@@ -22,11 +23,15 @@ import java.util.List;
  */
 public class BeginPalaceFestival extends Action {
 
+    private GameModel game;
+    private PalaceFestival festival;
     private int palaceValueForFestival;
     private Location palaceLocation;
     private List<Card> cardsBidded;
 
-    public BeginPalaceFestival(int palaceValueForFestival, Location palaceLocation, List<Card> cardsBidded) {
+    public BeginPalaceFestival(GameModel game, PalaceFestival festival, int palaceValueForFestival, Location palaceLocation, List<Card> cardsBidded) {
+        this.game = game;
+        this.festival = festival;
         this.palaceValueForFestival = palaceValueForFestival;
         this.palaceLocation = palaceLocation;
         this.cardsBidded = cardsBidded;
@@ -46,7 +51,7 @@ public class BeginPalaceFestival extends Action {
 
     @Override
     public ActionResult tryAction() {
-        PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+        PalaceFestivalPlayer player = festival.getCurrentPlayer();
         boolean palaceIsEligible = PalaceHasNotAlreadyHostedFestivalRule.palaceHasNotAlreadyHostedFestival(getPalace(game, palaceLocation));
         Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
         JavaPlayer currentJavaPlayer = null;
@@ -64,7 +69,7 @@ public class BeginPalaceFestival extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
         ActionResult result = tryAction();
         if (result.isSuccess()) {
             PalaceTileComponent palace = getPalace(game, palaceLocation);

@@ -32,7 +32,7 @@ public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
 
     protected Pair<ActionResult, PlaceTwoSpaceTile> confirmPlacement() {
         PlaceTwoSpaceTile result = new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation());
-        return new Pair<ActionResult, PlaceTwoSpaceTile>(result.doAction(getGameModel()), result);
+        return new Pair<ActionResult, PlaceTwoSpaceTile>(result.doAction(), result);
     }
 
 }

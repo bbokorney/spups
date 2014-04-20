@@ -28,6 +28,6 @@ public class PotentialPlaceRiceTile extends PotentialOneSpaceMovement {
 
     protected Pair<ActionResult, PlaceRiceTile> confirmPlacement(){
         PlaceRiceTile result = new PlaceRiceTile(getLocation());
-        return new Pair<ActionResult, PlaceRiceTile>(result.doAction(getGameModel()), result);
+        return new Pair<ActionResult, PlaceRiceTile>(result.doAction(), result);
     }
 }

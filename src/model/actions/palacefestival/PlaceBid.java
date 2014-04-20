@@ -1,10 +1,10 @@
 package model.actions.palacefestival;
 
-import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.palacefestival.Card;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.rules.palace.BidRequirementsRule;
 import model.rules.palace.CardValues;
@@ -17,32 +17,34 @@ import java.util.List;
 public class PlaceBid extends Action {
 
     private List<Card> bid;
+    private PalaceFestival festival;
 
-    public PlaceBid(List<Card> bid) {
+    public PlaceBid(PalaceFestival festival, List<Card> bid) {
         this.bid = bid;
+        this.festival = festival;
     }
 
     @Override
     public ActionResult tryAction() {
-        boolean valid = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(), game.peekAtFestivalCard(), bid);
+        boolean valid = BidRequirementsRule.bidMeetsRequirements(festival.getHighestBid(), festival.peekAtFestivalCard(), bid);
         String message = valid ? "bid successful" : "bid unsuccessful";
         return new ActionResult(valid, 0, 0, message, this);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
         ActionResult result = tryAction();
         if(result.isSuccess()) {
-            PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+            PalaceFestivalPlayer player = festival.getCurrentPlayer();
             int total = 0;
             for (Card card : bid) {
                 player.playCard(card);
-                game.discard(card);
-                total += CardValues.getMatchValue(card, game.peekAtFestivalCard());
+                festival.discard(card);
+                total += CardValues.getMatchValue(card, festival.peekAtFestivalCard());
             }
 
-            if (total > game.getHighestBid()) {
-                game.setHighestBid(total);
+            if (total > festival.getHighestBid()) {
+                festival.setHighestBid(total);
             }
         }
 

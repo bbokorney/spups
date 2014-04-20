@@ -7,6 +7,7 @@ import model.actions.serialization.JsonObject;
 import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.palacefestival.Card;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
 import model.rules.palace.BidRequirementsRule;
@@ -22,15 +23,19 @@ public class JoinFestival extends Action {
 
     private Location palaceLocation;
     private List<Card> cardsBidded;
+    private GameModel game;
+    private PalaceFestival festival;
 
-    public JoinFestival(Location palaceLocation, List<Card> cardsBidded) {
+    public JoinFestival(Location palaceLocation, List<Card> cardsBidded, GameModel game, PalaceFestival festival) {
         this.palaceLocation = palaceLocation;
         this.cardsBidded = cardsBidded;
+        this.game = game;
+        this.festival = festival;
     }
 
     @Override
     public ActionResult tryAction() {
-        PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+        PalaceFestivalPlayer player = festival.getCurrentPlayer();
         Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
         JavaPlayer currentJavaPlayer = null;
         for (JavaPlayer javaPlayer : javaPlayers) {
@@ -50,7 +55,7 @@ public class JoinFestival extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
         ActionResult result = tryAction();
 
         if (!result.isSuccess()) {

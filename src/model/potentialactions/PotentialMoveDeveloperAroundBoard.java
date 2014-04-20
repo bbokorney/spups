@@ -42,7 +42,7 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
 
     protected Pair<ActionResult, MoveDeveloperAroundBoard> confirmMovement() {
         MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath());
-        return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(getGameModel()), result);
+        return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(), result);
     }
 
 }
