@@ -32,6 +32,10 @@ public class JavaPlayer {
         return player.getScore();
     }
 
+    public void addDeveloper(Developer dev){
+        developers.add(dev);
+    };
+
     public List<Developer> getDevelopers() {return developers;}
 
     public int getCount(JavaPlayerResourceType type) {

@@ -1,8 +1,6 @@
 package model.actions;
 
 import model.GameModel;
-import model.Pair;
-import model.actions.serialization.Json;
 import model.actions.serialization.JsonObject;
 
 /**
@@ -14,24 +12,27 @@ public class StartGame extends Action {
     int numberOfPlayers;
     String[] playerNames;
     String[] playerColors;
+    GameModel game;
 
     /*
         Constructors
      */
-    StartGame(){
+    StartGame(GameModel game){
+        this.game = game;
         //Empty constructor
         //Most likely used during loading
     }
 
-    StartGame(int numberOfPlayers, String[] playerNames, String[] playerColors){
+    StartGame(int numberOfPlayers, String[] playerNames, String[] playerColors, GameModel game){
         this.numberOfPlayers = numberOfPlayers;
         this.playerNames = playerNames;
         this.playerColors = playerColors;
+        this.game = game;
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -51,13 +52,13 @@ public class StartGame extends Action {
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //start the game...?
