@@ -4,6 +4,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceTwoSpaceTile;
+import model.palacefestival.PalaceFestival;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
 
@@ -13,8 +14,8 @@ import model.tiles.VillageTileComponent;
 public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
 
 
-    public PotentialJavaTwoSpaceTile(GameModel game) {
-        super(game);
+    public PotentialJavaTwoSpaceTile(GameModel game, PalaceFestival festival) {
+        super(game, festival);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
     }
 
     protected Pair<ActionResult, PlaceTwoSpaceTile> confirmPlacement() {
-        PlaceTwoSpaceTile result = new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation(), game);
+        PlaceTwoSpaceTile result = new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation(), getGameModel());
         return new Pair<ActionResult, PlaceTwoSpaceTile>(result.doAction(), result);
     }
 
