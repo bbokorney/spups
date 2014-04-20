@@ -38,10 +38,13 @@ public class CityContainer {
         return null;
     }
 
-    public void removeLocationFromCity(Location loc, City city) {
-        city.getCity().remove(loc);
-        if (city.getCity().size() == 0)
-            cityCollection.remove(city);
+    public void removeLocationFromCity(Location loc) {
+        for (City city : cityCollection) {
+            city.removeLocation(loc); //remember this does nothing if city doesn't hold loc
+            //Remove this city if its size is 0 now
+            if (city.getCity().size() == 0)
+                cityCollection.remove(city);
+        }
     }
 
     public void removeCity(City city) {
