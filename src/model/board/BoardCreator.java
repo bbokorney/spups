@@ -79,9 +79,6 @@ public class BoardCreator {
         loc = new HexLocation(new ArrayList<Directions>(directions));
         space = new JavaSpace();
         board.placeSpace(loc, space);
-        loc = new HexLocation(new ArrayList<Directions>(directions));
-        space = new JavaSpace();
-        board.placeSpace(loc, space);
         board.placeIrrigationTileComponent(loc, new IrrigationTileComponent(new Tile(1)));
         directions.add(Directions.SOUTHEAST);
         loc = new HexLocation(new ArrayList<Directions>(directions));
@@ -96,9 +93,6 @@ public class BoardCreator {
         space = new JavaSpace();
         board.placeSpace(loc, space);
         directions.add(Directions.NORTH);
-        loc = new HexLocation(new ArrayList<Directions>(directions));
-        space = new JavaSpace();
-        board.placeSpace(loc, space);
         loc = new HexLocation(new ArrayList<Directions>(directions));
         space = new JavaSpace();
         board.placeSpace(loc, space);
@@ -292,9 +286,6 @@ public class BoardCreator {
         space = new JavaSpace();
         board.placeSpace(loc, space);
         directions.add(Directions.SOUTHWEST);
-        loc = new HexLocation(new ArrayList<Directions>(directions));
-        space = new JavaSpace();
-        board.placeSpace(loc, space);
         loc = new HexLocation(new ArrayList<Directions>(directions));
         space = new JavaSpace();
         board.placeSpace(loc, space);
