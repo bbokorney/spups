@@ -21,13 +21,12 @@ import java.util.Stack;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class JavaGameModel extends GameModel {
+public class JavaGameModel extends GameModel{
 
     private SharedResources resources;
     private Board board;
     private JavaPlayers javaPlayers;
     private Turn turn;
-    private PalaceFestival festival;
     //The following value will be held at a sentinel value until the final
     //round, at which point it will decrement from the number of jplayers to 0.
     private int finalRoundTurns;
@@ -39,37 +38,6 @@ public class JavaGameModel extends GameModel {
         javaPlayers = new JavaPlayers(numPlayers);
         finalRoundTurns = -1;
         turn = new NonFinalTurn();
-
-        //Instantiate the palace festival and its deck of cards
-        Stack<Card> deck = new Stack<Card>();
-        for (int i = 0; i < 5; i++) {
-            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM);
-            deck.add(card);
-        }
-        for (int i = 0; i < 5; i++) {
-            PalaceCard card = new PalaceCard(PalaceCardComponent.MASK);
-            deck.add(card);
-        }
-        for (int i = 0; i < 5; i++) {
-            PalaceCard card = new PalaceCard(PalaceCardComponent.PUPPET);
-            deck.add(card);
-        }
-        for (int i = 0; i < 5; i++) {
-            PalaceCard card = new PalaceCard(PalaceCardComponent.MASK,
-                                             PalaceCardComponent.PUPPET);
-            deck.add(card);
-        }
-        for (int i = 0; i < 5; i++) {
-            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM,
-                                             PalaceCardComponent.MASK);
-            deck.add(card);
-        }
-        for (int i = 0; i < 5; i++) {
-            PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM,
-                                             PalaceCardComponent.PUPPET);
-            deck.add(card);
-        }
-        festival = new PalaceFestival(null, deck);
     }
 
     public int getCount(SharedResourceType res) {
@@ -91,12 +59,10 @@ public class JavaGameModel extends GameModel {
         getCurrentJavaPlayer().useResource(res);
     }
 
-    @Override
     public boolean canUseAPForLandTileAction(int pointsToSpend) {
         return turn.canUseAPForLandTileAction(pointsToSpend);
     }
 
-    @Override
     public boolean cauUseAPForNonLandTileAction(int pointsToSpend) {
         return turn.canUseAPForNonLandTileAction(pointsToSpend);
     }
@@ -196,56 +162,6 @@ public class JavaGameModel extends GameModel {
         return turn.hasPalaceBeenUsed(loc);
     }
 
-    public void addPlayer(PalaceFestivalPlayer player){
-        festival.addPlayer(player);
-    }
-
-    public void removePlayer(PalaceFestivalPlayer player){
-        festival.removePlayer(player);
-    }
-
-    public PalaceFestivalPlayer getCurrentPalaceFestivalPlayer() {
-        return festival.getCurrentPlayer();
-    }
-
-    public Collection<PalaceFestivalPlayer> getFestivalPlayers() {
-        return festival.getPlayers();
-    }
-
-    public void advancePalaceFestivalTurn() {
-        festival.advanceTurn();
-    }
-    public boolean canDrawCard() {
-        return festival.canDrawCard();
-    }
-
-    public void recordDrawCard() {
-        festival.recordDrawCard();
-    }
-
-    public Card peekAtFestivalCard() {
-        return festival.peekAtFestivalCard();
-    }
-
-    public Card drawFestivalCard() { return festival.drawFestivalCard(); }
-    public Card drawDeckCard() { return festival.drawDeckCard(); }
-    public void discard(Card card) { festival.discard(card); }
-
-    @Override
-    public void beginPalaceFestival(PalaceTileComponent palaceTileComponent, int bid, PalaceFestivalPlayer player) {
-        //todo added methods from GameModel
-    }
-
-    @Override
-    public void setHighestBid(int bid) {
-        //todo added methods from GameModel
-    }
-
-    @Override
-    public int getHighestBid() {
-        return festival.getHighestBid();  //todo added methods from GameModel
-    }
-
     @Override
     public void useActionPoints(int actionPoints) {
         turn.useActionPoints(actionPoints);
@@ -259,14 +175,6 @@ public class JavaGameModel extends GameModel {
     @Override
     public Space getSpaceAtLocation(Location location) {
         return board.getSpace(location);
-    }
-
-    public void endPalaceFestival() {
-        festival.endPalaceFestival();
-    }
-
-    public PalaceTileComponent getFestivalPalace() {
-        return festival.getPalace();
     }
 
 }
