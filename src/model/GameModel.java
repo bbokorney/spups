@@ -48,6 +48,7 @@ public abstract class GameModel {
     public abstract void upgradePalace(Location loc, TileComponent tile);
     public abstract void useActionPoints(int actionPoints);
     public abstract boolean isHeightAtLocation(int i, Location location);
+    public abstract boolean isLocationInCity(Location loc);
 
     //Okay this was some old stuff from when we
 /*    public abstract void addPlayer(PalaceFestivalPlayer player);

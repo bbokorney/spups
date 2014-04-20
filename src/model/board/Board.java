@@ -9,13 +9,13 @@ import model.tiles.TileComponent;
  */
 public abstract class Board {
 
-	private Map<Location, Space> board;
+	protected Map<Location, Space> board;
     private ArrayList<Location> highlands;
     private ArrayList<Location> lowlands;
 
-    private BodyOfWaterContainer bodyOfWaterContainer;
-    private CityContainer cityContainer;
-    private VillageContainer villageContainer;
+    protected BodyOfWaterContainer bodyOfWaterContainer;
+    protected CityContainer cityContainer;
+    protected VillageContainer villageContainer;
 
 	public Board() {
 		board = new HashMap<Location, Space>();
@@ -68,30 +68,11 @@ public abstract class Board {
 		space.accept(tile);
 	}
 
-    //TODO:
-        /*
-        for Village tile, check
-        1) is it joining two (or more) villages
-        2) is it its own village
-        3) is it joining a village and a city
-        for irrigation, check
-        1) its own body of water?
-        2) a new body of water?
-        for rice, check
-        1) are we splitting a village or city?
-     */
+    public abstract void placeIrrigationTileComponent(Location loc, TileComponent tile);
 
-    public void placeIrrigationTileComponent(Location loc, TileComponent tile) {
+    public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
 
-    }
-
-    public void placeRiceTileComponent(Location loc, TileComponent tile) {
-
-    }
-
-    public void placeVillageTileComponent(Location loc, TileComponent tile) {
-
-    }
+    public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
 	
 	public TileComponent getTopTileComponent(Location loc) {
 		Space space = board.get(loc);
@@ -120,5 +101,13 @@ public abstract class Board {
             locations.add(iter.next());
         }
         return locations;
+    }
+
+    public boolean isLocationInCity(Location loc) {
+        for (City c : cityContainer.getCityCollection()) {
+            if (c.getCity().contains(c))
+                return true;
+        }
+        return false;
     }
 }
