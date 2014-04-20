@@ -35,7 +35,7 @@ public class JavaGameModel extends GameModel {
     public JavaGameModel(int numPlayers) {
         resources = new SharedResources();
         BoardCreator creator = new BoardCreator();
-        board = creator.createBoard();
+//        board = creator.createBoard();
         javaPlayers = new JavaPlayers(numPlayers);
         finalRoundTurns = -1;
         turn = new NonFinalTurn();

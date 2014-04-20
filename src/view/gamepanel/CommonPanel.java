@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import view.HexLabel;
 import model.GameModel;
 
 /**
@@ -25,13 +26,13 @@ public class CommonPanel extends JPanel {
 	JLabel threetile;
 	
 	public CommonPanel() {
-		p2 = newJLabel("3", "/Users/maumau/spups/resources/Palace2.png", 50, 80);
-		p4 = newJLabel("3", "/Users/maumau/spups/resources/Palace4.png", 50, 80);
-		p6 = newJLabel("3", "/Users/maumau/spups/resources/Palace6.png", 50, 80);
-		p8 = newJLabel("3", "/Users/maumau/spups/resources/Palace8.png", 50, 80);
-		p10 = newJLabel("3", "/Users/maumau/spups/resources/Palace10.png", 50, 80);
+		p2 = newJLabel("3", "/Users/maumau/spups/resources/Palace2.png", 70, 80);
+		p4 = newJLabel("3", "/Users/maumau/spups/resources/Palace4.png", 70, 80);
+		p6 = newJLabel("3", "/Users/maumau/spups/resources/Palace6.png", 70, 80);
+		p8 = newJLabel("3", "/Users/maumau/spups/resources/Palace8.png", 70, 80);
+		p10 = newJLabel("3", "/Users/maumau/spups/resources/Palace10.png", 70, 80);
 		threetile = newJLabel("3", "/Users/maumau/spups/resources/Threetile.png", 100, 100);
-		irrigation = newJLabel("3", "/Users/maumau/spups/resources/Irrigation.png", 50, 80);
+		irrigation = newJLabel("3", "/Users/maumau/spups/resources/Irrigation.png", 70, 80);
 
 		this.add(p2);
 		this.add(p4);
@@ -42,12 +43,13 @@ public class CommonPanel extends JPanel {
 		this.add(irrigation);
 	}
 
+
 	private JLabel newJLabel(String value, String src, int width, int height){
-		JLabel label= new JLabel(value);
-		label.setIcon(new ImageIcon(src));
+		HexLabel label= new HexLabel(value, new int[] {35}, new int[] {35}, width, height);
 		label.setFont(new Font("Lucida Grande", 0, 14));
+//		label.setIcon(new ImageIcon(src));
 		label.setPreferredSize(new Dimension(width, height));
-		label.setHorizontalTextPosition(SwingConstants.CENTER);
+		label.setHorizontalTextPosition(SwingConstants.RIGHT);
 		label.setVerticalTextPosition(SwingConstants.BOTTOM);
 		label.setVerticalAlignment(SwingConstants.BOTTOM);
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));

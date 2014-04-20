@@ -18,23 +18,39 @@ import model.board.Location;
  */
 @SuppressWarnings("serial")
 public class BoardPanel extends JPanel {
+	private static double hexScaling = 2.0/3;
 	private Image boardBackground;
 	//private Graphics2D g2d;
 	public BoardPanel(Board board) {
-		board = new JavaBoard();
+		//board = new JavaBoard();
 		boardBackground = JavaImageLoader.getImage("/Users/maumau/spups/resources/BoardBackground.jpg").getScaledInstance(510, 660, Image.SCALE_SMOOTH);
 		this.setVisible(true);
 		
-		HexLocation[] locations = board.getAllLocations().toArray(new HexLocation[0]);
+//		HexLocation[] locations = board.getAllLocations().toArray(new HexLocation[0]);
+		HexLocation[] locations = new HexLocation[]{};
+		
 		System.out.println(locations.length);
+		int[] origin = getBoardOrigin(locations);
 		for(int x = 0; x < locations.length; ++x) { 
 			System.out.println(Arrays.toString(locations[x].getDistanceFromOrigin()));
 		}
 
 	} 
 	
+	private int[] getBoardOrigin(HexLocation[] locations) { 
+		int width = 0; 
+		int height = 0; 
+		for(int x = 0; x < locations.length; ++x) { 
+			if(width > locations[x].getDistanceFromOrigin()[0])
+				width = locations[x].getDistanceFromOrigin()[0];
+			System.out.println(Arrays.toString(locations[x].getDistanceFromOrigin()));
+			
+		}
+		return new int[] {width, height};
+	}
+	
 	protected void paintComponent(Graphics g) {
-//        g.drawImage(boardBackground, 0, 0, null);
+        g.drawImage(boardBackground, 0, 0, null);
 //		System.out.println(hexSideLength());
 		int wStart = 100; 
 		int hStart = 100;
@@ -57,7 +73,7 @@ public class BoardPanel extends JPanel {
         for (int x = 0; x < 6; x++) {
         	int height = (int) (posHeight + hexSideLength()*Math.sin(x*2*Math.PI/6));
         	int width = (int) (posWidth + hexSideLength()*Math.cos(x*2*Math.PI/6));
-            tile.addPoint(width, height);
+            tile.addPoint((int)(width*(hexScaling)), (int)(height*(hexScaling)));
         }
 //        g.fillPolygon(tile);
         g.drawPolygon(tile);
