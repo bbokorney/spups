@@ -84,6 +84,10 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
         ActionResult result = actionPair.getFirst();
 
 	    updateView(result, potentialAction.getShortestLegalPath().getPath());
+
+	    if(result.isSuccess()) {
+		    controller.addToHistory(actionPair);
+	    }
     }
 
     private void initListeners() {
