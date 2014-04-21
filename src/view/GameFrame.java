@@ -1,13 +1,12 @@
 package view;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
 
+import java.awt.event.KeyListener;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
@@ -33,7 +32,7 @@ public class GameFrame extends JFrame {
     ActionPanel actionPanel;
     FestivalPanel festivalPanel;
     
-	public GameFrame(controller.keylistener.KeyListener listener){
+	public GameFrame(KeyListener keyListener){
 		this.setTitle("Java Spups");
 		this.setSize(WIDTH, HEIGHT);
 		this.setResizable(true);
@@ -52,6 +51,7 @@ public class GameFrame extends JFrame {
         addKeyListener(listener);
         setFocusTraversalKeysEnabled(false);
 
+        requestFocusInWindow();
         //this.setContentPane(gamePanel);
 	}
 

@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+//import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Stack;
@@ -59,6 +61,8 @@ public class RunGame {
 		                Controller controller = new Controller(frame, model, createPalaceFestival(model));
 		                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		                frame.setVisible(true);
+
+		                frame.requestFocusInWindow();
 		                
 		                
 		                HashMap<Location, TileComponent> map = new HashMap<Location, TileComponent>();

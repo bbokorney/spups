@@ -110,7 +110,7 @@ public abstract class Board {
 
     public boolean isLocationInCity(Location loc) {
         for (City c : cityContainer.getCityCollection()) {
-            if (c.getCity().contains(c))
+            if (c.getCity().contains(loc))
                 return true;
         }
         return false;
@@ -118,7 +118,7 @@ public abstract class Board {
 
     public boolean isLocationInVillage(Location loc) {
         for (Village v : villageContainer.getVillages()) {
-            if (v.getLocations().contains(v))
+            if (v.getLocations().contains(loc))
                 return true;
         }
         return false;
