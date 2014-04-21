@@ -6,11 +6,21 @@ import javax.swing.SwingWorker;
 
 import model.GameModel;
 import model.JavaGameModel;
+import model.board.Board;
+import model.board.Location;
 import model.palacefestival.Card;
+import model.palacefestival.JavaPlayerAdapter;
 import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceCardComponent;
 import model.palacefestival.PalaceFestival;
+import model.palacefestival.PalaceFestivalPlayer;
+import model.player.JavaPlayer;
+import model.tiles.IrrigationTileComponent;
+import model.tiles.PalaceTileComponent;
+import model.tiles.RiceTileComponent;
+import model.tiles.VillageTileComponent;
 import controller.Controller;
+import controller.keylistener.KeyListener;
 import view.GameFrame;
 
 
@@ -29,9 +39,16 @@ public class RunGame {
 			protected Void doInBackground() throws Exception {
 				SwingUtilities.invokeLater(new Runnable(){
 		            public void run(){
+		            	KeyListener listener = new KeyListener();
 		            	GameModel model = new JavaGameModel(3);
-		                PalaceFestival festival = createPalaceFestival();
-		                GameFrame frame = new GameFrame();
+		            	Board board = model.getBoard();
+		            	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
+		            	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
+		            	board.getSpace(board.getAllLocations().toArray(new Location[0])[2]).accept(new RiceTileComponent());
+		            	board.getSpace(board.getAllLocations().toArray(new Location[0])[3]).accept(new IrrigationTileComponent());
+		                PalaceFestival festival = createPalaceFestival(model);
+		                
+		                GameFrame frame = new GameFrame(listener);
 		                @SuppressWarnings("unused")
 		                Controller controller = new Controller(frame);
 		                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +64,7 @@ public class RunGame {
 		worker.execute();
     }    
     
-    public PalaceFestival createPalaceFestival() { 
+    public PalaceFestival createPalaceFestival(GameModel model) { 
     	 Stack<Card> deck = new Stack<Card>();
          for (int i = 0; i < 5; i++) {
              PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM);
@@ -76,6 +93,9 @@ public class RunGame {
                      PalaceCardComponent.PUPPET);
              deck.add(card);
          }
-         return new PalaceFestival(null, deck);
+         PalaceFestival festival = new PalaceFestival(null, deck);
+         for(JavaPlayer player : model.getJavaPlayers())
+        	 festival.addPlayer(new JavaPlayerAdapter(player));
+         return festival;
     }
 }

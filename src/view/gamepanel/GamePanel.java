@@ -72,8 +72,15 @@ public class GamePanel extends JPanel {
 		commonPanel.refreshView(model, festival);
 		
 		JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[0]);
-		for(int x = 0; x < players.length; ++x)
-			playerPanel[x++].refreshView(players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
+
+		System.out.println(players.length);
+		for(int x = 0; x < players.length; ++x){
+			System.out.println("Player : " + x);
+			playerPanel[x].refreshView(players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
+		}
+		for(int x = players.length; x < numOfPlayerPanels; ++x) { 
+			playerPanel[x].removeAll();
+		}
 		repaint();
 	}
 }
