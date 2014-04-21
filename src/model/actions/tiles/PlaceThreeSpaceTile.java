@@ -7,7 +7,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
-import model.board.HexLocation;
+import model.board.Location;
 import model.rules.tiles.*;
 import model.sharedresources.SharedResourceType;
 import model.tiles.RiceTileComponent;
@@ -23,8 +23,8 @@ public class PlaceThreeSpaceTile extends Action {
     /*
         attributes
      */
-    HexLocation villagePlacement;
-    HexLocation[] ricePlacement = new HexLocation[2];
+    Location villagePlacement;
+    Location[] ricePlacement = new Location[2];
     GameModel game;
 
 
@@ -34,7 +34,7 @@ public class PlaceThreeSpaceTile extends Action {
     public PlaceThreeSpaceTile(){
 
     }
-    public PlaceThreeSpaceTile(HexLocation villagePlacement, HexLocation rice1Placement, HexLocation rice2Placement, GameModel game) {
+    public PlaceThreeSpaceTile(Location villagePlacement, Location rice1Placement, Location rice2Placement, GameModel game) {
         this.villagePlacement = villagePlacement;
         this.ricePlacement[0] = rice1Placement;
         this.ricePlacement[1] = rice2Placement;
@@ -97,7 +97,7 @@ public class PlaceThreeSpaceTile extends Action {
 
 
         //see if there is a three space tile to take from shared
-        if(game.getCount(SharedResourceType.THREE) > 1){
+        if(game.getCount(SharedResourceType.THREE) > 0){
             isSuccess = isSuccess && true;
 
         }

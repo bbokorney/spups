@@ -20,9 +20,11 @@ public class PalaceLevelCitySizeRule {
             }
         }
         for(Village village : board.getVillageContainer().getVillages()) {
+            System.out.println("Village was here" +
+                    " of size " + village.getSize());
             if(village.getLocations().contains(location) &&
                     village.getLocations().size() >= palaceLevel) {
-
+                return true;
             }
         }
         return false;

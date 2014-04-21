@@ -6,7 +6,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
-import model.board.HexLocation;
+import model.board.Location;
 import model.rules.palace.HighestRankingPlayerInCityRule;
 import model.rules.palace.PalaceLevelCitySizeRule;
 import model.rules.tiles.PalacePlacementRule;
@@ -24,7 +24,7 @@ public class PlacePalaceTile extends Action {
         attributes
      */
     private int value;
-    private HexLocation placement;
+    private Location placement;
     GameModel game;
 
     /*
@@ -35,7 +35,7 @@ public class PlacePalaceTile extends Action {
         //used for loading
     }
 
-    public PlacePalaceTile(int value, HexLocation placement, GameModel game){
+    public PlacePalaceTile(int value, Location placement, GameModel game){
         this.value = value;
         this.placement = placement;
         this.game = game;
@@ -59,7 +59,7 @@ public class PlacePalaceTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //Check if there are any palace tiles of this value in shared resources
-        if(game.getCount(SharedResourceType.valueOf("PALACELEVEL" + value)) > 1){
+        if(game.getCount(SharedResourceType.valueOf("PALACELEVEL" + value)) > 0){
             isSuccess = isSuccess && true;
 
         }
