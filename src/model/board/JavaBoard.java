@@ -227,7 +227,8 @@ public class JavaBoard extends Board {
             }
         }*/
 
-        if (!visited.get(loc)) {
+        //if (!visited.get(loc)) {
+        if (visited.get(loc).equals(null)) {
             visited.put(loc, true);
             if (loc.equals(palaceLoc) || isLocationInCity(loc)) {
                 locations.add(loc);
@@ -257,7 +258,8 @@ public class JavaBoard extends Board {
             }
         }*/
 
-        if (!visited.get(loc)) {
+        //if (!visited.get(loc)) {
+        if (visited.get(loc).equals(null)) {
             visited.put(loc, true);
             if (isLocationInVillage(loc)) {
                 locations.add(loc);
