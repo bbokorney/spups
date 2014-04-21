@@ -69,6 +69,9 @@ public class JavaGameModel extends GameModel{
         /*
             This method will reset the Game and the rest of this model
             This will be utilized in Replay, Undo, etc...
+
+            This may not be needed depending on how replay mode stuff works!
+            //todo find out if I need this from Jonathan/Mau
          */
         resources = new SharedResources();
         BoardCreator creator = new BoardCreator();

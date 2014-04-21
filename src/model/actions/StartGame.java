@@ -2,6 +2,12 @@ package model.actions;
 
 import model.GameModel;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.JavaPlayerAdapter;
+import model.palacefestival.PalaceFestival;
+import model.player.JavaPlayer;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by idinamenzel on 4/14/2014.
@@ -13,21 +19,21 @@ public class StartGame extends Action {
     String[] playerNames;
     String[] playerColors;
     GameModel game;
+    PalaceFestival festival;
 
     /*
         Constructors
      */
-    StartGame(GameModel game){
+    public StartGame(GameModel game, PalaceFestival festival){
         this.game = game;
+        this.festival = festival;
         //Empty constructor
         //Most likely used during loading
     }
 
-    StartGame(int numberOfPlayers, String[] playerNames, String[] playerColors, GameModel game){
+    public StartGame(int numberOfPlayers, String[] playerNames){
         this.numberOfPlayers = numberOfPlayers;
         this.playerNames = playerNames;
-        this.playerColors = playerColors;
-        this.game = game;
     }
 
 
@@ -39,14 +45,16 @@ public class StartGame extends Action {
         returns true if valid
                 false if invalid
      */
-        boolean isSuccess = false;
+        boolean isSuccess = true;
         int famePoints = 0;
         int actionPoints = 0;
         String message = "";
 
-        //see if these are valid...?
-
-        //todo
+        //check to see if the number fo values is valid, between 2 and 4
+        if(numberOfPlayers > 4 || numberOfPlayers < 2){
+            isSuccess = isSuccess && false;
+            message += "Please select 2 - 4 players";
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
@@ -61,7 +69,11 @@ public class StartGame extends Action {
         ActionResult result = tryAction();
         if(result.isSuccess()) {
 
-            //start the game...?
+            game.setPlayersInGame(playerNames);
+            Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
+            for( JavaPlayer player : javaPlayers) {
+                festival.addPlayer(new JavaPlayerAdapter(player));
+            }
         }
         return result;
     }
