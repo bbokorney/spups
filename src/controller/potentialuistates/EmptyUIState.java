@@ -11,12 +11,16 @@ import model.actions.ActionResult;
 import model.actions.EndTurn;
 import model.actions.UseActionToken;
 import model.actions.palacefestival.PickUpDeckCard;
+import model.board.Location;
 import model.palacefestival.PalaceFestival;
 import model.potentialactions.PotentialBeginPalaceFestival;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -103,6 +107,7 @@ public class EmptyUIState extends PotentialJavaUIState {
 	    if(result.isSuccess()) {
 			action.doAction();
 		    controller.addEndTurnToHistory(new Pair<ActionResult, EndTurn>(result, action));
+			controller.refreshGameView();
 	    }
     }
 
@@ -116,6 +121,7 @@ public class EmptyUIState extends PotentialJavaUIState {
 	    if(result.isSuccess()) {
 		    action.doAction();
 		    controller.addToHistory(new Pair<ActionResult, UseActionToken>(result, action));
+		    controller.refreshGameView();
 	    }
     }
 
@@ -125,6 +131,7 @@ public class EmptyUIState extends PotentialJavaUIState {
 		if(result.isSuccess()) {
 			draw.doAction();
 			controller.addToHistory(new Pair<ActionResult, PickUpDeckCard>(result, draw));
+			controller.refreshGameView();
 		}
 	}
 

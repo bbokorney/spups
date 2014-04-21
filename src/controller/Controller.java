@@ -8,8 +8,16 @@ import controller.potentialuistates.PotentialJavaUIState;
 import model.GameModel;
 import model.Pair;
 import model.actions.Action;
+import model.actions.ActionResult;
+import model.board.Location;
 import model.palacefestival.PalaceFestival;
+import model.tiles.TileComponent;
 import view.GameFrame;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -68,4 +76,14 @@ public class Controller {
 	}
 
 	public PalaceFestival getPalaceFestival() { return paFes; }
+
+	public GameFrame getView() { return view; }
+
+	public void refreshGameView(ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
+		view.refreshGame(model, paFes, actionResult, potentialComponents, highlightedComponents);
+	}
+
+	public void refreshGameView() {
+		controller.refreshGameView(result, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
+	}
 }

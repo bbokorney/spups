@@ -9,12 +9,16 @@ import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.MoveDeveloperAroundBoard;
 import model.board.HexLocation;
+import model.board.Location;
 import model.player.Developer;
 import model.potentialactions.PotentialAction;
 import model.potentialactions.PotentialMoveDeveloperAroundBoard;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -47,53 +51,39 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
 
     public void moveNorth() {
         ActionResult result = potentialAction.moveNorth();
-        if(!result.isSuccess()) {
-
-        }
+		updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
     }
 
     public void moveSouth() {
         ActionResult result = potentialAction.moveSouth();
-        if(!result.isSuccess()) {
-
-        }
+	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
     }
 
     public void moveNortheast() {
         ActionResult result = potentialAction.moveNortheast();
-        if(!result.isSuccess()) {
-
-        }
+	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
     }
 
     public void moveNorthwest() {
         ActionResult result = potentialAction.moveNorthwest();
-        if(!result.isSuccess()) {
-
-        }
+	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
     }
 
 	public void moveSoutheast() {
 		ActionResult result = potentialAction.moveSoutheast();
-		if(!result.isSuccess()) {
-
-		}
+		updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
 	}
 
     public void moveSouthwest() {
         ActionResult result = potentialAction.moveSouthwest();
-        if(!result.isSuccess()) {
-
-        }
+	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
     }
 
     public void confirmPlacement() {
         Pair<ActionResult, MoveDeveloperAroundBoard> actionPair = potentialAction.confirmMovement();
         ActionResult result = actionPair.getFirst();
 
-        if(result.isSuccess()) {
-			controller.addToHistory(actionPair);
-        }
+	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
     }
 
     private void initListeners() {
@@ -156,4 +146,8 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
 
         keyListener.replaceTemporaryListener(listeners);
     }
+
+	private void updateView(ActionResult result, List<Location> list) {
+		controller.refreshGameView(result, new HashMap<Location, TileComponent>(), list);
+	}
 }
