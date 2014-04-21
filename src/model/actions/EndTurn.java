@@ -38,6 +38,8 @@ public class EndTurn extends Action {
 
         //Check if the turn can advance
 
+        //todo talk to controller about mapping key press for end turn to NOT WORK which forces them to go between planning and play mode
+
         if(!game.canAdvanceJavaTurn()){
             isSuccess = false;
             message += "Player cannot end their turn";
