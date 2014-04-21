@@ -40,7 +40,7 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
     }
 
 	public void switchDeveloper() {
-		ActionResult result = potentialAction.tabToNextDeveloper();
+		ActionResult result = potentialAction.getLocationFromPath();
 		if(!result.isSuccess()) {
 
 		}

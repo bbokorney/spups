@@ -93,10 +93,10 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void endTurn() {
-	    EndTurn action = new EndTurn();
-	    ActionResult result = action.tryAction(model);
+	    EndTurn action = new EndTurn(model);
+	    ActionResult result = action.tryAction();
 	    if(result.isSuccess()) {
-			action.doAction(model);
+			action.doAction();
 		    controller.addEndTurnToHistory(new Pair<ActionResult, EndTurn>(result, action));
 	    }
     }
@@ -106,10 +106,10 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void useActionToken() {
-        UseActionToken action = new UseActionToken();
-	    ActionResult result = action.tryAction(model);
+        UseActionToken action = new UseActionToken(model);
+	    ActionResult result = action.tryAction();
 	    if(result.isSuccess()) {
-		    action.doAction(model);
+		    action.doAction();
 		    controller.addToHistory(new Pair<ActionResult, UseActionToken>(result, action));
 	    }
     }

@@ -21,7 +21,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
         this.keyListener = keyListener;
 	    this.model = model;
 
-	    potentialAction = new PotentialBeginPalaceFestival(model);
+	    potentialAction = new PotentialBeginPalaceFestival();
 
         initListeners();
     }
