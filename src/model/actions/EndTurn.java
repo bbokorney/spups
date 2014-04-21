@@ -31,18 +31,19 @@ public class EndTurn extends Action {
         returns true if valid
                 false if invalid
      */
-        boolean isSuccess = false;
+        boolean isSuccess = true;
         int famePoints = 0;
         int actionPoints = 0;
         String message = "";
 
-        //Check if the path is valid
+        //Check if the turn can advance
 
-        //Check if the player has enough AP points to travel the path
+        if(!game.canAdvanceJavaTurn()){
+            isSuccess = false;
+            message += "Player cannot end their turn";
+        }
 
-        //todo
-
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
@@ -55,9 +56,7 @@ public class EndTurn extends Action {
         ActionResult result = tryAction();
         if(result.isSuccess()) {
 
-            //Decrememnt the AP points the path cost
-            //Move the developer along the path
-            //(change the developer location to the last place on the path)
+            game.advanceJavaTurn();
         }
         return result;
     }

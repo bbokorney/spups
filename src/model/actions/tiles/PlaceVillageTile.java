@@ -69,7 +69,7 @@ public class PlaceVillageTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough AP points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
         //check if they are placing on another one tile
@@ -126,7 +126,7 @@ public class PlaceVillageTile extends Action {
 
         //todo
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override

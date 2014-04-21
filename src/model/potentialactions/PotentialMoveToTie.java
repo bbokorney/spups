@@ -33,12 +33,8 @@ public class PotentialMoveToTie extends PotentialAction {
     }
 
     @Override
-    protected void setComponentsOnHoverBoard() {
-        // nothing to set
-    }
-
-    @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return playerWhoRequestedTie == null ? tieRequested() : tieAgreed();
     }
+
 }

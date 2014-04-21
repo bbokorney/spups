@@ -3,12 +3,8 @@ package model.board;
 import model.GameModel;
 import model.player.Developer;
 import model.player.JavaPlayer;
-import model.player.Player;
-import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -20,7 +16,7 @@ public class BoardRuleHelper {
         this.model = model;
     }
 
-    public Map<JavaPlayer, Integer> getPlayerRanksIn(Collection<HexLocation> locations) {
+    public Map<JavaPlayer, Integer> getPlayerRanksIn(Collection<Location> locations) {
         final Map<JavaPlayer, Map<Integer, Integer>> heightMap = new HashMap<JavaPlayer, Map<Integer, Integer>>();
         int maxHeight = 0;
         JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[model.getJavaPlayers().size()]);
@@ -35,35 +31,55 @@ public class BoardRuleHelper {
             }
         }
 
-        while(maxHeight >= 0) {
-            final int currentHeight = maxHeight;
-            Arrays.sort(players, new Comparator<JavaPlayer>() {
-                @Override
-                public int compare(JavaPlayer p1, JavaPlayer p2) {
-                    int p1Count = heightMap.get(p1).containsKey(currentHeight) ? heightMap.get(p1).get(currentHeight) : 0;
-                    int p2Count = heightMap.get(p2).containsKey(currentHeight) ? heightMap.get(p2).get(currentHeight) : 0;
-                    return p2Count - p1Count;
-                }
-            });
-            int heightCount = 0;
-            for(int i = 0; i < players.length; ++i) {
-                if(heightMap.get(players[i]).containsKey(heightCount)) {
-                    ++heightCount;
-                }
-            }
+        return calcRanks(players, heightMap, maxHeight);
+    }
 
-            if(heightCount == 0) {
-                // no one has this height, can't determine anything
-                continue;
-            }
+    private Map<JavaPlayer, Integer> calcRanks(JavaPlayer[] players, Map<JavaPlayer,
+            Map<Integer, Integer>> heightMap, int currHeight) {
 
-            if(heightCount > 1) {
-                // there's a tie, try the next one
-                
+        Map<JavaPlayer, Integer> myRanks = new HashMap<JavaPlayer, Integer>();
+        // if this is the only player, they're first by default
+        if(players.length == 1) {
+            myRanks.put(players[0], 1);
+        }
+
+        // if we've gone through every height, everyone is tied
+        if(currHeight < 0) {
+            for(JavaPlayer p : players) {
+                myRanks.put(p, 1);
             }
         }
 
-        return new HashMap<JavaPlayer, Integer>();
+        // sort the players descending by the number of developers they have at this height.
+        sortPlayersCountAtHeight(players, heightMap, currHeight);
+
+        int rankOffset = 0;
+        int start = 0;
+        int end = start+1;
+        while(start < players.length) {
+            while(end < players.length) {
+                // if this player is tied with the current highest ranked
+                // unresolved player
+                if(heightMap.get(players[start]).get(heightMap) ==
+                        heightMap.get(players[end]).get(heightMap)) {
+                    // include them in the list of tied players
+                    ++end;
+                }
+            }
+            // resolve this tie at the next height down
+            Map<JavaPlayer, Integer> ranks = calcRanks(Arrays.copyOfRange(players, start, end),
+                    heightMap, currHeight-1);
+            // increment each of the ranks
+            int maxRank = 0;
+            for(JavaPlayer p : ranks.keySet()) {
+                myRanks.put(p, ranks.get(p) + rankOffset);
+                maxRank = Math.max(maxRank, myRanks.get(p));
+            }
+            rankOffset = maxRank;
+            start = end;
+            end = start+1;
+        }
+        return myRanks;
     }
 
     private void createOrIncrement(Map<Integer, Integer> map, Integer key) {
@@ -74,10 +90,21 @@ public class BoardRuleHelper {
         map.put(key, value);
     }
 
+    private void sortPlayersCountAtHeight(JavaPlayer[] players, final Map<JavaPlayer, Map<Integer, Integer>> heightMap,
+                                     final int currentHeight) {
+        Arrays.sort(players, new Comparator<JavaPlayer>() {
+            public int compare(JavaPlayer p1, JavaPlayer p2) {
+                int p1Count = heightMap.get(p1).containsKey(currentHeight) ? heightMap.get(p1).get(currentHeight) : 0;
+                int p2Count = heightMap.get(p2).containsKey(currentHeight) ? heightMap.get(p2).get(currentHeight) : 0;
+                return p2Count - p1Count;
+            }
+        });
+    }
 
-    public Collection<Location> getSurroundingTiles(Collection<HexLocation> waterLocations) {
+
+    public Collection<Location> getSurroundingTiles(Collection<Location> waterLocations) {
         Set<Location> surroundingLocations = new HashSet<Location>();
-        for(HexLocation location : waterLocations) {
+        for(Location location : waterLocations) {
             for(Location neighbor : location.getNeighbors()) {
                 surroundingLocations.add(neighbor);
             }
@@ -87,9 +114,9 @@ public class BoardRuleHelper {
 
     public int pointsEarnedFromIrrigationPlacement(HexLocation location) {
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
-            for(HexLocation water : body.getLocations()) {
+            for(Location water : body.getLocations()) {
                 if(neighbors(water, location)) {
-                    ArrayList<HexLocation> newBody = new ArrayList<HexLocation>();
+                    ArrayList<Location> newBody = new ArrayList<Location>();
                     newBody.add(location);
                     newBody.addAll(body.getLocations());
                     int enclosingTileCount = 0;
@@ -160,19 +187,22 @@ public class BoardRuleHelper {
         return isOuterMostBorder(location);
     }
 
-    public boolean connectsTwoCities(HexLocation villageLocation, HexLocation... riceLocation) {
-        // TODO: Baker, waiting on Suchit
+    public boolean connectsTwoCities(Location villageLocation, Location... riceLocations) {
         int neighboringCount = 0;
         for(City city : model.getBoard().getCityContainer().getCityCollection()) {
-            if(neighborsCity(city, villageLocation)) {
+            List<Location> cityLocations = new ArrayList<Location>(city.getCity());
+            for(Location loc : riceLocations) {
+                cityLocations.remove(loc);
+            }
+            if(neighborsCity(cityLocations, villageLocation)) {
                 ++neighboringCount;
             }
         }
-        return neighboringCount < 2;
+        return neighboringCount >= 2;
     }
 
-    private boolean neighborsCity(City city, HexLocation location, HexLocation... riceLocation) {
-        for(Location possibleNeighbor : city.getCity()) {
+    private boolean neighborsCity(List<Location> cityLocations, Location location) {
+        for(Location possibleNeighbor : cityLocations) {
             if(neighbors(location, possibleNeighbor)) {
                 return true;
             }
@@ -180,12 +210,22 @@ public class BoardRuleHelper {
         return false;
     }
 
-    private boolean neighbors(HexLocation location1, Location location2) {
+    private boolean neighbors(Location location1, Location location2) {
         for(Location neighbor : location1.getNeighbors()) {
             if(location2.equals(neighbor)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public List<Location> getPalacesLegalForUpgrading() {
+        return null;
+        //todo needed for PotentialUpgradePalace
+        //exclude palaces by the following criteria
+        //The current player must be the highest in the city
+        //the city must not have been interacted with during this turn
+        //the city must be large enough city size) to support a larger palace (atleast current value + 2)
+
     }
 }

@@ -51,7 +51,7 @@ public class JoinFestival extends Action {
 
         boolean canBegin = hasDeveloperInCity && bidMeetsRequirements;
         String message = canBegin ? "action successful" : "not eligible to join festival";
-        return new ActionResult(false, 0, 0, message, this);
+        return new ActionResult(false, 0, 0, message);
     }
 
     @Override

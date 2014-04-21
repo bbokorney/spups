@@ -68,13 +68,13 @@ public class PlaceIrrigationTile extends Action {
         }
 
         //Check if the player has enough AP points - 1
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(game.canUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough AP points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
         //check if required elevation is 0
@@ -100,7 +100,7 @@ public class PlaceIrrigationTile extends Action {
         }
 
 
-      return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+      return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override

@@ -7,8 +7,12 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.rules.palace.HighestRankingPlayerInCityRule;
+import model.rules.palace.PalaceLevelCitySizeRule;
 import model.rules.tiles.PalacePlacementRule;
 import model.sharedresources.SharedResourceType;
+import model.tiles.PalaceTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -63,18 +67,18 @@ public class UpgradePalaceTile extends Action {
         }
 
         //check if the player has enough action points, 1
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(game.canUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough action points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
         //Check if the placement is a palace tile
         PalacePlacementRule terrainRule = new PalacePlacementRule(placement, board);
-        if(terrainRule.buildAllowed()){
+        if(terrainRule.upgradeAllowed(value)){
             isSuccess = isSuccess && true;
 
 
@@ -85,7 +89,7 @@ public class UpgradePalaceTile extends Action {
 
 
             //See if the tile has been interacted with this turn
-            if(true){
+            if(game.hasPalaceLocationBeenUsedThisTurn(placement)){
                 isSuccess = isSuccess && true;
 
             }
@@ -94,18 +98,8 @@ public class UpgradePalaceTile extends Action {
                 message += "Error: This palace has already been interacted with this turn.\n";
             }
 
-            //see if the value is less than the palace underneath
-            if(true){
-                isSuccess = isSuccess && true;
-
-            }
-            else{
-                isSuccess = isSuccess && false;
-                message += "Error: You may only upgrade to a higher-valued palace.\n";
-            }
-
             //check if the player is the highest ranked in the city
-            if(true){
+            if(HighestRankingPlayerInCityRule.highestRankingPlayerInCityRule(game.getCurrentJavaPlayer(), placement, helperJunk, board)){
                 isSuccess = isSuccess && true;
 
             }
@@ -115,7 +109,7 @@ public class UpgradePalaceTile extends Action {
             }
 
             //check if there are enough villages in the city to support a palace of this value
-            if(true){
+            if(PalaceLevelCitySizeRule.palaceLevelSizeAllowed(placement, board, value)){
                 isSuccess = isSuccess && true;
 
             }
@@ -127,12 +121,10 @@ public class UpgradePalaceTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: Only current palaces can be upgraded.";
+            message += "Error: This palace cannot be upgraded.\n";
         }
 
-        //todo
-
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
@@ -145,9 +137,20 @@ public class UpgradePalaceTile extends Action {
         ActionResult result = tryAction();
         if(result.isSuccess()) {
 
-            //Decrememnt the AP points the path cost
-            //Move the developer along the path
-            //(change the developer location to the last place on the path)
+            //Decrememnt the AP point
+            game.useActionPoints(result.getActionPoints());
+
+            //place the palace on this location of the board
+            game.upgradePalace(placement, new PalaceTileComponent(new Tile(1), value));
+
+            //award the player fame points
+            game.incrementScore(result.getFamePoints());
+
+            //set this location to palacesinteractedwith in the turn object
+            game.addPalaceToCurrentTurnList(placement);
+
+            //decremenet the number of this valued palace in the shared resources
+            game.useResource(SharedResourceType.valueOf("PALACE" + value));
         }
         return result;
     }

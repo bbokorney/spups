@@ -16,4 +16,13 @@ public class BodyOfWaterContainer {
     public Collection<BodyOfWater> getBodiesOfWater() {
         return bodyOfWaterCollection;
     }
+
+    public void addBodyOfWater(BodyOfWater b) {
+        bodyOfWaterCollection.add(b);
+    }
+
+    public void removeBodyOfWater(BodyOfWater... b) {
+        for (BodyOfWater body : b)
+            bodyOfWaterCollection.remove(body);
+    }
 }

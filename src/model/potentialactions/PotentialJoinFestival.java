@@ -1,32 +1,69 @@
 package model.potentialactions;
 
 import model.actions.ActionResult;
+import model.actions.palacefestival.JoinFestival;
+import model.actions.palacefestival.Withdraw;
+import model.board.Location;
 import model.palacefestival.Card;
+import model.rules.palace.CardValues;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PotentialJoinFestival {
+public class PotentialJoinFestival extends PotentialAction {
 
-    private Card[] cardsValidToBeginFestival;
+    private ArrayList<Card> cardsValidToBeginFestival;
     private ArrayList<Integer> indexOfCardsToBid;
+    private int currentIndex;
+    private Location palaceLoc;
+
+    public PotentialJoinFestival(Location palaceLocation) {
+        currentIndex = 0;
+        indexOfCardsToBid = new ArrayList<Integer>();
+        cardsValidToBeginFestival = new ArrayList<Card>();
+        this.palaceLoc = palaceLocation;
+        Collection<Card> hand = this.getPalaceFestival().getCurrentPlayer().getHand();
+        for (Card card : hand) {
+            if (CardValues.getMatchValue(card, getPalaceFestival().peekAtFestivalCard()) > 0)
+                cardsValidToBeginFestival.add(card);
+        }
+    }
+
+    public boolean tabToNextElement() {
+        currentIndex++;
+        currentIndex %= cardsValidToBeginFestival.size();
+        return true;
+    }
 
     public boolean chooseCurrentCard() {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        indexOfCardsToBid.add(currentIndex);
+        return true;
     }
 
     public boolean removeCurrentCardFromBid() {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        indexOfCardsToBid.remove(currentIndex); //TODO: test this.. potential bug
+        return true;
+    }
+
+    public ActionResult withdraw() {
+        return new Withdraw(getPalaceFestival()).tryAction();
     }
 
     public ActionResult confirmBid() {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
+        ArrayList<Card> bid = new ArrayList<Card>();
+        for (int i : indexOfCardsToBid) {
+            bid.add(cardsValidToBeginFestival.get(i));
+        }
+
+        return new JoinFestival(palaceLoc, bid, getGameModel(), getPalaceFestival()).tryAction();
     }
 
+    @Override
+    public ActionResult getActionResult() {
+        return confirmBid();
+    }
 
 }

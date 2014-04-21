@@ -99,10 +99,10 @@ public class History {
 	}
 
 	private void redoActions() {
-		model.resetGame();
+		model.resetStates();
 		for(Queue<Pair> t : actions) {
 			for(Pair<ActionResult, Action> a : t) {
-				a.getSecond().doAction(model);
+				a.getSecond().doAction();
 			}
 		}
 	}

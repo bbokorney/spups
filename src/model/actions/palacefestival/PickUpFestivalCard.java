@@ -25,7 +25,7 @@ public class PickUpFestivalCard extends Action {
         boolean festivalCardExists = festival.peekAtFestivalCard() != null;
         boolean success = canPickUpFestivalCard && festivalCardExists;
         String message = success ? "action successful" : "action failed";
-        return new ActionResult(success, 0, 1, message, this);
+        return new ActionResult(success, 0, 1, message);
     }
 
     @Override

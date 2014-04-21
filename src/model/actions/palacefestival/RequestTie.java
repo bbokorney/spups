@@ -38,7 +38,7 @@ public class RequestTie extends Action {
         String message = tie ? "success" : "players are not tied";
 
         // TODO: send the FP they would win if the tie went through
-        return new ActionResult(tie, 0,0, message, this);
+        return new ActionResult(tie, 0,0, message);
     }
 
     @Override
