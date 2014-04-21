@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * Created by Baker on 4/21/2014.
  */
-public abstract class PlaceOneSpaceTilUIState extends GameplayUIState {
+public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
     private final int KEY_SOUTH = KeyEvent.VK_NUMPAD2;
     private final int KEY_NORTH = KeyEvent.VK_NUMPAD8;
     private final int KEY_NORTHEAST = KeyEvent.VK_NUMPAD9;
@@ -45,8 +45,8 @@ public abstract class PlaceOneSpaceTilUIState extends GameplayUIState {
 
     PotentialOneSpaceMovement potentialAction;
 
-    public PlaceOneSpaceTilUIState(Controller controller, KeyListener keyListener,
-                                   GameModel model, TileComponent component, PotentialOneSpaceMovement potentialAction){
+    public PlaceOneSpaceTileUIState(Controller controller, KeyListener keyListener,
+                                    GameModel model, TileComponent component, PotentialOneSpaceMovement potentialAction){
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
