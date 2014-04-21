@@ -110,4 +110,12 @@ public abstract class Board {
         }
         return false;
     }
+
+    public boolean isLocationInVillage(Location loc) {
+        for (Village v : villageContainer.getVillages()) {
+            if (v.getLocations().contains(c))
+                return true;
+        }
+        return false;
+    }
 }
