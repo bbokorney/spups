@@ -99,6 +99,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void switchToPlaceRiceTileState() {
+        System.out.println("Moving to PlaceRiceTileUIState.");
         controller.setCurrentState(new PlaceRiceTileUIState(controller, keyListener, model));
     }
 

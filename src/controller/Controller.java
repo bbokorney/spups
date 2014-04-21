@@ -46,7 +46,7 @@ public class Controller {
     }
 
 	public void addToHistory(Pair action) {
-		history.addAction(action);
+		//history.addAction(action);
 	}
 	public void addEndTurnToHistory(Pair action) {
 		history.addEndTurn(action);
