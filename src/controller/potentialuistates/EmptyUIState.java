@@ -1,4 +1,4 @@
-package controller.keylistener.potentialuistates.keylistener.potentialuistates;
+package controller.potentialuistates;
 
 /**
  * Created by Baker on 4/14/2014.
