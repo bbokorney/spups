@@ -17,8 +17,9 @@ public class Village {
         return village.size();
     }
 
-    public void add(Location loc) {
-        village.add(loc);
+    public void add(Location... locations)  {
+        for (Location location : locations)
+            village.add(location);
     }
 
     public void remove(Location loc) {
