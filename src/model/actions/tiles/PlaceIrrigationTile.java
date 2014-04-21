@@ -6,7 +6,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
-import model.board.HexLocation;
+import model.board.Location;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.sharedresources.SharedResourceType;
 import model.tiles.IrrigationTileComponent;
@@ -21,7 +21,7 @@ public class PlaceIrrigationTile extends Action {
     /*
         attributes
      */
-    private HexLocation placement;
+    private Location placement;
     GameModel game;
 
 
@@ -33,7 +33,7 @@ public class PlaceIrrigationTile extends Action {
         //used for loading
     }
 
-    public PlaceIrrigationTile(HexLocation placement, GameModel game){
+    public PlaceIrrigationTile(Location placement, GameModel game){
         this.placement = placement;
         this.game = game;
     }
