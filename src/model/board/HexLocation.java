@@ -37,7 +37,6 @@ public class HexLocation implements Location {
     }
 	
 	public boolean equals(Object loc) {
-        System.out.println("HexLocation equals(...)");
         if (loc instanceof HexLocation) {
 			HexLocation hexloc = (HexLocation) loc;
             int[] myDistance = getDistanceFromOrigin();
