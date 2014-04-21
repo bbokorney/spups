@@ -9,7 +9,7 @@ public class SameElevationRule {
     public static boolean sameElevation(Space... spaces) {
         int elevation = spaces[0].getHeight();
         for(int i = 1; i < spaces.length; ++i) {
-            if(spaces[i].getHeight() == elevation) {
+            if(spaces[i].getHeight() != elevation) {
                 return false;
             }
         }

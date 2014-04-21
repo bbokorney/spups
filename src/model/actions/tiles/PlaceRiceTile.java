@@ -91,7 +91,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if they are not placing on top of a one tile
-        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
+        if(!PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
             isSuccess = isSuccess && true;
 
         }

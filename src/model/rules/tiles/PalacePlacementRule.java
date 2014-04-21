@@ -22,13 +22,19 @@ public class PalacePlacementRule {
     }
 
     public boolean buildAllowed() {
-        board.getSpace(location).getTopTileComponent().accept(new BuildVisitor());
-        return allowed;
+        if(board.getSpace(location).getTopTileComponent() != null) {
+            board.getSpace(location).getTopTileComponent().accept(new BuildVisitor());
+            return allowed;
+        }
+        return true;
     }
 
     public boolean upgradeAllowed(int value) {
-        board.getSpace(location).getTopTileComponent().accept(new UpgradeVisitor());
-        return allowed;
+        if(board.getSpace(location).getTopTileComponent() != null) {
+            board.getSpace(location).getTopTileComponent().accept(new UpgradeVisitor());
+            return allowed;
+        }
+        return true;
     }
 
     private class BuildVisitor implements Visitor {

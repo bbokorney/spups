@@ -1,10 +1,9 @@
 package pathfinding;
 
-import model.board.HexLocation;
 import model.board.Location;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Baker on 4/20/2014.
@@ -12,7 +11,7 @@ import java.util.List;
 class JavaNode implements PathNode<JavaNode> {
 
     private Location location;
-    private ArrayList<PathEdge<JavaNode>> edges;
+    private HashSet<PathEdge<JavaNode>> edges;
 
     public JavaNode(Location location) {
         this.location = location;
@@ -26,7 +25,7 @@ class JavaNode implements PathNode<JavaNode> {
         return false;
     }
 
-    public List<PathEdge<JavaNode>> getEdges() {
+    public Set<PathEdge<JavaNode>> getEdges() {
         return edges;
     }
 

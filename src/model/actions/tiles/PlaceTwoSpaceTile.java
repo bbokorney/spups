@@ -102,7 +102,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //check if they are placing on another two space tile
-        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement)){
+        if(!PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement)){
             isSuccess = isSuccess && true;
 
         }
@@ -135,7 +135,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(ConnectionTwoCitiesRule.connectsCities(villagePlacement, helperJunk)){
+        if(!ConnectionTwoCitiesRule.connectsCities(helperJunk, villagePlacement, ricePlacement)){
             isSuccess = isSuccess && true;
 
         }
