@@ -8,6 +8,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import model.GameModel;
@@ -26,6 +28,8 @@ public class CardsPanel extends JPanel {
 		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 75, 200);
 		this.add(stack);
 		this.add(card);
+		JTextArea textArea = new JTextArea();
+		this.add(new JTextArea());
 	}
 
 	private JLabel newJLabel(String value, String src, int width, int height){

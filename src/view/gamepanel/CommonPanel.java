@@ -1,7 +1,13 @@
 package view.gamepanel;
 
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import view.TileLabel;
 import model.GameModel;
@@ -34,10 +40,22 @@ public class CommonPanel extends JPanel {
 		this.add(irrigation);
 		this.add(threetile);
 		//TODO make the text of this go on the right place
-		stack = TileLabel.newJLabel("", "/Users/maumau/spups/resources/card.png", 80, 70);
-		card = TileLabel.newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 70);
+		stack = newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 100);
+		card = newJLabel(" ", "/Users/maumau/spups/resources/card.png", 60, 100);
 		this.add(stack);
 		this.add(card);
+	}
+	
+	private JLabel newJLabel(String value, String src, int width, int height){
+		JLabel label= new JLabel(value);
+		label.setIcon(new ImageIcon(src));
+		label.setFont(new Font("Lucida Grande", 0, 14));
+		label.setPreferredSize(new Dimension(width, height));
+		label.setHorizontalTextPosition(SwingConstants.CENTER);
+		label.setVerticalTextPosition(SwingConstants.BOTTOM);
+		label.setVerticalAlignment(SwingConstants.BOTTOM);
+		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		return label;
 	}
 
 

@@ -33,8 +33,8 @@ public class BoardPanel extends JPanel {
 		for(int x = 0; x < locations.length; ++x) { 
 			if(width > locations[x].getDistanceFromOrigin()[0])
 				width = locations[x].getDistanceFromOrigin()[0];
-			if(height > locations[x].getDistanceFromOrigin()[1])
-				height = locations[x].getDistanceFromOrigin()[1];
+			if(height > locations[x].getDistanceFromOrigin()[1]*-1)
+				height = locations[x].getDistanceFromOrigin()[1]*-1;
 		}
 		return new int[] {width*-1, height*-1};
 	}
@@ -47,7 +47,7 @@ public class BoardPanel extends JPanel {
 				int[] distance = location.getDistanceFromOrigin();
 				
 				int width = distance[0]+origin[0]+50;
-				int height = distance[1]+origin[1]+40;
+				int height = distance[1]*-1+origin[1]+40;
 	
 		    	LocationType type = board.getLocationType(location);
 		    	Color color = Color.white;
@@ -67,7 +67,7 @@ public class BoardPanel extends JPanel {
 			for(HexLocation location : locations) {
 				int[] distance = location.getDistanceFromOrigin();
 				int width = distance[0]+origin[0]+50;
-				int height = distance[1]+origin[1]+40;
+				int height = distance[1]*-1+origin[1]+40;
 				width = (int)(width*hexScaling)-10;
 				height = (int)(height*hexScaling)+18;
 
