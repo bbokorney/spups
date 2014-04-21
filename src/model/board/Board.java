@@ -100,12 +100,7 @@ public abstract class Board {
     }
 
     public Collection<Location> getAllLocations() {
-        ArrayList<Location> locations = new ArrayList<Location>();
-        Iterator<Location> iter = board.keySet().iterator();
-        while(iter.hasNext()) {
-            locations.add(iter.next());
-        }
-        return locations;
+        return board.keySet();
     }
 
     public boolean isLocationInCity(Location loc) {

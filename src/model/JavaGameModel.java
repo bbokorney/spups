@@ -114,10 +114,10 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void advanceJavaTurn() {
-        if (canAdvanceJavaTurn()) {
+        //if (canAdvanceJavaTurn()) {
             turn.advanceTurn();
             javaPlayers.advanceTurn();
-        }
+        //}
     }
 
     @Override
@@ -240,7 +240,7 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
-            getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
+        getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
     }
 
     @Override
