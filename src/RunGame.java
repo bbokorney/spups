@@ -1,23 +1,19 @@
-import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Stack;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 import model.GameModel;
 import model.JavaGameModel;
 import model.board.Board;
+import model.board.HexLocation;
 import model.board.Location;
 import model.palacefestival.Card;
 import model.palacefestival.JavaPlayerAdapter;
 import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceCardComponent;
 import model.palacefestival.PalaceFestival;
-import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
 import model.tiles.TileComponent;
 import model.tiles.IrrigationTileComponent;
@@ -69,7 +65,13 @@ public class RunGame {
 		                map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
 		                map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
 		                map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
-		                frame.refreshGame(model,festival,null,map,null);
+		                
+		                LinkedList<Location> highlights = new LinkedList<Location>();
+		                highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
+		                highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[11]);
+		                highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[12]);
+		                
+		                frame.refreshGame(model,festival,null,map,highlights);
 		                
 //		            }
 //		        });
@@ -80,7 +82,8 @@ public class RunGame {
     }    
     
     public PalaceFestival createPalaceFestival(GameModel model) { 
-    	 Stack<Card> deck = new Stack<Card>();
+    	 @SuppressWarnings("rawtypes")
+		 Stack<Card> deck = new Stack<Card>();
          for (int i = 0; i < 5; i++) {
              PalaceCard card = new PalaceCard(PalaceCardComponent.DRUM);
              deck.add(card);

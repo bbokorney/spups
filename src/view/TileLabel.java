@@ -82,7 +82,7 @@ public class TileLabel extends JLabel {
 	private static void setLabelStuff(JLabel label, int width, int height) {
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
-		label.setHorizontalTextPosition(SwingConstants.RIGHT);
+		label.setHorizontalTextPosition(SwingConstants.LEFT);
 		label.setVerticalTextPosition(SwingConstants.BOTTOM);
 		label.setVerticalAlignment(SwingConstants.BOTTOM);
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));

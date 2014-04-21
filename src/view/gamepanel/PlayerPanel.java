@@ -9,14 +9,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import view.TileLabel;
 import model.GameModel;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
-import model.player.Player;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
 import model.turn.Turn;
@@ -51,12 +49,9 @@ public class PlayerPanel extends JPanel {
 
 		int offHeight = 70;
 		int offWidth = 70;
-//		twotile = new JLabel("", JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace2.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 		twotile = newJLabel("3", "/Users/maumau/spups/resources/twotile.png", offWidth, offHeight);
 		developer = newJLabel("3", "/Users/maumau/spups/resources/developer.png", offWidth, offHeight);
-		rice = newJLabel("3", "/Users/maumau/spups/resources/rice.png", offWidth, offHeight);
-		village = newJLabel("3", "/Users/maumau/spups/resources/village.png", offWidth, offHeight);
-		extratokens = newJLabel("3", "/Users/maumau/spups/resources/AP.png", offWidth, offHeight);
+		extratokens = newJLabel("3", "/Users/maumau/spups/resources/Extra Action Token.png", offWidth, offHeight);
 		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, offHeight+30);
 		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, offHeight);
 		
