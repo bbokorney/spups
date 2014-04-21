@@ -234,4 +234,8 @@ public class JavaBoard extends Board {
         return locations;
     }
 
+
+    public void buildPalace(Location loc, TileComponent tile) {}
+
+    public void upgradePalace(Location loc, TileComponent tile) {}
 }

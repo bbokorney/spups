@@ -73,6 +73,10 @@ public abstract class Board {
     public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
 
     public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
+
+    public abstract void buildPalace(Location loc, TileComponent tile);
+
+    public abstract void upgradePalace(Location loc, TileComponent tile);
 	
 	public TileComponent getTopTileComponent(Location loc) {
 		Space space = board.get(loc);
