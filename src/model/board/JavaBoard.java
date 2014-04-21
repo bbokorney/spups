@@ -1,5 +1,6 @@
 package model.board;
 
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 
 import java.lang.reflect.Array;
@@ -235,7 +236,17 @@ public class JavaBoard extends Board {
     }
 
 
-    public void buildPalace(Location loc, TileComponent tile) {}
+    public void buildPalace(Location loc, PalaceTileComponent tile) {
+        //First place this palace down
+        Space space = board.get(loc);
+        space.accept(tile);
 
-    public void upgradePalace(Location loc, TileComponent tile) {}
+        //Now convert all locations that were in this village to being in
+        //a city
+        City newCity = new City(loc, tile);
+        Village village = villageContainer.getVillageFromLocation(loc);
+
+    }
+
+    public void upgradePalace(Location loc, PalaceTileComponent tile) {}
 }

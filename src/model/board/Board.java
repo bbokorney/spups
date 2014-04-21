@@ -2,6 +2,7 @@ package model.board;
 
 import java.util.*;
 
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 
 /**
@@ -74,9 +75,9 @@ public abstract class Board {
 
     public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
 
-    public abstract void buildPalace(Location loc, TileComponent tile);
+    public abstract void buildPalace(Location loc, PalaceTileComponent tile);
 
-    public abstract void upgradePalace(Location loc, TileComponent tile);
+    public abstract void upgradePalace(Location loc, PalaceTileComponent tile);
 	
 	public TileComponent getTopTileComponent(Location loc) {
 		Space space = board.get(loc);
