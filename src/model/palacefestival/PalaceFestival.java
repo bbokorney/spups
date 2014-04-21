@@ -174,4 +174,8 @@ public class PalaceFestival {
 
     }
 
+	public int getDeckSize() {
+		return resources.getDeckSize();
+	}
+
 }

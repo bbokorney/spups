@@ -117,7 +117,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //check if they are placing on another three space tile
-        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement[0], ricePlacement[1])){
+        if(!PlacementOnSameSizeTileRule.placingOnSameTile(board, villagePlacement, ricePlacement[0], ricePlacement[1])){
             isSuccess = isSuccess && true;
 
         }
@@ -156,7 +156,7 @@ public class PlaceThreeSpaceTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(ConnectionTwoCitiesRule.connectsCities(villagePlacement,helperJunk)){
+        if(!ConnectionTwoCitiesRule.connectsCities(helperJunk, villagePlacement, ricePlacement)){
             isSuccess = isSuccess && true;
 
         }
