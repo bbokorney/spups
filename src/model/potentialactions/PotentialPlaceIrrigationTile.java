@@ -2,6 +2,7 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceIrrigationTile;
 import model.palacefestival.PalaceFestival;
@@ -32,8 +33,8 @@ public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    public Pair<ActionResult, PlaceIrrigationTile> confirmPlacement(){
+    public Pair<ActionResult, Action> confirmAction(){
         PlaceIrrigationTile result = new PlaceIrrigationTile(getLocation(), getGameModel());
-        return new Pair<ActionResult, PlaceIrrigationTile>(result.doAction(), result);
+        return new Pair<ActionResult, Action>(result.doAction(), result);
     }
 }

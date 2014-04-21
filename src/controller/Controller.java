@@ -46,7 +46,7 @@ public class Controller {
     }
 
 	public void addToHistory(Pair action) {
-		//history.addAction(action);
+		//history.addAction(action); TODO: Baker, history broken
 	}
 	public void addEndTurnToHistory(Pair action) {
 		history.addEndTurn(action);

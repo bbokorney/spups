@@ -2,9 +2,12 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceRiceTile;
 import model.palacefestival.PalaceFestival;
+
+import java.rmi.activation.ActivationID;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -28,8 +31,8 @@ public class PotentialPlaceRiceTile extends PotentialOneSpaceMovement {
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    public Pair<ActionResult, PlaceRiceTile> confirmPlacement(){
+    public Pair<ActionResult, Action> confirmAction(){
         PlaceRiceTile result = new PlaceRiceTile(getLocation(), getGameModel());
-        return new Pair<ActionResult, PlaceRiceTile>(result.doAction(), result);
+        return new Pair<ActionResult, Action>(result.doAction(), result);
     }
 }
