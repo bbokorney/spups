@@ -85,9 +85,6 @@ public class UpgradePalaceTile extends Action {
             /*
             All these after should only be done if the thingy is a palace tile
              */
-
-
-
             //See if the tile has been interacted with this turn
             if(game.hasPalaceLocationBeenUsedThisTurn(placement)){
                 isSuccess = isSuccess && true;
@@ -123,6 +120,11 @@ public class UpgradePalaceTile extends Action {
             isSuccess = isSuccess && false;
             message += "Error: This palace cannot be upgraded.\n";
         }
+
+        if(message.equalsIgnoreCase("")){
+            message += "Upgrade Palace, AP " + actionPoints + ", Fame " + famePoints;
+        }
+
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

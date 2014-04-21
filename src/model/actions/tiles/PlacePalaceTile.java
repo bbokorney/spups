@@ -140,7 +140,9 @@ public class PlacePalaceTile extends Action {
             message += "Error: You cannot place this tile on top of a developer.\n";
         }
 
-        //todo
+        if(message.equalsIgnoreCase("")){
+            message += "Palace Tile, AP " + actionPoints + ", Fame " + famePoints;
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

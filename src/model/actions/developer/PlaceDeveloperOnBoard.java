@@ -70,6 +70,10 @@ public class PlaceDeveloperOnBoard extends Action {
             message += "Error: You do not have enough AP.";
         }
 
+        if(message.equalsIgnoreCase("")){
+            message += "Place Developer, AP " + actionPoints;
+        }
+
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 

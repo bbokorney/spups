@@ -56,6 +56,10 @@ public class StartGame extends Action {
             message += "Please select 2 - 4 players";
         }
 
+        if(message.equalsIgnoreCase("")){
+            message += "Start Game";
+        }
+
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 

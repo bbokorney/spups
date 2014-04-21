@@ -13,7 +13,7 @@ public interface Location extends Serializable {
 	
 	public int hashCode();
 	
-	public boolean equals(Location loc);
+	public boolean equals(Object loc);
 
     public List<Location> getNeighbors();
 
