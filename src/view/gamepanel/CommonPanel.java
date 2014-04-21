@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 
 import view.TileLabel;
 import model.GameModel;
+import model.palacefestival.PalaceFestival;
+import model.sharedresources.SharedResourceType;
 import model.tiles.IrrigationTileComponent;
 import model.tiles.PalaceTileComponent;
 
@@ -14,10 +16,6 @@ import model.tiles.PalaceTileComponent;
 @SuppressWarnings("serial")
 public class CommonPanel extends JPanel {
 	JLabel[] palace = new JLabel[5];
-	JLabel p4;
-	JLabel p6;
-	JLabel p8;
-	JLabel p10;
 	JLabel irrigation;
 	JLabel threetile;
 	JLabel stack;
@@ -30,10 +28,9 @@ public class CommonPanel extends JPanel {
 			palace[x/2-1] = TileLabel.newHexLabel(x + "palace", offWidth, offHeight, new PalaceTileComponent(x));
 			this.add(palace[x/2-1]);
 		}
+		
 		irrigation = TileLabel.newHexLabel("irrigation", offWidth, offHeight, new IrrigationTileComponent());
 		threetile = TileLabel.newThreeHexLabel("threetile", offWidth+20, offHeight+30);
-//		JLabel twotile = TileLabel.newTwoHexLabel("threetile", offWidth, offHeight);
-
 		this.add(irrigation);
 		this.add(threetile);
 		
@@ -44,8 +41,14 @@ public class CommonPanel extends JPanel {
 	}
 
 
-	public void refreshView(GameModel model) {
-		// TODO Auto-generated method stub
-		
+	public void refreshView(GameModel model, PalaceFestival festival) {
+		palace[0].setText(""+model.getCount(SharedResourceType.PALACELEVELTWO));
+		palace[1].setText(""+model.getCount(SharedResourceType.PALACELEVELFOUR));
+		palace[2].setText(""+model.getCount(SharedResourceType.PALACELEVELSIX));
+		palace[3].setText(""+model.getCount(SharedResourceType.PALACELEVELEIGHT));
+		palace[4].setText(""+model.getCount(SharedResourceType.PALACELEVELTEN));
+		irrigation.setText(""+model.getCount(SharedResourceType.IRRIGATION));
+		threetile.setText(""+model.getCount(SharedResourceType.THREE));
+		repaint();
 	}
 }

@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import view.TileLabel;
+import model.player.JavaPlayer;
+import model.player.JavaPlayerResourceType;
 import model.player.Player;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
@@ -44,29 +46,14 @@ public class PlayerPanel extends JPanel {
 
 		rice = TileLabel.newHexLabel("rice", offWidth, offHeight, new RiceTileComponent());
 		village = TileLabel.newHexLabel("village", offWidth, offHeight, new VillageTileComponent());
-		add(twotile);
+		twotile = TileLabel.newTwoHexLabel("twotile", offWidth, offHeight+30);
 		add(developer);
 		add(rice);
 		add(village);
+		add(twotile);
 		add(AP);
 		add(card);
 //		add(user);
-		
-//		for(int x = 2; x <= 10; x += 2) {
-//			palace[x/2-1] = TileLabel.newHexLabel(x + "palace", offWidth, offHeight, new PalaceTileComponent(x));
-//			this.add(palace[x/2-1]);
-//		}
-//		irrigation = TileLabel.newHexLabel("irrigation", offWidth, offHeight, new IrrigationTileComponent());
-//		threetile = TileLabel.newThreeHexLabel("threetile", offWidth, offHeight);
-//		JLabel twotile = TileLabel.newTwoHexLabel("threetile", offWidth, offHeight);
-//
-//		this.add(threetile);
-//		this.add(irrigation);
-//		
-//		stack = TileLabel.newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
-//		card = TileLabel.newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
-//		this.add(stack);
-//		this.add(card);
 	}
 
 	private JLabel newJLabel(String value, String src, int width, int height){
@@ -80,9 +67,13 @@ public class PlayerPanel extends JPanel {
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 		return label;
 	}
-	
-	public void refreshView(Player player) {
-		// TODO Auto-generated method stub
-		
+
+	public void refreshView(JavaPlayer javaPlayer, int cardSize) {
+		twotile.setText(""+javaPlayer.getCount(JavaPlayerResourceType.TWO));
+		rice.setText(""+javaPlayer.getCount(JavaPlayerResourceType.RICE));
+		village.setText(""+javaPlayer.getCount(JavaPlayerResourceType.VILLAGE));
+		AP.setText(""+javaPlayer.getCount(JavaPlayerResourceType.EXTRAACTIONTOKEN));
+		developer.setText(""+javaPlayer.getCount(JavaPlayerResourceType.DEVELOPER));
+		card.setText(""+cardSize);
 	}
 }

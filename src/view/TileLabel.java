@@ -59,7 +59,7 @@ public class TileLabel extends JLabel {
 
 
 	public static JLabel newTwoHexLabel(String value, int width, int height) {
-		TileLabel label= new TileLabel(value, new int[] {35, 105}, new int[] {35, 0}, width, height, new TileComponent[] {
+		TileLabel label= new TileLabel(value, new int[] {35, 35}, new int[] {35, 95}, width, height, new TileComponent[] {
 				new VillageTileComponent(), new RiceTileComponent()});
 		setLabelStuff(label, width, height);
 		return label;

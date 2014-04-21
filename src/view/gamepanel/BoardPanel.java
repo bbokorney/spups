@@ -27,11 +27,8 @@ public class BoardPanel extends JPanel {
 	//private Graphics2D g2d;
 	HexLocation[] locations;
 	Board board;
-	public BoardPanel(Board board) {
-		this.board = board;
+	public BoardPanel() {
 		this.setVisible(true);
-		
-		locations = board.getAllLocations().toArray(new HexLocation[0]);
 	}
 	
 	private int[] getBoardOrigin(HexLocation[] locations) { 
@@ -47,35 +44,37 @@ public class BoardPanel extends JPanel {
 	}
 	
 	protected void paintComponent(Graphics g) {
-		int[] origin = getBoardOrigin(locations);
-
-		for(HexLocation location : locations) { 
-			int[] distance = location.getDistanceFromOrigin();
-			
-			if(distance[0] == 0 && distance[1] == 0) 
-				board.getSpace(location).accept(new VillageTileComponent());
-			if(distance[0] == 0 && distance[1] == 60) 
-				board.getSpace(location).accept(new IrrigationTileComponent());
-			if(distance[0] == 0 && distance[1] == 120) 
-				board.getSpace(location).accept(new RiceTileComponent());
-			if(distance[0] == 0 && distance[1] == 180) 
-				board.getSpace(location).accept(new PalaceTileComponent(2));
-			
-			int width = distance[0]+origin[0]+50;
-			int height = distance[1]+origin[1]+40;
-
-	    	LocationType type = board.getLocationType(location);
-	    	Color color = Color.white;
-	    	if(type == LocationType.Highlands)
-	    		color = Color.red;
-	    	if(type == LocationType.Lowlands)
-	    		color = Color.green;
-			
-			drawHex(g, width, height, color);
-			TileComponent tile = board.getSpace(location).getTopTileComponent();
-			TileVisitor visitor = new TileVisitor(g, width, height);
-			if(tile != null) 
-				board.getSpace(location).getTopTileComponent().accept(visitor);
+		if(board != null) {
+			int[] origin = getBoardOrigin(locations);
+	
+			for(HexLocation location : locations) { 
+				int[] distance = location.getDistanceFromOrigin();
+				
+				if(distance[0] == 0 && distance[1] == 0) 
+					board.getSpace(location).accept(new VillageTileComponent());
+				if(distance[0] == 0 && distance[1] == 60) 
+					board.getSpace(location).accept(new IrrigationTileComponent());
+				if(distance[0] == 0 && distance[1] == 120) 
+					board.getSpace(location).accept(new RiceTileComponent());
+				if(distance[0] == 0 && distance[1] == 180) 
+					board.getSpace(location).accept(new PalaceTileComponent(2));
+				
+				int width = distance[0]+origin[0]+50;
+				int height = distance[1]+origin[1]+40;
+	
+		    	LocationType type = board.getLocationType(location);
+		    	Color color = Color.white;
+		    	if(type == LocationType.Highlands)
+		    		color = Color.red;
+		    	if(type == LocationType.Lowlands)
+		    		color = Color.green;
+				
+				drawHex(g, width, height, color);
+				TileComponent tile = board.getSpace(location).getTopTileComponent();
+				TileVisitor visitor = new TileVisitor(g, width, height);
+				if(tile != null) 
+					board.getSpace(location).getTopTileComponent().accept(visitor);
+			}
 		}
     }
 	
@@ -144,7 +143,9 @@ public class BoardPanel extends JPanel {
 	}
 
 	
-	public void refreshView(Board board) {
+	public void refreshView(Board board) {	
+		this.board = board;	
+		locations = board.getAllLocations().toArray(new HexLocation[0]);
 		// TODO Auto-generated method stub
 		repaint();
 	}
