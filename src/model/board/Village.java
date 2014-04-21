@@ -24,4 +24,17 @@ public class Village {
     public Collection<Location> getLocations() {
         return village;
     }
+
+    public boolean equals(Village village) {
+        //Check sizes are the same
+        if (this.getSize() != village.getSize())
+            return false;
+        //Check it holds the same locations as us
+        for (Location loc : getLocations()) {
+            if (!village.getLocations().contains(loc))
+                return false;
+        }
+
+        return true;
+    }
 }
