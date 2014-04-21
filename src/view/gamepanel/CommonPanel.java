@@ -60,11 +60,11 @@ public class CommonPanel extends JPanel {
 
 
 	public void refreshView(GameModel model, PalaceFestival festival) {
-		palace[0].setText(""+model.getCount(SharedResourceType.PALACELEVELTWO));
-		palace[1].setText(""+model.getCount(SharedResourceType.PALACELEVELFOUR));
-		palace[2].setText(""+model.getCount(SharedResourceType.PALACELEVELSIX));
-		palace[3].setText(""+model.getCount(SharedResourceType.PALACELEVELEIGHT));
-		palace[4].setText(""+model.getCount(SharedResourceType.PALACELEVELTEN));
+		palace[0].setText(""+model.getCount(SharedResourceType.PALACELEVEL2));
+		palace[1].setText(""+model.getCount(SharedResourceType.PALACELEVEL4));
+		palace[2].setText(""+model.getCount(SharedResourceType.PALACELEVEL6));
+		palace[3].setText(""+model.getCount(SharedResourceType.PALACELEVEL8));
+		palace[4].setText(""+model.getCount(SharedResourceType.PALACELEVEL10));
 		irrigation.setText(""+model.getCount(SharedResourceType.IRRIGATION));
 		threetile.setText(""+model.getCount(SharedResourceType.THREE));
 		stack.setText(""+festival.getDeckSize());
