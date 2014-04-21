@@ -144,7 +144,9 @@ public class PlaceTwoSpaceTile extends Action {
             message += "Error: You cannot connect cities.\n";
         }
 
-        //todo
+        if(message.equalsIgnoreCase("")){
+            message += "Two Space Tile, AP " + actionPoints + ", Fame " + famePoints;
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

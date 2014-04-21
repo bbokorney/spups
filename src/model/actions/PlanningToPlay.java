@@ -40,7 +40,9 @@ public class PlanningToPlay extends Action {
 
         //Check if the player has enough AP points to travel the path
 
-        //todo
+        if(message.equalsIgnoreCase("")){
+            message += "Play";
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

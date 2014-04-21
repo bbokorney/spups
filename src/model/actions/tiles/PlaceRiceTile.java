@@ -123,7 +123,9 @@ public class PlaceRiceTile extends Action {
         }
 
 
-        //todo
+        if(message.equalsIgnoreCase("")){
+            message += "Rice Tile, AP " + actionPoints + ", Fame " + famePoints;
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

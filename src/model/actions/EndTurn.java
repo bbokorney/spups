@@ -45,6 +45,10 @@ public class EndTurn extends Action {
             message += "Player cannot end their turn";
         }
 
+        if(message.equalsIgnoreCase("")){
+            message += "End Turn";
+        }
+
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 

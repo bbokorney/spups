@@ -165,6 +165,10 @@ public class PlaceThreeSpaceTile extends Action {
             message += "Error: You cannot connect cities.\n";
         }
 
+        if(message.equalsIgnoreCase("")){
+            message += "Three Space Tile, AP " + actionPoints + ", Fame " + famePoints;
+        }
+
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
      }
 

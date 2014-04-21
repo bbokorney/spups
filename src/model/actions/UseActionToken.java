@@ -54,6 +54,10 @@ public class UseActionToken extends Action {
             message += "You have no Action Tokens left";
         }
 
+        if(message.equalsIgnoreCase("")){
+            message += "Action Token, AP " + actionPoints + ", Fame " + famePoints;
+        }
+
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
