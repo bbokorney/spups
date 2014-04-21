@@ -68,6 +68,12 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
         return true;
     }
 
+    public boolean tabToPreviousCard() {
+        palaceIndex--;
+        palaceIndex %= palacesValidForFestival.size();
+        return true;
+    }
+
     public boolean chooseCurrentPalace() {
         selectedPalace = palacesValidForFestival.get(palaceIndex);
         selectedPalaceLocation = locationsValidForFestival.get(palaceIndex);
