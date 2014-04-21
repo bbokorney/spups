@@ -11,6 +11,7 @@ import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
 import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
+import model.tiles.VillageTileComponent;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -60,7 +61,7 @@ public class PlaceTwoSpaceTile extends Action {
 
 
         //see if there is a two space tile to take from player
-        if(game.getCount(JavaPlayerResourceType.TWO) > 1){
+        if(game.getCount(JavaPlayerResourceType.TWO) > 0){
             isSuccess = isSuccess && true;
 
         }
@@ -172,7 +173,7 @@ public class PlaceTwoSpaceTile extends Action {
 
             //place the tile components down on three locations
             Tile twoSpaceTile = new Tile(2);
-            game.placeVillageTileComponent(villagePlacement, new RiceTileComponent(twoSpaceTile));
+            game.placeVillageTileComponent(villagePlacement, new VillageTileComponent(twoSpaceTile));
             game.placeRiceTileComponent(ricePlacement, new RiceTileComponent(twoSpaceTile));
 
             //set has placed land boolean to true

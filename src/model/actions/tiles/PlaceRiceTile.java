@@ -60,7 +60,7 @@ public class PlaceRiceTile extends Action {
 
 
         //Check if the player has a rice tile to use
-        if(game.getCount(JavaPlayerResourceType.RICE) > 1){
+        if(game.getCount(JavaPlayerResourceType.RICE) > 0){
             isSuccess = isSuccess && true;
 
         }
