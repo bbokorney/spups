@@ -114,10 +114,10 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void advanceJavaTurn() {
-        if (canAdvanceJavaTurn()) {
+        //if (canAdvanceJavaTurn()) {
             turn.advanceTurn();
             javaPlayers.advanceTurn();
-        }
+        //}
     }
 
     @Override
