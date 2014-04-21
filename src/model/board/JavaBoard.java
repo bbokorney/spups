@@ -57,7 +57,7 @@ public class JavaBoard extends Board {
             BodyOfWater newBody = new BodyOfWater();
             for (BodyOfWater body : bodiesToJoin) {
                 for (Location waterLoc : body.getLocations()) {
-                    newBody.add(loc);
+                    newBody.add(waterLoc);
                 }
             }
             newBody.add(loc);
@@ -166,7 +166,7 @@ public class JavaBoard extends Board {
             Village village = new Village();
             village.add(loc);
             villageContainer.addVillage(village);
-    }
+        }
         //If this joins 1 village
         else if (villagesToJoin.size() == 1) {
             Village village = villagesToJoin.get(0);
@@ -177,7 +177,7 @@ public class JavaBoard extends Board {
             Village newVillage = new Village();
             for (Village village : villagesToJoin) {
                 for (Location villageLoc : village.getLocations()) {
-                    newVillage.add(loc);
+                    newVillage.add(villageLoc);
                 }
             }
             newVillage.add(loc);
