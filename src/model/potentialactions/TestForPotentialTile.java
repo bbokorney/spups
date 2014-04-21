@@ -1,12 +1,18 @@
 package model.potentialactions;
 
+import controller.Controller;
 import model.GameModel;
 import model.JavaGameModel;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceCardComponent;
 import model.palacefestival.PalaceFestival;
+import model.tiles.RiceTileComponent;
+import model.tiles.Tile;
+import model.tiles.VillageTileComponent;
+import view.GameFrame;
 
+import javax.swing.*;
 import java.util.Stack;
 
 /**
@@ -50,15 +56,21 @@ public class TestForPotentialTile {
             deck.add(card);
         }
 
-
-
         GameModel game = new JavaGameModel(3);
         PalaceFestival festival = new PalaceFestival(null, deck);
 
-//        PotentialJavaThreeSpaceTile threeSpacePA = new PotentialJavaThreeSpaceTile(game, festival);
-//        stuff.printThreeSpace(threeSpacePA, "New PotentialJavaThreeSpaceTile:");
-//
-//
+        GameFrame frame = new GameFrame(game);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        frame.refreshGame(game,festival,null,null,null);
+
+
+
+        PotentialJavaThreeSpaceTile threeSpacePA = new PotentialJavaThreeSpaceTile(game, festival);
+        stuff.printThreeSpace(threeSpacePA, "New PotentialJavaThreeSpaceTile:");
+
+
 //        threeSpacePA.rotateClockwise();
 //        stuff.printThreeSpace(threeSpacePA, "Rotate:");
 //        threeSpacePA.rotateClockwise();
@@ -74,6 +86,10 @@ public class TestForPotentialTile {
 //
 //        threeSpacePA.moveNorth();
 //        stuff.printThreeSpace(threeSpacePA, "Move North:");
+//
+//        game.getBoard().getSpace(threeSpacePA.getCenterLocation()).accept(new VillageTileComponent(new Tile(1)));
+//
+//
 //
 //        threeSpacePA.moveSouth();
 //        stuff.printThreeSpace(threeSpacePA, "Move South:");
@@ -124,27 +140,43 @@ public class TestForPotentialTile {
 //
 //        twoSpacePA.moveSouthwest();
 //        stuff.printTwoSpace(twoSpacePA, "Move Southwest:");
+////
+//        PotentialPlaceRiceTile riceSpacePA = new PotentialPlaceRiceTile (game, festival);
+//        stuff.printOneSpace(riceSpacePA, "New PotentialJavaOneSpaceTile:");
+//
+//        riceSpacePA.moveNorth();
+//        stuff.printOneSpace(riceSpacePA, "Move North:");
+//
+//
+//        game.getBoard().getSpace(riceSpacePA.getLocation()).accept(new RiceTileComponent(new Tile(1)));
+//
+//        riceSpacePA.moveSouth();
+//        stuff.printOneSpace(riceSpacePA, "Move North:");
+//        riceSpacePA.moveSouth();
+//        stuff.printOneSpace(riceSpacePA, "Move North:");
+//        riceSpacePA.moveSouth();
+//        stuff.printOneSpace(riceSpacePA, "Move North:");
+//        riceSpacePA.moveSouth();
+//        stuff.printOneSpace(riceSpacePA, "Move North:");
+//        game.getBoard().getSpace(riceSpacePA.getLocation()).accept(new RiceTileComponent(new Tile(1)));
+//
+//        riceSpacePA.moveNortheast();
+//        stuff.printOneSpace(riceSpacePA, "Move Northeast:");
+//
+//        game.getBoard().getSpace(riceSpacePA.getLocation()).accept(new RiceTileComponent(new Tile(1)));
+//
+//        riceSpacePA.moveSoutheast();
+//        stuff.printOneSpace(riceSpacePA, "Move Southeast:");
+//
+//        game.getBoard().getSpace(riceSpacePA.getLocation()).accept(new RiceTileComponent(new Tile(1)));
+//
+//        riceSpacePA.moveNorthwest();
+//        stuff.printOneSpace(riceSpacePA, "Move Northwest:");
+//
+//        riceSpacePA.moveSouthwest();
+//        stuff.printOneSpace(riceSpacePA, "Move Southwest:");
 
-        PotentialPlaceRiceTile riceSpacePA = new PotentialPlaceRiceTile (game, festival);
-        stuff.printOneSpace(riceSpacePA, "New PotentialJavaOneSpaceTile:");
 
-        riceSpacePA.moveNorth();
-        stuff.printOneSpace(riceSpacePA, "Move North:");
-
-        riceSpacePA.moveSouth();
-        stuff.printOneSpace(riceSpacePA, "Move South:");
-
-        riceSpacePA.moveNortheast();
-        stuff.printOneSpace(riceSpacePA, "Move Northeast:");
-
-        riceSpacePA.moveSoutheast();
-        stuff.printOneSpace(riceSpacePA, "Move Southeast:");
-
-        riceSpacePA.moveNorthwest();
-        stuff.printOneSpace(riceSpacePA, "Move Northwest:");
-
-        riceSpacePA.moveSouthwest();
-        stuff.printOneSpace(riceSpacePA, "Move Southwest:");
 
     }
     public void printThreeSpace(PotentialJavaThreeSpaceTile threeSpacePA, String startMessage) {
