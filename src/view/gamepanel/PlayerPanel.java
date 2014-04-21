@@ -40,7 +40,7 @@ public class PlayerPanel extends JPanel {
 		rice = newJLabel("3", "/Users/maumau/spups/resources/rice.png", offWidth, offHeight);
 		village = newJLabel("3", "/Users/maumau/spups/resources/village.png", offWidth, offHeight);
 		AP = newJLabel("3", "/Users/maumau/spups/resources/AP.png", offWidth, offHeight);
-		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, offHeight);
+		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, offHeight+30);
 		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, offHeight);
 		
 

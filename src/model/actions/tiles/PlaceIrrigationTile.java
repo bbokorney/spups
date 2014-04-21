@@ -58,7 +58,7 @@ public class PlaceIrrigationTile extends Action {
 
     //
 
-        if(game.getCount(SharedResourceType.IRRIGATION) > 1){
+        if(game.getCount(SharedResourceType.IRRIGATION) > 0){
             isSuccess = isSuccess && true;
 
         }

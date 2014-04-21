@@ -60,13 +60,13 @@ public class PlaceRiceTile extends Action {
 
 
         //Check if the player has a rice tile to use
-        if(game.getCount(JavaPlayerResourceType.RICE) > 1){
+        if(game.getCount(JavaPlayerResourceType.RICE) > 0){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough rice tiles.\n";
+            message += "Error: You do not have enough rice tiles. ";
         }
 
         //check if the player has enough AP, 1
@@ -76,18 +76,18 @@ public class PlaceRiceTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough AP.\n";
+            message += "Error: You do not have enough AP. ";
         }
 
         //check if they are not placing outside of central java
         if(game.isHeightAtLocation(0, placement) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
             isSuccess = isSuccess && true;
+            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk, placement);
             famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
-
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place outside Central Java.\n";
+            message += "Error: You cannot place outside Central Java. ";
         }
 
         //Check if they are not placing on top of a one tile
@@ -97,7 +97,7 @@ public class PlaceRiceTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on a one space tile.\n";
+            message += "Error: You cannot place this on a one space tile. ";
         }
 
         //Check if they are placing this directly on the board or on another land tile
@@ -109,7 +109,7 @@ public class PlaceRiceTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place a rice tile on this terrain.\n";
+            message += "Error: You cannot place a rice tile on this terrain. ";
         }
 
         //Check if the player is placing on top of a developer
@@ -119,11 +119,10 @@ public class PlaceRiceTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You cannot place this tile on top of a developer.\n";
+            message += "Error: You cannot place this tile on top of a developer. ";
         }
 
-
-        if(message.equalsIgnoreCase("")){
+        if(message.equals("")){
             message += "Rice Tile, AP " + actionPoints + ", Fame " + famePoints;
         }
 

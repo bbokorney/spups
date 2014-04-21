@@ -1,17 +1,17 @@
 package view;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JFrame;
 
+import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
-import model.potentialactions.ActionState;
 import model.tiles.TileComponent;
 import view.actionpanel.ActionPanel;
 import view.gamepanel.GamePanel;
@@ -31,7 +31,7 @@ public class GameFrame extends JFrame {
     ActionPanel actionPanel;
     FestivalPanel festivalPanel;
     
-	public GameFrame(){
+	public GameFrame(controller.keylistener.KeyListener listener){
 		this.setTitle("Java Spups");
 		this.setSize(WIDTH, HEIGHT);
 		this.setResizable(true);
@@ -46,20 +46,24 @@ public class GameFrame extends JFrame {
         this.add(gamePanel);
         this.setJMenuBar(menu);
         
+        addKeyListener(new KeyListener());
+        
         //this.setContentPane(gamePanel);
 	}
 
     public void refreshGame( GameModel game, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
-        //ths gives all the information during the java game
+        //this gives all the information during the java game
     	gamePanel.refreshView(game, festival, actionResult, potentialComponents, highlightedComponents);
 //    	actionPanel.refreshView();
     }
 
-    public void refreshCardView(List<Card> cards){
+    @SuppressWarnings("rawtypes")
+	public void refreshCardView(List<Card> cards){
         //shows cards of the current player when it is the players turn in the Java Game
     }
 
-    public void refreshView(PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected){
+    @SuppressWarnings("rawtypes")
+	public void refreshView(PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected){
         //picking cards
         //sorry they aren't a list of pairs with card and a boolean for selection
         //it was implemented this way in the model and I don't feel like working on it

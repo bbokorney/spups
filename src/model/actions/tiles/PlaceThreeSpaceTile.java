@@ -97,7 +97,7 @@ public class PlaceThreeSpaceTile extends Action {
 
 
         //see if there is a three space tile to take from shared
-        if(game.getCount(SharedResourceType.THREE) > 1){
+        if(game.getCount(SharedResourceType.THREE) > 0){
             isSuccess = isSuccess && true;
 
         }

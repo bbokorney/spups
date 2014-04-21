@@ -53,7 +53,7 @@ public class PlaceVillageTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //see if there is a village tile to take from player
-        if(game.getCount(JavaPlayerResourceType.VILLAGE) > 1){
+        if(game.getCount(JavaPlayerResourceType.VILLAGE) > 0){
             isSuccess = isSuccess && true;
 
         }
@@ -72,19 +72,28 @@ public class PlaceVillageTile extends Action {
             message += "Error: You do not have enough AP.\n";
         }
 
-        //check if they are placing on another one tile
-        if(!PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
-            isSuccess = isSuccess && true;
 
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place this on top of another one space tile.\n";
-        }
 
         //see if all the spaces they are placing on are the same elevation
         if(SameElevationRule.sameElevation(game.getSpaceAtLocation(placement))){
             isSuccess = isSuccess && true;
+
+            /*
+                The rest of this stuff should only be checked if they are on the same elevation
+             */
+            //check if they are placing on another one tile
+            if(!PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
+                isSuccess = isSuccess && true;
+
+            }
+            else{
+                isSuccess = isSuccess && false;
+                message += "Error: You cannot place this on top of another one space tile.\n";
+            }
+
+            if(game.isHeightAtLocation(0, placement)){
+                famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
+            }
 
         }
         else{

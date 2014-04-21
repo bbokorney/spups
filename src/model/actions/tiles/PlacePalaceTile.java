@@ -59,7 +59,7 @@ public class PlacePalaceTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //Check if there are any palace tiles of this value in shared resources
-        if(game.getCount(SharedResourceType.valueOf("PALACE" + value)) > 1){
+        if(game.getCount(SharedResourceType.valueOf("PALACELEVEL" + value)) > 0){
             isSuccess = isSuccess && true;
 
         }
@@ -93,7 +93,7 @@ public class PlacePalaceTile extends Action {
              */
 
             //Check if there is not already a palace in that city/village
-            if(game.isLocationInCity(placement)){
+            if(!game.isLocationInCity(placement)){
                 isSuccess = isSuccess && true;
 
             }
