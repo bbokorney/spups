@@ -21,6 +21,11 @@ public class Village {
         village.add(loc);
     }
 
+    public void remove(Location loc) {
+        if (village.contains(loc))
+            village.remove(loc);
+    }
+
     public Collection<Location> getLocations() {
         return village;
     }
