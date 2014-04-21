@@ -69,6 +69,7 @@ public class JavaBoard extends Board {
         Space space = board.get(loc);
         space.accept(tile);
 
+        //CHECK FOR SPLITTING A CITY
         //Get all neighbors which are in a city
         List<Location> cityNeighbors = new ArrayList<Location>();
         for (Location neighbor: loc.getNeighbors()) {
@@ -104,6 +105,42 @@ public class JavaBoard extends Board {
 
             //Now we can safely remove the old city
             cityContainer.removeCity(oldCity);
+        }
+
+        //CHECK FOR SPLITTING A VILLAGE
+        //Get all neighbors which are in a city
+        List<Location> villageNeighbors = new ArrayList<Location>();
+        for (Location neighbor: loc.getNeighbors()) {
+            for (Village village : villageContainer.getVillages()) {
+                if (village.getLocations().contains(neighbor))
+                    villageNeighbors.add(neighbor);
+            }
+        }
+
+        //Remove this location from a city if it was in one
+        if (isLocationInVillage(loc))
+            villageContainer.removeLocationFromVillage(loc);
+
+        //Okay so here's the tough part. We're gonna go through each of our
+        //village neighbors and basically make a new village out of it and its
+        //village neighbors (found successively in a graph search). As we do
+        // this for each village neighbor, all the villages which need to be
+        // split based on this new rice tile placement will be split, and all
+        // the villages which should not be split will be rejoined.
+        for (Location neighbor : villageNeighbors) {
+            //First get the original city to which this neighbor belonged
+            Village oldVillage = villageContainer.getVillageFromLocation(neighbor);
+
+            //Now create a new city
+            Village newVillage = new Village();
+            ArrayList<Location> villages = makeVillage(loc, new HashMap<Location, Boolean>());
+            newVillage.add(villages.toArray(new Location[0]));
+
+            //Add this new city to citycontainer
+            villageContainer.addVillage(newVillage);
+
+            //Now we can safely remove the old city
+            villageContainer.removeVillage(oldVillage);
         }
     }
 
@@ -171,12 +208,27 @@ public class JavaBoard extends Board {
     private ArrayList<Location> makeCity(Location loc, Location palaceLoc,
                                          HashMap<Location, Boolean> visited) {
         ArrayList<Location> locations = new ArrayList<Location>();
+        visited.put(loc, true);
         if ((loc.equals(palaceLoc) || isLocationInCity(loc) &&
              !visited.get(loc))) {
             locations.add(loc);
-            visited.put(loc, true);
             for (Location neighbor : loc.getNeighbors()) {
                 locations.addAll(makeCity(neighbor, palaceLoc, visited));
+            }
+        }
+        return locations;
+    }
+
+    //This method will construct a village given a single location (which is
+    //already in a village) and branch out to find all its village neighbors
+    private ArrayList<Location> makeVillage(Location loc,
+                                            HashMap<Location, Boolean> visited) {
+        ArrayList<Location> locations = new ArrayList<Location>();
+        visited.put(loc, true);
+        if (isLocationInVillage(loc) && !visited.get(loc)) {
+            locations.add(loc);
+            for (Location neighbor : loc.getNeighbors()) {
+                locations.addAll(makeVillage(neighbor, visited));
             }
         }
         return locations;
