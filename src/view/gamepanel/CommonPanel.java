@@ -33,9 +33,9 @@ public class CommonPanel extends JPanel {
 		threetile = TileLabel.newThreeHexLabel("threetile", offWidth+20, offHeight+30);
 		this.add(irrigation);
 		this.add(threetile);
-		
-		stack = TileLabel.newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
-		card = TileLabel.newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
+		//TODO make the text of this go on the right place
+		stack = TileLabel.newJLabel("", "/Users/maumau/spups/resources/card.png", 80, 70);
+		card = TileLabel.newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 70);
 		this.add(stack);
 		this.add(card);
 	}
@@ -50,7 +50,9 @@ public class CommonPanel extends JPanel {
 		irrigation.setText(""+model.getCount(SharedResourceType.IRRIGATION));
 		threetile.setText(""+model.getCount(SharedResourceType.THREE));
 		stack.setText(""+festival.getDeckSize());
-		card.setText(""+festival.peekAtFestivalCard());
+		
+		// TODO put picture of festival card
+		//card.setText(""+festival.peekAtFestivalCard());
 		repaint();
 	}
 }

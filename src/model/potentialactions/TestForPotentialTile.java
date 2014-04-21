@@ -55,14 +55,6 @@ public class TestForPotentialTile {
         GameModel game = new JavaGameModel(3);
         PalaceFestival festival = new PalaceFestival(null, deck);
 
-        GameFrame frame = new GameFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-//        frame.refreshGame(game,festival,null,null,null);
-
-
-
         PotentialJavaThreeSpaceTile threeSpacePA = new PotentialJavaThreeSpaceTile(game, festival);
         stuff.printThreeSpace(threeSpacePA, "New PotentialJavaThreeSpaceTile:");
 
