@@ -42,7 +42,7 @@ public class PlaceDeveloperOnBoard extends Action {
 
         boolean isSuccess = true;
         int famePoints = 0;         //will never gain fame points
-        int actionPoints = 1 + path.getCost();       //todo add the cost of the path
+        int actionPoints = 1;
         String message = "";
 
         //check if the player has a developer off the board
@@ -54,8 +54,9 @@ public class PlaceDeveloperOnBoard extends Action {
             message += "You do not have any more developers.\n";
         }
 
-        if(path.valid()){
+        if(path != null && path.valid()){
             isSuccess = isSuccess && true;
+            actionPoints += path.getCost();
         }
         else{
             isSuccess = isSuccess && false;
