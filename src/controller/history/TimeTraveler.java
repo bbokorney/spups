@@ -33,7 +33,7 @@ public class TimeTraveler {
 		Queue<Pair> latestTurn = undoneActions.peek();
 		Pair<ActionResult, Action> pair = latestTurn.poll();
 		doneActions.add(pair);
-		pair.getSecond().doAction(model);
+		pair.getSecond().doAction();
 
 		if(latestTurn.size() < 1) {
 			undoneActions.poll();

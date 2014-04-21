@@ -233,16 +233,6 @@ public class JavaGameModel extends GameModel{
         return getCurrentJavaPlayer().getDeveloperLocations();
     }
 
-	public void resetGame() {
-		int numPlayers = javaPlayers.getPlayers().size();
-
-		resources = new SharedResources();
-		board = new JavaBoard();
-		javaPlayers = new JavaPlayers(numPlayers);
-		finalRoundTurns = -1;
-		turn = new NonFinalTurn();
-	}
-
     @Override
     public void setHasPlacedLandTile(boolean hasPlacedLandTile) {
         turn.setHasPlacedLandTile(hasPlacedLandTile);
