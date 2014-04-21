@@ -13,7 +13,7 @@ public class IrrigationTileComponent extends TileComponent {
     }
 
     public IrrigationTileComponent() {
-
+        super(new Tile(1));
     }
 
     public void accept(Visitor visitor) {

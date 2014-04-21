@@ -35,7 +35,7 @@ public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    protected Pair<ActionResult, PlaceTwoSpaceTile> confirmPlacement() {
+    public Pair<ActionResult, PlaceTwoSpaceTile> confirmPlacement() {
         PlaceTwoSpaceTile result = new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation(), getGameModel());
         return new Pair<ActionResult, PlaceTwoSpaceTile>(result.doAction(), result);
     }

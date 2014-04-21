@@ -6,9 +6,10 @@ import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
-import model.actions.tiles.PlaceTwoSpaceTile;
-import model.potentialactions.PotentialJavaTwoSpaceTile;
+import model.actions.developer.PlaceDeveloperOnBoard;
+import model.potentialactions.PotentialPlaceDeveloperOnBoard;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PlaceTwoSpaceTileUIState extends GameplayUIState {
+public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 	private final int KEY_NORTH = KeyEvent.VK_NUMPAD8;
 	private final int KEY_SOUTH = KeyEvent.VK_NUMPAD2;
 	private final int KEY_NORTHEAST = KeyEvent.VK_NUMPAD9;
@@ -26,20 +27,19 @@ public class PlaceTwoSpaceTileUIState extends GameplayUIState {
 	private final int KEY_SOUTHWEST = KeyEvent.VK_NUMPAD1;
 
 	private final int KEY_CONFIRM = KeyEvent.VK_ENTER;
-	private final int KEY_ROTATE = KeyEvent.VK_R;
 
     Controller controller;
     KeyListener keyListener;
     GameModel model;
 
-	PotentialJavaTwoSpaceTile potentialAction;
+	PotentialPlaceDeveloperOnBoard potentialAction;
 
-    public PlaceTwoSpaceTileUIState(Controller controller, KeyListener keyListener, GameModel model){
+    public PlaceDeveloperOnBoardUIState(Controller controller, KeyListener keyListener, GameModel model){
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
 
-	    potentialAction = new PotentialJavaTwoSpaceTile(model, controller.getPalaceFestival());
+	    potentialAction = new PotentialPlaceDeveloperOnBoard(model, controller.getPalaceFestival());
 
         initListeners();
     }
@@ -86,15 +86,8 @@ public class PlaceTwoSpaceTileUIState extends GameplayUIState {
 		}
 	}
 
-	public void rotate() {
-		ActionResult result = potentialAction.rotateClockwise();
-		if(!result.isSuccess()) {
-
-		}
-	}
-
 	public void confirmPlacement() {
-		Pair<ActionResult, PlaceTwoSpaceTile> actionPair = potentialAction.confirmPlacement();
+		Pair<ActionResult, Action> actionPair = potentialAction.confirmAction();
 		ActionResult result = actionPair.getFirst();
 
 		if(result.isSuccess()) {
@@ -148,14 +141,6 @@ public class PlaceTwoSpaceTileUIState extends GameplayUIState {
 			@Override
 			public void call() {
 				moveSouthwest();
-			}
-		});
-		listeners.add(i);
-
-		i = new InternalListener(KEY_ROTATE, new Funktor() {
-			@Override
-			public void call() {
-				rotate();
 			}
 		});
 		listeners.add(i);

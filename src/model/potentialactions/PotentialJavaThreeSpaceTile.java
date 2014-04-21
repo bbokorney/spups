@@ -27,7 +27,7 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    protected Pair<ActionResult, PlaceThreeSpaceTile> confirmPlacement() {
+    public Pair<ActionResult, PlaceThreeSpaceTile> confirmPlacement() {
         PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), getGameModel() );
         return new Pair<ActionResult, PlaceThreeSpaceTile>(result.doAction(), result);
     }

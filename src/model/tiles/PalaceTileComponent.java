@@ -15,6 +15,7 @@ public class PalaceTileComponent extends TileComponent {
     }
 
     public PalaceTileComponent(int level) {
+        super(new Tile(1));
         this.level = level;
     }
 
