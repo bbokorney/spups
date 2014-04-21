@@ -51,39 +51,39 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
 
     public void moveNorth() {
         ActionResult result = potentialAction.moveNorth();
-		updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
+		updateView(result, potentialAction.getShortestLegalPath().getPath());
     }
 
     public void moveSouth() {
         ActionResult result = potentialAction.moveSouth();
-	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
+	    updateView(result, potentialAction.getShortestLegalPath().getPath());
     }
 
     public void moveNortheast() {
         ActionResult result = potentialAction.moveNortheast();
-	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
+	    updateView(result, potentialAction.getShortestLegalPath().getPath());
     }
 
     public void moveNorthwest() {
         ActionResult result = potentialAction.moveNorthwest();
-	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
+	    updateView(result, potentialAction.getShortestLegalPath().getPath());
     }
 
 	public void moveSoutheast() {
 		ActionResult result = potentialAction.moveSoutheast();
-		updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
+		updateView(result, potentialAction.getShortestLegalPath().getPath());
 	}
 
     public void moveSouthwest() {
         ActionResult result = potentialAction.moveSouthwest();
-	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
+	    updateView(result, potentialAction.getShortestLegalPath().getPath());
     }
 
     public void confirmPlacement() {
         Pair<ActionResult, MoveDeveloperAroundBoard> actionPair = potentialAction.confirmMovement();
         ActionResult result = actionPair.getFirst();
 
-	    updateView(result, Arrays.asList(potentialAction.getShortestLegalPath().getPath()));
+	    updateView(result, potentialAction.getShortestLegalPath().getPath());
     }
 
     private void initListeners() {

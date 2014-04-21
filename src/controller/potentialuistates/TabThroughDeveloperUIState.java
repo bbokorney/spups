@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Created by Baker on 4/14/2014.
  */
+// TODO: Baker, commented out code
 public class TabThroughDeveloperUIState extends GameplayUIState {
 	private final int KEY_SWITCH = KeyEvent.VK_TAB;
 	private final int KEY_MOVE = KeyEvent.VK_ENTER;
@@ -34,23 +35,23 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
         this.keyListener = keyListener;
         this.model = model;
 
-	    potentialAction = new PotentialTabThroughDevelopers();
+	    //potentialAction = new PotentialTabThroughDevelopers();
 
         initListeners();
     }
 
 	public void switchDeveloper() {
-		ActionResult result = potentialAction.getLocationFromPath();
-		if(!result.isSuccess()) {
-
-		}
+//		ActionResult result = potentialAction.getLocationFromPath();
+//		if(!result.isSuccess()) {
+//
+//		}
 	}
 
 	public void switchToMoveDeveloperState() {
-		Developer developer = potentialAction.getSelectedDeveloper();
-		if(developer instanceof Developer) {
-			controller.setCurrentState(new MoveDeveloperAroundBoardUIState(controller, keyListener, model, developer));
-		}
+//		Developer developer = potentialAction.getSelectedDeveloper();
+//		if(developer instanceof Developer) {
+//			controller.setCurrentState(new MoveDeveloperAroundBoardUIState(controller, keyListener, model, developer));
+//		}
 	}
 
 	public void confirmDeletion() {

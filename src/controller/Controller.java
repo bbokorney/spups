@@ -14,6 +14,7 @@ import model.palacefestival.PalaceFestival;
 import model.tiles.TileComponent;
 import view.GameFrame;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +35,7 @@ public class Controller {
 	public Controller(GameFrame view, GameModel model, PalaceFestival palaceFestival) {
 		this.view = view;
         this.model = model;
-        keyListener = new KeyListener();
+        keyListener = view.getKeyListener();
 		paFes = palaceFestival;
 
         currentState = new EmptyUIState(this, keyListener, model, paFes);

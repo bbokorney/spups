@@ -32,7 +32,7 @@ public class PotentialPlaceIrrigationTile extends PotentialOneSpaceMovement{
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    protected Pair<ActionResult, PlaceIrrigationTile> confirmPlacement(){
+    public Pair<ActionResult, PlaceIrrigationTile> confirmPlacement(){
         PlaceIrrigationTile result = new PlaceIrrigationTile(getLocation(), getGameModel());
         return new Pair<ActionResult, PlaceIrrigationTile>(result.doAction(), result);
     }

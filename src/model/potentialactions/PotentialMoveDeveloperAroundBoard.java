@@ -18,13 +18,13 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
 
     Location developerStartingLocation;
 
-
+    // TODO: Baker, this needs to expose the shortest path
     public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival, Location location){
         super(game, festival);
         this.developerStartingLocation = location;
     }
 
-    private JavaPath getShortestLegalPath(){
+    public JavaPath getShortestLegalPath(){
         LeastCostPathFinder pathFinder = new LeastCostPathFinder(getGameModel());
         return  pathFinder.findShortestPath(developerStartingLocation, getLocation());
 

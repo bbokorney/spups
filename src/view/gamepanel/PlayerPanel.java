@@ -40,12 +40,15 @@ public class PlayerPanel extends JPanel {
 		name = new JTextArea();
 		name.setPreferredSize(new Dimension(70, 30));
 		name.setBackground(Color.red);
+        name.setEditable(false);
 		fame = new JTextArea();
 		fame.setPreferredSize(new Dimension(70, 30));
 		fame.setBackground(Color.red);
+        fame.setEditable(false);
 		AP = new JTextArea();
 		AP.setPreferredSize(new Dimension(70, 30));
 		AP.setBackground(Color.red);
+        AP.setEditable(false);
 //		this.setLayout(null);
 		
 

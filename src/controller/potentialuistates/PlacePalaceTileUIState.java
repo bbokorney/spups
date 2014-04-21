@@ -34,7 +34,7 @@ public class PlacePalaceTileUIState extends GameplayUIState {
     GameModel model;
 
 	PotentialPlacePalaceTile potentialAction;
-
+// TODO: Baker , fix this class
     public PlacePalaceTileUIState(Controller controller, KeyListener keyListener, GameModel model){
         this.controller = controller;
         this.keyListener = keyListener;
@@ -88,13 +88,13 @@ public class PlacePalaceTileUIState extends GameplayUIState {
 	}
 
 	public void incValue() {
-		int value = potentialAction.getValue();
-		potentialAction.setValue((value >= 10) ? 10 : (value + 2) % 11);
+		//int value = potentialAction.getValue();
+		//potentialAction.setValue((value >= 10) ? 10 : (value + 2) % 11);
 	}
 
 	public void decValue() {
-		int value = potentialAction.getValue();
-		potentialAction.setValue((value <= 2) ? 2 : value - 2);
+		//int value = potentialAction.getValue();
+		//potentialAction.setValue((value <= 2) ? 2 : value - 2);
 	}
 
 	public void confirmPlacement() {

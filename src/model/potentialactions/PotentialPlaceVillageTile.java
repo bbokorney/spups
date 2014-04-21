@@ -27,7 +27,7 @@ public class PotentialPlaceVillageTile extends PotentialOneSpaceMovement {
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    protected Pair<ActionResult, PlaceVillageTile> confirmPlacement(){
+    public Pair<ActionResult, PlaceVillageTile> confirmPlacement(){
         PlaceVillageTile result = new PlaceVillageTile(getLocation(), getGameModel() );
         return new Pair<ActionResult, PlaceVillageTile>(result.doAction(), result);
     }
