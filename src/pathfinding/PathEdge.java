@@ -7,4 +7,6 @@ public interface PathEdge<T> {
     T getSource();
     T getDestination();
     int getCost();
+    boolean equals(Object o);
+    int hashCode();
 }

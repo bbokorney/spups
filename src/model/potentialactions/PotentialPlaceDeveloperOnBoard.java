@@ -40,7 +40,8 @@ public class PotentialPlaceDeveloperOnBoard extends PotentialOneSpaceMovement {
     }
 
     private JavaPath getShortestLegalPath(){
-        return  new LeastCostPathFinder().findShortestPlacementPath(getLocation(), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
+        LeastCostPathFinder pathFinder = new LeastCostPathFinder(getGameModel());
+        return pathFinder.findShortestPlacementPath(getLocation());
 
     }
 

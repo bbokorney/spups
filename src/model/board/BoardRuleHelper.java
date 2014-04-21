@@ -221,7 +221,7 @@ public class BoardRuleHelper {
 
     public List<Location> getPalacesLegalForUpgrading() {
         return null;
-        //todo needed for PotentialUpgradePalace
+        //todo needed for PotentialUpgradePalace Baker
         //exclude palaces by the following criteria
         //The current player must be the highest in the city
         //the city must not have been interacted with during this turn

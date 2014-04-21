@@ -25,7 +25,8 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     }
 
     private JavaPath getShortestLegalPath(){
-        return  new LeastCostPathFinder().findShortestPath(developerStartingLocation, getLocation(), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
+        LeastCostPathFinder pathFinder = new LeastCostPathFinder(getGameModel());
+        return  pathFinder.findShortestPath(developerStartingLocation, getLocation());
 
     }
 
