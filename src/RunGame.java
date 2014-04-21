@@ -48,6 +48,9 @@ public class RunGame {
 		            	board.getSpace(board.getAllLocations().toArray(new Location[0])[3]).accept(new IrrigationTileComponent());
 		                PalaceFestival festival = createPalaceFestival(model);
 		                
+		                model.getJavaPlayers().toArray(new JavaPlayer[0])[0].addDeveloper(board.getAllLocations().toArray(new Location[0])[0]);
+		                
+		                
 		                GameFrame frame = new GameFrame(listener);
 		                @SuppressWarnings("unused")
 		                Controller controller = new Controller(frame);

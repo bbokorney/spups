@@ -45,7 +45,7 @@ public abstract class Turn {
         this.palacesInteracted = palacesInteracted;
     }
 
-    protected int getActionPoints(){ return actionPoints;}
+    public int getActionPoints(){ return actionPoints;}
 
     public boolean hasPlacedLandTile() {
         return hasPlacedLandTile;
