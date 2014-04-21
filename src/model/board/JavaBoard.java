@@ -117,7 +117,7 @@ public class JavaBoard extends Board {
             }
         }
 
-        //Remove this location from a city if it was in one
+        //Remove this location from a village if it was in one
         if (isLocationInVillage(loc))
             villageContainer.removeLocationFromVillage(loc);
 
