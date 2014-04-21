@@ -12,7 +12,7 @@ public class FinalTurn extends Turn {
     private int turnsLeft;
 
     public FinalTurn(int numPlayers) {
-        turnsLeft = numPlayers - 1;
+        turnsLeft = numPlayers;
         this.setActionPoints(6);
         this.setHasPlacedLandTile(false);
         this.setActionTokenUsed(false);
@@ -21,7 +21,7 @@ public class FinalTurn extends Turn {
 
     @Override
     public boolean canEndTurn() {
-        return (turnsLeft > 0);
+        return (turnsLeft > 1);
     }
 
     public void advanceTurn() {
