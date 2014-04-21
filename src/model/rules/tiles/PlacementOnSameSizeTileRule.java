@@ -19,6 +19,6 @@ public class PlacementOnSameSizeTileRule {
             }
             return count == tile.getNumberOfComponents();
         }
-        return true;
+        return false;
     }
 }
