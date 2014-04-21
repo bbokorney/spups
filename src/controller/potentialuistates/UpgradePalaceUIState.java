@@ -45,19 +45,21 @@ public class UpgradePalaceUIState extends GameplayUIState {
 	}
 
 	public void incValue() {
-		int value = potentialAction.getValue();
-		potentialAction.setValue((value >= 10) ? 10 : (value + 2) % 11);
+		//int value = potentialAction.getValue();
+		//potentialAction.setValue((value >= 10) ? 10 : (value + 2) % 11);
 		//update view
+        // TODO: Baker
 	}
 
 	public void decValue() {
-		int value = potentialAction.getValue();
-		potentialAction.setValue((value <= 2) ? 2 : value - 2);
+		// TODO: Baker
+		//int value = potentialAction.getValue();
+		//potentialAction.setValue((value <= 2) ? 2 : value - 2);
 		//update view
 	}
 
 	public void confirmPlacement() {
-		Pair<ActionResult, UpgradePalaceTile> actionPair = potentialAction.confirmUpgrade();
+		Pair<ActionResult, UpgradePalaceTile> actionPair = potentialAction.chooseCurrentPlaceToUpgrade();
 		ActionResult result = actionPair.getFirst();
 
 		if(result.isSuccess()) {
