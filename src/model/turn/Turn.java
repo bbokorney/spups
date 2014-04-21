@@ -15,8 +15,8 @@ public abstract class Turn {
     private Collection<Location> palacesInteracted;
 
 
+    public abstract void advanceTurn();
     public abstract boolean canEndTurn();
-    public abstract boolean isFinalTurn();
     public abstract boolean canUseAPForLandTileAction(int pointsToSpend);
     public abstract boolean canUseAPForNonLandTileAction(int pointsToSpend);
 

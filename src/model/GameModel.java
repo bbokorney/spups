@@ -46,8 +46,8 @@ public abstract class GameModel {
     public abstract void placeIrrigationTileComponent(Location loc, TileComponent tile);
     public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
     public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
-    public abstract void buildPalace(Location loc, TileComponent tile);
-    public abstract void upgradePalace(Location loc, TileComponent tile);
+    public abstract void buildPalace(Location loc, PalaceTileComponent tile);
+    public abstract void upgradePalace(Location loc, PalaceTileComponent tile);
     public abstract void useActionPoints(int actionPoints);
     public abstract boolean isHeightAtLocation(int i, Location location);
     public abstract boolean isLocationInCity(Location loc);
