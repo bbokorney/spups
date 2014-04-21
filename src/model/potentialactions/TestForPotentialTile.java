@@ -88,26 +88,47 @@ public class TestForPotentialTile {
 //        System.out.println(villageTile2.confirmPlacement().getFirst().getMessage());
 
         //attempting to place a palace tile
-        PotentialPlacePalaceTile palaceTile = new PotentialPlacePalaceTile(game, festival, 2);
-        stuff.printOneSpace(palaceTile, "Creating Palace: " + palaceTile.moveNorth().getMessage());
-        System.out.println(palaceTile.confirmPlacement().getFirst().getMessage());
+//        PotentialPlacePalaceTile palaceTile = new PotentialPlacePalaceTile(game, festival, 2);
+//        stuff.printOneSpace(palaceTile, "Creating Palace: " + palaceTile.moveNorth().getMessage())
+//        ;
+//        stuff.printOneSpace(palaceTile, "Creating Palace: " + palaceTile.moveNorth().getMessage());
+//        System.out.println(palaceTile.confirmPlacement().getFirst().getMessage());
 
                 //this is rotated clockwise once around the origin once and placed down
         PotentialJavaTwoSpaceTile twoSpacePA = new PotentialJavaTwoSpaceTile(game, festival);
         String message = (twoSpacePA.rotateClockwise().getMessage());
-        System.out.println(twoSpacePA.confirmPlacement().getFirst().getMessage());
-
-        System.out.println(palaceTile.confirmPlacement().getFirst().getMessage());
+        twoSpacePA.moveNorthwest();
+        twoSpacePA.moveSouthwest();
+        twoSpacePA.moveNorthwest();
+        twoSpacePA.moveSouthwest();
+        twoSpacePA.moveNorthwest();
+        message = twoSpacePA.confirmPlacement().getFirst().getMessage();
+        stuff.printTwoSpace(twoSpacePA, "Place rotated tile: "+ message);
+//
+//        System.out.println(palaceTile.confirmPlacement().getFirst().getMessage());
 
         //this is a three space tile moved up one north and placed down
         PotentialJavaTwoSpaceTile twoSpacePA2 = new PotentialJavaTwoSpaceTile(game, festival);
         twoSpacePA2.moveNorth();
+
+        twoSpacePA2.moveNorth();
         System.out.println(twoSpacePA2.confirmPlacement().getFirst().getMessage());
 
-        System.out.println(palaceTile.confirmPlacement().getFirst().getMessage());
+//        PotentialPlaceIrrigationTile irrigationPA = new PotentialPlaceIrrigationTile(game, festival);
+//        irrigationPA.moveSouth();
+//        irrigationPA.confirmPlacement();
+
+        PotentialPlaceDeveloperOnBoard placeDev = new PotentialPlaceDeveloperOnBoard(game, festival);
+        placeDev.moveNorthwest();
+        placeDev.moveSouthwest();
+        placeDev.moveNorthwest();
+        placeDev.moveSouthwest();
+        placeDev.moveNorthwest();
+        message = placeDev.confirmMovement().getFirst().getMessage();
+        stuff.printOneSpace(placeDev, "Placing the dev: " + message);
 
 
-
+        System.out.println(game.getTurn().getActionPoints());
 
 
 
