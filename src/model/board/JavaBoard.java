@@ -81,8 +81,8 @@ public class JavaBoard extends Board {
         }
 
         //Remove this location from a city if it was in one
-        if (isLocationInCity(loc))
-            cityContainer.removeLocationFromCity(loc);
+        //if (isLocationInCity(loc))
+        //    cityContainer.removeLocationFromCity(loc);
 
         //Okay so here's the tough part. We're gonna go through each of our
         //city neighbors and basically make a new city out of it and its city
@@ -119,8 +119,8 @@ public class JavaBoard extends Board {
         }
 
         //Remove this location from a village if it was in one
-        if (isLocationInVillage(loc))
-            villageContainer.removeLocationFromVillage(loc);
+        //if (isLocationInVillage(loc))
+        //    villageContainer.removeLocationFromVillage(loc);
 
         //Okay so here's the tough part. We're gonna go through each of our
         //village neighbors and basically make a new village out of it and its
