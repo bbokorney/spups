@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 
 
+
 import view.palacefestival.FestivalPanel;
 import model.GameModel;
 import model.actions.ActionResult;
@@ -75,10 +76,13 @@ public class GamePanel extends JPanel {
 		
 	}
 
-	public void refreshView(GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
+	public void refreshView(FestivalPanel festivalPanel, GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
 		boardPanel.refreshView(model.getBoard(), model, potentialComponents, highlightedComponents);
 		cardsPanel.refreshView(actionResult);
 		commonPanel.refreshView(model, festival);
+		
+		this.remove(festivalPanel);
+		this.add(boardPanel);
 		
 		JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[0]);
 
@@ -92,6 +96,7 @@ public class GamePanel extends JPanel {
 		repaint();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void refreshFestivalView(PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
 		// TODO Auto-generated method stub
 		

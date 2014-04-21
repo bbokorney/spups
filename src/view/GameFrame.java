@@ -59,7 +59,7 @@ public class GameFrame extends JFrame {
 
     public void refreshGame( GameModel game, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
         //this gives all the information during the java game
-    	gamePanel.refreshView(game, festival, actionResult, potentialComponents, highlightedComponents);
+    	gamePanel.refreshView(festivalPanel, game, festival, actionResult, potentialComponents, highlightedComponents);
 //    	actionPanel.refreshView();
     }
 

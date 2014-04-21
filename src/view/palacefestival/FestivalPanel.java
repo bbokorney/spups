@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JPanel;
 //import javax.swing.JScrollPane;
@@ -12,13 +11,8 @@ import javax.swing.JPanel;
 
 
 import model.GameModel;
-import model.actions.ActionResult;
-import model.board.Location;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
-import model.palacefestival.PalaceFestivalPlayer;
-import model.player.JavaPlayer;
-import model.tiles.TileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -54,7 +48,7 @@ public class FestivalPanel extends JPanel {
 
 		cardsPanel.setBackground(Color.BLUE);
 		for(int x = 0; x < numOfPlayerPanels; ++x) 
-			playerPanel[x].setBackground(Color.RED);
+			playerPanel[x].setBackground(Color.yellow);
 		
 		handPanel.setPreferredSize(new Dimension(600, 200));
 		cardsPanel.setPreferredSize(new Dimension(245, 200));
