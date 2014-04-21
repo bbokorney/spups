@@ -4,6 +4,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.TakeDeveloperOffBoard;
+import model.board.Location;
 import model.palacefestival.PalaceFestival;
 import model.player.Developer;
 import pathfinding.JavaPath;
@@ -17,24 +18,24 @@ import java.util.List;
 public class PotentialTabThroughDevelopers extends PotentialAction {
 
 
-    List<Developer> developerList;
+    List<Location> developerLocationList;
     int indexOfCurrentDeveloper;
 
     public PotentialTabThroughDevelopers (GameModel game, PalaceFestival festival){
         super(game, festival);
-        developerList = game.getCurrentJavaPlayer().getDevelopers();
+        developerLocationList = game.getLocationsOfCurrentPlayersDevelopers();
         indexOfCurrentDeveloper = 0;
     }
 
 
     @Override
     public ActionResult getActionResult() {
-        return new TakeDeveloperOffBoard(developerList.get(indexOfCurrentDeveloper).getLocation(), getShortestLegalPath(), getGameModel()).tryAction();
+        return new TakeDeveloperOffBoard(developerLocationList.get(indexOfCurrentDeveloper), getShortestLegalPath(), getGameModel()).tryAction();
     }
 
     public void tabToNextDeveloper(){
         indexOfCurrentDeveloper += 1;
-        indexOfCurrentDeveloper %= developerList.size();
+        indexOfCurrentDeveloper %= developerLocationList.size();
 
     }
 
@@ -47,7 +48,7 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
      */
 
     public PotentialMoveDeveloperAroundBoard selectDeveloperToMoveAroundBoard() {
-        return new PotentialMoveDeveloperAroundBoard(getGameModel(), getPalaceFestival(),developerList.get(indexOfCurrentDeveloper).getLocation());
+        return new PotentialMoveDeveloperAroundBoard(getGameModel(), getPalaceFestival(),developerLocationList.get(indexOfCurrentDeveloper));
     }
 
     /*
@@ -58,12 +59,12 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
         To return both, the Pair class was implemented, taking these two as it's parameterizing types
      */
     public Pair<ActionResult, TakeDeveloperOffBoard> confirmDeletion() {
-        TakeDeveloperOffBoard result = new TakeDeveloperOffBoard(developerList.get(indexOfCurrentDeveloper).getLocation(), getShortestLegalPath(), getGameModel());
+        TakeDeveloperOffBoard result = new TakeDeveloperOffBoard(developerLocationList.get(indexOfCurrentDeveloper), getShortestLegalPath(), getGameModel());
         return new Pair<ActionResult, TakeDeveloperOffBoard>(result.doAction(), result);
     }
 
     private JavaPath getShortestLegalPath(){
-        return  new LeastCostPathFinder().findShortestRemovalPath(developerList.get(indexOfCurrentDeveloper).getLocation(), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
+        return  new LeastCostPathFinder().findShortestRemovalPath(developerLocationList.get(indexOfCurrentDeveloper), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
 
     }
 }
