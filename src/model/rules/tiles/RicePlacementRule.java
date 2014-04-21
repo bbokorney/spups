@@ -23,8 +23,11 @@ public class RicePlacementRule {
     }
 
     public boolean allowed() {
-
-        return allowed;
+        if(board.getSpace(location).getTopTileComponent() != null) {
+            board.getSpace(location).getTopTileComponent().accept(new PlacementVisitor());
+            return allowed;
+        }
+        return true;
     }
 
     private class PlacementVisitor implements Visitor {

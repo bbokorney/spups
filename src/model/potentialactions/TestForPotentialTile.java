@@ -1,6 +1,5 @@
 package model.potentialactions;
 
-import controller.Controller;
 import model.GameModel;
 import model.JavaGameModel;
 import model.palacefestival.Card;
@@ -59,11 +58,11 @@ public class TestForPotentialTile {
         GameModel game = new JavaGameModel(3);
         PalaceFestival festival = new PalaceFestival(null, deck);
 
-        GameFrame frame = new GameFrame(game);
+        GameFrame frame = new GameFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        frame.refreshGame(game,festival,null,null,null);
+//        frame.refreshGame(game,festival,null,null,null);
 
 
 
@@ -71,8 +70,8 @@ public class TestForPotentialTile {
         stuff.printThreeSpace(threeSpacePA, "New PotentialJavaThreeSpaceTile:");
 
 
-//        threeSpacePA.rotateClockwise();
-//        stuff.printThreeSpace(threeSpacePA, "Rotate:");
+        String message = (threeSpacePA.rotateClockwise().getMessage());
+        stuff.printThreeSpace(threeSpacePA, "Rotate: " + message);
 //        threeSpacePA.rotateClockwise();
 //        stuff.printThreeSpace(threeSpacePA, "Rotate:");
 //        threeSpacePA.rotateClockwise();
@@ -84,8 +83,24 @@ public class TestForPotentialTile {
 //        threeSpacePA.rotateClockwise();
 //        stuff.printThreeSpace(threeSpacePA, "Rotate:");
 //
-//        threeSpacePA.moveNorth();
-//        stuff.printThreeSpace(threeSpacePA, "Move North:");
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 1 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 2 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 3 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 4 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 5 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 6 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 7 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 8 : " + message);
+        message = threeSpacePA.moveNorth().getMessage();
+        stuff.printThreeSpace(threeSpacePA, "Move North 9 : " + message);
 //
 //        game.getBoard().getSpace(threeSpacePA.getCenterLocation()).accept(new VillageTileComponent(new Tile(1)));
 //
@@ -181,19 +196,19 @@ public class TestForPotentialTile {
     }
     public void printThreeSpace(PotentialJavaThreeSpaceTile threeSpacePA, String startMessage) {
         System.out.println( startMessage);
-        System.out.println("\t Other 1 " + threeSpacePA.getOtherLocation(0).getDistanceFromOrigin()[0] + ", " + threeSpacePA.getOtherLocation(0).getDistanceFromOrigin()[1]);
-        System.out.println("\t Center " + threeSpacePA.getCenterLocation().getDistanceFromOrigin()[0] + ", " + threeSpacePA.getCenterLocation().getDistanceFromOrigin()[1]);
-        System.out.println("\t Other 2 " + threeSpacePA.getOtherLocation(1).getDistanceFromOrigin()[0] + ", " + threeSpacePA.getOtherLocation(1).getDistanceFromOrigin()[1]);
+        System.out.println("\t Other 1  " + threeSpacePA.getOtherLocation(0).getDistanceFromOrigin()[0] + ", " + threeSpacePA.getOtherLocation(0).getDistanceFromOrigin()[1]);
+        System.out.println("\t Center   " + threeSpacePA.getCenterLocation().getDistanceFromOrigin()[0] + ", " + threeSpacePA.getCenterLocation().getDistanceFromOrigin()[1]);
+        System.out.println("\t Other 2  " + threeSpacePA.getOtherLocation(1).getDistanceFromOrigin()[0] + ", " + threeSpacePA.getOtherLocation(1).getDistanceFromOrigin()[1]);
     }
 
     public void printTwoSpace(PotentialJavaTwoSpaceTile twoSpacePA, String startMessage) {
         System.out.println( startMessage);
-        System.out.println("\t Rice    " + twoSpacePA.getOtherLocation().getDistanceFromOrigin()[0] + ", " + twoSpacePA.getOtherLocation().getDistanceFromOrigin()[1]);
-        System.out.println("\t Village " + twoSpacePA.getCenterLocation().getDistanceFromOrigin()[0] + ", " + twoSpacePA.getCenterLocation().getDistanceFromOrigin()[1]);
+        System.out.println("\t Rice     " + twoSpacePA.getOtherLocation().getDistanceFromOrigin()[0] + ", " + twoSpacePA.getOtherLocation().getDistanceFromOrigin()[1]);
+        System.out.println("\t Village  " + twoSpacePA.getCenterLocation().getDistanceFromOrigin()[0] + ", " + twoSpacePA.getCenterLocation().getDistanceFromOrigin()[1]);
     }
 
     public void printOneSpace(PotentialOneSpaceMovement oneSpacePA, String startMessage) {
         System.out.println( startMessage);
-        System.out.println("\t Space   " + oneSpacePA.getLocation().getDistanceFromOrigin()[0] +", " + oneSpacePA.getLocation().getDistanceFromOrigin()[1]);
+        System.out.println("\t Space    " + oneSpacePA.getLocation().getDistanceFromOrigin()[0] +", " + oneSpacePA.getLocation().getDistanceFromOrigin()[1]);
     }
 }

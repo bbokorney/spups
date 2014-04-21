@@ -9,7 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import view.TileLabel;
+import model.player.JavaPlayer;
+import model.player.JavaPlayerResourceType;
 import model.player.Player;
+import model.tiles.RiceTileComponent;
+import model.tiles.VillageTileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -25,22 +30,30 @@ public class PlayerPanel extends JPanel {
 	JLabel user;
 	public PlayerPanel() {
 //		this.setLayout(null);
+		
+
+		int offHeight = 70;
+		int offWidth = 70;
 //		twotile = new JLabel("", JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace2.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-		twotile = newJLabel("3", "/Users/maumau/spups/resources/twotile.png", 40, 90);
-		developer = newJLabel("3", "/Users/maumau/spups/resources/developer.png", 40, 90);
-		rice = newJLabel("3", "/Users/maumau/spups/resources/rice.png", 40, 90);
-		village = newJLabel("3", "/Users/maumau/spups/resources/village.png", 40, 90);
-		AP = newJLabel("3", "/Users/maumau/spups/resources/AP.png", 40, 90);
-		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, 90);
-		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, 90);
-		add(twotile);
+		twotile = newJLabel("3", "/Users/maumau/spups/resources/twotile.png", offWidth, offHeight);
+		developer = newJLabel("3", "/Users/maumau/spups/resources/developer.png", offWidth, offHeight);
+		rice = newJLabel("3", "/Users/maumau/spups/resources/rice.png", offWidth, offHeight);
+		village = newJLabel("3", "/Users/maumau/spups/resources/village.png", offWidth, offHeight);
+		AP = newJLabel("3", "/Users/maumau/spups/resources/AP.png", offWidth, offHeight);
+		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, offHeight);
+		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, offHeight);
+		
+
+		rice = TileLabel.newHexLabel("rice", offWidth, offHeight, new RiceTileComponent());
+		village = TileLabel.newHexLabel("village", offWidth, offHeight, new VillageTileComponent());
+		twotile = TileLabel.newTwoHexLabel("twotile", offWidth, offHeight+30);
 		add(developer);
 		add(rice);
 		add(village);
+		add(twotile);
 		add(AP);
 		add(card);
-		add(user);
-		
+//		add(user);
 	}
 
 	private JLabel newJLabel(String value, String src, int width, int height){
@@ -54,9 +67,13 @@ public class PlayerPanel extends JPanel {
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 		return label;
 	}
-	
-	public void refreshView(Player player) {
-		// TODO Auto-generated method stub
-		
+
+	public void refreshView(JavaPlayer javaPlayer, int cardSize) {
+		twotile.setText(""+javaPlayer.getCount(JavaPlayerResourceType.TWO));
+		rice.setText(""+javaPlayer.getCount(JavaPlayerResourceType.RICE));
+		village.setText(""+javaPlayer.getCount(JavaPlayerResourceType.VILLAGE));
+		AP.setText(""+javaPlayer.getCount(JavaPlayerResourceType.EXTRAACTIONTOKEN));
+		developer.setText(""+javaPlayer.getCount(JavaPlayerResourceType.DEVELOPER));
+		card.setText(""+cardSize);
 	}
 }
