@@ -69,6 +69,7 @@ public class TileLabel extends JLabel {
 	public static JLabel newJLabel(String value, String src, int width, int height){
 		JLabel label= new JLabel(value);
 		label.setIcon(new ImageIcon(src));
+		label.setVerticalAlignment(JLabel.NORTH);
 		setLabelStuff(label, width, height);
 		return label;
 	}

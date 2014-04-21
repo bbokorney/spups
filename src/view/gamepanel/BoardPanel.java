@@ -12,9 +12,6 @@ import javax.swing.JPanel;
 import model.board.Board;
 import model.board.HexLocation;
 import model.board.LocationType;
-import model.tiles.IrrigationTileComponent;
-import model.tiles.PalaceTileComponent;
-import model.tiles.RiceTileComponent;
 import model.tiles.TileComponent;
 
 /**
@@ -43,20 +40,11 @@ public class BoardPanel extends JPanel {
 	}
 	
 	protected void paintComponent(Graphics g) {
-		if(board != null) {
+//		if(board != null) {
 			int[] origin = getBoardOrigin(locations);
 	
 			for(HexLocation location : locations) { 
 				int[] distance = location.getDistanceFromOrigin();
-				
-//				if(distance[0] == 0 && distance[1] == 0) 
-//					board.getSpace(location).accept(new VillageTileComponent());
-//				if(distance[0] == 0 && distance[1] == 60) 
-//					board.getSpace(location).accept(new IrrigationTileComponent());
-//				if(distance[0] == 0 && distance[1] == 120) 
-//					board.getSpace(location).accept(new RiceTileComponent());
-//				if(distance[0] == 0 && distance[1] == 180) 
-//					board.getSpace(location).accept(new PalaceTileComponent(2));
 				
 				int width = distance[0]+origin[0]+50;
 				int height = distance[1]+origin[1]+40;
@@ -74,7 +62,25 @@ public class BoardPanel extends JPanel {
 				if(tile != null) 
 					board.getSpace(location).getTopTileComponent().accept(visitor);
 			}
-		}
+			
+			// Elevation
+			for(HexLocation location : locations) {
+				int[] distance = location.getDistanceFromOrigin();
+				int width = distance[0]+origin[0]+50;
+				int height = distance[1]+origin[1]+40;
+				width = (int)(width*hexScaling)-10;
+				height = (int)(height*hexScaling)+18;
+
+		        if(board.getSpace(location).getHeight() != 0) {
+					g.setColor(Color.white);
+					g.fillOval(width-2, height-12, 13, 13);
+					g.setColor(Color.black);
+			        g.setFont(new Font("default", Font.PLAIN, 13));
+		        	g.drawString(board.getSpace(location).getHeight()+"", width, height);
+		        }
+			}
+			
+//		}
     }
 	
 	public static void drawHouses(Graphics g, int i, int j, Color color) {
@@ -114,7 +120,7 @@ public class BoardPanel extends JPanel {
 	        g.setFont(new Font("default", Font.BOLD, 20));
 	        if(palaceValue > 9)
 	        	i -= 12;
-	        g.drawString(palaceValue+"", (int)(i*(hexScaling))-6, (int)(j*(hexScaling))+6);
+	        g.drawString(palaceValue+"", (int)(i*(hexScaling))-6, (int)(j*(hexScaling))+8);
 	}
 
 	public enum TileType {
