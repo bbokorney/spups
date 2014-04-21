@@ -9,7 +9,10 @@ import java.util.ArrayList;
  */
 public class FinalTurn extends Turn {
 
-    public FinalTurn() {
+    private int turnsLeft;
+
+    public FinalTurn(int numPlayers) {
+        turnsLeft = numPlayers;
         this.setActionPoints(6);
         this.setHasPlacedLandTile(false);
         this.setActionTokenUsed(false);
@@ -18,12 +21,15 @@ public class FinalTurn extends Turn {
 
     @Override
     public boolean canEndTurn() {
-        return true;
+        return (turnsLeft > 1);
     }
 
-    @Override
-    public boolean isFinalTurn() {
-        return true;
+    public void advanceTurn() {
+        turnsLeft--;
+        this.setActionPoints(6);
+        this.setHasPlacedLandTile(false);
+        this.setActionTokenUsed(false);
+        this.setPalacesInteracted(new ArrayList<Location>());
     }
 
     @Override

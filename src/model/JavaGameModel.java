@@ -23,16 +23,11 @@ import java.util.Stack;
  */
 public class JavaGameModel extends GameModel{
 
-    //starting values for attributes
-    private static final int numFinalRoundTurns = -1;
-
+    private int numPlayers;
     private SharedResources resources;
     private Board board;
     private JavaPlayers javaPlayers;
     private Turn turn;
-    //The following value will be held at a sentinel value until the final
-    //round, at which point it will decrement from the number of jplayers to 0.
-    private int finalRoundTurns;
 
     /*
         Use for testing the view only
@@ -46,6 +41,8 @@ public class JavaGameModel extends GameModel{
             playerNames[0] = "Player " + (i+1);
         }
         setPlayersInGame(playerNames);
+
+        numPlayers = numberOfPlayers;
 
     }
 
@@ -76,7 +73,6 @@ public class JavaGameModel extends GameModel{
         resources = new SharedResources();
         BoardCreator creator = new BoardCreator();
         board = creator.createBoard();
-        finalRoundTurns = numFinalRoundTurns;
         turn = new NonFinalTurn();
 
     }
@@ -119,30 +115,19 @@ public class JavaGameModel extends GameModel{
     @Override
     public void advanceJavaTurn() {
         if (canAdvanceJavaTurn()) {
-            //First check if we are in the final round, indicated by the
-            //finalRoundTurns value being > 0
-            if (finalRoundTurns > 0) {
-                finalRoundTurns--;
-                turn = new FinalTurn();
-            } else
-                turn = new NonFinalTurn();
+            turn.advanceTurn();
             javaPlayers.advanceTurn();
         }
     }
 
     @Override
     public boolean canAdvanceJavaTurn() {
-        //If this is the last turn of the game, dont advance?
-        if (turn.isFinalTurn() && finalRoundTurns <= 1)
-            return false;
-        else
-            return turn.canEndTurn();
+       return turn.canEndTurn();
     }
 
     @Override
     public void beginFinalRound() {
-        finalRoundTurns = javaPlayers.getPlayers().size();
-        turn = new FinalTurn();
+        turn = new FinalTurn(numPlayers);
     }
 
     @Override
@@ -201,12 +186,12 @@ public class JavaGameModel extends GameModel{
         board.placeVillageTileComponent(loc, tile);
     }
 
-    //TODO:
-    @Override
-    public void buildPalace(Location loc, TileComponent tile) {}
-
-    @Override
-    public void upgradePalace(Location loc, TileComponent tile) {}
+    public void buildPalace(Location loc, PalaceTileComponent tile) {
+        board.buildPalace(loc, tile);
+    }
+    public void upgradePalace(Location loc, PalaceTileComponent tile) {
+        board.upgradePalace(loc, tile);
+    }
 
     @Override
     public void addPalaceToCurrentTurnList(Location loc) {
