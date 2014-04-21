@@ -33,6 +33,7 @@ public class MoveDeveloperAroundBoard extends Action {
 
     public MoveDeveloperAroundBoard(Location developerStartinglocation, JavaPath path, GameModel game){
         this.developerStartinglocation = developerStartinglocation;
+        this.developerEndingLocation = developerStartinglocation;
         this.path = path;
         this.game = game;
     }
