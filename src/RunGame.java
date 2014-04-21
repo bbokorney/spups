@@ -54,7 +54,7 @@ public class RunGame {
 		                
 		                GameFrame frame = new GameFrame(listener);
 		                @SuppressWarnings("unused")
-		                Controller controller = new Controller(frame);
+		                Controller controller = new Controller(frame, model, createPalaceFestival(model));
 		                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		                frame.setVisible(true);
 
@@ -65,6 +65,7 @@ public class RunGame {
 		                map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
 		                map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
 		                map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
+
 		                
 		                LinkedList<Location> highlights = new LinkedList<Location>();
 		                highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
@@ -73,6 +74,8 @@ public class RunGame {
 		                
 		                frame.refreshGame(model,festival,null,map,highlights);
 		                
+                        frame.requestFocus();//or inWindow
+
 //		            }
 //		        });
 //					return null;

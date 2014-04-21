@@ -1,13 +1,8 @@
 package model.potentialactions;
 
-import controller.Controller;
 import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.JavaGameModel;
-import model.Pair;
-import model.actions.ActionResult;
-import model.actions.tiles.PlaceIrrigationTile;
-import model.actions.tiles.PlaceRiceTile;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceCardComponent;
@@ -71,28 +66,28 @@ public class TestForPotentialTile {
 //        //this is rotated clockwise once around the origin once and placed down
 //        PotentialJavaThreeSpaceTile threeSpacePA = new PotentialJavaThreeSpaceTile(game, festival);
 //        String message = (threeSpacePA.rotateClockwise().getMessage());
-//        System.out.println(threeSpacePA.confirmPlacement().getFirst().getMessage());
+//        System.out.println(threeSpacePA.confirmAction().getFirst().getMessage());
 //
 //        //this is a three space tile moved up one north and placed down
 //        PotentialJavaThreeSpaceTile threeSpacePA2 = new PotentialJavaThreeSpaceTile(game, festival);
 //        threeSpacePA2.moveNorth();
-//        System.out.println(threeSpacePA2.confirmPlacement().getFirst().getMessage());
+//        System.out.println(threeSpacePA2.confirmAction().getFirst().getMessage());
 
 //        //this places a village one north of the origin
 //        PotentialPlaceVillageTile villageTile1 = new PotentialPlaceVillageTile(game, festival);
 //        System.out.println(villageTile1.moveNorth().getMessage());
-//        System.out.println(villageTile1.confirmPlacement().getFirst().getMessage());
+//        System.out.println(villageTile1.confirmAction().getFirst().getMessage());
 //
 //        //this places a village on the origin
 //        PotentialPlaceVillageTile villageTile2 = new PotentialPlaceVillageTile(game, festival);
-//        System.out.println(villageTile2.confirmPlacement().getFirst().getMessage());
+//        System.out.println(villageTile2.confirmAction().getFirst().getMessage());
 
         //attempting to place a palace tile
 //        PotentialPlacePalaceTile palaceTile = new PotentialPlacePalaceTile(game, festival, 2);
 //        stuff.printOneSpace(palaceTile, "Creating Palace: " + palaceTile.moveNorth().getMessage())
 //        ;
 //        stuff.printOneSpace(palaceTile, "Creating Palace: " + palaceTile.moveNorth().getMessage());
-//        System.out.println(palaceTile.confirmPlacement().getFirst().getMessage());
+//        System.out.println(palaceTile.confirmAction().getFirst().getMessage());
 
                 //this is rotated clockwise once around the origin once and placed down
         PotentialJavaTwoSpaceTile twoSpacePA = new PotentialJavaTwoSpaceTile(game, festival);
@@ -105,7 +100,7 @@ public class TestForPotentialTile {
         message = twoSpacePA.confirmPlacement().getFirst().getMessage();
         stuff.printTwoSpace(twoSpacePA, "Place rotated tile: "+ message);
 //
-//        System.out.println(palaceTile.confirmPlacement().getFirst().getMessage());
+//        System.out.println(palaceTile.confirmAction().getFirst().getMessage());
 
         //this is a three space tile moved up one north and placed down
         PotentialJavaTwoSpaceTile twoSpacePA2 = new PotentialJavaTwoSpaceTile(game, festival);
@@ -116,7 +111,7 @@ public class TestForPotentialTile {
 
 //        PotentialPlaceIrrigationTile irrigationPA = new PotentialPlaceIrrigationTile(game, festival);
 //        irrigationPA.moveSouth();
-//        irrigationPA.confirmPlacement();
+//        irrigationPA.confirmAction();
 
         PotentialPlaceDeveloperOnBoard placeDev = new PotentialPlaceDeveloperOnBoard(game, festival);
         placeDev.moveNorthwest();
@@ -124,7 +119,7 @@ public class TestForPotentialTile {
         placeDev.moveNorthwest();
         placeDev.moveSouthwest();
         placeDev.moveNorthwest();
-        message = placeDev.confirmMovement().getFirst().getMessage();
+        message = placeDev.confirmAction().getFirst().getMessage();
         stuff.printOneSpace(placeDev, "Placing the dev: " + message);
 
 

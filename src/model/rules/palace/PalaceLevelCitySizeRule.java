@@ -27,6 +27,12 @@ public class PalaceLevelCitySizeRule {
                 return true;
             }
         }
+        for(Village village : board.getVillageContainer().getVillages()) {
+            if(village.getLocations().contains(location) &&
+                    village.getLocations().size() >= palaceLevel) {
+
+            }
+        }
         return false;
     }
 }

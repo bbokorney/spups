@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import java.awt.event.KeyListener;
+import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
@@ -28,6 +28,7 @@ public class GameFrame extends JFrame {
     private final static int HEIGHT = 820; // 850;
     JavaMenu menu;
     GamePanel gamePanel;
+    controller.keylistener.KeyListener listener;
     ActionPanel actionPanel;
     FestivalPanel festivalPanel;
     
@@ -40,16 +41,21 @@ public class GameFrame extends JFrame {
 		
         menu = new JavaMenu();
         gamePanel = new GamePanel();
-        actionPanel = new ActionPanel(); 
+        actionPanel = new ActionPanel();
         festivalPanel = new FestivalPanel();
         
         this.add(gamePanel);
         this.setJMenuBar(menu);
-        
-        addKeyListener(keyListener);
+
+        this.listener = keyListener;
+        addKeyListener(listener);
+        setFocusTraversalKeysEnabled(false);
+
         requestFocusInWindow();
         //this.setContentPane(gamePanel);
 	}
+
+    public controller.keylistener.KeyListener getKeyListener() { return listener; }
 
     public void refreshGame( GameModel game, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
         //this gives all the information during the java game

@@ -191,12 +191,13 @@ public class JavaBoard extends Board {
             if (isLocationInCity(neighbor)) {
                 //If so, add this location (and any village its in) to the city
                 City city = cityContainer.getCityFromLocation(neighbor);
-                Village village = villageContainer.getVillageFromLocation(neighbor);
+                Village village = villageContainer.getVillageFromLocation(loc);
                 for (Location villageLoc : village.getLocations()) {
                     city.add(villageLoc);
                 }
                 //Now remove the village cause it no longer is one
                 villageContainer.removeVillage(village);
+                break;
             }
         }
 
@@ -228,7 +229,7 @@ public class JavaBoard extends Board {
         }*/
 
         //if (!visited.get(loc)) {
-        if (visited.get(loc) == null) {
+        if (!visited.containsKey(loc) || (!visited.get(loc))) {
             visited.put(loc, true);
             if (loc.equals(palaceLoc) || isLocationInCity(loc)) {
                 locations.add(loc);
@@ -259,7 +260,7 @@ public class JavaBoard extends Board {
         }*/
 
         //if (!visited.get(loc)) {
-        if (visited.get(loc) == null) {
+        if (!visited.containsKey(loc) || (!visited.get(loc))) {
             visited.put(loc, true);
             if (isLocationInVillage(loc)) {
                 locations.add(loc);
