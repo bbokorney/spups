@@ -2,6 +2,7 @@ package model.board;
 
 import java.util.*;
 
+import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
 
 /**
@@ -73,6 +74,10 @@ public abstract class Board {
     public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
 
     public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
+
+    public abstract void buildPalace(Location loc, PalaceTileComponent tile);
+
+    public abstract void upgradePalace(Location loc, PalaceTileComponent tile);
 	
 	public TileComponent getTopTileComponent(Location loc) {
 		Space space = board.get(loc);
@@ -106,6 +111,14 @@ public abstract class Board {
     public boolean isLocationInCity(Location loc) {
         for (City c : cityContainer.getCityCollection()) {
             if (c.getCity().contains(c))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isLocationInVillage(Location loc) {
+        for (Village v : villageContainer.getVillages()) {
+            if (v.getLocations().contains(v))
                 return true;
         }
         return false;

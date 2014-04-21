@@ -9,6 +9,8 @@ import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
 
+import java.util.List;
+
 /**
  * Created by idinamenzel on 4/14/2014.
  */
@@ -17,12 +19,14 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     Location developerStartingLocation;
 
 
-    public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival){
+    public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival, Location location){
         super(game, festival);
+        this.developerStartingLocation = location;
     }
 
     private JavaPath getShortestLegalPath(){
-        return  new LeastCostPathFinder().findShortestPath(developerStartingLocation, getLocation(), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
+        LeastCostPathFinder pathFinder = new LeastCostPathFinder(getGameModel());
+        return  pathFinder.findShortestPath(developerStartingLocation, getLocation());
 
     }
 
@@ -36,6 +40,11 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     public Pair<ActionResult, MoveDeveloperAroundBoard> confirmMovement() {
         MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), getGameModel());
         return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(), result);
+    }
+
+    public List<Location> getLocationFromPath() {
+        //Todo Meghan
+        return null;
     }
 
 }

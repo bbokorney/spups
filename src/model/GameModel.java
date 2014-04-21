@@ -21,6 +21,8 @@ import java.util.List;
  */
 public abstract class GameModel {
 
+
+    public abstract void setPlayersInGame(String[] playerNames);
     public abstract int getCount(SharedResourceType res);
     public abstract void useResource(SharedResourceType res);
     public abstract int getCount(JavaPlayerResourceType res);
@@ -44,8 +46,8 @@ public abstract class GameModel {
     public abstract void placeIrrigationTileComponent(Location loc, TileComponent tile);
     public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
     public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
-    public abstract void buildPalace(Location loc, TileComponent tile);
-    public abstract void upgradePalace(Location loc, TileComponent tile);
+    public abstract void buildPalace(Location loc, PalaceTileComponent tile);
+    public abstract void upgradePalace(Location loc, PalaceTileComponent tile);
     public abstract void useActionPoints(int actionPoints);
     public abstract boolean isHeightAtLocation(int i, Location location);
     public abstract boolean isLocationInCity(Location loc);
@@ -77,4 +79,9 @@ public abstract class GameModel {
     public abstract void takeDeveloperOffBoard(Location developerLocationTakenOff);
 
     public abstract void moveDeveloperAroundBoard(Location developerStartinglocation, Location developerEndingLocation);
+
+    public abstract List<Location> getLocationsOfCurrentPlayersDevelopers();
+
+    public abstract void resetStates();
+
 }

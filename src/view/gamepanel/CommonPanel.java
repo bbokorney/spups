@@ -9,19 +9,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import view.HexLabel;
+import view.TileLabel;
 import model.GameModel;
+import model.palacefestival.PalaceFestival;
+import model.sharedresources.SharedResourceType;
+import model.tiles.IrrigationTileComponent;
+import model.tiles.PalaceTileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
  */
 @SuppressWarnings("serial")
 public class CommonPanel extends JPanel {
-	JLabel p2;
-	JLabel p4;
-	JLabel p6;
-	JLabel p8;
-	JLabel p10;
+	JLabel[] palace = new JLabel[5];
 	JLabel irrigation;
 	JLabel threetile;
 	JLabel stack;
@@ -30,29 +30,22 @@ public class CommonPanel extends JPanel {
 	public CommonPanel() {
 		int offHeight = 70;
 		int offWidth = 70;
-		p2 = newHexLabel("2palace", "/Users/maumau/spups/resources/Palace2.png", offWidth, offHeight);
-		p4 = newHexLabel("4palace", "/Users/maumau/spups/resources/Palace4.png", offWidth, offHeight);
-		p6 = newHexLabel("6palace", "/Users/maumau/spups/resources/Palace6.png", offWidth, offHeight);
-		p8 = newHexLabel("8palace", "/Users/maumau/spups/resources/Palace8.png", offWidth, offHeight);
-		p10 = newHexLabel("10palace", "/Users/maumau/spups/resources/Palace10.png", offWidth, offHeight);
-		irrigation = newHexLabel("irrigation", "/Users/maumau/spups/resources/Irrigation.png", offWidth, offHeight);
-		threetile = newHexLabel("threetile", "/Users/maumau/spups/resources/Threetile.png", 90, 90);
-
-		this.add(p2);
-		this.add(p4);
-		this.add(p6);
-		this.add(p8);
-		this.add(p10);
-		this.add(threetile);
-		this.add(irrigation);
+		for(int x = 2; x <= 10; x += 2) {
+			palace[x/2-1] = TileLabel.newHexLabel(x + "palace", offWidth, offHeight, new PalaceTileComponent(x));
+			this.add(palace[x/2-1]);
+		}
 		
-		stack = newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
-		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
+		irrigation = TileLabel.newHexLabel("irrigation", offWidth, offHeight, new IrrigationTileComponent());
+		threetile = TileLabel.newThreeHexLabel("threetile", offWidth+20, offHeight+30);
+		this.add(irrigation);
+		this.add(threetile);
+		//TODO make the text of this go on the right place
+		stack = newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 100);
+		card = newJLabel(" ", "/Users/maumau/spups/resources/card.png", 60, 100);
 		this.add(stack);
 		this.add(card);
 	}
-
-
+	
 	private JLabel newJLabel(String value, String src, int width, int height){
 		JLabel label= new JLabel(value);
 		label.setIcon(new ImageIcon(src));
@@ -65,20 +58,19 @@ public class CommonPanel extends JPanel {
 		return label;
 	}
 
-	private JLabel newHexLabel(String value, String src, int width, int height){
-		HexLabel label= new HexLabel(value, new int[] {35}, new int[] {35}, width, height);
-		label.setFont(new Font("Lucida Grande", 0, 14));
-//		label.setIcon(new ImageIcon(src));
-		label.setPreferredSize(new Dimension(width, height));
-		label.setHorizontalTextPosition(SwingConstants.RIGHT);
-		label.setVerticalTextPosition(SwingConstants.BOTTOM);
-		label.setVerticalAlignment(SwingConstants.BOTTOM);
-		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-		return label;
-	}
 
-	public void refreshView(GameModel model) {
-		// TODO Auto-generated method stub
+	public void refreshView(GameModel model, PalaceFestival festival) {
+		palace[0].setText(""+model.getCount(SharedResourceType.PALACELEVELTWO));
+		palace[1].setText(""+model.getCount(SharedResourceType.PALACELEVELFOUR));
+		palace[2].setText(""+model.getCount(SharedResourceType.PALACELEVELSIX));
+		palace[3].setText(""+model.getCount(SharedResourceType.PALACELEVELEIGHT));
+		palace[4].setText(""+model.getCount(SharedResourceType.PALACELEVELTEN));
+		irrigation.setText(""+model.getCount(SharedResourceType.IRRIGATION));
+		threetile.setText(""+model.getCount(SharedResourceType.THREE));
+		stack.setText(""+festival.getDeckSize());
 		
+		// TODO put picture of festival card
+		//card.setText(""+festival.peekAtFestivalCard());
+		repaint();
 	}
 }

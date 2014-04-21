@@ -71,9 +71,9 @@ public class MoveDeveloperAroundBoard extends Action {
             message += "Error: You do not have enough AP.\n";
         }
 
-        //Check if the player has enough AP points to travel the path
-
-        //todo
+        if(message.equalsIgnoreCase("")){
+            message += "Move Developer, AP " + actionPoints;
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

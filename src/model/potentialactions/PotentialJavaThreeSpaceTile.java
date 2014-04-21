@@ -12,15 +12,7 @@ import model.palacefestival.PalaceFestival;
 public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
 
     public PotentialJavaThreeSpaceTile(GameModel game, PalaceFestival festival) {
-        super(game, festival); //hoverboard);
-    }
-
-    private void setComponentsOnHoverBoard() {
-        Boolean validity = isValid();
-        //getHoverBoard().reset();
-        //getHoverBoard().placeTileComponent(getOtherLocation(0), new RiceTileComponent(), ActionState.fromValue(validity) );
-        //getHoverBoard().placeTileComponent(getOtherLocation(1), new RiceTileComponent(), ActionState.fromValue(validity) );
-        //getHoverBoard().placeTileComponent(getCenterLocation(), new VillageTileComponent(), ActionState.fromValue(validity) );
+        super(game, festival);
     }
 
     @Override
@@ -28,6 +20,13 @@ public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
         return new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), getGameModel()).tryAction();
     }
 
+    /*
+       This method's return type has been changed, as many PotentialActions have due to
+       the modification of ActionResult. At first, ActionResult had Action as an aggregate,
+       which coupled them. We separated them to not force an ActionResult to have an Action.
+       This change was for the OO purposes.
+       To return both, the Pair class was implemented, taking these two as it's parameterizing types
+    */
     protected Pair<ActionResult, PlaceThreeSpaceTile> confirmPlacement() {
         PlaceThreeSpaceTile result = new PlaceThreeSpaceTile(getCenterLocation(), getOtherLocation(0), getOtherLocation(1), getGameModel() );
         return new Pair<ActionResult, PlaceThreeSpaceTile>(result.doAction(), result);

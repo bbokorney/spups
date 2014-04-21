@@ -1,5 +1,7 @@
 package model.board;
 
+import pathfinding.JavaEdge;
+import pathfinding.Path;
 import pathfinding.PathEdge;
 import pathfinding.PathNode;
 import java.util.List;
@@ -8,11 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class HexLocation implements Location, PathNode {
-
-    public boolean equals(PathNode pathNode) {
-        return false;
-    }
+public class HexLocation implements Location {
 
     //A unique list representing this location's semantic location
 	private List<Directions> pathFromOrigin;
@@ -38,8 +36,8 @@ public class HexLocation implements Location, PathNode {
                 .hashCode();
     }
 	
-	public boolean equals(Location loc) {
-		if (loc instanceof HexLocation) {
+	public boolean equals(Object loc) {
+        if (loc instanceof HexLocation) {
 			HexLocation hexloc = (HexLocation) loc;
             int[] myDistance = getDistanceFromOrigin();
             int[] theirDistance = hexloc.getDistanceFromOrigin();
@@ -60,7 +58,7 @@ public class HexLocation implements Location, PathNode {
 		//create a new Location object with that new path, and add it to our
 		//list of neighbors
 		for (Directions direction : Directions.values()) {
-			List<Directions> path = pathFromOrigin;
+			List<Directions> path = new ArrayList<Directions>(pathFromOrigin);
 			path.add(direction);
             Location neighbor = new HexLocation(path);
 			neighbors.add(neighbor);
@@ -98,7 +96,7 @@ public class HexLocation implements Location, PathNode {
             4 is southwest
             5 is northwest
          */
-        HexLocation loc = this;
+        HexLocation loc = new HexLocation(new ArrayList<Directions>(pathFromOrigin));
         switch (i) {
             case 0:
                 loc.appendPath(Directions.NORTH);

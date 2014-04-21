@@ -11,7 +11,7 @@ public class JavaPlayers implements TurnTracker<JavaPlayer> {
     private ArrayList<JavaPlayer> players;
     private int currentPlayer;
 
-    public JavaPlayers(int numPlayers) {
+    public JavaPlayers() {
         players = new ArrayList<JavaPlayer>();
         currentPlayer = 0;
     }

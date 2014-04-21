@@ -2,8 +2,11 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.actions.ActionResult;
+import model.board.Directions;
 import model.board.HexLocation;
 import model.palacefestival.PalaceFestival;
+
+import java.util.ArrayList;
 
 /**
  * Created by idinamenzel on 4/15/14.
@@ -17,6 +20,9 @@ public abstract class PotentialTwoSpaceMovement extends PotentialAction implemen
     public PotentialTwoSpaceMovement(GameModel game, PalaceFestival festival){
         super(game, festival);
         this.rotationState = 0;
+
+        centerLocation = new HexLocation(new ArrayList<Directions>());
+        otherLocation = centerLocation.getNeighbor(0);
     }
 
     @Override

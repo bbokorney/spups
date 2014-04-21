@@ -24,8 +24,9 @@ public class City {
         return city.size();
     }
 
-    public void add(Location loc) {
-        city.add(loc);
+    public void add(Location... locations) {
+        for (Location location : locations)
+            city.add(location);
     }
 
     public int getPalaceLevel() {
@@ -46,5 +47,25 @@ public class City {
 
     public void placePalaceTile(PalaceTileComponent palace) {
         this.palace = palace;
+    }
+
+    //If this city holds this location, remove it. Otherwise, nothing.
+    public void removeLocation(Location loc) {
+        if (city.contains(loc))
+            city.remove(loc);
+    }
+
+    public boolean equals(City city) {
+        //Check sizes are the same
+        if (this.getSize() != city.getSize())
+            return false;
+        //Check it holds the same locations as us
+        for (Location loc : getCity()) {
+            if (!city.getCity().contains(loc))
+                return false;
+        }
+
+        return (!getPalaceLocation().equals(city.getPalaceLocation())
+                && !getPalaceTile().equals(city.getPalaceTile()));
     }
 }

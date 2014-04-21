@@ -45,4 +45,8 @@ public class PalaceFestivalResources implements CardGameResources<Card> {
         discard.push(card);
     }
 
+	public int getDeckSize() {
+		return deck.size();
+	}
+
 }
