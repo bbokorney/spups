@@ -97,7 +97,7 @@ public class JavaBoard extends Board {
             //Now create a new city
             City newCity = new City(oldCity.getPalaceLocation(),
                                     oldCity.getPalaceTile());
-            ArrayList<Location> city = makeCity(loc, oldCity.getPalaceLocation()
+            ArrayList<Location> city = makeCity(neighbor, oldCity.getPalaceLocation()
                                            , new HashMap<Location, Boolean>());
             newCity.add(city.toArray(new Location[0]));
 
@@ -134,7 +134,7 @@ public class JavaBoard extends Board {
 
             //Now create a new city
             Village newVillage = new Village();
-            ArrayList<Location> villages = makeVillage(loc, new HashMap<Location, Boolean>());
+            ArrayList<Location> villages = makeVillage(neighbor, new HashMap<Location, Boolean>());
             newVillage.add(villages.toArray(new Location[0]));
 
             //Add this new city to citycontainer
