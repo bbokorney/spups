@@ -12,6 +12,7 @@ import model.player.JavaPlayerResourceType;
 import model.sharedresources.SharedResourceType;
 import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
+import model.turn.Turn;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 public abstract class GameModel {
 
-
+	public abstract Turn getTurn();
     public abstract void setPlayersInGame(String[] playerNames);
     public abstract int getCount(SharedResourceType res);
     public abstract void useResource(SharedResourceType res);

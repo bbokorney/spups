@@ -44,7 +44,7 @@ public class TakeDeveloperOffBoard extends Action {
      */
         boolean isSuccess = true;
         int famePoints = 0;         //will never gain fame points
-        int actionPoints = 1 + path.getCost();       //todo add the cost of the path
+        int actionPoints = 1 + path.getCost();
         String message = "";
 
         if(path.valid()){
