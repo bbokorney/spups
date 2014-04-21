@@ -31,7 +31,7 @@ public class GameFrame extends JFrame {
     ActionPanel actionPanel;
     FestivalPanel festivalPanel;
     
-	public GameFrame(GameModel model){
+	public GameFrame(){
 		this.setTitle("Java Spups");
 		this.setSize(WIDTH, HEIGHT);
 		this.setResizable(true);
@@ -39,7 +39,7 @@ public class GameFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
         menu = new JavaMenu();
-        gamePanel = new GamePanel(model);
+        gamePanel = new GamePanel();
         actionPanel = new ActionPanel(); 
         festivalPanel = new FestivalPanel();
         
@@ -51,6 +51,8 @@ public class GameFrame extends JFrame {
 
     public void refreshGame( GameModel game, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
         //ths gives all the information during the java game
+    	gamePanel.refreshView(game, festival, actionResult, potentialComponents, highlightedComponents);
+//    	actionPanel.refreshView();
     }
 
     public void refreshCardView(List<Card> cards){

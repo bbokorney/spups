@@ -73,7 +73,7 @@ public class PlaceVillageTile extends Action {
         }
 
         //check if they are placing on another one tile
-        if(PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
+        if(!PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
             isSuccess = isSuccess && true;
 
         }
@@ -83,7 +83,7 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if all the spaces they are placing on are the same elevation
-        if(true){
+        if(SameElevationRule.sameElevation(game.getSpaceAtLocation(placement))){
             isSuccess = isSuccess && true;
 
         }
@@ -115,7 +115,7 @@ public class PlaceVillageTile extends Action {
         }
 
         //see if they are connecting two cities
-        if(ConnectionTwoCitiesRule.connectsCities(placement,helperJunk)){
+        if(!ConnectionTwoCitiesRule.connectsCities(helperJunk, placement)){
             isSuccess = isSuccess && true;
 
         }
@@ -124,7 +124,9 @@ public class PlaceVillageTile extends Action {
             message += "Error: You cannot connect cities.\n";
         }
 
-        //todo
+        if(message.equalsIgnoreCase("")){
+            message += "Village Tile, AP " + actionPoints + ", Fame " + famePoints;
+        }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

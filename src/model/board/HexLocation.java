@@ -36,8 +36,8 @@ public class HexLocation implements Location {
                 .hashCode();
     }
 	
-	public boolean equals(Location loc) {
-		if (loc instanceof HexLocation) {
+	public boolean equals(Object loc) {
+        if (loc instanceof HexLocation) {
 			HexLocation hexloc = (HexLocation) loc;
             int[] myDistance = getDistanceFromOrigin();
             int[] theirDistance = hexloc.getDistanceFromOrigin();

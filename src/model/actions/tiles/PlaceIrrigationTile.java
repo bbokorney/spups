@@ -99,6 +99,9 @@ public class PlaceIrrigationTile extends Action {
             message += "Error: This tile cannot be placed outside Central Java.\n";
         }
 
+        if(message.equalsIgnoreCase("")){
+            message += "Irrigation Tile, AP " + actionPoints + ", Fame " + famePoints;
+        }
 
       return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }

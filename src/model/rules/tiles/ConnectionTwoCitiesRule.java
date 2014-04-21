@@ -8,7 +8,7 @@ import model.board.Location;
  * Created by Baker on 4/14/2014.
  */
 public class ConnectionTwoCitiesRule {
-    public static boolean connectsCities(HexLocation location, BoardRuleHelper helper) {
-        return helper.connectsTwoCities(location);
+    public static boolean connectsCities(BoardRuleHelper helper, HexLocation villageLocation, HexLocation... riceLocations) {
+        return helper.connectsTwoCities(villageLocation, riceLocations);
     }
 }

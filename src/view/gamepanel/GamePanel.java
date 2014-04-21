@@ -3,11 +3,18 @@ package view.gamepanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 import model.GameModel;
-import model.player.Player;
+import model.actions.ActionResult;
+import model.board.Location;
+import model.palacefestival.PalaceFestival;
+import model.palacefestival.PalaceFestivalPlayer;
+import model.player.JavaPlayer;
+import model.tiles.TileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -19,8 +26,8 @@ public class GamePanel extends JPanel {
 	private CardsPanel cardsPanel;
 	private CommonPanel commonPanel;
 	private PlayerPanel[] playerPanel;
-	public GamePanel(GameModel model) {
-		boardPanel = new BoardPanel(model.getBoard());
+	public GamePanel() {
+		boardPanel = new BoardPanel();
 		cardsPanel = new CardsPanel();
 		commonPanel = new CommonPanel(); 
 		playerPanel = new PlayerPanel[numOfPlayerPanels];
@@ -59,13 +66,14 @@ public class GamePanel extends JPanel {
 		this.setVisible(true);
 	}
 
-	public void refreshView(GameModel model) {
+	public void refreshView(GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
 		boardPanel.refreshView(model.getBoard());
 		cardsPanel.refreshView(model);
-		commonPanel.refreshView(model);
-		int x = 0;
-//		for(Player player : model.getJavaPlayers())
-//			playerPanel[x++].refreshView(player);
-//		repaint();
+		commonPanel.refreshView(model, festival);
+		
+		JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[0]);
+		for(int x = 0; x < players.length; ++x)
+			playerPanel[x++].refreshView(players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
+		repaint();
 	}
 }
