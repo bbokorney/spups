@@ -40,20 +40,20 @@ public class UpgradePalaceUIState extends GameplayUIState {
     }
 
 	public void switchPalaces() {
-		ActionResult result = potentialAction.tabToNextPalace();
-		send result to view
+		potentialAction.tabToNextPalace();
+		//send result to view
 	}
 
 	public void incValue() {
 		int value = potentialAction.getValue();
 		potentialAction.setValue((value >= 10) ? 10 : (value + 2) % 11);
-		update view
+		//update view
 	}
 
 	public void decValue() {
 		int value = potentialAction.getValue();
 		potentialAction.setValue((value <= 2) ? 2 : value - 2);
-		update view
+		//update view
 	}
 
 	public void confirmPlacement() {

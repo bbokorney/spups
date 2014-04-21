@@ -28,7 +28,7 @@ public class PotentialPlaceRiceTile extends PotentialOneSpaceMovement {
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    protected Pair<ActionResult, PlaceRiceTile> confirmPlacement(){
+    public Pair<ActionResult, PlaceRiceTile> confirmPlacement(){
         PlaceRiceTile result = new PlaceRiceTile(getLocation(), getGameModel());
         return new Pair<ActionResult, PlaceRiceTile>(result.doAction(), result);
     }

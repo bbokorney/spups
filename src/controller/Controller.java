@@ -37,7 +37,7 @@ public class Controller {
         keyListener = new KeyListener();
 		paFes = palaceFestival;
 
-        currentState = new EmptyUIState(this, keyListener, model);
+        currentState = new EmptyUIState(this, keyListener, model, paFes);
 	}
 
     public void setCurrentState(PotentialJavaUIState newState) {
@@ -84,6 +84,6 @@ public class Controller {
 	}
 
 	public void refreshGameView() {
-		controller.refreshGameView(result, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
+		//controller.refreshGameView(result, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
 	}
 }

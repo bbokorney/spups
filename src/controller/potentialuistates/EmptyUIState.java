@@ -26,39 +26,40 @@ import java.util.Map;
  * Created by Baker on 4/14/2014.
  */
 public class EmptyUIState extends PotentialJavaUIState {
-    private final int KEY_PLACEDEVELOPER = KeyEvent.VK_1;
-    private final int KEY_SWITCHDEVELOPER = KeyEvent.VK_2;
+    private final int KEY_PLACEDEVELOPER = KeyEvent.VK_D;
+    private final int KEY_SWITCHDEVELOPER = KeyEvent.VK_TAB;
 
-    private final int KEY_PLACERICE = KeyEvent.VK_3;
-    private final int KEY_PLACEVILLAGE = KeyEvent.VK_4;
-    private final int KEY_PLACEIRRIGATION = KeyEvent.VK_5;
-    private final int KEY_PLACEPALACE = KeyEvent.VK_6;
-    private final int KEY_PLACETWO = KeyEvent.VK_7;
-    private final int KEY_PLACETHREE = KeyEvent.VK_8;
+    private final int KEY_PLACERICE = KeyEvent.VK_R;
+    private final int KEY_PLACEVILLAGE = KeyEvent.VK_V;
+    private final int KEY_PLACEIRRIGATION = KeyEvent.VK_I;
+    private final int KEY_PLACEPALACE = KeyEvent.VK_P;
+    private final int KEY_PLACETWO = KeyEvent.VK_2;
+    private final int KEY_PLACETHREE = KeyEvent.VK_3;
 
-    private final int KEY_UPGRADEPALACE = KeyEvent.VK_9;
+    private final int KEY_UPGRADEPALACE = KeyEvent.VK_U;
 
-    private final int KEY_ACTIONTOKEN = KeyEvent.VK_0;
-	private final int KEY_DRAWCARD = KeyEvent.VK_D;
+    private final int KEY_ACTIONTOKEN = KeyEvent.VK_T;
+	private final int KEY_DRAW_DECK_CARD = KeyEvent.VK_C;
+	private final int KEY_DRAW_FESTIVAL_CARD = KeyEvent.VK_X;
 
-    private final int KEY_ENDTURN = KeyEvent.VK_Q;
-    private final int KEY_PALACEFESTIVAL = KeyEvent.VK_W;
+    private final int KEY_ENDTURN = KeyEvent.VK_E;
+    private final int KEY_PALACEFESTIVAL = KeyEvent.VK_F;
 
-    private final int KEY_REPLAYROUND = KeyEvent.VK_E;
-    private final int KEY_REPLAYGAME = KeyEvent.VK_R;
+    private final int KEY_REPLAYROUND = KeyEvent.VK_A;
+    private final int KEY_REPLAYGAME = KeyEvent.VK_Z;
 
-    private final int KEY_PLANNINGPLAY = KeyEvent.VK_T;
+    private final int KEY_PLANNINGPLAY = KeyEvent.VK_Q;
 
     Controller controller;
     KeyListener keyListener;
     GameModel model;
 	PalaceFestival paFes;
 
-    public EmptyUIState(Controller controller, KeyListener keyListener, GameModel model){
+    public EmptyUIState(Controller controller, KeyListener keyListener, GameModel model, PalaceFestival paFes){
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
-	    paFes = controller.getPalaceFestival();
+	    this.paFes = paFes;
 
         initListeners();
     }
@@ -125,18 +126,22 @@ public class EmptyUIState extends PotentialJavaUIState {
 	    }
     }
 
-	public void drawCard() {
-		PickUpDeckCard draw = new PickUpDeckCard(paFes);
-		ActionResult result = draw.tryAction();
-		if(result.isSuccess()) {
-			draw.doAction();
-			controller.addToHistory(new Pair<ActionResult, PickUpDeckCard>(result, draw));
-			controller.refreshGameView();
-		}
-	}
+	public void drawDeckCard() {
+        PickUpDeckCard draw = new PickUpDeckCard(paFes);
+        ActionResult result = draw.tryAction();
+        if(result.isSuccess()) {
+            draw.doAction();
+            controller.addToHistory(new Pair<ActionResult, PickUpDeckCard>(result, draw));
+            controller.refreshGameView();
+        }
+    }
+
+    public void drawFestivalCard() {
+        // TODO: implement
+    }
 
     public void switchBetweenPlanningAndPlayModes() {
-
+        // TODO: implement
     }
 
     public void replayRound() {
@@ -229,13 +234,21 @@ public class EmptyUIState extends PotentialJavaUIState {
         });
         listeners.add(i);
 
-	    i = new InternalListener(KEY_DRAWCARD, new Funktor() {
+	    i = new InternalListener(KEY_DRAW_DECK_CARD, new Funktor() {
 		    @Override
 		    public void call() {
-			    drawCard();
+			    drawDeckCard();
 		    }
 	    });
 	    listeners.add(i);
+
+        i = new InternalListener(KEY_DRAW_FESTIVAL_CARD, new Funktor() {
+            @Override
+            public void call() {
+                drawFestivalCard();
+            }
+        });
+        listeners.add(i);
 
         i = new InternalListener(KEY_ENDTURN, new Funktor() {
             @Override
