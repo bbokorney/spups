@@ -26,6 +26,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         super(game, palaceFestival);
 //        this.hoverboard = hoverboard;
         this.rotationState = 0;
+        otherLocations = new HexLocation[2];
         centerLocation = new HexLocation(new ArrayList<Directions>());
         otherLocations[0] = centerLocation.getNeighbor(0);
         otherLocations[1] = centerLocation.getNeighbor(1);
@@ -34,6 +35,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
 
     @Override
     public ActionResult moveNorth() {
+
         HexLocation newCenterLocation = centerLocation.getNeighbor(0);
         HexLocation newOtherLocation = otherLocations[0].getNeighbor(0);
         HexLocation newOtherOtherLocation = otherLocations[1].getNeighbor(0);
@@ -41,7 +43,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
-            otherLocations[1] = newOtherLocation;
+            otherLocations[1] = newOtherOtherLocation;
             //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
@@ -56,7 +58,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
-            otherLocations[1] = newOtherLocation;
+            otherLocations[1] = newOtherOtherLocation;
             //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
@@ -71,7 +73,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
-            otherLocations[1] = newOtherLocation;
+            otherLocations[1] = newOtherOtherLocation;
             //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
@@ -86,7 +88,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
-            otherLocations[1] = newOtherLocation;
+            otherLocations[1] = newOtherOtherLocation;
             //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
@@ -101,7 +103,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
-            otherLocations[1] = newOtherLocation;
+            otherLocations[1] = newOtherOtherLocation;
             //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
@@ -117,7 +119,7 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         if (getGameModel().getBoard().areLocationsOnBoard(newCenterLocation, newOtherLocation, newOtherOtherLocation)) {
             centerLocation = newCenterLocation;
             otherLocations[0] = newOtherLocation;
-            otherLocations[1] = newOtherLocation;
+            otherLocations[1] = newOtherOtherLocation;
             //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
