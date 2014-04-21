@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import java.awt.event.KeyListener;
+import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
@@ -47,7 +47,7 @@ public class GameFrame extends JFrame {
         this.add(gamePanel);
         this.setJMenuBar(menu);
 
-        this.listener = listener;
+        this.listener = keyListener;
         addKeyListener(listener);
         setFocusTraversalKeysEnabled(false);
 

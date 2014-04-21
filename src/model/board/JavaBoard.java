@@ -90,7 +90,6 @@ public class JavaBoard extends Board {
         //each city neighbor, all the cities which need to be split based
         //on this new rice tile placement will be split, and all the cities
         //which should not be split will be rejoined.
-        System.out.println("size of cityneighbors is " +cityNeighbors.size());
         for (Location neighbor : cityNeighbors) {
             //First get the original city to which this neighbor belonged
             City oldCity = cityContainer.getCityFromLocation(neighbor);
@@ -130,7 +129,6 @@ public class JavaBoard extends Board {
         // split based on this new rice tile placement will be split, and all
         // the villages which should not be split will be rejoined.
         for (Location neighbor : villageNeighbors) {
-            System.out.println("is loc in village " + isLocationInVillage(neighbor));
             //First get the original city to which this neighbor belonged
             Village oldVillage = villageContainer.getVillageFromLocation(neighbor);
 
@@ -138,8 +136,6 @@ public class JavaBoard extends Board {
             Village newVillage = new Village();
             ArrayList<Location> villages = makeVillage(neighbor, new HashMap<Location, Boolean>());
             newVillage.add(villages.toArray(new Location[0]));
-            System.out.println("size of new village is " + newVillage.getSize());
-
 
             //Add this new city to citycontainer
             villageContainer.addVillage(newVillage);
@@ -265,10 +261,8 @@ public class JavaBoard extends Board {
 
         //if (!visited.get(loc)) {
         if (!visited.containsKey(loc) || (!visited.get(loc))) {
-            System.out.println("got here");
             visited.put(loc, true);
             if (isLocationInVillage(loc)) {
-                System.out.println("got here now");
                 locations.add(loc);
                 for (Location neighbor : loc.getNeighbors()) {
                     locations.addAll(makeVillage(neighbor, visited));
