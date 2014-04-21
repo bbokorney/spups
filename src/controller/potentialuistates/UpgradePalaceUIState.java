@@ -30,6 +30,7 @@ public class UpgradePalaceUIState extends GameplayUIState {
 	PotentialUpgradePalaceTile potentialAction;
 
     public UpgradePalaceUIState(Controller controller, KeyListener keyListener, GameModel model){
+	    super();
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -101,6 +102,6 @@ public class UpgradePalaceUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
-		keyListener.replaceTemporaryListener(listeners);
+		keyListener.addTemporaryListeners(listeners);
 	}
 }

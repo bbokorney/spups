@@ -54,6 +54,7 @@ public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
 
     public PlaceOneSpaceTileUIState(Controller controller, KeyListener keyListener,
                                     GameModel model, TileComponent component){
+	    super();
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -222,7 +223,7 @@ public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
         });
         listeners.add(i);
 
-        keyListener.replaceTemporaryListener(listeners);
+        keyListener.addTemporaryListeners(listeners);
     }
 
 }

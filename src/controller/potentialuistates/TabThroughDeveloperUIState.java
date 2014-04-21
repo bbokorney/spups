@@ -31,6 +31,7 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 	PotentialTabThroughDevelopers potentialAction;
 
     public TabThroughDeveloperUIState(Controller controller, KeyListener keyListener, GameModel model){
+	    super();
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -41,10 +42,10 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
     }
 
 	public void switchDeveloper() {
-//		ActionResult result = potentialAction.getLocationFromPath();
-//		if(!result.isSuccess()) {
-//
-//		}
+		//ActionResult result = potentialAction.getLocationFromPath();
+		//if(!result.isSuccess()) {
+
+		//}
 	}
 
 	public void switchToMoveDeveloperState() {
@@ -90,6 +91,6 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
-		keyListener.replaceTemporaryListener(listeners);
+		keyListener.addTemporaryListeners(listeners);
 	}
 }

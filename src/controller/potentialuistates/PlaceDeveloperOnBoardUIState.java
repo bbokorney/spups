@@ -38,6 +38,7 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 	PotentialPlaceDeveloperOnBoard potentialAction;
 
     public PlaceDeveloperOnBoardUIState(Controller controller, KeyListener keyListener, GameModel model){
+	    super();
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -145,7 +146,7 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
-		keyListener.replaceTemporaryListener(listeners);
+		keyListener.addTemporaryListeners(listeners);
 	}
 
 	private void updateView(ActionResult result, List<Location> list) {

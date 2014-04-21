@@ -35,6 +35,7 @@ public class PlaceTwoSpaceTileUIState extends GameplayUIState {
 	PotentialJavaTwoSpaceTile potentialAction;
 
     public PlaceTwoSpaceTileUIState(Controller controller, KeyListener keyListener, GameModel model){
+	    super();
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -168,6 +169,6 @@ public class PlaceTwoSpaceTileUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
-		keyListener.replaceTemporaryListener(listeners);
+		keyListener.addTemporaryListeners(listeners);
 	}
 }
