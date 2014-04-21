@@ -157,7 +157,6 @@ public class BoardPanel extends JPanel {
 			}
 			((Graphics2D) g).setColor(Color.YELLOW);
 			g.fillPolygon(house);
-//	        g.fillArc((int)(i*(hexScaling)), (int)(j*(hexScaling)), 20, 200, 0, 30);
 	        g.setColor(Color.black);
 	        g.setFont(new Font("default", Font.BOLD, 20));
 	        if(palaceValue > 9)
@@ -207,7 +206,6 @@ public class BoardPanel extends JPanel {
         for (int x = 0; x < 4; x++) {
         	int xPoint = (int) (width*hexScaling + xx[x]*7);
         	int yPoint = (int) (height*hexScaling + yy[x]*7);
-//        	int yPoint = (int) (posWidth + hexSideLength()*Math.cos(x*2*Math.PI/6));
             tile.addPoint(xPoint, yPoint);
         }
         
@@ -217,7 +215,6 @@ public class BoardPanel extends JPanel {
         ((Graphics2D) g).setColor(Color.black);
         ((Graphics2D) g).setStroke(new BasicStroke(2));
         g.drawPolygon(tile);
-//        g.drawString("FJSKLFJDS", (int)(width*hexScaling), (int)(height*hexScaling));
 	}
 	
 	public static void drawIrrigationWave(Graphics g, int width, int height, int yOffset) {

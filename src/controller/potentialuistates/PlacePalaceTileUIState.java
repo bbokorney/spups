@@ -6,6 +6,7 @@ import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.tiles.PlacePalaceTile;
 import model.potentialactions.PotentialPlacePalaceTile;
@@ -98,7 +99,7 @@ public class PlacePalaceTileUIState extends GameplayUIState {
 	}
 
 	public void confirmPlacement() {
-		Pair<ActionResult, PlacePalaceTile> actionPair = potentialAction.confirmPlacement();
+		Pair<ActionResult, Action> actionPair = potentialAction.confirmAction();
 		ActionResult result = actionPair.getFirst();
 
 		if(result.isSuccess()) {

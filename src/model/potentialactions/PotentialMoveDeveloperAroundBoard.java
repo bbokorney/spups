@@ -2,8 +2,10 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.developer.MoveDeveloperAroundBoard;
+import model.actions.tiles.PlaceVillageTile;
 import model.board.Location;
 import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
@@ -45,6 +47,12 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     public List<Location> getLocationFromPath() {
         //Todo Meghan
         return null;
+    }
+
+    public Pair<ActionResult, Action> confirmAction(){
+        return null;
+//        PlaceVillageTile result = new MoveDeveloperAroundBoard(getLocation(), getGameModel() );
+//        return new Pair<ActionResult, Action>(result.doAction(), result);
     }
 
 }

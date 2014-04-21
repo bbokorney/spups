@@ -87,7 +87,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void switchToPlaceVillageTileState() {
-        controller.setCurrentState(new PlaceVillageTileUIState(controller, keyListener, model));
+        controller.setCurrentState(new PlaceVillageTileUIState(controller, keyListener, model, paFes));
     }
 
     public void switchToPlacePalaceTileState() {
@@ -99,8 +99,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void switchToPlaceRiceTileState() {
-        System.out.println("Moving to PlaceRiceTileUIState.");
-        controller.setCurrentState(new PlaceRiceTileUIState(controller, keyListener, model));
+        controller.setCurrentState(new PlaceRiceTileUIState(controller, keyListener, model, paFes));
     }
 
     public void endTurn() {

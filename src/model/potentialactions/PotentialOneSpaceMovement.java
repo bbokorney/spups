@@ -1,7 +1,10 @@
 package model.potentialactions;
 
 import model.GameModel;
+import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
+import model.actions.tiles.PlaceRiceTile;
 import model.board.Directions;
 import model.board.HexLocation;
 import model.palacefestival.PalaceFestival;
@@ -91,8 +94,5 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         return location;
     }
 
-
-
-
-
+    public abstract Pair<ActionResult, Action> confirmAction();
 }
