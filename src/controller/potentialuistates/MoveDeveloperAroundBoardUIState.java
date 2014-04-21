@@ -40,7 +40,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
     PotentialMoveDeveloperAroundBoard potentialAction;
 
     public MoveDeveloperAroundBoardUIState(Controller controller, KeyListener keyListener, GameModel model, HexLocation developer){
-	    super();
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;

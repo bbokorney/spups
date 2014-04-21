@@ -22,12 +22,17 @@ public abstract class GameplayUIState extends PotentialJavaUIState{
 	GameModel model;
     PalaceFestival festival;
 
-	public GameplayUIState() {
+	public GameplayUIState(Controller controller, KeyListener keyListener, GameModel model) {
+		this.controller = controller;
+		this.keyListener = keyListener;
+		this.model = model;
+		festival = controller.getPalaceFestival();
 		setEmptyListener();
 	}
 
     public void switchToEmptyState() {
-       controller.setCurrentState(new EmptyUIState(controller, keyListener, model, festival));
+	    controller.refreshGameView();
+		controller.setCurrentState(new EmptyUIState(controller, keyListener, model, festival));
     }
 
 	public void setEmptyListener() {

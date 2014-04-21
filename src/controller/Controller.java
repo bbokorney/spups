@@ -86,7 +86,7 @@ public class Controller {
 	}
 
 	public void refreshGameView() {
-		//controller.refreshGameView(result, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
+		refreshGameView(null, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
 	}
 
 	public void refreshCardView(List<Card> cards) {

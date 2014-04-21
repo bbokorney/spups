@@ -31,7 +31,7 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 	PotentialTabThroughDevelopers potentialAction;
 
     public TabThroughDeveloperUIState(Controller controller, KeyListener keyListener, GameModel model){
-	    super();
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;

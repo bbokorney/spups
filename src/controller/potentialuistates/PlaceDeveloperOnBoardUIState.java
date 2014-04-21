@@ -38,7 +38,7 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 	PotentialPlaceDeveloperOnBoard potentialAction;
 
     public PlaceDeveloperOnBoardUIState(Controller controller, KeyListener keyListener, GameModel model){
-	    super();
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;

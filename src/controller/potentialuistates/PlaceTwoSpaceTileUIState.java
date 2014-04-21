@@ -8,11 +8,15 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceTwoSpaceTile;
+import model.board.Location;
 import model.potentialactions.PotentialJavaTwoSpaceTile;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -35,7 +39,7 @@ public class PlaceTwoSpaceTileUIState extends GameplayUIState {
 	PotentialJavaTwoSpaceTile potentialAction;
 
     public PlaceTwoSpaceTileUIState(Controller controller, KeyListener keyListener, GameModel model){
-	    super();
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -102,6 +106,18 @@ public class PlaceTwoSpaceTileUIState extends GameplayUIState {
 			controller.addToHistory(actionPair);
 		}
 	}
+
+//	private void updateView(ActionResult result) {
+//		Map<Location, TileComponent> hoverComponents = new HashMap<Location, TileComponent>();
+//		hoverComponents.put(potentialAction.getLocation(), component);
+//		List<Location> highlighted = new ArrayList<Location>();
+//		highlighted.add(potentialAction.getLocation());
+//		controller.refreshGameView(result, hoverComponents, highlighted);
+//	}
+//
+//	protected void updateView() {
+//		updateView(potentialAction.getActionResult());
+//	}
 
 	private void initListeners() {
 		List<InternalListener> listeners = new ArrayList<InternalListener>();

@@ -54,7 +54,7 @@ public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
 
     public PlaceOneSpaceTileUIState(Controller controller, KeyListener keyListener,
                                     GameModel model, TileComponent component){
-	    super();
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;

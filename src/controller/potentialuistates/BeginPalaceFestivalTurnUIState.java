@@ -31,7 +31,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 	PotentialBeginPalaceFestival potentialAction;
 
     public BeginPalaceFestivalTurnUIState(Controller controller, KeyListener keyListener, GameModel model){
-	    super();
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
 	    this.model = model;
