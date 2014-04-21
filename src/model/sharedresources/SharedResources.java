@@ -12,7 +12,7 @@ public class SharedResources extends Resources<SharedResourceType> {
         super();
         // TODO: add resources once enum is completed (see below?)
         super.addResource(SharedResourceType.IRRIGATION, 16);
-        super.addResource(SharedResourceType.THREE, 3);
+        super.addResource(SharedResourceType.THREE, 56);
         super.addResource(SharedResourceType.PALACELEVELTWO, 6);
         super.addResource(SharedResourceType.PALACELEVELFOUR, 7);
         super.addResource(SharedResourceType.PALACELEVELSIX, 8);
