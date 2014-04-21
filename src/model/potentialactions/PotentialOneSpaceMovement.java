@@ -2,8 +2,11 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.actions.ActionResult;
+import model.board.Directions;
 import model.board.HexLocation;
 import model.palacefestival.PalaceFestival;
+
+import java.util.ArrayList;
 
 /**
  * Created by idinamenzel on 4/15/14.
@@ -20,6 +23,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     public PotentialOneSpaceMovement(GameModel game, PalaceFestival festival){
         super(game, festival);
+        location = new HexLocation(new ArrayList<Directions>());
     }
 
     @Override
@@ -27,7 +31,6 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         HexLocation newLocation = location.getNeighbor(0);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }

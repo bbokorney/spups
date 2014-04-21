@@ -17,8 +17,9 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     Location developerStartingLocation;
 
 
-    public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival){
+    public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival, Location location){
         super(game, festival);
+        this.developerStartingLocation = location;
     }
 
     private JavaPath getShortestLegalPath(){

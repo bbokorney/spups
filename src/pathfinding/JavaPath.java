@@ -1,14 +1,16 @@
 package pathfinding;
 
 import model.board.HexLocation;
+import model.board.Location;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Baker on 4/14/2014.
  */
 public class JavaPath {
-    private Path<HexLocation> path;
+    private Path<JavaNode> path;
 
     public boolean valid() {
         return path.valid();
@@ -18,7 +20,11 @@ public class JavaPath {
         return path.getCost();
     }
 
-    public List<HexLocation> getPath() {
-        return path.getPath();
+    public List<Location> getPath() {
+        List<Location> locations = new ArrayList<Location>();
+        for(int i = 0; i < path.getPath().size(); ++i) {
+            locations.add(path.getPath().get(i).getLocation());
+        }
+        return locations;
     }
 }
