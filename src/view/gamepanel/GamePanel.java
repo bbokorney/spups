@@ -71,17 +71,18 @@ public class GamePanel extends JPanel {
 	}
 
 	public void refreshView(GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
-		boardPanel.refreshView(model.getBoard(), model);
+		boardPanel.refreshView(model.getBoard(), model, potentialComponents, highlightedComponents);
 		cardsPanel.refreshView(model);
 		commonPanel.refreshView(model, festival);
 		
 		JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[0]);
 
-		for(int x = 0; x < players.length; ++x){
-			playerPanel[x].refreshView(model, model.getTurn(), players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
+		for(int x = 0; x < players.length; ++x) {
+			if(festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand() != null)
+				playerPanel[x].refreshView(model, model.getTurn(), players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
 		}
 		for(int x = players.length; x < numOfPlayerPanels; ++x) { 
-			playerPanel[x].removeAll();
+//			playerPanel[x].removeAll();
 		}
 		repaint();
 	}
