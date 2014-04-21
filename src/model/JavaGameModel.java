@@ -151,9 +151,12 @@ public class JavaGameModel extends GameModel{
         board.placeVillageTileComponent(loc, tile);
     }
 
-    //TODO:
-    public void buildPalace(Location loc, TileComponent tile) {}
-    public void upgradePalace(Location loc, TileComponent tile) {}
+    public void buildPalace(Location loc, PalaceTileComponent tile) {
+        board.buildPalace(loc, tile);
+    }
+    public void upgradePalace(Location loc, PalaceTileComponent tile) {
+        board.upgradePalace(loc, tile);
+    }
 
     public void addPalaceToCurrentTurnList(Location loc) {
         turn.addPalaceToList(loc);
