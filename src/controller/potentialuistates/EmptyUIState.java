@@ -10,6 +10,8 @@ import model.Pair;
 import model.actions.ActionResult;
 import model.actions.EndTurn;
 import model.actions.UseActionToken;
+import model.actions.palacefestival.PickUpDeckCard;
+import model.palacefestival.PalaceFestival;
 import model.potentialactions.PotentialBeginPalaceFestival;
 
 import java.awt.event.KeyEvent;
@@ -33,6 +35,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     private final int KEY_UPGRADEPALACE = KeyEvent.VK_9;
 
     private final int KEY_ACTIONTOKEN = KeyEvent.VK_0;
+	private final int KEY_DRAWCARD = KeyEvent.VK_D;
 
     private final int KEY_ENDTURN = KeyEvent.VK_Q;
     private final int KEY_PALACEFESTIVAL = KeyEvent.VK_W;
@@ -45,11 +48,13 @@ public class EmptyUIState extends PotentialJavaUIState {
     Controller controller;
     KeyListener keyListener;
     GameModel model;
+	PalaceFestival paFes;
 
     public EmptyUIState(Controller controller, KeyListener keyListener, GameModel model){
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
+	    paFes = controller.getPalaceFestival();
 
         initListeners();
     }
@@ -113,6 +118,15 @@ public class EmptyUIState extends PotentialJavaUIState {
 		    controller.addToHistory(new Pair<ActionResult, UseActionToken>(result, action));
 	    }
     }
+
+	public void drawCard() {
+		PickUpDeckCard draw = new PickUpDeckCard(paFes);
+		ActionResult result = draw.tryAction();
+		if(result.isSuccess()) {
+			draw.doAction();
+			controller.addToHistory(new Pair<ActionResult, PickUpDeckCard>(result, draw));
+		}
+	}
 
     public void switchBetweenPlanningAndPlayModes() {
 
@@ -207,6 +221,14 @@ public class EmptyUIState extends PotentialJavaUIState {
             }
         });
         listeners.add(i);
+
+	    i = new InternalListener(KEY_DRAWCARD, new Funktor() {
+		    @Override
+		    public void call() {
+			    drawCard();
+		    }
+	    });
+	    listeners.add(i);
 
         i = new InternalListener(KEY_ENDTURN, new Funktor() {
             @Override

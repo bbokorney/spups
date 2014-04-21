@@ -40,7 +40,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
         this.keyListener = keyListener;
         this.model = model;
 
-        potentialAction = new PotentialMoveDeveloperAroundBoard(model, developer);
+        potentialAction = new PotentialMoveDeveloperAroundBoard(model, controller.getPalaceFestival(), developer);
 
         initListeners();
     }

@@ -39,7 +39,7 @@ public class PlaceRiceTileUIState extends GameplayUIState {
         this.keyListener = keyListener;
         this.model = model;
 
-	    potentialAction = new PotentialPlaceRiceTile(model);
+	    potentialAction = new PotentialPlaceRiceTile(model, controller.getPalaceFestival());
 
         initListeners();
     }

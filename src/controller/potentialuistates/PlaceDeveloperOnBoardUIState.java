@@ -39,7 +39,7 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
         this.keyListener = keyListener;
         this.model = model;
 
-	    potentialAction = new PotentialPlaceDeveloperOnBoard(model);
+	    potentialAction = new PotentialPlaceDeveloperOnBoard(model, controller.getPalaceFestival());
 
         initListeners();
     }

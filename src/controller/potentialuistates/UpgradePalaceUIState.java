@@ -34,7 +34,7 @@ public class UpgradePalaceUIState extends GameplayUIState {
         this.keyListener = keyListener;
         this.model = model;
 
-	    potentialAction = new PotentialUpgradePalaceTile();
+	    potentialAction = new PotentialUpgradePalaceTile(model, controller.getPalaceFestival());
 
         initListeners();
     }
@@ -70,7 +70,7 @@ public class UpgradePalaceUIState extends GameplayUIState {
 		InternalListener i = new InternalListener(KEY_SWITCH, new Funktor() {
 			@Override
 			public void call() {
-				moveNorth();
+				switchPalaces();
 			}
 		});
 		listeners.add(i);

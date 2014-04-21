@@ -8,6 +8,7 @@ import controller.potentialuistates.PotentialJavaUIState;
 import model.GameModel;
 import model.Pair;
 import model.actions.Action;
+import model.palacefestival.PalaceFestival;
 import view.GameFrame;
 
 /**
@@ -18,13 +19,15 @@ public class Controller {
     KeyListener keyListener;
     GameFrame view;
     GameModel model;
+	PalaceFestival paFes;
 
     PotentialJavaUIState currentState;
 
-	public Controller(GameFrame view, GameModel model) {
+	public Controller(GameFrame view, GameModel model, PalaceFestival palaceFestival) {
 		this.view = view;
         this.model = model;
         keyListener = new KeyListener();
+		paFes = palaceFestival;
 
         currentState = new EmptyUIState(this, keyListener, model);
 	}
@@ -33,15 +36,11 @@ public class Controller {
         this.currentState = newState;
     }
 
-    public void addToHistory(Action action) {
-
-    }
-
 	public void addToHistory(Pair action) {
 		history.addAction(action);
 	}
 	public void addEndTurnToHistory(Pair action) {
-		history.
+		history.addEndTurn(action);
 	}
 
     public void askForUserConfirmation(Action actionMessage) {
@@ -67,4 +66,6 @@ public class Controller {
 	public java.awt.event.KeyListener getKeyListener() {
 		return keyListener;
 	}
+
+	public PalaceFestival getPalaceFestival() { return paFes; }
 }

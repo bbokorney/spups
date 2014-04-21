@@ -37,7 +37,7 @@ public class PlaceIrrigationTileUIState extends GameplayUIState {
         this.keyListener = keyListener;
         this.model = model;
 
-        potentialAction = new PotentialPlaceIrrigationTile(model);
+        potentialAction = new PotentialPlaceIrrigationTile(model, controller.getPalaceFestival());
 
         initListeners();
     }

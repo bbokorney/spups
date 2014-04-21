@@ -40,7 +40,7 @@ public class PlaceThreeSpaceTileUIState extends GameplayUIState {
         this.keyListener = keyListener;
         this.model = model;
 
-	    potentialAction = new PotentialJavaThreeSpaceTile(model);
+	    potentialAction = new PotentialJavaThreeSpaceTile(model, controller.getPalaceFestival());
 
         initListeners();
     }
