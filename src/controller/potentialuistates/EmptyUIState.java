@@ -91,11 +91,11 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void switchToPlacePalaceTileState() {
-        controller.setCurrentState(new PlacePalaceTileUIState(controller, keyListener, model));
+        controller.setCurrentState(new PlacePalaceTileUIState(controller, keyListener, model, paFes));
     }
 
     public void switchToPlaceIrrigationTileState() {
-        controller.setCurrentState(new PlaceIrrigationTileUIState(controller, keyListener, model));
+        controller.setCurrentState(new PlaceIrrigationTileUIState(controller, keyListener, model, paFes));
     }
 
     public void switchToPlaceRiceTileState() {
@@ -290,6 +290,6 @@ public class EmptyUIState extends PotentialJavaUIState {
         });
         listeners.add(i);
 
-        keyListener.addPersistentListener(listeners);
+        keyListener.addPersistentListeners(listeners);
     }
 }

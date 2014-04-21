@@ -9,6 +9,7 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Location;
+import model.potentialactions.PotentialAction;
 import model.potentialactions.PotentialOneSpaceMovement;
 import model.tiles.TileComponent;
 
@@ -38,29 +39,38 @@ public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
 
     private final int KEY_CONFIRM = KeyEvent.VK_ENTER;
 
-    Controller controller;
-    KeyListener keyListener;
-    GameModel model;
-    TileComponent component;
+    private Controller controller;
+    private KeyListener keyListener;
+    private GameModel model;
+    private TileComponent component;
 
     PotentialOneSpaceMovement potentialAction;
 
     public PlaceOneSpaceTileUIState(Controller controller, KeyListener keyListener,
                                     GameModel model, TileComponent component, PotentialOneSpaceMovement potentialAction){
+        this(controller, keyListener, model, component);
+        setPotentialAction(potentialAction);
+    }
+
+    public PlaceOneSpaceTileUIState(Controller controller, KeyListener keyListener,
+                                    GameModel model, TileComponent component){
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
         this.component = component;
 
-        //this.potentialAction = new PotentialPlaceRiceTile(model, controller.getPalaceFestival());
-        this.potentialAction = potentialAction;
-        updateView(potentialAction.getActionResult());
-
         initListeners();
-
+        initAdditonalListeners();
     }
 
+    protected void setPotentialAction(PotentialOneSpaceMovement action) {
+        this.potentialAction = action;
+        updateView(potentialAction.getActionResult());
+    }
 
+    protected void setTileComponent(TileComponent component) { this.component = component; }
+
+    protected void initAdditonalListeners() {}
 
     private void updateView(ActionResult result) {
         Map<Location, TileComponent> hoverComponents = new HashMap<Location, TileComponent>();
@@ -69,6 +79,12 @@ public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
         highlighted.add(potentialAction.getLocation());
         controller.refreshGameView(result, hoverComponents, highlighted);
     }
+
+    protected void updateView() {
+        updateView(potentialAction.getActionResult());
+    }
+
+    protected KeyListener getKeyListener() { return keyListener; }
 
     public void moveNorth() {
         updateView(potentialAction.moveNorth());

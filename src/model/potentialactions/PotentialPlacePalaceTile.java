@@ -24,6 +24,20 @@ public class PotentialPlacePalaceTile extends PotentialOneSpaceMovement{
         return new PlacePalaceTile(value, getLocation(), getGameModel()).tryAction();
     }
 
+    public void incrementLevel() {
+        if(value != 10) {
+            value += 2;
+        }
+    }
+
+    public void decrementLevel() {
+        if(value != 2) {
+            value -= 2;
+        }
+    }
+
+    public int getLevel() { return value; }
+
     /*
        This method's return type has been changed, as many PotentialActions have due to
        the modification of ActionResult. At first, ActionResult had Action as an aggregate,
