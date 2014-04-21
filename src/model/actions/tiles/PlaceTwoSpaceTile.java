@@ -6,7 +6,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
-import model.board.HexLocation;
+import model.board.Location;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
 import model.tiles.RiceTileComponent;
@@ -22,8 +22,8 @@ public class PlaceTwoSpaceTile extends Action {
      /*
         attributes
      */
-    HexLocation villagePlacement;
-    HexLocation ricePlacement;
+    Location villagePlacement;
+    Location ricePlacement;
     GameModel game;
     /*
         constructors
@@ -31,7 +31,7 @@ public class PlaceTwoSpaceTile extends Action {
     public PlaceTwoSpaceTile(){
 
     }
-    public PlaceTwoSpaceTile(HexLocation villagePlacement, HexLocation ricePlacement, GameModel game){
+    public PlaceTwoSpaceTile(Location villagePlacement, Location ricePlacement, GameModel game){
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
         this.game = game;

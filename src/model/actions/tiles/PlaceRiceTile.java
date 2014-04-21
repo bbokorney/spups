@@ -6,7 +6,7 @@ import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
-import model.board.HexLocation;
+import model.board.Location;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
@@ -24,7 +24,7 @@ public class PlaceRiceTile extends Action {
     /*
         attributes
      */
-    HexLocation placement;
+    Location placement;
     GameModel game;
 
     /*
@@ -34,7 +34,7 @@ public class PlaceRiceTile extends Action {
         //Empty constructor
         //mostly used for loading
     }
-    public PlaceRiceTile(HexLocation placement, GameModel game){
+    public PlaceRiceTile(Location placement, GameModel game){
         this.placement = placement;
         this.game = game;
     }
