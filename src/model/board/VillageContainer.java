@@ -35,4 +35,13 @@ public class VillageContainer {
         return null;
     }
 
+    public void removeLocationFromVillage(Location loc) {
+        for (Village village : villageCollection) {
+            village.remove(loc); //remember this does nothing if city doesn't hold loc
+            //Remove this city if its size is 0 now
+            if (village.getLocations().size() == 0)
+                removeVillage(village);
+        }
+    }
+
 }
