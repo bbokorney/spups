@@ -30,8 +30,8 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		boardPanel = new BoardPanel();
 		cardsPanel = new CardsPanel();
-		JScrollPane scrollCardsPanel = new JScrollPane(); 
-		scrollCardsPanel.add(cardsPanel);
+//		JScrollPane scrollCardsPanel = new JScrollPane(); 
+//		scrollCardsPanel.add(cardsPanel);
 		commonPanel = new CommonPanel(); 
 		playerPanel = new PlayerPanel[numOfPlayerPanels];
 		for(int x = 0; x < numOfPlayerPanels; ++x)
@@ -47,7 +47,8 @@ public class GamePanel extends JPanel {
 		left.add(playerPanel[0], BorderLayout.NORTH);
 		right.add(playerPanel[1], BorderLayout.NORTH);
 		left.add(commonPanel, BorderLayout.CENTER);
-		right.add(scrollCardsPanel, BorderLayout.CENTER);
+//		right.add(scrollCardsPanel, BorderLayout.CENTER);
+		right.add(cardsPanel, BorderLayout.CENTER);
 		right.add(playerPanel[2], BorderLayout.SOUTH);
 		left.add(playerPanel[3], BorderLayout.SOUTH);
 
