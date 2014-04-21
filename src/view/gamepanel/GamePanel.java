@@ -9,9 +9,13 @@ import java.util.Map;
 import javax.swing.JPanel;
 //import javax.swing.JScrollPane;
 
+
+
+import view.palacefestival.FestivalPanel;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
+import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
@@ -86,5 +90,15 @@ public class GamePanel extends JPanel {
 			playerPanel[x].removeAll();
 		}
 		repaint();
+	}
+
+	public void refreshFestivalView(PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void refreshFestivalView(FestivalPanel festivalPanel) {
+		this.remove(boardPanel);
+		this.add(festivalPanel);
 	}
 }

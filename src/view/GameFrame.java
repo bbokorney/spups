@@ -74,4 +74,10 @@ public class GameFrame extends JFrame {
         //sorry they aren't a list of pairs with card and a boolean for selection
         //it was implemented this way in the model and I don't feel like working on it
     }
+
+    @SuppressWarnings("rawtypes")
+	public void refreshFestivalView(GameModel model, PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected){
+    	festivalPanel.refreshView(model, festival, cardsOfCurrentPlayer, cardsSelected);
+    	gamePanel.refreshFestivalView(festivalPanel);
+    }
 }
