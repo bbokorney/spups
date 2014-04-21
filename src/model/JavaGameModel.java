@@ -23,88 +23,119 @@ import java.util.Stack;
  */
 public class JavaGameModel extends GameModel{
 
+    private int numPlayers;
     private SharedResources resources;
     private Board board;
     private JavaPlayers javaPlayers;
     private Turn turn;
-    //The following value will be held at a sentinel value until the final
-    //round, at which point it will decrement from the number of jplayers to 0.
-    private int finalRoundTurns;
 
-    public JavaGameModel(int numPlayers) {
+    /*
+        Use for testing the view only
+     */
+    public JavaGameModel(int numberOfPlayers) {
+        resetStates();
+        javaPlayers = new JavaPlayers();
+
+        String[] playerNames = new String[numberOfPlayers];
+        for(int i = 0; i < numberOfPlayers; i++){
+            playerNames[0] = "Player " + (i+1);
+        }
+        setPlayersInGame(playerNames);
+
+        numPlayers = numberOfPlayers;
+
+    }
+
+    /*
+        Used for when we incorporate the StartGame Action
+     */
+    public JavaGameModel() {
+       resetStates();
+    }
+
+    @Override
+    public void setPlayersInGame(String[] playerNames) {
+
+        for(String name: playerNames) {
+            javaPlayers.addPlayer(new JavaPlayer(name));
+        }
+    }
+
+    @Override
+    public void resetStates() {
+        /*
+            This method will reset the Game and the rest of this model
+            This will be utilized in Replay, Undo, etc...
+
+            This may not be needed depending on how replay mode stuff works!
+            //todo find out if I need this from Jonathan/Mau
+         */
         resources = new SharedResources();
         BoardCreator creator = new BoardCreator();
         board = creator.createBoard();
-        javaPlayers = new JavaPlayers(numPlayers);
-        finalRoundTurns = -1;
         turn = new NonFinalTurn();
+
     }
 
+    @Override
     public int getCount(SharedResourceType res) {
         return resources.getCount(res);
     }
 
-    
+    @Override
     public void useResource(SharedResourceType res) {
         resources.useResource(res);
     }
 
-    
+    @Override
     public int getCount(JavaPlayerResourceType res) {
         return getCurrentJavaPlayer().getCount(res);
     }
 
-    
+    @Override
     public void useResource(JavaPlayerResourceType res) {
         getCurrentJavaPlayer().useResource(res);
     }
 
+    @Override
     public boolean canUseAPForLandTileAction(int pointsToSpend) {
         return turn.canUseAPForLandTileAction(pointsToSpend);
     }
 
+    @Override
     public boolean canUseAPForNonLandTileAction(int pointsToSpend) {
         return turn.canUseAPForNonLandTileAction(pointsToSpend);
     }
 
-    
+    @Override
     public boolean hasUsedActionToken() {
         return turn.hasUsedActionToken();
     }
 
-    
+    @Override
     public void advanceJavaTurn() {
         if (canAdvanceJavaTurn()) {
-            //First check if we are in the final round, indicated by the
-            //finalRoundTurns value being > 0
-            if (finalRoundTurns > 0) {
-                finalRoundTurns--;
-                turn = new FinalTurn();
-            } else
-                turn = new NonFinalTurn();
+            turn.advanceTurn();
             javaPlayers.advanceTurn();
         }
     }
 
-    
+    @Override
     public boolean canAdvanceJavaTurn() {
-        //If this is the last turn of the game, dont advance?
-        if (turn.isFinalTurn() && finalRoundTurns <= 1)
-            return false;
-        else
-            return turn.canEndTurn();
+       return turn.canEndTurn();
     }
 
-    
+    @Override
     public void beginFinalRound() {
-        finalRoundTurns = javaPlayers.getPlayers().size();
-        turn = new FinalTurn();
+        turn = new FinalTurn(numPlayers);
     }
 
+    @Override
     public JavaPlayer getCurrentJavaPlayer() {
         return javaPlayers.getCurrentPlayer();
     }
 
+    @Override
     public Collection<JavaPlayer> getJavaPlayers() {
         return javaPlayers.getPlayers();
     }
@@ -114,51 +145,60 @@ public class JavaGameModel extends GameModel{
         board.placeTopTileComponent(loc, tile);
     }*/
 
-    
+    @Override
     public void getTopTileComponent(Location loc) {
         board.getTopTileComponent(loc);
     }
 
-    
+    @Override
     public String getName() {
         return javaPlayers.getCurrentPlayer().getName();
     }
 
-    
+    @Override
     public void incrementScore(int score) {
         int currentScore = getCurrentJavaPlayer().getScore();
         getCurrentJavaPlayer().adjustScore(currentScore + score);
     }
 
-    
+    @Override
     public List<Developer> getDevelopers() {
         return getCurrentJavaPlayer().getDevelopers();
     }
 
+    @Override
     public Board getBoard() {
         return board;
     }
 
+    @Override
     public void placeIrrigationTileComponent(Location loc, TileComponent tile) {
         board.placeIrrigationTileComponent(loc, tile);
     }
 
+    @Override
     public void placeRiceTileComponent(Location loc, TileComponent tile) {
         board.placeRiceTileComponent(loc, tile);
     }
 
+    @Override
     public void placeVillageTileComponent(Location loc, TileComponent tile) {
         board.placeVillageTileComponent(loc, tile);
     }
 
-    //TODO:
-    public void buildPalace(Location loc, TileComponent tile) {}
-    public void upgradePalace(Location loc, TileComponent tile) {}
+    public void buildPalace(Location loc, PalaceTileComponent tile) {
+        board.buildPalace(loc, tile);
+    }
+    public void upgradePalace(Location loc, PalaceTileComponent tile) {
+        board.upgradePalace(loc, tile);
+    }
 
+    @Override
     public void addPalaceToCurrentTurnList(Location loc) {
         turn.addPalaceToList(loc);
     }
 
+    @Override
     public boolean hasPalaceLocationBeenUsedThisTurn(Location loc) {
         return turn.hasPalaceBeenUsed(loc);
     }
@@ -203,6 +243,7 @@ public class JavaGameModel extends GameModel{
             getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
     }
 
+    @Override
     public boolean isLocationInCity(Location loc) {
         return board.isLocationInCity(loc);
     }
