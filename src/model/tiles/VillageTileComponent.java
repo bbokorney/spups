@@ -13,7 +13,7 @@ public class VillageTileComponent extends TileComponent {
     }
 
     public VillageTileComponent() {
-
+        super(new Tile(1));
     }
 
     public void accept(Visitor visitor) {

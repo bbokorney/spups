@@ -42,12 +42,12 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 
 	public void switchPalace() {
 		potentialAction.tabToNextPalace();
-		controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
+		//controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
 	}
 
 	public void confirmPalace() {
 		potentialAction.chooseCurrentPalace();
-		controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
+		//controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
 		initSecondListeners();
 	}
 

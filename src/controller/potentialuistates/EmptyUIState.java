@@ -290,6 +290,6 @@ public class EmptyUIState extends PotentialJavaUIState {
         });
         listeners.add(i);
 
-        keyListener.replaceTemporaryListener(listeners);
+        keyListener.addPersistentListener(listeners);
     }
 }
