@@ -112,7 +112,7 @@ public class BoardRuleHelper {
         return surroundingLocations;
     }
 
-    public int pointsEarnedFromIrrigationPlacement(HexLocation location) {
+    public int pointsEarnedFromIrrigationPlacement(Location location) {
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
             for(Location water : body.getLocations()) {
                 if(neighbors(water, location)) {
