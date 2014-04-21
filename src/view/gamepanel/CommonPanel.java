@@ -49,6 +49,8 @@ public class CommonPanel extends JPanel {
 		palace[4].setText(""+model.getCount(SharedResourceType.PALACELEVELTEN));
 		irrigation.setText(""+model.getCount(SharedResourceType.IRRIGATION));
 		threetile.setText(""+model.getCount(SharedResourceType.THREE));
+		stack.setText(""+festival.getDeckSize());
+		card.setText(""+festival.peekAtFestivalCard());
 		repaint();
 	}
 }

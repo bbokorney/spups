@@ -16,7 +16,6 @@ import model.tiles.IrrigationTileComponent;
 import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
 import model.tiles.TileComponent;
-import model.tiles.VillageTileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -50,14 +49,14 @@ public class BoardPanel extends JPanel {
 			for(HexLocation location : locations) { 
 				int[] distance = location.getDistanceFromOrigin();
 				
-				if(distance[0] == 0 && distance[1] == 0) 
-					board.getSpace(location).accept(new VillageTileComponent());
-				if(distance[0] == 0 && distance[1] == 60) 
-					board.getSpace(location).accept(new IrrigationTileComponent());
-				if(distance[0] == 0 && distance[1] == 120) 
-					board.getSpace(location).accept(new RiceTileComponent());
-				if(distance[0] == 0 && distance[1] == 180) 
-					board.getSpace(location).accept(new PalaceTileComponent(2));
+//				if(distance[0] == 0 && distance[1] == 0) 
+//					board.getSpace(location).accept(new VillageTileComponent());
+//				if(distance[0] == 0 && distance[1] == 60) 
+//					board.getSpace(location).accept(new IrrigationTileComponent());
+//				if(distance[0] == 0 && distance[1] == 120) 
+//					board.getSpace(location).accept(new RiceTileComponent());
+//				if(distance[0] == 0 && distance[1] == 180) 
+//					board.getSpace(location).accept(new PalaceTileComponent(2));
 				
 				int width = distance[0]+origin[0]+50;
 				int height = distance[1]+origin[1]+40;
@@ -169,5 +168,4 @@ public class BoardPanel extends JPanel {
 		int startY = (int)(height*BoardPanel.hexScaling)-yOffset;
 		g.drawLine(startX, startY, startX+length, startY);
 	}
-	
 }
