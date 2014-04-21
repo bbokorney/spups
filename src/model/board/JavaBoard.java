@@ -244,9 +244,23 @@ public class JavaBoard extends Board {
         //Now convert all locations that were in this village to being in
         //a city
         City newCity = new City(loc, tile);
+        newCity.add(loc);
         Village village = villageContainer.getVillageFromLocation(loc);
-
+        for (Location location : village.getLocations()) {
+            newCity.add(location);
+            villageContainer.removeLocationFromVillage(location);
+        }
+        cityContainer.addCity(newCity);
+        villageContainer.removeVillage(village);
     }
 
-    public void upgradePalace(Location loc, PalaceTileComponent tile) {}
+    public void upgradePalace(Location loc, PalaceTileComponent tile) {
+        //First place this palace down
+        Space space = board.get(loc);
+        space.accept(tile);
+
+        //Now make sure you update the city accordingly
+        City city = cityContainer.getCityFromLocation(loc);
+        city.placePalaceTile(tile);
+    }
 }
