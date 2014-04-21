@@ -67,4 +67,8 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
         return  new LeastCostPathFinder().findShortestRemovalPath(developerLocationList.get(indexOfCurrentDeveloper), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
 
     }
+
+	public List<Location> getLocationFromPath() {
+		//Todo Megan
+	}
 }

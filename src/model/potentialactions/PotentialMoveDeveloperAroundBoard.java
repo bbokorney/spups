@@ -9,6 +9,8 @@ import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
 
+import java.util.List;
+
 /**
  * Created by idinamenzel on 4/14/2014.
  */
@@ -38,5 +40,9 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
         MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), getGameModel());
         return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(), result);
     }
+
+	public List<Location> getLocationFromPath() {
+		//Todo Megan
+	}
 
 }
