@@ -179,8 +179,8 @@ public class BoardPanel extends JPanel {
 		double[] yy = {-1.5, -1.5, 1.5, 1.5};
         Polygon tile = new Polygon();
         for (int x = 0; x < 4; x++) {
-        	int xPoint = (int) (width*hexScaling + xx[x]*8);
-        	int yPoint = (int) (height*hexScaling + yy[x]*8);
+        	int xPoint = (int) (width*hexScaling + xx[x]*7);
+        	int yPoint = (int) (height*hexScaling + yy[x]*7);
 //        	int yPoint = (int) (posWidth + hexSideLength()*Math.cos(x*2*Math.PI/6));
             tile.addPoint(xPoint, yPoint);
         }
