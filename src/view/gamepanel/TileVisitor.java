@@ -45,7 +45,7 @@ public class TileVisitor implements Visitor {
 
 	@Override
 	public void visit(IrrigationTileComponent component) {
-		System.out.println(width + " " + height);
+//		System.out.println(width + " " + height);
 		BoardPanel.drawHex(g, width, height, new Color(8, 128, 255));
 		BoardPanel.drawIrrigationWave(g, width, height, -8);
 		BoardPanel.drawIrrigationWave(g, width, height, 8);

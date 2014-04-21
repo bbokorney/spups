@@ -6,12 +6,16 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JPanel;
 
+import model.GameModel;
 import model.board.Board;
 import model.board.HexLocation;
 import model.board.LocationType;
+import model.player.Developer;
 import model.tiles.TileComponent;
 
 /**
@@ -115,7 +119,7 @@ public class BoardPanel extends JPanel {
 			}
 			((Graphics2D) g).setColor(Color.YELLOW);
 			g.fillPolygon(house);
-	        g.fillArc((int)(i*(hexScaling)), (int)(j*(hexScaling)), 20, 200, 0, 30);
+//	        g.fillArc((int)(i*(hexScaling)), (int)(j*(hexScaling)), 20, 200, 0, 30);
 	        g.setColor(Color.black);
 	        g.setFont(new Font("default", Font.BOLD, 20));
 	        if(palaceValue > 9)
@@ -148,10 +152,17 @@ public class BoardPanel extends JPanel {
 	}
 
 	
-	public void refreshView(Board board) {	
+	public void refreshView(Board board, GameModel model) {	
 		this.board = board;	
 		locations = board.getAllLocations().toArray(new HexLocation[0]);
-		// TODO Auto-generated method stub
+
+		List<Developer> list = model.getDevelopers();
+		System.out.println(model.getDevelopers());
+		Developer developer = null;
+		for(Iterator<Developer> iterator = list.iterator(); iterator.hasNext(); developer = iterator.next()) {
+			System.out.println(developer);
+		}
+		
 		repaint();
 	}
 	

@@ -40,7 +40,6 @@ public class TileLabel extends JLabel {
 		for(int i = 0; i < xx.length; ++i) {
 			g.setColor(Color.BLACK);
 //			Polygon polygon = JavaImageLoader.makeHex(xx[i], yy[i]);
-//			System.out.println(tiles[i]);
 			TileVisitor visitor = new TileVisitor(g, xx[i], yy[i]);
 			tiles[i].accept(visitor);
 //			g.drawPolygon(polygon);
