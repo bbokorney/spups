@@ -21,6 +21,8 @@ import java.util.List;
  */
 public abstract class GameModel {
 
+
+    public abstract void setPlayersInGame(String[] playerNames);
     public abstract int getCount(SharedResourceType res);
     public abstract void useResource(SharedResourceType res);
     public abstract int getCount(JavaPlayerResourceType res);
@@ -79,4 +81,7 @@ public abstract class GameModel {
     public abstract void moveDeveloperAroundBoard(Location developerStartinglocation, Location developerEndingLocation);
 
     public abstract List<Location> getLocationsOfCurrentPlayersDevelopers();
+
+    public abstract void resetStates();
+
 }
