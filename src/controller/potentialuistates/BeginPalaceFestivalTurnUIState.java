@@ -5,10 +5,14 @@ import controller.keylistener.Funktor;
 import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
 import model.GameModel;
+import model.board.Location;
 import model.potentialactions.PotentialBeginPalaceFestival;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,27 +41,34 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
     }
 
 	public void switchPalace() {
-
+		potentialAction.tabToNextPalace();
+		controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
 	}
 
 	public void confirmPalace() {
-
+		potentialAction.chooseCurrentPalace();
+		controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
+		initSecondListeners();
 	}
 
 	public void switchCard() {
-
+		potentialAction.tabToNextCard();
+		//how do i update selected card in view?
 	}
 
 	public void selectCard() {
-
+		potentialAction.chooseCurrentCard();
+		//how do i update selected card in view?
 	}
 
 	public void deselectCard() {
-
+		potentialAction.removeCurrentCardFromBid();
+		//how do i update selected card in view?
 	}
 
 	public void confirmBid() {
-
+		potentialAction.confirmBid();
+		controller.setCurrentState(new PalaceFestivalTurnUIState());
 	}
 
     private void initFirstListeners() {
@@ -77,6 +88,8 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 		    }
 	    });
 	    listeners.add(i);
+
+	    keyListener.replaceTemporaryListener(listeners);
     }
 
 	private void initSecondListeners() {
@@ -112,5 +125,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 			}
 		});
 		listeners.add(i);
+
+		keyListener.replaceTemporaryListener(listeners);
 	}
 }

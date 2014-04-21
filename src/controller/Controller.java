@@ -10,6 +10,7 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Location;
+import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.tiles.TileComponent;
 import view.GameFrame;
@@ -86,5 +87,9 @@ public class Controller {
 
 	public void refreshGameView() {
 		//controller.refreshGameView(result, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
+	}
+
+	public void refreshCardView(List<Card> cards) {
+		view.refreshCardView(cards);
 	}
 }
