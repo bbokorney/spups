@@ -1,6 +1,5 @@
 package model.sharedresources;
 
-import model.player.JavaPlayerResourceType;
 import model.player.Resources;
 
 /**
@@ -13,11 +12,11 @@ public class SharedResources extends Resources<SharedResourceType> {
         // TODO: add resources once enum is completed (see below?)
         super.addResource(SharedResourceType.IRRIGATION, 16);
         super.addResource(SharedResourceType.THREE, 56);
-        super.addResource(SharedResourceType.PALACELEVELTWO, 6);
-        super.addResource(SharedResourceType.PALACELEVELFOUR, 7);
-        super.addResource(SharedResourceType.PALACELEVELSIX, 8);
-        super.addResource(SharedResourceType.PALACELEVELEIGHT, 9);
-        super.addResource(SharedResourceType.PALACELEVELTEN, 10);
+        super.addResource(SharedResourceType.PALACELEVEL2, 6);
+        super.addResource(SharedResourceType.PALACELEVEL4, 7);
+        super.addResource(SharedResourceType.PALACELEVEL6, 8);
+        super.addResource(SharedResourceType.PALACELEVEL8, 9);
+        super.addResource(SharedResourceType.PALACELEVEL10, 10);
         //TODO:Add palace card?
         //super.addResource();
     }
