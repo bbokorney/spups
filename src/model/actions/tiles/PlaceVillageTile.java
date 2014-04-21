@@ -53,7 +53,7 @@ public class PlaceVillageTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //see if there is a village tile to take from player
-        if(game.getCount(JavaPlayerResourceType.VILLAGE) > 1){
+        if(game.getCount(JavaPlayerResourceType.VILLAGE) > 0){
             isSuccess = isSuccess && true;
 
         }
