@@ -1,6 +1,5 @@
 package model.potentialactions;
 
-import controller.Controller;
 import model.GameModel;
 import model.JavaGameModel;
 import model.palacefestival.Card;
@@ -59,11 +58,11 @@ public class TestForPotentialTile {
         GameModel game = new JavaGameModel(3);
         PalaceFestival festival = new PalaceFestival(null, deck);
 
-        GameFrame frame = new GameFrame(game);
+        GameFrame frame = new GameFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        frame.refreshGame(game,festival,null,null,null);
+//        frame.refreshGame(game,festival,null,null,null);
 
 
 

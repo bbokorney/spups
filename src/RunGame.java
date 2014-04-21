@@ -24,7 +24,7 @@ public class RunGame {
 				SwingUtilities.invokeLater(new Runnable(){
 		            public void run(){
 		            	GameModel model = new JavaGameModel(3);
-		                GameFrame frame = new GameFrame(model);
+		                GameFrame frame = new GameFrame();
 		                @SuppressWarnings("unused")
 		                Controller controller = new Controller(frame);
 		                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
