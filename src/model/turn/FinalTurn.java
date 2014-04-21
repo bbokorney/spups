@@ -33,11 +33,6 @@ public class FinalTurn extends Turn {
     }
 
     @Override
-    public boolean isFinalTurn() {
-        return true;
-    }
-
-    @Override
     public boolean canUseAPForLandTileAction(int pointsToSpend) {
         return this.getActionPoints() >= pointsToSpend;
     }

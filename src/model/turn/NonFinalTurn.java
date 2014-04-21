@@ -32,10 +32,6 @@ public class NonFinalTurn extends Turn {
         this.setPalacesInteracted(new ArrayList<Location>());
     }
 
-    @Override
-    public boolean isFinalTurn() {
-        return false;
-    }
   @Override
     public boolean canUseAPForLandTileAction(int pointsToSpend) {
         return this.getActionPoints() >= pointsToSpend;
