@@ -25,6 +25,13 @@ public class NonFinalTurn extends Turn {
         return true;
     }
 
+    public void advanceTurn() {
+        this.setActionPoints(6);
+        this.setHasPlacedLandTile(false);
+        this.setActionTokenUsed(false);
+        this.setPalacesInteracted(new ArrayList<Location>());
+    }
+
     @Override
     public boolean isFinalTurn() {
         return false;
