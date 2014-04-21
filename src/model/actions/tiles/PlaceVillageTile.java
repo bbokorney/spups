@@ -1,16 +1,16 @@
 package model.actions.tiles;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
-import model.board.Location;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
+import model.tiles.Tile;
+import model.tiles.VillageTileComponent;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -22,6 +22,7 @@ public class PlaceVillageTile extends Action {
         attributes
      */
     HexLocation placement;
+    GameModel game;
 
     /*
         constructors
@@ -29,13 +30,14 @@ public class PlaceVillageTile extends Action {
     public PlaceVillageTile(){
 
     }
-    public PlaceVillageTile(HexLocation placement){
+    public PlaceVillageTile(HexLocation placement, GameModel game){
         this.placement = placement;
+        this.game = game;
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -67,7 +69,7 @@ public class PlaceVillageTile extends Action {
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough AP points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
         //check if they are placing on another one tile
@@ -124,26 +126,34 @@ public class PlaceVillageTile extends Action {
 
         //todo
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points
+            game.useActionPoints(result.getActionPoints());
 
             // decrement the number of villages in player resources
+            game.useResource(JavaPlayerResourceType.VILLAGE);
 
             // place the village component on the placement location
+            game.placeVillageTileComponent(placement, new VillageTileComponent(new Tile(1)));
+
 
             //award the player the fame points earned
+            game.incrementScore(result.getFamePoints());
+
+            //set has placed land tile to true
+            game.setHasPlacedLandTile(true);
         }
         return result;
     }

@@ -7,21 +7,25 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.HexLocation;
+import model.rules.palace.HighestRankingPlayerInCityRule;
+import model.rules.palace.PalaceLevelCitySizeRule;
 import model.rules.tiles.PalacePlacementRule;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.sharedresources.SharedResourceType;
+import model.tiles.PalaceTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
  */
 public class PlacePalaceTile extends Action {
 
-
     /*
         attributes
      */
     private int value;
     private HexLocation placement;
+    GameModel game;
 
     /*
         constructors
@@ -31,14 +35,15 @@ public class PlacePalaceTile extends Action {
         //used for loading
     }
 
-    public PlacePalaceTile(int value, HexLocation placement){
+    public PlacePalaceTile(int value, HexLocation placement, GameModel game){
         this.value = value;
         this.placement = placement;
+        this.game = game;
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -67,13 +72,13 @@ public class PlacePalaceTile extends Action {
         //Check if the player has enough AP points to complete this - 1 AP
         //ActionPointsRule
 
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(game.canUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough AP points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
 
@@ -88,7 +93,7 @@ public class PlacePalaceTile extends Action {
              */
 
             //Check if there is not already a palace in that city/village
-            if(true){
+            if(game.isLocationInCity(placement)){
                 isSuccess = isSuccess && true;
 
             }
@@ -98,7 +103,7 @@ public class PlacePalaceTile extends Action {
             }
 
             //Check if there are enough villages to make it a city
-            if(true){
+            if(PalaceLevelCitySizeRule.palaceLevelSizeAllowed(placement, board, value)){
                 isSuccess = isSuccess && true;
 
             }
@@ -109,7 +114,7 @@ public class PlacePalaceTile extends Action {
 
             //Check if the player is the highest ranked player in this city
             //HighestRankedPlayerInCityRule
-            if(true){
+            if(HighestRankingPlayerInCityRule.highestRankingPlayerInCityRule(game.getCurrentJavaPlayer(), placement, helperJunk, board)){
                 isSuccess = isSuccess && true;
 
             }
@@ -137,28 +142,33 @@ public class PlacePalaceTile extends Action {
 
         //todo
 
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP point
+            game.useActionPoints(result.getActionPoints());
 
             //place the palace on this location of the board
+            game.buildPalace(placement, new PalaceTileComponent(new Tile(1), value));
 
             //award the player fame points
+            game.incrementScore(result.getFamePoints());
 
             //set this location to palacesinteractedwith in the turn object
+            game.addPalaceToCurrentTurnList(placement);
 
             //decremenet the number of this valued palace in the shared resources
+            game.useResource(SharedResourceType.valueOf("PALACE" + value));
 
         }
         return result;

@@ -21,19 +21,21 @@ import java.util.List;
  */
 public abstract class GameModel {
 
+
+    public abstract void setPlayersInGame(String[] playerNames);
     public abstract int getCount(SharedResourceType res);
     public abstract void useResource(SharedResourceType res);
     public abstract int getCount(JavaPlayerResourceType res);
     public abstract void useResource(JavaPlayerResourceType res);
     public abstract boolean canUseAPForLandTileAction(int pointsToSpend);
-    public abstract boolean cauUseAPForNonLandTileAction(int pointsToSpend);
+    public abstract boolean canUseAPForNonLandTileAction(int pointsToSpend);
     public abstract boolean hasUsedActionToken();
     public abstract void advanceJavaTurn();
     public abstract boolean canAdvanceJavaTurn();
     public abstract void beginFinalRound();
     public abstract JavaPlayer getCurrentJavaPlayer();
     public abstract Collection<JavaPlayer> getJavaPlayers();
-    public abstract void placeTopTileComponent(Location loc, TileComponent tile);
+    //public abstract void placeTopTileComponent(Location loc, TileComponent tile);
     public abstract void getTopTileComponent(Location loc);
     public abstract String getName();
     public abstract void incrementScore(int score);
@@ -41,8 +43,17 @@ public abstract class GameModel {
     public abstract Board getBoard();
     public abstract void addPalaceToCurrentTurnList(Location loc);
     public abstract boolean hasPalaceLocationBeenUsedThisTurn(Location loc);
+    public abstract void placeIrrigationTileComponent(Location loc, TileComponent tile);
+    public abstract void placeRiceTileComponent(Location loc, TileComponent tile);
+    public abstract void placeVillageTileComponent(Location loc, TileComponent tile);
+    public abstract void buildPalace(Location loc, PalaceTileComponent tile);
+    public abstract void upgradePalace(Location loc, PalaceTileComponent tile);
+    public abstract void useActionPoints(int actionPoints);
+    public abstract boolean isHeightAtLocation(int i, Location location);
+    public abstract boolean isLocationInCity(Location loc);
 
-    public abstract void addPlayer(PalaceFestivalPlayer player);
+    //Okay this was some old stuff from when we
+/*    public abstract void addPlayer(PalaceFestivalPlayer player);
     public abstract void removePlayer(PalaceFestivalPlayer player);
     public abstract PalaceFestivalPlayer getCurrentPalaceFestivalPlayer();
     public abstract Collection<PalaceFestivalPlayer> getFestivalPlayers();
@@ -57,14 +68,20 @@ public abstract class GameModel {
     public abstract void endPalaceFestival();
     public abstract void setHighestBid(int bid);
     public abstract int getHighestBid();
-    public abstract PalaceTileComponent getFestivalPalace();
+    public abstract PalaceTileComponent getFestivalPalace();*/
 
+    public abstract void setHasPlacedLandTile(boolean hasPlacedLandTile);
 
-    public abstract void useActionPoints(int actionPoints);
+    public abstract void placeDeveloperOnBoard(Location locationOfDeveloperPlaced);
 
-	public abstract void resetGame();
+    public abstract Space getSpaceAtLocation(Location villagePlacement);
 
-    public abstract boolean isHeightAtLocation(int i, Location location);
+    public abstract void takeDeveloperOffBoard(Location developerLocationTakenOff);
 
-    public abstract Space getSpaceAtLocation(Location location);
+    public abstract void moveDeveloperAroundBoard(Location developerStartinglocation, Location developerEndingLocation);
+
+    public abstract List<Location> getLocationsOfCurrentPlayersDevelopers();
+
+    public abstract void resetStates();
+
 }

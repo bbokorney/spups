@@ -1,8 +1,8 @@
 package model.actions;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.serialization.JsonObject;
+import model.player.JavaPlayerResourceType;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -18,46 +18,58 @@ public class UseActionToken extends Action {
     /*
         Constructors
      */
-    public UseActionToken(){
+    GameModel game;
+
+    public UseActionToken(GameModel game){
+        this.game = game;
         //Empty constructor
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
         returns true if valid
                 false if invalid
      */
-        boolean isSuccess = false;
+        boolean isSuccess = true;
         int famePoints = 0;
         int actionPoints = 0;
         String message = "";
 
-        //Check if the path is valid
+        if(game.hasUsedActionToken()){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You have already used an Action Token this turn.";
+        }
+        if(game.getCount(JavaPlayerResourceType.EXTRAACTIONTOKEN) > 0){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You have no Action Tokens left";
+        }
 
-        //Check if the player has enough AP points to travel the path
-
-        //todo
-
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
-            //Decrememnt the AP points the path cost
-            //Move the developer along the path
-            //(change the developer location to the last place on the path)
+            game.useResource(JavaPlayerResourceType.EXTRAACTIONTOKEN);
+            game.useActionPoints(-1);
+            game.hasUsedActionToken();
         }
         return result;
     }

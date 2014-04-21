@@ -1,5 +1,7 @@
 package model.board;
 
+import pathfinding.JavaEdge;
+import pathfinding.Path;
 import pathfinding.PathEdge;
 import pathfinding.PathNode;
 import java.util.List;
@@ -8,11 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class HexLocation implements Location, PathNode {
-
-    public boolean equals(PathNode pathNode) {
-        return false;
-    }
+public class HexLocation implements Location {
 
     //A unique list representing this location's semantic location
 	private List<Directions> pathFromOrigin;
@@ -53,16 +51,16 @@ public class HexLocation implements Location, PathNode {
 	
 	//Returns an ordered list of all neighbors in clockwise direction, starting
 	//from up
-	public List<HexLocation> getNeighbors() {
-		List<HexLocation> neighbors = new ArrayList<HexLocation>();
+	public List<Location> getNeighbors() {
+		List<Location> neighbors = new ArrayList<Location>();
 		
 		//For each direction, append our own path with that direction,
 		//create a new Location object with that new path, and add it to our
 		//list of neighbors
 		for (Directions direction : Directions.values()) {
-			List<Directions> path = pathFromOrigin;
+			List<Directions> path = new ArrayList<Directions>(pathFromOrigin);
 			path.add(direction);
-            HexLocation neighbor = new HexLocation(path);
+            Location neighbor = new HexLocation(path);
 			neighbors.add(neighbor);
 		}
 		
@@ -98,7 +96,7 @@ public class HexLocation implements Location, PathNode {
             4 is southwest
             5 is northwest
          */
-        HexLocation loc = this;
+        HexLocation loc = new HexLocation(new ArrayList<Directions>(pathFromOrigin));
         switch (i) {
             case 0:
                 loc.appendPath(Directions.NORTH);
@@ -128,7 +126,7 @@ public class HexLocation implements Location, PathNode {
      * this tile to the origin based on a magical mix of the current path
      * and geometry. Prepare to be amazed.
      */
-    private int[] getDistanceFromOrigin() {
+    public int[] getDistanceFromOrigin() {
         int xdistance = 0;
         int ydistance = 0;
         for (Directions d : pathFromOrigin) {
@@ -141,19 +139,19 @@ public class HexLocation implements Location, PathNode {
                     break;
                 case NORTHEAST:
                     ydistance+=30;
-                    xdistance+=40;
+                    xdistance+=52;
                     break;
                 case SOUTHEAST:
                     ydistance-=30;
-                    xdistance+=40;
+                    xdistance+=52;
                     break;
                 case SOUTHWEST:
                     ydistance-=30;
-                    xdistance-=40;
+                    xdistance-=52;
                     break;
                 case NORTHWEST:
                     ydistance+=30;
-                    xdistance-=40;
+                    xdistance-=52;
                     break;
             }
         }

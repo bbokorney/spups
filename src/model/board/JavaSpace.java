@@ -20,7 +20,7 @@ public class JavaSpace extends Space{
 	}
 	
 	public TileComponent getTopTileComponent() {
-		return tiles.peek();
+        return tiles.isEmpty() ? null : tiles.peek();
 	}
 	
 	public int getHeight() {

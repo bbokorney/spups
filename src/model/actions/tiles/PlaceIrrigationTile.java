@@ -9,6 +9,8 @@ import model.board.BoardRuleHelper;
 import model.board.HexLocation;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.sharedresources.SharedResourceType;
+import model.tiles.IrrigationTileComponent;
+import model.tiles.Tile;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -20,6 +22,7 @@ public class PlaceIrrigationTile extends Action {
         attributes
      */
     private HexLocation placement;
+    GameModel game;
 
 
     /*
@@ -30,13 +33,14 @@ public class PlaceIrrigationTile extends Action {
         //used for loading
     }
 
-    public PlaceIrrigationTile(HexLocation placement){
+    public PlaceIrrigationTile(HexLocation placement, GameModel game){
         this.placement = placement;
+        this.game = game;
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
@@ -64,13 +68,13 @@ public class PlaceIrrigationTile extends Action {
         }
 
         //Check if the player has enough AP points - 1
-        if(game.cauUseAPForNonLandTileAction(actionPoints)){
+        if(game.canUseAPForNonLandTileAction(actionPoints)){
             isSuccess = isSuccess && true;
 
         }
         else{
             isSuccess = isSuccess && false;
-            message += "Error: You do not have enough AP points.\n";
+            message += "Error: You do not have enough AP.\n";
         }
 
         //check if required elevation is 0
@@ -96,27 +100,30 @@ public class PlaceIrrigationTile extends Action {
         }
 
 
-      return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+      return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points it cost
             game.useActionPoints(result.getActionPoints());
 
             //Award the fame points to the player
+            game.incrementScore(result.getFamePoints());
 
             //decrement the number of irrigation tiles from shared resources
+            game.useResource(SharedResourceType.IRRIGATION);
 
             //place the tile on the board
+            game.placeIrrigationTileComponent(placement, new IrrigationTileComponent(new Tile(1)));
 
         }
         return result;

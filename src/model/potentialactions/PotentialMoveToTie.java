@@ -4,6 +4,7 @@ import model.actions.ActionResult;
 import model.actions.palacefestival.AgreeToTie;
 import model.actions.palacefestival.EndPalaceFestival;
 import model.actions.palacefestival.RequestTie;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 
 /**
@@ -12,27 +13,28 @@ import model.palacefestival.PalaceFestivalPlayer;
 public class PotentialMoveToTie extends PotentialAction {
 
     private PalaceFestivalPlayer playerWhoRequestedTie = null;
+    private PalaceFestival festival;
+
+    public PotentialMoveToTie(PalaceFestival festival) {
+        this.festival = festival;
+    }
 
     private ActionResult tieRequested() {
-        playerWhoRequestedTie = getGameModel().getCurrentPalaceFestivalPlayer();
-        return new RequestTie().tryAction(getGameModel());
+        playerWhoRequestedTie = festival.getCurrentPlayer();
+        return new RequestTie(festival).tryAction();
     }
 
     private ActionResult tieAgreed() {
-        ActionResult tieActionResult = new AgreeToTie(playerWhoRequestedTie).tryAction(getGameModel());
-        if (!tieActionResult.isSuccess() || !getGameModel().getCurrentPalaceFestivalPlayer().equals(playerWhoRequestedTie))
+        ActionResult tieActionResult = new AgreeToTie(playerWhoRequestedTie, festival).tryAction();
+        if (!tieActionResult.isSuccess() || !festival.getCurrentPlayer().equals(playerWhoRequestedTie))
             return tieActionResult;
 
-        return new EndPalaceFestival().tryAction(getGameModel());
+        return new EndPalaceFestival(festival).tryAction();
     }
 
     @Override
-    protected void setComponentsOnHoverBoard() {
-        // nothing to set
-    }
-
-    @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return playerWhoRequestedTie == null ? tieRequested() : tieAgreed();
     }
+
 }

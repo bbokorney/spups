@@ -10,7 +10,7 @@ public class ActionResult {
     int actionPoints;
     String message;
 
-    public ActionResult(boolean s, int fp, int ap, String m, Action action){
+    public ActionResult(boolean s, int fp, int ap, String m){
         success = s;
         famePoints = fp;
         actionPoints = ap;

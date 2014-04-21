@@ -1,18 +1,17 @@
 package model.actions.palacefestival;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.palacefestival.Card;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
 import model.rules.palace.BidRequirementsRule;
 import model.rules.palace.HasDeveloperInCityRule;
-import model.rules.palace.PalaceHasNotAlreadyHostedFestivalRule;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,15 +23,19 @@ public class JoinFestival extends Action {
 
     private Location palaceLocation;
     private List<Card> cardsBidded;
+    private GameModel game;
+    private PalaceFestival festival;
 
-    public JoinFestival(Location palaceLocation, List<Card> cardsBidded) {
+    public JoinFestival(Location palaceLocation, List<Card> cardsBidded, GameModel game, PalaceFestival festival) {
         this.palaceLocation = palaceLocation;
         this.cardsBidded = cardsBidded;
+        this.game = game;
+        this.festival = festival;
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
-        PalaceFestivalPlayer player = game.getCurrentPalaceFestivalPlayer();
+    public ActionResult tryAction() {
+        PalaceFestivalPlayer player = festival.getCurrentPlayer();
         Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
         JavaPlayer currentJavaPlayer = null;
         for (JavaPlayer javaPlayer : javaPlayers) {
@@ -44,22 +47,22 @@ public class JoinFestival extends Action {
         // check if the player has a developer in the city
         boolean hasDeveloperInCity = HasDeveloperInCityRule.hasDeveloperInCity(currentJavaPlayer, palaceLocation, new BoardRuleHelper(game), game.getBoard());
         // check if the player's bid is high enough
-        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(game.getHighestBid(), game.peekAtFestivalCard(), cardsBidded);
+        boolean bidMeetsRequirements = BidRequirementsRule.bidMeetsRequirements(festival.getHighestBid(), festival.peekAtFestivalCard(), cardsBidded);
 
         boolean canBegin = hasDeveloperInCity && bidMeetsRequirements;
         String message = canBegin ? "action successful" : "not eligible to join festival";
-        return new ActionResult(false, 0, 0, message, this);
+        return new ActionResult(false, 0, 0, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
-        ActionResult result = tryAction(game);
+    public ActionResult doAction() {
+        ActionResult result = tryAction();
 
         if (!result.isSuccess()) {
-            game.removePlayer(game.getCurrentPalaceFestivalPlayer());
+            festival.removePlayer(festival.getCurrentPlayer());
         }
 
-        game.advancePalaceFestivalTurn();
+        festival.advanceTurn();
         return result;
     }
 

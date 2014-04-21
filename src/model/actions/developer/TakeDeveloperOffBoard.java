@@ -1,11 +1,11 @@
 package model.actions.developer;
 
 import model.GameModel;
-import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
 import model.board.Location;
+import model.player.JavaPlayerResourceType;
 import pathfinding.JavaPath;
 
 /**
@@ -19,53 +19,68 @@ public class TakeDeveloperOffBoard extends Action {
      */
     Location developerLocationTakenOff;
     JavaPath path;
+    GameModel game;
     /*
         constructors
      */
-    public TakeDeveloperOffBoard(){
+    public TakeDeveloperOffBoard(GameModel game){
+        this.game = game;
 
     }
-    public TakeDeveloperOffBoard(Location developerLocationTakenOff, JavaPath path){
+    public TakeDeveloperOffBoard(Location developerLocationTakenOff, JavaPath path, GameModel game){
         this.path = path;
         this.developerLocationTakenOff = developerLocationTakenOff;
+        this.game = game;
     }
 
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
      /*
         Check if the action is valid to complete
         ...
         returns true if valid
                 false if invalid
      */
-        boolean isSuccess = false;
-        int famePoints = 0;
-        int actionPoints = 0;
+        boolean isSuccess = true;
+        int famePoints = 0;         //will never gain fame points
+        int actionPoints = 1 + path.getCost();       //todo add the cost of the path
         String message = "";
 
-        //Check if the path is valid
+        if(path.valid()){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You cannot travel an invalid path.\n";
+        }
+        if( game.canUseAPForNonLandTileAction(actionPoints)){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You do not have enough AP.";
+        }
 
-        //Check if the player has enough AP points to travel the path
-
-        //todo
-
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
     /*
         Check if the action is valid
         Do the action if is valid to so
         ...
      */
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points the path cost
+            game.useActionPoints(result.getActionPoints());
+
             //Move the developer along the path
-            //(change the developer location to the last place on the path)
+            game.takeDeveloperOffBoard(developerLocationTakenOff);
+
         }
         return result;
     }

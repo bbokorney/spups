@@ -1,13 +1,12 @@
 package model.actions.developer;
 
 
-import model.Pair;
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
-import model.board.JavaBoard;
 import model.board.Location;
-import model.GameModel;
 import model.actions.serialization.JsonObject;
+import model.player.JavaPlayerResourceType;
 import pathfinding.JavaPath;
 
 /**
@@ -21,6 +20,7 @@ public class PlaceDeveloperOnBoard extends Action {
      */
     private Location locationOfDeveloperPlaced;
     private JavaPath path;
+    GameModel game;
 
 
     /*
@@ -31,40 +31,61 @@ public class PlaceDeveloperOnBoard extends Action {
         //mostly used for loading
     }
 
-    public PlaceDeveloperOnBoard(Location locationOfDeveloperPlaced, JavaPath path){
+    public PlaceDeveloperOnBoard(Location locationOfDeveloperPlaced, JavaPath path, GameModel game){
         this.locationOfDeveloperPlaced = locationOfDeveloperPlaced;
         this.path = path;
+        this.game = game;
     }
 
     @Override
-    public ActionResult tryAction(GameModel game) {
+    public ActionResult tryAction() {
 
         boolean isSuccess = true;
         int famePoints = 0;         //will never gain fame points
-        int actionPoints = 1;       //todo add the cost of the path
+        int actionPoints = 1 + path.getCost();       //todo add the cost of the path
         String message = "";
 
         //check if the player has a developer off the board
+        if(game.getCount(JavaPlayerResourceType.DEVELOPER) > 0){//todo figure out if these are developers off the board
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You do not have any more developers.\n";
+        }
 
-        //Check if the path is valid
+        if(path.valid()){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "You cannot travel an invalid path.\n";
+        }
 
-        //Check if the player has enough AP points to travel the path
+        if( game.canUseAPForNonLandTileAction(actionPoints)){
+            isSuccess = isSuccess && true;
+        }
+        else{
+            isSuccess = isSuccess && false;
+            message += "Error: You do not have enough AP.";
+        }
 
-
-        //todo
-
-        return new ActionResult(isSuccess, famePoints, actionPoints, message, this);
+        return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 
     @Override
-    public ActionResult doAction(GameModel game) {
+    public ActionResult doAction() {
 
-        ActionResult result = tryAction(game);
+        ActionResult result = tryAction();
         if(result.isSuccess()) {
 
             //Decrememnt the AP points the path cost
+            game.useActionPoints(result.getActionPoints());
+
             //place the developer on the ending of the path
-            //increment the number of developers on the board
+            game.placeDeveloperOnBoard(locationOfDeveloperPlaced);
+
+
         }
         return result;
     }

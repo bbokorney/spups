@@ -17,7 +17,30 @@ public class Village {
         return village.size();
     }
 
-    public void add(Location loc) {
-        village.add(loc);
+    public void add(Location... locations)  {
+        for (Location location : locations)
+            village.add(location);
+    }
+
+    public void remove(Location loc) {
+        if (village.contains(loc))
+            village.remove(loc);
+    }
+
+    public Collection<Location> getLocations() {
+        return village;
+    }
+
+    public boolean equals(Village village) {
+        //Check sizes are the same
+        if (this.getSize() != village.getSize())
+            return false;
+        //Check it holds the same locations as us
+        for (Location loc : getLocations()) {
+            if (!village.getLocations().contains(loc))
+                return false;
+        }
+
+        return true;
     }
 }
