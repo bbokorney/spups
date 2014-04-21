@@ -2,25 +2,19 @@ package view.gamepanel;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Polygon;
-import java.util.Arrays;
-import java.util.HashSet;
 
 import javax.swing.JPanel;
 
-import view.JavaImageLoader;
 import model.board.Board;
 import model.board.HexLocation;
-import model.board.JavaBoard;
-import model.board.Location;
 import model.board.LocationType;
-import model.board.Space;
 import model.tiles.IrrigationTileComponent;
+import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
-import model.tiles.Tile;
 import model.tiles.TileComponent;
 import model.tiles.VillageTileComponent;
 
@@ -30,7 +24,6 @@ import model.tiles.VillageTileComponent;
 @SuppressWarnings("serial")
 public class BoardPanel extends JPanel {
 	public static double hexScaling = 2.0/3;
-	private Image boardBackground;
 	//private Graphics2D g2d;
 	HexLocation[] locations;
 	Board board;
@@ -39,12 +32,7 @@ public class BoardPanel extends JPanel {
 		this.setVisible(true);
 		
 		locations = board.getAllLocations().toArray(new HexLocation[0]);
-		
-		System.out.println(locations.length);
-		int[] origin = getBoardOrigin(locations);
-		System.out.println(Arrays.toString(origin));
-
-	} 
+	}
 	
 	private int[] getBoardOrigin(HexLocation[] locations) { 
 		int width = 0; 
@@ -70,6 +58,8 @@ public class BoardPanel extends JPanel {
 				board.getSpace(location).accept(new IrrigationTileComponent());
 			if(distance[0] == 0 && distance[1] == 120) 
 				board.getSpace(location).accept(new RiceTileComponent());
+			if(distance[0] == 0 && distance[1] == 180) 
+				board.getSpace(location).accept(new PalaceTileComponent(2));
 			
 			int width = distance[0]+origin[0]+50;
 			int height = distance[1]+origin[1]+40;
@@ -87,7 +77,6 @@ public class BoardPanel extends JPanel {
 			if(tile != null) 
 				board.getSpace(location).getTopTileComponent().accept(visitor);
 		}
-		System.out.println("Size " + locations.length);
     }
 	
 	public static void drawHouses(Graphics g, int i, int j, Color color) {
@@ -105,6 +94,29 @@ public class BoardPanel extends JPanel {
 			((Graphics2D) g).setColor(color);
 			g.fillPolygon(house);
 		}
+	}
+
+	public static void drawPalace(Graphics g, int i, int j, Color color, int palaceValue) {
+		int houseDimension = 18; 
+		int roofWidth = 25; 
+		int roofHeight = 26;
+		
+		int[] xHouse = {-houseDimension, -houseDimension, -roofWidth, 0, roofWidth, houseDimension, houseDimension};
+		int[] yHouse = {houseDimension, 0, 0, -roofHeight, 0, 0, houseDimension};
+			Polygon house = new Polygon();
+			for(int y = 0; y < xHouse.length; ++y) {
+				int width = i+xHouse[y];
+				int height = j+yHouse[y];
+	            house.addPoint((int)(width*(hexScaling)), (int)(height*(hexScaling)));
+			}
+			((Graphics2D) g).setColor(Color.YELLOW);
+			g.fillPolygon(house);
+	        g.fillArc((int)(i*(hexScaling)), (int)(j*(hexScaling)), 20, 200, 0, 30);
+	        g.setColor(Color.black);
+	        g.setFont(new Font("default", Font.BOLD, 20));
+	        if(palaceValue > 9)
+	        	i -= 12;
+	        g.drawString(palaceValue+"", (int)(i*(hexScaling))-6, (int)(j*(hexScaling))+6);
 	}
 
 	public enum TileType {
@@ -138,7 +150,6 @@ public class BoardPanel extends JPanel {
 	}
 	
 	public static void drawIrrigationWave(Graphics g, int width, int height, int yOffset) {
-	    System.out.println("FJDKLSJ");
 	    g.setColor(Color.blue);
 		int lastX = (int)(width*BoardPanel.hexScaling)-12; 
 		int lastY = (int)(height*BoardPanel.hexScaling)-yOffset;
@@ -152,7 +163,6 @@ public class BoardPanel extends JPanel {
 	}
 	
 	public static void drawRiceLines(Graphics g, int width, int height, int yOffset, int length) {
-	    System.out.println("FJDKLSJ");
 	    g.setColor(new Color(20, 84, 1));
 		int startX = (int)(width*BoardPanel.hexScaling)-(length/2); 
 		int startY = (int)(height*BoardPanel.hexScaling)-yOffset;

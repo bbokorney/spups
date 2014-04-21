@@ -2,8 +2,6 @@ package view.gamepanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Polygon;
 
 import model.rules.tiles.Visitor;
 import model.tiles.IrrigationTileComponent;
@@ -32,16 +30,17 @@ public class TileVisitor implements Visitor {
 	@Override
 	public void visit(RiceTileComponent component) {
 		BoardPanel.drawHex(g, width, height, new Color(30, 128, 2));
-		BoardPanel.drawRiceLines(g, width, height, -14,26);
-		BoardPanel.drawRiceLines(g, width, height, -7,34);
-		BoardPanel.drawRiceLines(g, width, height, 0,40);
-		BoardPanel.drawRiceLines(g, width, height, 7,34);
-		BoardPanel.drawRiceLines(g, width, height, 14,26);
+		BoardPanel.drawRiceLines(g, width, height, -14, 26);
+		BoardPanel.drawRiceLines(g, width, height, -7, 34);
+		BoardPanel.drawRiceLines(g, width, height, 0, 40);
+		BoardPanel.drawRiceLines(g, width, height, 7, 34);
+		BoardPanel.drawRiceLines(g, width, height, 14, 26);
 	}
 
 	@Override
 	public void visit(PalaceTileComponent component) {
 		BoardPanel.drawHex(g, width, height, new Color(128, 109, 41));
+		BoardPanel.drawPalace(g, width, height, Color.black, component.getLevel());
 	}
 
 	@Override

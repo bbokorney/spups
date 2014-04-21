@@ -9,7 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import view.TileLabel;
 import model.player.Player;
+import model.tiles.RiceTileComponent;
+import model.tiles.VillageTileComponent;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -25,22 +28,45 @@ public class PlayerPanel extends JPanel {
 	JLabel user;
 	public PlayerPanel() {
 //		this.setLayout(null);
+		
+
+		int offHeight = 70;
+		int offWidth = 70;
 //		twotile = new JLabel("", JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace2.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-		twotile = newJLabel("3", "/Users/maumau/spups/resources/twotile.png", 40, 90);
-		developer = newJLabel("3", "/Users/maumau/spups/resources/developer.png", 40, 90);
-		rice = newJLabel("3", "/Users/maumau/spups/resources/rice.png", 40, 90);
-		village = newJLabel("3", "/Users/maumau/spups/resources/village.png", 40, 90);
-		AP = newJLabel("3", "/Users/maumau/spups/resources/AP.png", 40, 90);
-		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, 90);
-		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, 90);
+		twotile = newJLabel("3", "/Users/maumau/spups/resources/twotile.png", offWidth, offHeight);
+		developer = newJLabel("3", "/Users/maumau/spups/resources/developer.png", offWidth, offHeight);
+		rice = newJLabel("3", "/Users/maumau/spups/resources/rice.png", offWidth, offHeight);
+		village = newJLabel("3", "/Users/maumau/spups/resources/village.png", offWidth, offHeight);
+		AP = newJLabel("3", "/Users/maumau/spups/resources/AP.png", offWidth, offHeight);
+		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, offHeight);
+		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, offHeight);
+		
+
+		rice = TileLabel.newHexLabel("rice", offWidth, offHeight, new RiceTileComponent());
+		village = TileLabel.newHexLabel("village", offWidth, offHeight, new VillageTileComponent());
 		add(twotile);
 		add(developer);
 		add(rice);
 		add(village);
 		add(AP);
 		add(card);
-		add(user);
+//		add(user);
 		
+//		for(int x = 2; x <= 10; x += 2) {
+//			palace[x/2-1] = TileLabel.newHexLabel(x + "palace", offWidth, offHeight, new PalaceTileComponent(x));
+//			this.add(palace[x/2-1]);
+//		}
+//		irrigation = TileLabel.newHexLabel("irrigation", offWidth, offHeight, new IrrigationTileComponent());
+//		threetile = TileLabel.newThreeHexLabel("threetile", offWidth, offHeight);
+//		JLabel twotile = TileLabel.newTwoHexLabel("threetile", offWidth, offHeight);
+//
+//		this.add(threetile);
+//		this.add(irrigation);
+//		
+//		stack = TileLabel.newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
+//		card = TileLabel.newJLabel("3", "/Users/maumau/spups/resources/card.png", 70, 90);
+//		this.add(stack);
+//		this.add(card);
 	}
 
 	private JLabel newJLabel(String value, String src, int width, int height){
