@@ -148,7 +148,23 @@ public class JavaBoard extends Board {
             villageContainer.addVillage(newVillage);
         }
 
-        //TODO: What about expanding a city?
+        //Okay now we have to account for expanding a city
+        //First check if any neighbor is in a city
+        for (Location neighbor: neighbors) {
+            if (isLocationInCity(neighbor)) {
+                //If so, add this location (and any village its in) to the city
+                City city = cityContainer.getCityFromLocation(neighbor);
+                Village village = villageContainer.getVillageFromLocation(neighbor);
+                for (Location villageLoc : village.getLocations()) {
+                    city.add(villageLoc);
+                }
+                //Now remove the village cause it no longer is one
+                villageContainer.removeVillage(village);
+            }
+        }
+
+
+
     }
 
     //This method will construct a City given a single location (which is
