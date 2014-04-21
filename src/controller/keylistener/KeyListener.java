@@ -24,10 +24,12 @@ public class KeyListener implements java.awt.event.KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
 
+    	System.out.println(e);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+    	System.out.println(e);
         for(InternalListener i : temporary) {
             i.actionPerformed(e);
         }
@@ -41,6 +43,7 @@ public class KeyListener implements java.awt.event.KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
 
+    	System.out.println(e);
     }
 
     public void replaceTemporaryListener(List<InternalListener> listeners) {

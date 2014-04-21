@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Stack;
 
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import model.palacefestival.PalaceCardComponent;
 import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
+import model.tiles.TileComponent;
 import model.tiles.IrrigationTileComponent;
 import model.tiles.PalaceTileComponent;
 import model.tiles.RiceTileComponent;
@@ -34,11 +37,11 @@ public class RunGame {
     }
     
     public RunGame() {
-    	SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-			@Override
-			protected Void doInBackground() throws Exception {
-				SwingUtilities.invokeLater(new Runnable(){
-		            public void run(){
+//    	SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+//			@Override
+//			protected Void doInBackground() throws Exception {
+//				SwingUtilities.invokeLater(new Runnable(){
+//		            public void run(){
 		            	KeyListener listener = new KeyListener();
 		            	GameModel model = new JavaGameModel(3);
 		            	Board board = model.getBoard();
@@ -57,14 +60,19 @@ public class RunGame {
 		                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		                frame.setVisible(true);
 		                
-		                frame.refreshGame(model,festival,null,null,null);
 		                
-		            }
-		        });
-					return null;
-			}
-		};
-		worker.execute();
+		                HashMap<Location, TileComponent> map = new HashMap<Location, TileComponent>();
+		                map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
+		                map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
+		                map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
+		                frame.refreshGame(model,festival,null,map,null);
+		                
+//		            }
+//		        });
+//					return null;
+//			}
+//		};
+//		worker.execute();
     }    
     
     public PalaceFestival createPalaceFestival(GameModel model) { 

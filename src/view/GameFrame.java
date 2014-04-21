@@ -1,12 +1,13 @@
 package view;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
 
-import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
@@ -46,7 +47,7 @@ public class GameFrame extends JFrame {
         this.add(gamePanel);
         this.setJMenuBar(menu);
         
-        addKeyListener(new KeyListener());
+        addKeyListener(listener);
         
         //this.setContentPane(gamePanel);
 	}
