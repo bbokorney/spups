@@ -80,7 +80,7 @@ public class GamePanel extends JPanel {
 		System.out.println(players.length);
 		for(int x = 0; x < players.length; ++x){
 			System.out.println("Player : " + x);
-			playerPanel[x].refreshView(players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
+			//playerPanel[x].refreshView(players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
 		}
 		for(int x = players.length; x < numOfPlayerPanels; ++x) { 
 			playerPanel[x].removeAll();
