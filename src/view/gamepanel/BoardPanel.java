@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class BoardPanel extends JPanel {
 	//private Graphics2D g2d;
 	HexLocation[] locations;
 	Board board;
+	GameModel model;
 	public BoardPanel() {
 		this.setVisible(true);
 	}
@@ -83,6 +85,18 @@ public class BoardPanel extends JPanel {
 		        	g.drawString(board.getSpace(location).getHeight()+"", width, height);
 		        }
 			}
+			
+
+			List<Developer> list = model.getDevelopers();
+//			System.out.println(model.getDevelopers().toArray(new Developer[0])[0]);
+			for(Iterator<Developer> iterator = list.iterator(); iterator.hasNext();) {
+				Developer developer = iterator.next();
+				int[] distance = ((HexLocation) developer.getLocation()).getDistanceFromOrigin();
+				int width = distance[0]+origin[0]+50;
+				int height = distance[1]*-1+origin[1]+40;
+				drawDeveloper(g, width, height, Color.orange);
+			}
+			
 			
 //		}
     }
@@ -154,16 +168,30 @@ public class BoardPanel extends JPanel {
 	
 	public void refreshView(Board board, GameModel model) {	
 		this.board = board;	
+		this.model = model;
 		locations = board.getAllLocations().toArray(new HexLocation[0]);
 
-		List<Developer> list = model.getDevelopers();
-		System.out.println(model.getDevelopers());
-		Developer developer = null;
-		for(Iterator<Developer> iterator = list.iterator(); iterator.hasNext(); developer = iterator.next()) {
-			System.out.println(developer);
-		}
-		
 		repaint();
+	}
+	
+	public static void drawDeveloper(Graphics g, int width, int height, Color color) {
+		double[] xx = {-0.7, 0.7, 1, -1};
+		double[] yy = {-1.5, -1.5, 1.5, 1.5};
+        Polygon tile = new Polygon();
+        for (int x = 0; x < 4; x++) {
+        	int xPoint = (int) (width*hexScaling + xx[x]*8);
+        	int yPoint = (int) (height*hexScaling + yy[x]*8);
+//        	int yPoint = (int) (posWidth + hexSideLength()*Math.cos(x*2*Math.PI/6));
+            tile.addPoint(xPoint, yPoint);
+        }
+        
+        g.setColor(color);
+    	g.fillPolygon(tile);
+    	
+        ((Graphics2D) g).setColor(Color.black);
+        ((Graphics2D) g).setStroke(new BasicStroke(2));
+        g.drawPolygon(tile);
+//        g.drawString("FJSKLFJDS", (int)(width*hexScaling), (int)(height*hexScaling));
 	}
 	
 	public static void drawIrrigationWave(Graphics g, int width, int height, int yOffset) {
