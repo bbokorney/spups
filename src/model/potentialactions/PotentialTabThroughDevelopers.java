@@ -69,6 +69,7 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
     }
 
 	public List<Location> getLocationFromPath() {
-		//Todo Megan
+		//Todo Meghan
+        return null;
 	}
 }
