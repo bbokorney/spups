@@ -30,8 +30,8 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		boardPanel = new BoardPanel();
 		cardsPanel = new CardsPanel();
-		JScrollPane scrollCardsPanel = new JScrollPane(); 
-		scrollCardsPanel.add(cardsPanel);
+//		JScrollPane scrollCardsPanel = new JScrollPane(); 
+//		scrollCardsPanel.add(cardsPanel);
 		commonPanel = new CommonPanel(); 
 		playerPanel = new PlayerPanel[numOfPlayerPanels];
 		for(int x = 0; x < numOfPlayerPanels; ++x)
@@ -47,7 +47,8 @@ public class GamePanel extends JPanel {
 		left.add(playerPanel[0], BorderLayout.NORTH);
 		right.add(playerPanel[1], BorderLayout.NORTH);
 		left.add(commonPanel, BorderLayout.CENTER);
-		right.add(scrollCardsPanel, BorderLayout.CENTER);
+//		right.add(scrollCardsPanel, BorderLayout.CENTER);
+		right.add(cardsPanel, BorderLayout.CENTER);
 		right.add(playerPanel[2], BorderLayout.SOUTH);
 		left.add(playerPanel[3], BorderLayout.SOUTH);
 
@@ -71,17 +72,18 @@ public class GamePanel extends JPanel {
 	}
 
 	public void refreshView(GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
-		boardPanel.refreshView(model.getBoard(), model);
+		boardPanel.refreshView(model.getBoard(), model, potentialComponents, highlightedComponents);
 		cardsPanel.refreshView(model);
 		commonPanel.refreshView(model, festival);
 		
 		JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[0]);
 
-		for(int x = 0; x < players.length; ++x){
-			playerPanel[x].refreshView(model, model.getTurn(), players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
+		for(int x = 0; x < players.length; ++x) {
+			if(festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand() != null)
+				playerPanel[x].refreshView(model, model.getTurn(), players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
 		}
 		for(int x = players.length; x < numOfPlayerPanels; ++x) { 
-			playerPanel[x].removeAll();
+//			playerPanel[x].removeAll();
 		}
 		repaint();
 	}

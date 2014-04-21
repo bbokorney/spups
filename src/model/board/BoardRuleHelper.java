@@ -1,8 +1,11 @@
 package model.board;
 
 import model.GameModel;
+import model.palacefestival.PalaceCardComponent;
 import model.player.Developer;
 import model.player.JavaPlayer;
+import model.rules.palace.HighestRankingPlayerInCityRule;
+import model.rules.palace.PalaceLevelCitySizeRule;
 
 import java.util.*;
 
@@ -220,12 +223,24 @@ public class BoardRuleHelper {
     }
 
     public List<Location> getPalacesLegalForUpgrading() {
-        return null;
-        //todo needed for PotentialUpgradePalace Baker
+        List<Location> legalLocations = new ArrayList<Location>();
         //exclude palaces by the following criteria
-        //The current player must be the highest in the city
-        //the city must not have been interacted with during this turn
-        //the city must be large enough city size) to support a larger palace (atleast current value + 2)
-
+        for(City city : model.getBoard().cityContainer.getCityCollection()) {
+            //The current player must be the highest in the city
+            if(!HighestRankingPlayerInCityRule.highestRankingPlayerInCityRule(model.getCurrentJavaPlayer(),
+                    city.getPalaceLocation(), this, model.getBoard())) {
+                continue;
+            }
+            //the city must not have been interacted with during this turn
+            if(model.getTurn().hasPalaceBeenUsed(city.getPalaceLocation())) {
+                continue;
+            }
+            //the city must be large enough city size to support a larger palace (at least current value + 2)
+            if(PalaceLevelCitySizeRule.palaceLevelSizeAllowed(city.getPalaceLocation(), model.getBoard(),
+                    city.getPalaceLevel()+2)) {
+                legalLocations.add(city.getPalaceLocation());
+            }
+        }
+        return legalLocations;
     }
 }

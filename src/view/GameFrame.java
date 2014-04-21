@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import controller.keylistener.KeyListener;
+import java.awt.event.KeyListener;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
@@ -31,7 +31,7 @@ public class GameFrame extends JFrame {
     ActionPanel actionPanel;
     FestivalPanel festivalPanel;
     
-	public GameFrame(controller.keylistener.KeyListener listener){
+	public GameFrame(KeyListener keyListener){
 		this.setTitle("Java Spups");
 		this.setSize(WIDTH, HEIGHT);
 		this.setResizable(true);
@@ -46,8 +46,8 @@ public class GameFrame extends JFrame {
         this.add(gamePanel);
         this.setJMenuBar(menu);
         
-        addKeyListener(new KeyListener());
-        
+        addKeyListener(keyListener);
+        requestFocusInWindow();
         //this.setContentPane(gamePanel);
 	}
 
