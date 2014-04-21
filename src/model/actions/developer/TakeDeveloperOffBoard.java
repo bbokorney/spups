@@ -62,6 +62,10 @@ public class TakeDeveloperOffBoard extends Action {
             message += "Error: You do not have enough AP.";
         }
 
+        if(message.equalsIgnoreCase("")){
+            message += "Remove Developer, AP " + actionPoints;
+        }
+
         return new ActionResult(isSuccess, famePoints, actionPoints, message);
     }
 

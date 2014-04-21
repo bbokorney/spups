@@ -41,8 +41,9 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
         return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(), result);
     }
 
-	public List<Location> getLocationFromPath() {
-		//Todo Megan
-	}
+    public List<Location> getLocationFromPath() {
+        //Todo Meghan
+        return null;
+    }
 
 }

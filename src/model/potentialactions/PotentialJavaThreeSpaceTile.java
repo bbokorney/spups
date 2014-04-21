@@ -12,15 +12,7 @@ import model.palacefestival.PalaceFestival;
 public class PotentialJavaThreeSpaceTile extends PotentialThreeSpaceMovement{
 
     public PotentialJavaThreeSpaceTile(GameModel game, PalaceFestival festival) {
-        super(game, festival); //hoverboard);
-    }
-
-    private void setComponentsOnHoverBoard() {
-        Boolean validity = isValid();
-        //getHoverBoard().reset();
-        //getHoverBoard().placeTileComponent(getOtherLocation(0), new RiceTileComponent(), ActionState.fromValue(validity) );
-        //getHoverBoard().placeTileComponent(getOtherLocation(1), new RiceTileComponent(), ActionState.fromValue(validity) );
-        //getHoverBoard().placeTileComponent(getCenterLocation(), new VillageTileComponent(), ActionState.fromValue(validity) );
+        super(game, festival);
     }
 
     @Override

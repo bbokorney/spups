@@ -4,9 +4,12 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.PlaceDeveloperOnBoard;
+import model.board.Location;
 import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
+
+import java.util.List;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -39,6 +42,11 @@ public class PotentialPlaceDeveloperOnBoard extends PotentialOneSpaceMovement {
     private JavaPath getShortestLegalPath(){
         return  new LeastCostPathFinder().findShortestPlacementPath(getLocation(), getGameModel().getCurrentJavaPlayer(), getGameModel().getBoard());
 
+    }
+
+    public List<Location> getLocationFromPath() {
+        //Todo Meghan
+        return null;
     }
 
 
