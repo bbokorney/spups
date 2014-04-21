@@ -1,7 +1,12 @@
 package model.potentialactions;
 
+import controller.Controller;
+import controller.keylistener.KeyListener;
 import model.GameModel;
 import model.JavaGameModel;
+import model.Pair;
+import model.actions.ActionResult;
+import model.actions.tiles.PlaceRiceTile;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceCardComponent;
@@ -55,8 +60,13 @@ public class TestForPotentialTile {
         GameModel game = new JavaGameModel(3);
         PalaceFestival festival = new PalaceFestival(null, deck);
 
-        PotentialJavaThreeSpaceTile threeSpacePA = new PotentialJavaThreeSpaceTile(game, festival);
-        stuff.printThreeSpace(threeSpacePA, "New PotentialJavaThreeSpaceTile:");
+
+        GameFrame frame = new GameFrame(new KeyListener());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+//        PotentialJavaThreeSpaceTile threeSpacePA = new PotentialJavaThreeSpaceTile(game, festival);
+//        stuff.printThreeSpace(threeSpacePA, "New PotentialJavaThreeSpaceTile:");
 
 
         String message;// = (threeSpacePA.rotateClockwise().getMessage());
@@ -163,32 +173,70 @@ public class TestForPotentialTile {
         PotentialPlaceRiceTile riceSpacePA = new PotentialPlaceRiceTile (game, festival);
         stuff.printOneSpace(riceSpacePA, "New PotentialJavaOneSpaceTile:");
 
+//        Pair<ActionResult, PlaceRiceTile> pair = riceSpacePA.confirmPlacement();
+//        System.out.println(pair.getFirst().getMessage());
+
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 1  : " + message);
+//        message =  riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 2  : " + message);
+//        message =  riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 3  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 4  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 5  : " + message);
+//        message =  riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 6  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 7  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+
+//
+//        message = "";
+//        stuff.printOneSpace(riceSpacePA, "Move Northeast 7  : " + message);
+        message = riceSpacePA.moveSoutheast().getMessage();
+
+        stuff.printOneSpace(riceSpacePA, "Move Northeast 7  : " + message);
+        message = riceSpacePA.moveSouthwest().getMessage();
+
+        Pair<ActionResult, PlaceRiceTile> pair2 = riceSpacePA.confirmPlacement();
+
+        frame.refreshGame(game, festival, pair2.getFirst(), null, null);
+
+//        stuff.printOneSpace(riceSpacePA, "Move Southeast 7  : " + message);
+//        message = riceSpacePA.moveSoutheast().getMessage();
+//
+//        stuff.printOneSpace(riceSpacePA, "Move Southeast 7  : " + message);
+//        message = riceSpacePA.moveSoutheast().getMessage();
+
+
 //        message = riceSpacePA.moveNorth().getMessage();
 //        stuff.printOneSpace(riceSpacePA, "Move North: " + message);
 //
 //
 //        game.getBoard().getSpace(riceSpacePA.getLocation()).accept(new RiceTileComponent(new Tile(1)));
 //
-        message = riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 1  : " + message);
-        message =  riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 2  : " + message);
-        message =  riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 3  : " + message);
-        message = riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 4  : " + message);
-        message = riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 5  : " + message);
-        message =  riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 6  : " + message);
-        message = riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 7  : " + message);
-        message = riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 8  : " + message);
-        message = riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 9  : " + message);
-        message = riceSpacePA.moveSouth().getMessage();
-        stuff.printOneSpace(riceSpacePA, "Move South 10 : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 1  : " + message);
+//        message =  riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 2  : " + message);
+//        message =  riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 3  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 4  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 5  : " + message);
+//        message =  riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 6  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 7  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 8  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 9  : " + message);
+//        message = riceSpacePA.moveSouth().getMessage();
+//        stuff.printOneSpace(riceSpacePA, "Move South 10 : " + message);
 //        game.getBoard().getSpace(riceSpacePA.getLocation()).accept(new RiceTileComponent(new Tile(1)));
 //
 //        riceSpacePA.moveNortheast();
