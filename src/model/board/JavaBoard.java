@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class JavaBoard extends Board {
 
-    //TODO:
     /*
         for Village tile, check
         1) is it joining two (or more) villages
