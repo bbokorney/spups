@@ -4,7 +4,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.MoveDeveloperAroundBoard;
-import model.board.HexLocation;
+import model.board.Location;
 import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
@@ -14,12 +14,12 @@ import pathfinding.LeastCostPathFinder;
  */
 public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement {
 
-    HexLocation developerStartingLocation;
+    Location developerStartingLocation;
 
 
-    public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival){
-
+    public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival, Location location){
         super(game, festival);
+        this.developerStartingLocation = location;
     }
 
     private JavaPath getShortestLegalPath(){
@@ -27,21 +27,14 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
 
     }
 
-    @Override
-    public void setComponentsOnHoverBoard() {
-
-        getHoverBoard().reset();
-        //hoverBoard.placeTileComponent(getLocation(), null, ActionState.valueOf());
-
-    }
 
     @Override
-    protected ActionResult getActionResult() {
+    public ActionResult getActionResult() {
         return new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), getGameModel()).tryAction();
     }
 
 
-    protected Pair<ActionResult, MoveDeveloperAroundBoard> confirmMovement() {
+    public Pair<ActionResult, MoveDeveloperAroundBoard> confirmMovement() {
         MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), getGameModel());
         return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(), result);
     }

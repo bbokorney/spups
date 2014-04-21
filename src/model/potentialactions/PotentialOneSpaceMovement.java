@@ -1,7 +1,6 @@
 package model.potentialactions;
 
 import model.GameModel;
-import model.JavaGameModel;
 import model.actions.ActionResult;
 import model.board.HexLocation;
 import model.palacefestival.PalaceFestival;
@@ -28,7 +27,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         HexLocation newLocation = location.getNeighbor(0);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -38,7 +37,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         HexLocation newLocation = location.getNeighbor(1);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -48,7 +47,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         HexLocation newLocation = location.getNeighbor(2);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -58,7 +57,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         HexLocation newLocation = location.getNeighbor(3);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
 
         return this.getActionResult();
@@ -69,7 +68,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         HexLocation newLocation = location.getNeighbor(4);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
@@ -80,7 +79,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         HexLocation newLocation = location.getNeighbor(5);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
-            this.setComponentsOnHoverBoard();
+            //this.setComponentsOnHoverBoard();
         }
         return this.getActionResult();
     }
