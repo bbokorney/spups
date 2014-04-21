@@ -240,7 +240,7 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
-            getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
+        getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
     }
 
     @Override
