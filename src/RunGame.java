@@ -1,5 +1,8 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import javax.swing.JFrame;
@@ -71,7 +74,13 @@ public class RunGame {
         
         frame.requestFocus();//or inWindow
         
-        frame.refreshFestivalView(model, festival, null, null);
+        List<Card> cardsOfCurrentPlayer = new LinkedList<Card>();
+        for(int x = 0; x < 20; ++x) {
+        	PalaceCard card = new PalaceCard(PalaceCardComponent.values()[(new Random()).nextInt(3)]);
+        	cardsOfCurrentPlayer.add(card);
+        }
+        
+        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, null);
     }    
     
     public PalaceFestival createPalaceFestival(GameModel model) { 

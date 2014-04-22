@@ -22,13 +22,19 @@ public class PalaceFestivalPlayerPanel extends JPanel {
 	JLabel stack;
 	
 	public PalaceFestivalPlayerPanel() {		
-		stack = newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 100);
+		stack = newJLabel("", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
 		this.add(stack);
 	}
+
 	
 	private JLabel newJLabel(String value, String src, int width, int height){
+		ImageIcon icon = new ImageIcon(src);
+		return newJLabel(value, icon, width, height);
+	}
+	
+	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
 		JLabel label= new JLabel(value);
-		label.setIcon(new ImageIcon(src));
+		label.setIcon(icon);
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
