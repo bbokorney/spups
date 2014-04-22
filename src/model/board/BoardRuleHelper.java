@@ -252,8 +252,8 @@ public class BoardRuleHelper {
         return model.getBoard().getLocationType(location) == LocationType.CentralJava;
     }
 
-    public boolean isOuterMostBorder(Location location) {
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers(), null);
+    public boolean isOuterMostBorder(Location location, Developer developer) {
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers(), developer);
         if(!model.getBoard().areLocationsOnBoard(location) ||
                 !dpr.allowed()) {
             return false;
@@ -286,11 +286,11 @@ public class BoardRuleHelper {
     }
 
     public boolean developerCanEnterHere(Location location) {
-        return isOuterMostBorder(location);
+        return isOuterMostBorder(location, null);
     }
 
-    public boolean developerCanBeRemovedFromHere(HexLocation location) {
-        return isOuterMostBorder(location);
+    public boolean developerCanBeRemovedFromHere(Location location, Developer developer) {
+        return isOuterMostBorder(location, developer);
     }
 
     public boolean connectsTwoCities(Location villageLocation, Location... riceLocations) {
