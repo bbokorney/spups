@@ -3,19 +3,11 @@ package view.palacefestival;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Polygon;
 import java.awt.image.BufferedImage;
-import java.util.LinkedList;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import model.GameModel;
 import model.palacefestival.PalaceCard;

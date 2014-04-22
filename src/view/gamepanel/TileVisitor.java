@@ -3,9 +3,7 @@ package view.gamepanel;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import model.board.Board;
 import model.board.HexLocation;
-import model.board.Location;
 import model.rules.tiles.Visitor;
 import model.tiles.IrrigationTileComponent;
 import model.tiles.PalaceTileComponent;

@@ -285,7 +285,7 @@ public class JavaBoard extends Board {
         Village village = villageContainer.getVillageFromLocation(loc);
         for (Location location : village.getLocations()) {
             newCity.add(location);
-            villageContainer.removeLocationFromVillage(location);
+            //villageContainer.removeLocationFromVillage(location);
         }
         cityContainer.addCity(newCity);
         villageContainer.removeVillage(village);
