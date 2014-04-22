@@ -76,7 +76,7 @@ public class RunGame {
 		                
                         frame.requestFocus();//or inWindow
                         
-                        frame.refreshFestivalView(model, festival, null, null);
+                        //frame.refreshFestivalView(model, festival, null, null);
 
 //		            }
 //		        });
