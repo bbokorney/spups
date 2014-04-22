@@ -5,20 +5,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
 
+import view.GameFrame;
 import model.GameModel;
+import model.actions.ActionResult;
 import model.board.Board;
 import model.board.HexLocation;
 import model.board.Location;
 import model.board.LocationType;
-import model.player.Developer;
+import model.player.JavaPlayer;
 import model.tiles.TileComponent;
 
 /**
@@ -33,6 +36,8 @@ public class BoardPanel extends JPanel {
 	GameModel model;
 	Map<Location, TileComponent> potentialComponents;
 	List<Location> highlightedComponents;
+	ActionResult result;
+	
 	public BoardPanel() {
 		this.setVisible(true);
 	}
@@ -66,9 +71,10 @@ public class BoardPanel extends JPanel {
 		    	if(type == LocationType.Lowlands)
 		    		color = Color.green;
 				
-				drawHex(g, width, height, color);
+				drawHex(g, width, height, color, location);
+//				connectLocations(g, location);
 				TileComponent tile = board.getSpace(location).getTopTileComponent();
-				TileVisitor visitor = new TileVisitor(g, width, height);
+				TileVisitor visitor = new TileVisitor(g, width, height, this, location);
 				if(tile != null) 
 					board.getSpace(location).getTopTileComponent().accept(visitor);
 			}
@@ -91,13 +97,14 @@ public class BoardPanel extends JPanel {
 			}
 			
 			// DEVELOPERS
-			List<Developer> list = model.getDevelopers();
-			for(Iterator<Developer> iterator = list.iterator(); iterator.hasNext();) {
-				Developer developer = iterator.next();
-				int[] distance = ((HexLocation) developer.getLocation()).getDistanceFromOrigin();
-				int width = distance[0]+origin[0]+50;
-				int height = distance[1]*-1+origin[1]+40;
-				drawDeveloper(g, width, height, Color.orange);
+			for(JavaPlayer player : model.getJavaPlayers()) {
+				HexLocation[] locations = player.getDeveloperLocations().toArray(new HexLocation[0]);
+				for(int x = 0; x < locations.length; ++x) {
+					int[] distance = locations[x].getDistanceFromOrigin();
+					int width = distance[0]+origin[0]+50;
+					int height = distance[1]*-1+origin[1]+40;
+					drawDeveloper(g, width, height, GameFrame.playerColors[x]);
+				}
 			}
 			
 			List<HexLocation> highlights = new LinkedList<HexLocation>();
@@ -116,10 +123,10 @@ public class BoardPanel extends JPanel {
 					int width = distance[0]+origin[0]+50;
 					int height = distance[1]*-1+origin[1]+40;
 					if(tile != null) {
-						TileVisitor visitor = new TileVisitor(g, width, height);
+						TileVisitor visitor = new TileVisitor(g, width, height, this, location);
 						tile.accept(visitor);
 					}
-			        
+					
 					Polygon poly = new Polygon();
 			        for (int x = 0; x < 6; x++) {
 			        	int hheight = (int) (height + hexSideLength()*Math.sin(x*2*Math.PI/6));
@@ -127,13 +134,19 @@ public class BoardPanel extends JPanel {
 			        	poly.addPoint((int)(wwidth*(hexScaling)), (int)(hheight*(hexScaling)));
 			        }
 			        g.setColor(Color.CYAN);
+			        if(result != null) {
+			        	if(result.isSuccess()) {
+			        		g.setColor(Color.green);
+			        	} else { 
+			        		g.setColor(Color.red);
+			        	}
+			        
+			        }
+			        	
 			        ((Graphics2D) g).setStroke(new BasicStroke(4));
 			        g.drawPolygon(poly);
 				}
-			}	
-			
-			
-			
+			}
     }
 	
 	public static void drawHouses(Graphics g, int i, int j, Color color) {
@@ -179,6 +192,12 @@ public class BoardPanel extends JPanel {
 		Rice, Village, Palace, Irrigation, Highlands;
 	}
 	
+	
+	/*
+	 *   / \ / \
+	 *  |   |   |
+	 *   \ / \ /
+	 */
 	public static void drawHex(Graphics g, int posWidth, int posHeight, Color color) {
         Polygon tile = new Polygon();
         for (int x = 0; x < 6; x++) {
@@ -190,22 +209,102 @@ public class BoardPanel extends JPanel {
         g.setColor(color);
     	g.fillPolygon(tile);
     	
+    	
         ((Graphics2D) g).setColor(Color.black);
         ((Graphics2D) g).setStroke(new BasicStroke(2));
         g.drawPolygon(tile);
     }
+	
+
+	public void drawHex(Graphics g, int posWidth, int posHeight, Color color, HexLocation location) {
+        Polygon tile = new Polygon();
+        for (int x = 0; x < 6; x++) {
+        	int height = (int) (posHeight + hexSideLength()*Math.sin(x*2*Math.PI/6));
+        	int width = (int) (posWidth + hexSideLength()*Math.cos(x*2*Math.PI/6));
+            tile.addPoint((int)(width*(hexScaling)), (int)(height*(hexScaling)));
+        }
+        
+        g.setColor(color);
+    	g.fillPolygon(tile);
+
+		int[] origin = getBoardOrigin(locations);
+		
+
+    	((Graphics2D) g).setColor(Color.black);
+    	((Graphics2D) g).setStroke(new BasicStroke(2));
+    	for(int x = 0; x < 6; ++x) {
+			int x1 = tile.xpoints[x];
+			int x2 = tile.xpoints[(x+1)%6];
+			int y1 = tile.ypoints[x];
+			int y2 = tile.ypoints[(x+1)%6];
+    		boolean draw = true;
+    		for(HexLocation neighbor : location.getNeighbors().toArray(new HexLocation[0])) {
+    			if(board.getSpace(location) != null && board.getSpace(location).getTopTileComponent() != null 
+    					&& board.getSpace(neighbor) != null && board.getSpace(neighbor).getTopTileComponent() != null 
+    					&& board.getSpace(location).getTopTileComponent().getParent() == board.getSpace(neighbor).getTopTileComponent().getParent()) {
+
+	    			int[] distance = neighbor.getDistanceFromOrigin();
+	    			int width = (int)((distance[0]+origin[0]+50)*hexScaling);
+	    			int height = (int)((distance[1]*-1+origin[1]+40)*hexScaling);
+	
+	    			int threshold = (int)((hexSideLength()+5)*hexScaling);
+	    			
+		            if(Math.abs(x1-width) < threshold && Math.abs(x2-width) < threshold && Math.abs(y1-height) < threshold && Math.abs(y2-height) < threshold)
+		            	draw = false;
+    			}
+    		}
+    		if(draw)
+    			g.setColor(Color.black);
+    		else
+            	g.setColor(new Color(30, 128, 2));
+    		g.drawLine(x1, y1, x2, y2);
+    			
+    	}
+    	
+    	
+//        g.drawPolygon(tile);
+    }
+	
+	public void connectLocations(Graphics g, HexLocation location) {
+		int[] origin = getBoardOrigin(locations);
+		board.getSpace(location);
+		for(HexLocation neighbor : location.getNeighbors().toArray(new HexLocation[0])) {
+			if(board.getSpace(location) != null && board.getSpace(location).getTopTileComponent() != null 
+					&& board.getSpace(neighbor) != null && board.getSpace(neighbor).getTopTileComponent() != null 
+					&& board.getSpace(location).getTopTileComponent().getParent() == board.getSpace(neighbor).getTopTileComponent().getParent()) {
+				ArrayList<Point> list  = new ArrayList<Point>();
+				int[] distance = location.getDistanceFromOrigin();
+				int width1 = distance[0]+origin[0]+50;
+				int height1 = distance[1]*-1+origin[1]+40;
+				distance = neighbor.getDistanceFromOrigin();
+				int width2 = distance[0]+origin[0]+50;
+				int height2 = distance[1]*-1+origin[1]+40;
+		        for (int x = 0; x < 6; x++) {
+		        	int height = (int) (height1 + hexSideLength()*Math.sin(x*2*Math.PI/6));
+		        	int width = (int) (width1 + hexSideLength()*Math.cos(x*2*Math.PI/6));
+		            if(Math.abs(height-height2) < hexSideLength()+5 && Math.abs(width-width2) < hexSideLength()+5)
+		            	list.add(new Point((int)(width*(hexScaling)), (int)(height*(hexScaling))));
+		        }
+		        g.setColor(new Color(30, 128, 2));
+		        ((Graphics2D) g).setStroke(new BasicStroke(9));
+		        System.out.println(list);
+		        g.drawLine(list.get(0).x, list.get(0).y, list.get(1).x, list.get(1).y);
+			}
+		}
+	}
 	
 	private static int hexSideLength() { 
 		return (int) (30*Math.sin(Math.PI/2) / Math.sin(Math.PI/3));
 	}
 
 	
-	public void refreshView(Board board, GameModel model, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {	
+	public void refreshView(Board board, GameModel model, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents, ActionResult result) {	
 		this.board = board;	
 		this.model = model;
 		this.potentialComponents = potentialComponents; 
 		this.highlightedComponents = highlightedComponents;
 		locations = board.getAllLocations().toArray(new HexLocation[0]);
+		this.result = result;
 
 		repaint();
 	}

@@ -15,6 +15,12 @@ import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceCardComponent;
 import model.palacefestival.PalaceFestival;
 import model.player.JavaPlayer;
+import model.tiles.IrrigationTileComponent;
+import model.tiles.PalaceTileComponent;
+import model.tiles.RiceTileComponent;
+import model.tiles.Tile;
+import model.tiles.TileComponent;
+import model.tiles.VillageTileComponent;
 import model.tiles.*;
 import controller.Controller;
 import controller.keylistener.KeyListener;
@@ -61,7 +67,6 @@ public class RunGame {
         
         LinkedList<Location> highlights = new LinkedList<Location>();
         
-        frame.refreshGame(model,festival,null,map,highlights);
         
         frame.requestFocus();//or inWindow
         
@@ -69,6 +74,7 @@ public class RunGame {
         
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
+//    	Tile tile = new Tile(3);
 
         //SACHITS TEST CODE (PATENT PENDING)
 //        ArrayList<Directions> list = new ArrayList<Directions>();
@@ -90,12 +96,14 @@ public class RunGame {
 //        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
 //        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[11]);
 //        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[12]);
-//        for(int x = 0; x < 20; ++x) {
+//        for(int x = 0; x < 27; ++x) {
 //        	PalaceCard card = new PalaceCard(PalaceCardComponent.values()[(new Random()).nextInt(3)]);
 //        	cardsOfCurrentPlayer.add(card);
 //        }
 //        cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
 
+        frame.refreshGame(model,festival,null,map,highlights);
+//        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
         //frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
 
     }    

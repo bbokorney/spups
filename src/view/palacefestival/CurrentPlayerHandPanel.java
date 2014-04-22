@@ -3,6 +3,7 @@ package view.palacefestival;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.palacefestival.Card;
@@ -21,29 +22,33 @@ import java.awt.image.BufferedImage;
 @SuppressWarnings("serial")
 public class CurrentPlayerHandPanel extends JPanel {
 	BufferedImage cards; 
-	int cardPerLine = 7;
+	private static final int cardPerLine = 9;
+	JLabel user;
 	
 	public CurrentPlayerHandPanel() {
-		cards = new BufferedImage(500, 300, BufferedImage.TYPE_INT_ARGB);
+		cards = new BufferedImage(550, 300, BufferedImage.TYPE_INT_ARGB);
+		user = new JLabel();
+		this.add(user);
 	}
 
 	
 	
 	@SuppressWarnings("rawtypes")
-	public void refreshView(List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
+	public void refreshView(List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected, String playerName) {
+		user.setText(playerName + "'s Hand:");
 		Graphics2D g2d = cards.createGraphics();
         g2d.setStroke(new BasicStroke(5));
 		g2d.setColor(Color.cyan);
 		for(int x = 0; x < cardsOfCurrentPlayer.size(); ++x) { 
 			Image card = PalaceCardImageLoader.getImage((PalaceCard) cardsOfCurrentPlayer.get(x));
-			int width = (x%cardPerLine)*50;
-			int height = (x/cardPerLine)*70+1;
+			int width = (x%cardPerLine)*60+10;
+			int height = (x/cardPerLine)*75+50;
 			g2d.drawImage(card, width, height, null);
 		}
 
 		for(Integer i : cardsSelected) { 
-			int width = (i%cardPerLine)*50;
-			int height = (i/cardPerLine)*70+1;
+			int width = (i%cardPerLine)*60+10;
+			int height = (i/cardPerLine)*75+50;
 			g2d.drawPolygon(new Polygon(new int[] {width, width+50, width+50, width}, new int[] {height, height, height+70, height+70}, 4)); 
 		}
 		g2d.dispose();

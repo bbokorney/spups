@@ -18,6 +18,7 @@ import model.tiles.VillageTileComponent;
 
 @SuppressWarnings("serial")
 public class TileLabel extends JLabel {
+//	BoardPanel board;
 	TileComponent[] tiles;
 	int xx[]; 
 	int yy[];
@@ -40,7 +41,7 @@ public class TileLabel extends JLabel {
 		for(int i = 0; i < xx.length; ++i) {
 			g.setColor(Color.BLACK);
 //			Polygon polygon = JavaImageLoader.makeHex(xx[i], yy[i]);
-			TileVisitor visitor = new TileVisitor(g, xx[i], yy[i]);
+			TileVisitor visitor = new TileVisitor(g, xx[i], yy[i], null, null);
 			tiles[i].accept(visitor);
 //			g.drawPolygon(polygon);
 //			g.setColor(Color.RED);
