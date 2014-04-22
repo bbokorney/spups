@@ -7,6 +7,7 @@ import model.player.JavaPlayer;
 import model.rules.developer.DeveloperPlacementRule;
 import model.rules.palace.HighestRankingPlayerRule;
 import model.rules.palace.PalaceLevelCitySizeRule;
+import model.tiles.PalaceTileComponent;
 
 import java.util.*;
 
@@ -33,10 +34,12 @@ public class BoardRuleHelper {
                     createOrIncrement(heights, height);
                 }
             }
-            heightMap.put(players[i], heights);
+            if(heights.keySet().size() > 0) {
+                heightMap.put(players[i], heights);
+            }
         }
 
-        return calcRanks(players, heightMap, maxHeight);
+        return calcRanks(heightMap.keySet().toArray(new JavaPlayer[0]), heightMap, maxHeight);
     }
 
     private Map<JavaPlayer, Integer> calcRanks(JavaPlayer[] players, Map<JavaPlayer,
@@ -132,13 +135,15 @@ public class BoardRuleHelper {
         Set<Location> surroundingLocations = new HashSet<Location>();
         for(Location location : waterLocations) {
             for(Location neighbor : location.getNeighbors()) {
-                surroundingLocations.add(neighbor);
+                if (!waterLocations.contains(neighbor))
+                    surroundingLocations.add(neighbor);
             }
         }
         return surroundingLocations;
     }
 
     public HashMap<JavaPlayer, Integer> pointsEarnedFromIrrigationPlacement(Location location) {
+        System.out.println(model.getBoard().getBodyOfWaterContainer().getBodiesOfWater().size());
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
             for(Location water : body.getLocations()) {
                 if(neighbors(water, location)) {
@@ -153,9 +158,33 @@ public class BoardRuleHelper {
                         }
                     }
                     if(enclosingTileCount == surrounding.size()) {
+                        ////break because we dont wanna give points for every
+                        //water location in this one body of water
+                        Map<JavaPlayer, Integer> map = getPlayerRanksIn(surrounding);
+                        if (map.size() == 0) {
+                            //do nothing
+                        }
+                        int count = 0;
+                        for (JavaPlayer player : map.keySet()) {
+                            if (map.get(player) == 1)
+                                count++;
+                        }
+                        if (count == 1) {
+                            for (JavaPlayer player : map.keySet()) {
+                                if (map.get(player) == 1) {
+                                    HashMap<JavaPlayer, Integer> returnmap = new HashMap<JavaPlayer, Integer>();
+                                    returnmap.put(player, newBody.size() * 3);
+                                    return returnmap;
+                                }
+                            }
+                        }
+                        break;
+
                         //return 1;
                         //todo return noll baker
-                        return new HashMap<JavaPlayer, Integer>();
+                        //return new HashMap<JavaPlayer, Integer>();
+
+
                     }
                 }
             }
@@ -197,6 +226,24 @@ public class BoardRuleHelper {
                 }
                 if(isSurrounded){
                     famePointsEarned += 3*body.getSize();
+                    Map<JavaPlayer, Integer> map = getPlayerRanksIn(surrounding);
+                    if (map.size() == 0) {
+                        //do nothing
+                    }
+                    int count = 0;
+                    for (JavaPlayer player : map.keySet()) {
+                        if (map.get(player) == 1)
+                            count++;
+                    }
+                    if (count == 1) {
+                        for (JavaPlayer player : map.keySet()) {
+                            if (map.get(player) == 1) {
+                                HashMap<JavaPlayer, Integer> returnmap = new HashMap<JavaPlayer, Integer>();
+                                returnmap.put(player, famePointsEarned);
+                                return returnmap;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -332,6 +379,7 @@ public class BoardRuleHelper {
     }
 
     private boolean neighbors(Location location1, Location location2) {
+        System.out.println("checking " + location1.getDistanceFromOrigin()[0] + " with " + location2.getDistanceFromOrigin()[0]);
         for(Location neighbor : location1.getNeighbors()) {
             if(location2.equals(neighbor)) {
                 return true;

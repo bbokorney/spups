@@ -2,10 +2,14 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 import controller.keylistener.KeyListener;
 import model.GameModel;
@@ -44,7 +48,7 @@ public class GameFrame extends JFrame {
 		this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-        menu = new JavaMenu();
+        menu = new JavaMenu(this);
         gamePanel = new GamePanel();
         actionPanel = new ActionPanel();
         festivalPanel = new FestivalPanel();

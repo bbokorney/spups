@@ -46,7 +46,7 @@ public class PalaceFestivalTurnUIState extends PotentialJavaUIState {
 
 		playersTying = 0;
 
-		potentialAction = new PotentialJoinFestival(palaceLocation);
+		potentialAction = new PotentialJoinFestival(model, paFes, palaceLocation);
 		potentialTie = new PotentialMoveToTie(paFes);
 		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 
@@ -62,7 +62,7 @@ public class PalaceFestivalTurnUIState extends PotentialJavaUIState {
 
 		this.playersTying = playersTying;
 
-		potentialAction = new PotentialJoinFestival(palaceLocation);
+		potentialAction = new PotentialJoinFestival(model, paFes, palaceLocation);
 		this.potentialTie = potentialTie;
 		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 
@@ -99,6 +99,10 @@ public class PalaceFestivalTurnUIState extends PotentialJavaUIState {
 		else {
 			controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 			controller.setCurrentState(new PalaceFestivalTurnUIState(controller, keyListener, model, palaceLocation));
+		}
+		if(paFes.getPalace() == null) {
+			controller.goToEmptyState();
+			controller.refreshGameView();
 		}
 	}
 

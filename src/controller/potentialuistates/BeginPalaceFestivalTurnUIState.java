@@ -50,6 +50,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 	public void confirmPalace() {
 		potentialAction.chooseCurrentPalace();
 		//controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
+		setEmptyListener();
 		initSecondListeners();
 		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 	}
@@ -93,7 +94,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 	    });
 	    listeners.add(i);
 
-	    keyListener.replaceTemporaryListener(listeners);
+	    keyListener.addTemporaryListeners(listeners);
     }
 
 	private void initSecondListeners() {
