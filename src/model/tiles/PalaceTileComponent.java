@@ -12,11 +12,13 @@ public class PalaceTileComponent extends TileComponent {
     public PalaceTileComponent(Tile parent, int level) {
         super(parent);
         this.level = level;
+	    isFaceUp = true;
     }
 
     public PalaceTileComponent(int level) {
         super(new Tile(1));
         this.level = level;
+	    isFaceUp = true;
     }
 
     public void flip() {

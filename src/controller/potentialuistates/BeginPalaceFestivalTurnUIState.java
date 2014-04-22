@@ -37,14 +37,14 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 	    this.model = model;
 
 	    potentialAction = new PotentialBeginPalaceFestival(model, controller.getPalaceFestival());
-	    controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
+	    controller.refreshGameView(null, null, Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
 
         initFirstListeners();
     }
 
 	public void switchPalace() {
 		potentialAction.tabToNextPalace();
-		controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
+		controller.refreshGameView(null, null, Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
 	}
 
 	public void confirmPalace() {
