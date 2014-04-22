@@ -15,12 +15,6 @@ import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceCardComponent;
 import model.palacefestival.PalaceFestival;
 import model.player.JavaPlayer;
-import model.tiles.IrrigationTileComponent;
-import model.tiles.PalaceTileComponent;
-import model.tiles.RiceTileComponent;
-import model.tiles.Tile;
-import model.tiles.TileComponent;
-import model.tiles.VillageTileComponent;
 import model.tiles.*;
 import controller.Controller;
 import controller.keylistener.KeyListener;
@@ -32,7 +26,6 @@ import view.GameFrame;
  */
 public class RunGame {    
     public static void main(String[] args) {
-        @SuppressWarnings("unused")
         int numPlayers = args.length;
         if (numPlayers < 2 || numPlayers > 4)
             System.out.println("Please enter a number between 2 and 4 inclusive.");
@@ -41,14 +34,14 @@ public class RunGame {
             for (int i = 0; i < args.length; i++) {
                 names.add(args[i]);
             }
-            RunGame game = new RunGame(names.toArray(new String[0]));
+            @SuppressWarnings("unused")
+			RunGame game = new RunGame(names.toArray(new String[0]));
         }
     }
 
     public RunGame(String[] playerNames){
     	KeyListener listener = new KeyListener();
     	GameModel model = new JavaGameModel();
-    	Board board = model.getBoard();
         PalaceFestival festival = new PalaceFestival(null, createDeck());
 
         
@@ -69,42 +62,41 @@ public class RunGame {
         
         
         frame.requestFocus();//or inWindow
-        
+
+    	Board board = model.getBoard();
         List<Card> cardsOfCurrentPlayer = new LinkedList<Card>();
         
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
-//    	Tile tile = new Tile(3);
+    	Tile tile = new Tile(3);
 
-        //SACHITS TEST CODE (PATENT PENDING)
-//        ArrayList<Directions> list = new ArrayList<Directions>();
-//        board.placeRiceTileComponent(new HexLocation(list), new RiceTileComponent(new Tile(1)));
-//        model.placeDeveloperOnBoard(new HexLocation(new ArrayList<Directions>()));
-//        list.add(Directions.NORTH);
-//        model.placeDeveloperOnBoard(new HexLocation(list));
+//        SACHITS TEST CODE (PATENT PENDING)
+        ArrayList<Directions> list = new ArrayList<Directions>();
+        board.placeRiceTileComponent(new HexLocation(list), new RiceTileComponent(new Tile(1)));
+        model.placeDeveloperOnBoard(new HexLocation(new ArrayList<Directions>()));
+        list.add(Directions.NORTH);
+        model.placeDeveloperOnBoard(new HexLocation(list));
         
 
-//    	Board board = model.getBoard();
-//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
-//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
-//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[2]).accept(new RiceTileComponent());
-//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[3]).accept(new IrrigationTileComponent());
-//        model.getJavaPlayers().toArray(new JavaPlayer[0])[0].addDeveloper(board.getAllLocations().toArray(new Location[0])[0]);
-//        map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
-//        map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
-//        map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
-//        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
-//        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[11]);
-//        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[12]);
-//        for(int x = 0; x < 27; ++x) {
-//        	PalaceCard card = new PalaceCard(PalaceCardComponent.values()[(new Random()).nextInt(3)]);
-//        	cardsOfCurrentPlayer.add(card);
-//        }
-//        cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
+    	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
+    	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
+    	board.getSpace(board.getAllLocations().toArray(new Location[0])[2]).accept(new RiceTileComponent());
+    	board.getSpace(board.getAllLocations().toArray(new Location[0])[3]).accept(new IrrigationTileComponent());
+        model.getJavaPlayers().toArray(new JavaPlayer[0])[0].addDeveloper(board.getAllLocations().toArray(new Location[0])[0]);
+        map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
+        map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
+        map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
+        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
+        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[11]);
+        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[12]);
+        for(int x = 0; x < 27; ++x) {
+        	PalaceCard card = new PalaceCard(PalaceCardComponent.values()[(new Random()).nextInt(3)]);
+        	cardsOfCurrentPlayer.add(card);
+        }
+        cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
 
         frame.refreshGame(model,festival,null,map,highlights);
 //        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
-        //frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
 
     }    
     

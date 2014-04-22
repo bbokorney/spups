@@ -1,6 +1,5 @@
 package view.palacefestival;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -15,14 +14,19 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Polygon;
-import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 
 
 @SuppressWarnings("serial")
 public class CurrentPlayerHandPanel extends JPanel {
-	BufferedImage cards; 
 	private static final int cardPerLine = 9;
+	private static final int widthMargin = 10; 
+	private static final int heightMargin = 50; 
+	private static final int cardWidth = 50; 
+	private static final int cardHeight = 70;
+	private static final int cardMargin = 10;
+	
+	BufferedImage cards; 
 	JLabel user;
 	
 	public CurrentPlayerHandPanel() {
@@ -38,22 +42,21 @@ public class CurrentPlayerHandPanel extends JPanel {
 		user.setText(playerName + "'s Hand:");
 		Graphics2D g2d = cards.createGraphics();
         g2d.setStroke(new BasicStroke(5));
-		g2d.setColor(Color.cyan);
+		g2d.setColor(Color.green);
 		for(int x = 0; x < cardsOfCurrentPlayer.size(); ++x) { 
 			Image card = PalaceCardImageLoader.getImage((PalaceCard) cardsOfCurrentPlayer.get(x));
-			int width = (x%cardPerLine)*60+10;
-			int height = (x/cardPerLine)*75+50;
+			int width = (x%cardPerLine)*(cardWidth+cardMargin)+widthMargin;
+			int height = (x/cardPerLine)*(cardHeight+cardMargin)+heightMargin;
 			g2d.drawImage(card, width, height, null);
 		}
 
 		for(Integer i : cardsSelected) { 
-			int width = (i%cardPerLine)*60+10;
-			int height = (i/cardPerLine)*75+50;
-			g2d.drawPolygon(new Polygon(new int[] {width, width+50, width+50, width}, new int[] {height, height, height+70, height+70}, 4)); 
+			int width = (i%cardPerLine)*(cardWidth+cardMargin)+widthMargin;
+			int height = (i/cardPerLine)*(cardHeight+cardMargin)+heightMargin;
+			g2d.drawPolygon(new Polygon(new int[] {width, width+cardWidth, width+cardWidth, width}, new int[] {height, height, height+cardHeight, height+cardHeight}, 4)); 
 		}
 		g2d.dispose();
-		// TODO put picture of festival card
-		//card.setText(""+festival.peekAtFestivalCard());
+		
 		repaint();
 	}
 	
