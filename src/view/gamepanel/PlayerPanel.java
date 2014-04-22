@@ -63,7 +63,6 @@ public class PlayerPanel extends JPanel {
 		card = newJLabel("3", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 80, offHeight+30);
 		user = newJLabel("", new ImageIcon(JavaImageLoader.getImage("resources/user.png")), 80, offHeight);
 		
-
 		rice = TileLabel.newHexLabel("rice", offWidth, offHeight, new RiceTileComponent());
 		village = TileLabel.newHexLabel("village", offWidth, offHeight, new VillageTileComponent());
 		twotile = TileLabel.newTwoHexLabel("twotile", offWidth, offHeight+30);
