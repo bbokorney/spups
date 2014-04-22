@@ -80,14 +80,20 @@ public class PlaceRiceTile extends Action {
         }
 
         //check if they are not placing outside of central java
-        if(game.isHeightAtLocation(0, placement) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+        if(game.isHeightAtLocation(0, placement)){
+
             isSuccess = isSuccess && true;
-            actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk, placement);
             famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: You cannot place outside Central Java. ";
+
+            if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+
+                actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk, placement);
+
+            }
+            else{
+                isSuccess = isSuccess && false;
+                message += "Error: You cannot place outside Central Java. ";
+            }
         }
 
         //Check if they are not placing on top of a one tile

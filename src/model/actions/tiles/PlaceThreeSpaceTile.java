@@ -74,18 +74,23 @@ public class PlaceThreeSpaceTile extends Action {
             /*
                 Check if the
             */
-            if(game.isHeightAtLocation(0, villagePlacement) && PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
+            //this should never work
+            if(game.isHeightAtLocation(0, villagePlacement)){
+
                 isSuccess = isSuccess && true;
-                actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
                 famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
 
-            }
-            else{
-                isSuccess = isSuccess && false;
-                message += "Error: You cannot place outside Central Java.\n";
-            }
+                if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
 
+                    isSuccess = isSuccess && true;
+                    actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk,villagePlacement,ricePlacement[0], ricePlacement[1]);
 
+                }
+                else{
+                    isSuccess = isSuccess && false;
+                    message += "Error: You cannot place outside Central Java. ";
+                }
+            }
 
         }
         else{

@@ -41,18 +41,19 @@ public class RunGame {
             RunGame game = new RunGame(names.toArray(new String[0]));
         }
     }
-    
-    public RunGame(String[] playersNames) {
+
+    public RunGame(String[] playerNames){
     	KeyListener listener = new KeyListener();
-    	GameModel model = new JavaGameModel(playersNames.length);
+    	GameModel model = new JavaGameModel();
+    	Board board = model.getBoard();
         PalaceFestival festival = createPalaceFestival(model);
-        
-        
+
         
         GameFrame frame = new GameFrame(listener);
         @SuppressWarnings("unused")
-        Controller controller = new Controller(frame, model, createPalaceFestival(model));
-        StartGame startGame = new StartGame(model, festival, playersNames);
+        Controller controller = new Controller(frame, model, festival);
+        StartGame startGame = new StartGame(model, festival, playerNames);
+        System.out.println(startGame.doAction().getMessage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -96,7 +97,7 @@ public class RunGame {
         frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
     }    
     
-    public PalaceFestival createPalaceFestival(GameModel model) { 
+    public PalaceFestival createPalaceFestival(GameModel model) {
     	 @SuppressWarnings("rawtypes")
 		 Stack<Card> deck = new Stack<Card>();
          for (int i = 0; i < 5; i++) {
@@ -127,8 +128,8 @@ public class RunGame {
              deck.add(card);
          }
          PalaceFestival festival = new PalaceFestival(null, deck);
-         for(JavaPlayer player : model.getJavaPlayers())
-        	 festival.addPlayer(new JavaPlayerAdapter(player));
+//         for(JavaPlayer player : model.getJavaPlayers())
+//        	 festival.addPlayer(new JavaPlayerAdapter(player));
          return festival;
     }
 }

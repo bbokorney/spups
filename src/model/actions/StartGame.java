@@ -24,18 +24,12 @@ public class StartGame extends Action {
     /*
         Constructors
      */
-    public StartGame(GameModel game, PalaceFestival festival){
+    public StartGame(GameModel game, PalaceFestival festival, String[] playerNames){
+        this.numberOfPlayers = playerNames.length;
+        this.playerNames = playerNames;
         this.game = game;
         this.festival = festival;
-        //Empty constructor
-        //Most likely used during loading
     }
-
-    public StartGame(int numberOfPlayers, String[] playerNames){
-        this.numberOfPlayers = numberOfPlayers;
-        this.playerNames = playerNames;
-    }
-
 
     @Override
     public ActionResult tryAction() {
@@ -77,7 +71,10 @@ public class StartGame extends Action {
             Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
             for( JavaPlayer player : javaPlayers) {
                 festival.addPlayer(new JavaPlayerAdapter(player));
+
             }
+
+
         }
         return result;
     }
