@@ -97,10 +97,10 @@ public class BoardPanel extends JPanel {
 			}
 			
 			// DEVELOPERS
-			for(JavaPlayer player : model.getJavaPlayers()) {
-				HexLocation[] locations = player.getDeveloperLocations().toArray(new HexLocation[0]);
-				for(int x = 0; x < locations.length; ++x) {
-					int[] distance = locations[x].getDistanceFromOrigin();
+			for(int x = 0; x < model.getJavaPlayers().size(); ++x) {
+				HexLocation[] locations = model.getJavaPlayers().toArray(new JavaPlayer[0])[x].getDeveloperLocations().toArray(new HexLocation[0]);
+				for(int y = 0; y < locations.length; ++y) {
+					int[] distance = locations[y].getDistanceFromOrigin();
 					int width = distance[0]+origin[0]+50;
 					int height = distance[1]*-1+origin[1]+40;
 					drawDeveloper(g, width, height, GameFrame.playerColors[x]);
