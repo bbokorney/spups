@@ -116,7 +116,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
         Pair<ActionResult, MoveDeveloperAroundBoard> actionPair = potentialAction.confirmMovement();
         ActionResult result = actionPair.getFirst();
 
-	    updateView(result, potentialAction.getShortestLegalPath().getPath());
+	    controller.refreshGameView();
 
 	    if(result.isSuccess()) {
 		    controller.addToHistory(actionPair);
