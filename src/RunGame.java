@@ -34,13 +34,14 @@ import view.GameFrame;
 public class RunGame {    
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        int numPlayers = Integer.parseInt(args[0]);
-        if (numPlayers < 2 || numPlayers > 4)
-            System.out.println("Please enter a number between 2 and 4 inclusive.");
-        else { RunGame game = new RunGame(numPlayers); }
+//        int numPlayers = Integer.parseInt(args[0]);
+//        if (numPlayers < 2 || numPlayers > 4)
+//            System.out.println("Please enter a number between 2 and 4 inclusive.");
+//        else {
+            RunGame game = new RunGame(); //numPlayers); }
     }
-    
-    public RunGame(int numPlayers) {
+
+    public RunGame(){ //int numPlayers) {
     	KeyListener listener = new KeyListener();
     	GameModel model = new JavaGameModel();
     	Board board = model.getBoard();
@@ -52,7 +53,7 @@ public class RunGame {
 
 //        model.getJavaPlayers().toArray(new JavaPlayer[0])[0].addDeveloper(board.getAllLocations().toArray(new Location[0])[0]);
 
-        String[] playerNames = { "Player 2341", "Player234 2", "Player 2343"};
+        String[] playerNames = { "Player 2341", "Player234 2"};
 
         
         GameFrame frame = new GameFrame(listener);
