@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by idinamenzel on 4/15/14.
  */
-public abstract class PotentialTwoSpaceMovement extends PotentialAction implements HexComponentMovement, HexComponentRotation {
+public abstract class PotentialTwoSpaceMovement extends PotentialAction implements HexComponentPotentialAction, HexComponentRotation {
 
     private HexLocation centerLocation;
     private HexLocation otherLocation;

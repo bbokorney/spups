@@ -9,20 +9,18 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Location;
-import model.potentialactions.PotentialAction;
-import model.potentialactions.PotentialOneSpaceMovement;
+import model.potentialactions.HexComponentPotentialAction;
 import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Baker on 4/21/2014.
  */
-public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
+public abstract class HexComponentMovementUIState extends GameplayUIState {
     private final int KEY_SOUTH = KeyEvent.VK_NUMPAD2;
     private final int KEY_NORTH = KeyEvent.VK_NUMPAD8;
     private final int KEY_NORTHEAST = KeyEvent.VK_NUMPAD9;
@@ -42,44 +40,42 @@ public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
     private Controller controller;
     private KeyListener keyListener;
     private GameModel model;
-    private TileComponent component;
 
-    PotentialOneSpaceMovement potentialAction;
 
-    public PlaceOneSpaceTileUIState(Controller controller, KeyListener keyListener,
-                                    GameModel model, TileComponent component, PotentialOneSpaceMovement potentialAction){
-        this(controller, keyListener, model, component);
-        setPotentialAction(potentialAction);
+    private HexComponentPotentialAction potentialAction;
+
+    public HexComponentMovementUIState(Controller controller, KeyListener keyListener,
+                                       GameModel model, HexComponentPotentialAction potentialAction){
+        this(controller, keyListener, model);
+        this.potentialAction = potentialAction;
     }
 
-    public PlaceOneSpaceTileUIState(Controller controller, KeyListener keyListener,
-                                    GameModel model, TileComponent component){
+    public HexComponentMovementUIState(Controller controller, KeyListener keyListener,
+                                       GameModel model){
 	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
-        this.component = component;
+
 
         initListeners();
-        initAdditonalListeners();
+        initAdditionalListeners();
     }
 
-    protected void setPotentialAction(PotentialOneSpaceMovement action) {
+    protected void setPotentialAction(HexComponentPotentialAction action) {
         this.potentialAction = action;
         updateView(potentialAction.getActionResult());
     }
 
-    protected void setTileComponent(TileComponent component) { this.component = component; }
-
-    protected void initAdditonalListeners() {}
+    protected void initAdditionalListeners() {}
 
     private void updateView(ActionResult result) {
-        Map<Location, TileComponent> hoverComponents = new HashMap<Location, TileComponent>();
-        hoverComponents.put(potentialAction.getLocation(), component);
-        List<Location> highlighted = new ArrayList<Location>();
-        highlighted.add(potentialAction.getLocation());
-        controller.refreshGameView(result, hoverComponents, highlighted);
+        controller.refreshGameView(result, getBoardComponents(), getHighlightedLocations());
     }
+
+    protected abstract Map<Location, TileComponent> getBoardComponents();
+
+    protected abstract List<Location> getHighlightedLocations();
 
     protected void updateView() {
         updateView(potentialAction.getActionResult());
@@ -117,6 +113,7 @@ public abstract class PlaceOneSpaceTileUIState extends GameplayUIState {
 
         if(result.isSuccess()) {
             controller.addToHistory(actionPair);
+            controller.goToEmptyState();
         }
     }
 

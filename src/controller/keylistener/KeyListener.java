@@ -50,6 +50,8 @@ public class KeyListener implements java.awt.event.KeyListener{
 
     public void addTemporaryListeners(List<InternalListener> listeners) { temporary.addAll(listeners); }
 
+    public void addTemporaryListener(InternalListener listener) { temporary.add(listener); }
+
     public void addPersistentListeners(List<InternalListener> listeners) {
         persistent.addAll(listeners);
     }

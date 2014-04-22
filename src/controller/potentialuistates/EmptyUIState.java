@@ -113,7 +113,14 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void startPalaceFestival() {
-        controller.setCurrentState(new BeginPalaceFestivalTurnUIState(controller, keyListener, model));
+	    EndTurn action = new EndTurn(model);
+	    ActionResult result = action.tryAction();
+	    if(result.isSuccess()) {
+		    action.doAction();
+		    controller.addEndTurnToHistory(new Pair<ActionResult, EndTurn>(result, action));
+		    controller.refreshGameView();
+		    controller.setCurrentState(new BeginPalaceFestivalTurnUIState(controller, keyListener, model));
+	    }
     }
 
     public void useActionToken() {

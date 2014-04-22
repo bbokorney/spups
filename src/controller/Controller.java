@@ -92,4 +92,13 @@ public class Controller {
 	public void refreshCardView(List<Card> cards) {
 		view.refreshCardView(cards);
 	}
+
+	public void refreshPalaceFestivalView(List<Integer> cardsSelected) {
+		view.refreshFestivalView(model, paFes, new ArrayList<Card>(paFes.getCurrentPlayer().getHand()), cardsSelected);
+	}
+
+    public void goToEmptyState() {
+        this.setCurrentState(new EmptyUIState(this, keyListener, model, paFes));
+        refreshGameView();
+    }
 }
