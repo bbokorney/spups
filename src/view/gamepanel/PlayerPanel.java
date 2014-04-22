@@ -44,14 +44,17 @@ public class PlayerPanel extends JPanel {
 		name.setPreferredSize(new Dimension(80, 30));
         name.setEditable(false);
         name.setHighlighter(null);
+        name.setFont(new Font(name.getFont().getName(),name.getFont().getStyle(), 14));
 		fame = new JTextArea();
 		fame.setPreferredSize(new Dimension(70, 30));
         fame.setEditable(false);
         fame.setHighlighter(null);
+        fame.setFont(new Font(fame.getFont().getName(),fame.getFont().getStyle(), 14));
 		AP = new JTextArea();
 		AP.setPreferredSize(new Dimension(70, 30));
         AP.setEditable(false);
         AP.setHighlighter(null);
+        AP.setFont(new Font(AP.getFont().getName(),AP.getFont().getStyle(), 14));
 		
 
 		twotile = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/twotile.png")), offWidth, offHeight);
