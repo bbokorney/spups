@@ -104,7 +104,7 @@ public class PlayerPanel extends JPanel {
 		developer.setText(""+javaPlayer.getCount(JavaPlayerResourceType.DEVELOPER));
 		card.setText(""+cardSize);
 		name.setText(javaPlayer.getName());
-		fame.setText("FAME: "+javaPlayer.getScore());
+		fame.setText("FAME: " + javaPlayer.getScore());
 		if(model.getCurrentJavaPlayer() == javaPlayer) {
 //			System.out.println("TURN " + turn);
 			String s = turn == null ? "turn" : turn.getActionPoints() + "";

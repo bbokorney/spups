@@ -84,19 +84,18 @@ public class PlaceIrrigationTile extends Action {
             //calculate the points earned by placing this
             famePoints += helperJunk.pointsEarnedFromIrrigationPlacement(placement);
 
+            if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+                isSuccess = isSuccess && true;
+            }
+            else{
+                isSuccess = isSuccess && false;
+                message += "Error: This tile cannot be placed outside Central Java.\n";
+            }
+
         }
         else{
             isSuccess = isSuccess && false;
             message += "Error: The elevation is nonzero.\n";
-        }
-
-        //checks if the player is placing outside of central java
-        if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
-            isSuccess = isSuccess && true;
-        }
-        else{
-            isSuccess = isSuccess && false;
-            message += "Error: This tile cannot be placed outside Central Java.\n";
         }
 
         if(message.equalsIgnoreCase("")){

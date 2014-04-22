@@ -47,7 +47,7 @@ public class Controller {
     }
 
 	public void addToHistory(Pair action) {
-		//history.addAction(action); TODO: Baker, history broken
+		history.addAction(action);
 	}
 	public void addEndTurnToHistory(Pair action) {
 		history.addEndTurn(action);
@@ -66,7 +66,7 @@ public class Controller {
     }
 
     public TimeTraveler startRoundReplay() {
-		return history.rewindTurns(3);
+		return history.rewindTurns(model.getJavaPlayers().size());
     }
 
     public TimeTraveler startGameReplay() {
