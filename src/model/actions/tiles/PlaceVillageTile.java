@@ -7,7 +7,9 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
+import model.rules.palace.HighestRankingPlayerRule;
 import model.rules.tiles.*;
 import model.tiles.Tile;
 import model.tiles.VillageTileComponent;
@@ -23,7 +25,8 @@ public class PlaceVillageTile extends Action {
      */
     Location placement;
     GameModel game;
-    //private JavaPlayer playerAwardedPoints
+    private JavaPlayer playerAwardedPoints;
+    int famePointsEarned;
 
     /*
         constructors
@@ -89,7 +92,9 @@ public class PlaceVillageTile extends Action {
             }
 
             if(game.isHeightAtLocation(0, placement)){
-                famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
+
+
+                helperJunk.pointsEarnedFromLandPlacement(placement);
             }
 
         }
@@ -121,8 +126,10 @@ public class PlaceVillageTile extends Action {
         //this should never work
         if(game.isHeightAtLocation(0, placement)){
 
+            //HashMap<JavaPlayer, >
+            famePointsEarned = helperJunk.pointsEarnedFromLandPlacement(placement);
 
-            famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
+
 
             if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
 
@@ -173,6 +180,7 @@ public class PlaceVillageTile extends Action {
 
 
             //award the player the fame points earned
+            game.incrementScore(famePointsEarned, playerAwardedPoints);
             game.incrementScore(result.getFamePoints());
 
             //set has placed land tile to true
