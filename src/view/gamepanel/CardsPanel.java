@@ -46,6 +46,9 @@ public class CardsPanel extends JPanel {
 		textArea.setBackground(GameFrame.defaultBackground);
 		textArea.setEditable(false);
 		textArea.setHighlighter(null);
+		
+
+        textArea.setFont(new Font(textArea.getFont().getName(),textArea.getFont().getStyle(), 16));
 		this.add(textArea);
 	}
 	

@@ -44,14 +44,17 @@ public class PlayerPanel extends JPanel {
 		name.setPreferredSize(new Dimension(80, 30));
         name.setEditable(false);
         name.setHighlighter(null);
+        name.setFont(new Font(name.getFont().getName(),name.getFont().getStyle(), 14));
 		fame = new JTextArea();
 		fame.setPreferredSize(new Dimension(70, 30));
         fame.setEditable(false);
         fame.setHighlighter(null);
+        fame.setFont(new Font(fame.getFont().getName(),fame.getFont().getStyle(), 14));
 		AP = new JTextArea();
 		AP.setPreferredSize(new Dimension(70, 30));
         AP.setEditable(false);
         AP.setHighlighter(null);
+        AP.setFont(new Font(AP.getFont().getName(),AP.getFont().getStyle(), 14));
 		
 
 		twotile = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/twotile.png")), offWidth, offHeight);
@@ -60,7 +63,6 @@ public class PlayerPanel extends JPanel {
 		card = newJLabel("3", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 80, offHeight+30);
 		user = newJLabel("", new ImageIcon(JavaImageLoader.getImage("resources/user.png")), 80, offHeight);
 		
-
 		rice = TileLabel.newHexLabel("rice", offWidth, offHeight, new RiceTileComponent());
 		village = TileLabel.newHexLabel("village", offWidth, offHeight, new VillageTileComponent());
 		twotile = TileLabel.newTwoHexLabel("twotile", offWidth, offHeight+30);
@@ -102,7 +104,6 @@ public class PlayerPanel extends JPanel {
 		fame.setBackground(this.getBackground());
 		AP.setBackground(this.getBackground());
 		if(model.getCurrentJavaPlayer() == javaPlayer) {
-//			System.out.println("TURN " + turn);
 			String s = turn == null ? "turn" : turn.getActionPoints() + "";
 			AP.setText("AP:" + s);
 		} else { 

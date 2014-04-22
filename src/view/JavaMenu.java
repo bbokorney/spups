@@ -38,7 +38,6 @@ public class JavaMenu extends JMenuBar {
 				createGame = new CreateGameFrame(listener);
 			}
 		});
-		file.add(newGame);
 	
 	    this.add(file);
 	}
