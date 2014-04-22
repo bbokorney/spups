@@ -157,8 +157,7 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void incrementScore(int score) {
-        int currentScore = getCurrentJavaPlayer().getScore();
-        getCurrentJavaPlayer().adjustScore(currentScore + score);
+        getCurrentJavaPlayer().adjustScore(score);
     }
 
     @Override
