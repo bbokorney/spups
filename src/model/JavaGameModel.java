@@ -74,7 +74,7 @@ public class JavaGameModel extends GameModel{
         BoardCreator creator = new BoardCreator();
         board = creator.createBoard();
         turn = new NonFinalTurn();
-
+        javaPlayers = new JavaPlayers();
     }
 
     @Override
