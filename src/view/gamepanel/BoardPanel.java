@@ -31,12 +31,13 @@ import model.tiles.TileComponent;
 public class BoardPanel extends JPanel {
 	public static double hexScaling = 2.0/3;
 	//private Graphics2D g2d;
-	HexLocation[] locations;
-	Board board;
-	GameModel model;
-	Map<Location, TileComponent> potentialComponents;
-	List<Location> highlightedComponents;
-	ActionResult result;
+	private HexLocation[] locations;
+	private int[] origin;
+	private Board board;
+	private GameModel model;
+	private Map<Location, TileComponent> potentialComponents;
+	private List<Location> highlightedComponents;
+	private ActionResult result;
 	
 	public BoardPanel() {
 		this.setVisible(true);
@@ -55,8 +56,6 @@ public class BoardPanel extends JPanel {
 	}
 	
 	protected void paintComponent(Graphics g) {
-			int[] origin = getBoardOrigin(locations);
-	
 			// BACKGROUND and TILES
 			for(HexLocation location : locations) { 
 				int[] distance = location.getDistanceFromOrigin();
@@ -225,10 +224,7 @@ public class BoardPanel extends JPanel {
         }
         
         g.setColor(color);
-    	g.fillPolygon(tile);
-
-		int[] origin = getBoardOrigin(locations);
-		
+    	g.fillPolygon(tile);		
 
     	((Graphics2D) g).setColor(Color.black);
     	((Graphics2D) g).setStroke(new BasicStroke(2));
@@ -266,12 +262,11 @@ public class BoardPanel extends JPanel {
     }
 	
 	public void connectLocations(Graphics g, HexLocation location) {
-		int[] origin = getBoardOrigin(locations);
 		board.getSpace(location);
 		for(HexLocation neighbor : location.getNeighbors().toArray(new HexLocation[0])) {
-			if(board.getSpace(location) != null && board.getSpace(location).getTopTileComponent() != null 
-					&& board.getSpace(neighbor) != null && board.getSpace(neighbor).getTopTileComponent() != null 
-					&& board.getSpace(location).getTopTileComponent().getParent() == board.getSpace(neighbor).getTopTileComponent().getParent()) {
+			if(board.getSpace(location) != null && board.getSpace(location).getTopTileComponent() != null && 
+					board.getSpace(neighbor) != null && board.getSpace(neighbor).getTopTileComponent() != null && 
+					board.getSpace(location).getTopTileComponent().getParent() == board.getSpace(neighbor).getTopTileComponent().getParent()) {
 				ArrayList<Point> list  = new ArrayList<Point>();
 				int[] distance = location.getDistanceFromOrigin();
 				int width1 = distance[0]+origin[0]+50;
@@ -303,8 +298,9 @@ public class BoardPanel extends JPanel {
 		this.model = model;
 		this.potentialComponents = potentialComponents; 
 		this.highlightedComponents = highlightedComponents;
-		locations = board.getAllLocations().toArray(new HexLocation[0]);
+		this.locations = board.getAllLocations().toArray(new HexLocation[0]);
 		this.result = result;
+		this.origin = getBoardOrigin(this.locations);
 
 		repaint();
 	}

@@ -15,6 +15,7 @@ import model.palacefestival.PalaceFestival;
 import model.tiles.TileComponent;
 import view.actionpanel.ActionPanel;
 import view.gamepanel.GamePanel;
+import view.palacefestival.CardsFrame;
 import view.palacefestival.FestivalPanel;
 
 
@@ -70,6 +71,8 @@ public class GameFrame extends JFrame {
     @SuppressWarnings("rawtypes")
 	public void refreshCardView(List<Card> cards){
         //shows cards of the current player when it is the players turn in the Java Game
+    	CardsFrame cardsFrame = new CardsFrame(festivalPanel.getCurrentPlayerHandPanel());
+    	cardsFrame.refresh();
     }
 
     @SuppressWarnings("rawtypes")

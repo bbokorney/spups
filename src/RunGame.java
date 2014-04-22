@@ -77,7 +77,8 @@ public class RunGame {
     
 
 
-    private void initTestBoard(GameModel model, PalaceFestival festival,
+    @SuppressWarnings("unused")
+	private void initTestBoard(GameModel model, PalaceFestival festival,
 			LinkedList<Location> highlights, @SuppressWarnings("rawtypes") List<Card> cardsOfCurrentPlayer,
 			List<Integer> cardsHighlighted, HashMap<Location, TileComponent> map, GameFrame frame) {
 		// TODO Auto-generated method stub

@@ -39,7 +39,8 @@ public class CurrentPlayerHandPanel extends JPanel {
 	
 	@SuppressWarnings("rawtypes")
 	public void refreshView(List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected, String playerName) {
-		user.setText(playerName + "'s Hand:");
+		if(playerName != null)
+			user.setText(playerName + "'s Hand:");
 		Graphics2D g2d = cards.createGraphics();
         g2d.setStroke(new BasicStroke(5));
 		g2d.setColor(Color.green);
