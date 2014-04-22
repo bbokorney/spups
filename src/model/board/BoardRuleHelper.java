@@ -33,6 +33,7 @@ public class BoardRuleHelper {
                     createOrIncrement(heights, height);
                 }
             }
+            heightMap.put(players[i], heights);
         }
 
         return calcRanks(players, heightMap, maxHeight);
@@ -51,6 +52,12 @@ public class BoardRuleHelper {
         if(currHeight < 0) {
             for(JavaPlayer p : players) {
                 myRanks.put(p, 1);
+            }
+        }
+
+        for(JavaPlayer p : heightMap.keySet()) {
+            if(!heightMap.get(p).containsKey(currHeight)) {
+                heightMap.get(p).put(currHeight, 0);
             }
         }
 
@@ -100,7 +107,7 @@ public class BoardRuleHelper {
             public int compare(JavaPlayer p1, JavaPlayer p2) {
                 int p1Count = heightMap.get(p1).containsKey(currentHeight) ? heightMap.get(p1).get(currentHeight) : 0;
                 int p2Count = heightMap.get(p2).containsKey(currentHeight) ? heightMap.get(p2).get(currentHeight) : 0;
-                return p2Count - p1Count;
+                return p1Count > p2Count ? -1 : 1;
             }
         });
     }
