@@ -4,6 +4,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.TakeDeveloperOffBoard;
+import model.board.Directions;
 import model.board.HexLocation;
 import model.board.Location;
 import model.palacefestival.PalaceFestival;
@@ -75,7 +76,7 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
 		//Todo Meghan: please check this
         //return null;
 
-        Location loc = new HexLocation(developerLocationList.get(indexOfCurrentDeveloper));
+        Location loc = developerLocationList.get(indexOfCurrentDeveloper);
         ArrayList<Location> list = new ArrayList<Location>();
         list.add(loc);
         return list;
