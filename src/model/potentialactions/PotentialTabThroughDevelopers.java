@@ -68,8 +68,7 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
 
     private JavaPath getShortestLegalPath(){
         LeastCostPathFinder pathFinder = new LeastCostPathFinder(getGameModel());
-        return  pathFinder.findShortestRemovalPath(developerLocationList.get(indexOfCurrentDeveloper));
-
+        return pathFinder.findShortestRemovalPath(developerLocationList.get(indexOfCurrentDeveloper));
     }
 
 	public List<Location> getLocationFromPath() {
