@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import view.JavaImageLoader;
 import model.actions.ActionResult;
 
 /**
@@ -27,8 +28,8 @@ public class CardsPanel extends JPanel {
 	JButton replayMode;
 	
 	public CardsPanel() {
-		stack = newJLabel("3", "/Users/maumau/spups/resources/card.png", 75, 200);
-		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 75, 200);
+		stack = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/card.png")), 75, 200);
+		card = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/card.png")), 75, 200);
 //		this.add(stack);
 //		this.add(card);
 		
@@ -41,9 +42,15 @@ public class CardsPanel extends JPanel {
 		this.add(textArea);
 	}
 
+	
 	private JLabel newJLabel(String value, String src, int width, int height){
+		ImageIcon icon = new ImageIcon(src);
+		return newJLabel(value, icon, width, height);
+	}
+	
+	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
 		JLabel label= new JLabel(value);
-		label.setIcon(new ImageIcon(src));
+		label.setIcon(icon);
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import view.TileLabel;
+import view.palacefestival.PalaceCardImageLoader;
 import model.GameModel;
 import model.palacefestival.PalaceFestival;
 import model.sharedresources.SharedResourceType;
@@ -40,15 +41,20 @@ public class CommonPanel extends JPanel {
 		this.add(irrigation);
 		this.add(threetile);
 		//TODO make the text of this go on the right place
-		stack = newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 100);
-		card = newJLabel(" ", "/Users/maumau/spups/resources/card.png", 60, 100);
+		stack = newJLabel("", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
+		card = newJLabel(" ", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
 		this.add(stack);
 		this.add(card);
 	}
 	
 	private JLabel newJLabel(String value, String src, int width, int height){
+		ImageIcon icon = new ImageIcon(src);
+		return newJLabel(value, icon, width, height);
+	}
+	
+	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
 		JLabel label= new JLabel(value);
-		label.setIcon(new ImageIcon(src));
+		label.setIcon(icon);
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -57,7 +63,6 @@ public class CommonPanel extends JPanel {
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 		return label;
 	}
-
 
 	public void refreshView(GameModel model, PalaceFestival festival) {
 		palace[0].setText(""+model.getCount(SharedResourceType.PALACELEVEL2));

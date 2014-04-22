@@ -6,8 +6,10 @@ import java.awt.Dimension;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 //import javax.swing.JScrollPane;
+
 
 
 
@@ -38,6 +40,12 @@ public class GamePanel extends JPanel {
 //		JScrollPane scrollCardsPanel = new JScrollPane(); 
 //		scrollCardsPanel.add(cardsPanel);
 		commonPanel = new CommonPanel(); 
+		
+
+		boardPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		cardsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		commonPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 		playerPanel = new PlayerPanel[numOfPlayerPanels];
 		for(int x = 0; x < numOfPlayerPanels; ++x)
 			playerPanel[x] = new PlayerPanel();
@@ -59,8 +67,10 @@ public class GamePanel extends JPanel {
 
 		cardsPanel.setBackground(Color.BLUE);
 		commonPanel.setBackground(Color.BLUE);
-		for(int x = 0; x < numOfPlayerPanels; ++x) 
+		for(int x = 0; x < numOfPlayerPanels; ++x) {
 			playerPanel[x].setBackground(Color.RED);
+			playerPanel[x].setBorder(BorderFactory.createLineBorder(Color.black));
+		}
 		
 		boardPanel.setPreferredSize(new Dimension(600, 200));
 		cardsPanel.setPreferredSize(new Dimension(245, 200));
