@@ -34,6 +34,7 @@ public class Controller {
     PotentialJavaUIState currentState;
 
 	public Controller(GameFrame view, GameModel model, PalaceFestival palaceFestival) {
+        history = new History(this, model);
 		this.view = view;
         this.model = model;
         keyListener = view.getKeyListener();
@@ -47,10 +48,10 @@ public class Controller {
     }
 
 	public void addToHistory(Pair action) {
-		//history.addAction(action); TODO: Baker, history broken
+		history.addAction(action);
 	}
 	public void addEndTurnToHistory(Pair action) {
-		//history.addEndTurn(action); //todo baker or jon
+		history.addEndTurn(action);
 	}
 
     public void askForUserConfirmation(Action actionMessage) {
@@ -66,7 +67,7 @@ public class Controller {
     }
 
     public TimeTraveler startRoundReplay() {
-		return history.rewindTurns(3);
+		return history.rewindTurns(model.getJavaPlayers().size());
     }
 
     public TimeTraveler startGameReplay() {

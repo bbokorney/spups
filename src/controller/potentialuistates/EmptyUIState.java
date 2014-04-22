@@ -76,12 +76,10 @@ public class EmptyUIState extends PotentialJavaUIState {
         controller.setCurrentState(new UpgradePalaceUIState(controller, keyListener, model));
     }
 
-    // Renamed from switchToPlaceVillageRiceTwoSpaceTileState()
     public void switchToPlaceTwoSpaceTileState() {
         controller.setCurrentState(new PlaceTwoSpaceTileUIState(controller, keyListener, model));
     }
 
-    // Renamed from switchToPlaceVillageRiceThreeSpaceTileState()
     public void switchToPlaceThreeSpaceTileState() {
         controller.setCurrentState(new PlaceThreeSpaceTileUIState(controller, keyListener, model));
     }

@@ -12,6 +12,10 @@ import java.util.List;
 public class JavaPath {
     private Path<JavaNode> path;
 
+    public JavaPath(Path<JavaNode> path) {
+        this.path = path;
+    }
+
     public boolean valid() {
         return path.valid();
     }
@@ -20,11 +24,17 @@ public class JavaPath {
         return path.getCost();
     }
 
+    public void setCost(int cost) { path.setCost(cost);}
+
     public List<Location> getPath() {
         List<Location> locations = new ArrayList<Location>();
         for(int i = 0; i < path.getPath().size(); ++i) {
             locations.add(path.getPath().get(i).getLocation());
         }
         return locations;
+    }
+
+    public String toString() {
+        return String.format("%s, %s, %s", valid(), getCost(), getPath().size());
     }
 }

@@ -1,11 +1,13 @@
 package pathfinding;
 
 import model.GameModel;
+import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.board.LocationType;
 import model.rules.developer.DeveloperPassThroughRule;
 import model.rules.developer.DeveloperPlacementRule;
 import model.rules.developer.DeveloperTraversalRule;
+import org.omg.PortableInterceptor.LOCATION_FORWARD;
 
 import java.util.*;
 
@@ -14,15 +16,19 @@ import java.util.*;
  */
 public class LeastCostPathFinder {
     private GameModel model;
+    private BoardRuleHelper helper;
 
     public LeastCostPathFinder(GameModel model) {
         this.model = model;
+        this.helper = new BoardRuleHelper(model);
     }
 
     public JavaPath findShortestPath(Location src, Location dest) {
+        JavaNode destination = new JavaNode(dest);
         PathFinder<JavaNode, JavaEdge> pathFinder = new PathFinder<JavaNode, JavaEdge>();
         Set<Location> visited = new HashSet<Location>();
         Map<Location, JavaNode> nodes = new HashMap<Location, JavaNode>();
+        nodes.put(dest, destination);
         Queue<JavaNode> queue = new LinkedList<JavaNode>();
         JavaNode source = new JavaNode(src);
         nodes.put(src, source);
@@ -33,6 +39,9 @@ public class LeastCostPathFinder {
 
             // get all of the valid edges
             for(Location neighbor : curr.getLocation().getNeighbors()) {
+                if(!model.getBoard().areLocationsOnBoard(neighbor)) {
+                    continue;
+                }
                 List<JavaEdge> edges = getEdgesTo(curr.getLocation(), neighbor, nodes);
                 for(JavaEdge edge : edges) {
                     if(edge != null) {
@@ -45,27 +54,45 @@ public class LeastCostPathFinder {
             }
         }
 
-        return null;
+        Path<JavaNode> path = pathFinder.findShortestPath(source, destination);
+
+        return new JavaPath(path);
+    }
+
+    private int minCostToEnterOrExitHere(Location location) {
+        if(helper.inHighLands(location)) {
+            return 2;
+        }
+        else if(helper.inLowlands(location)) {
+            return 1;
+        }
+
+        for(Location neighbor : location.getNeighbors()) {
+            if(helper.inLowlands(neighbor)) {
+                return 1;
+            }
+        }
+        return 2;
     }
 
     public JavaPath findShortestPlacementPath(Location placementLocation) {
-        JavaPath min = null;
-        for(Location src : outerJavaLocations()) {
-            JavaPath path = findShortestPath(src, placementLocation);
-            if(min == null) {
-                min = path;
-            }
-            else {
-                min = path.valid() && path.getCost() < min.getCost() ? path : min;
-            }
-        }
-        return min;
+        return findShortestEnterOrExitPath(placementLocation);
     }
 
     public JavaPath findShortestRemovalPath(Location removalLocation) {
+        return findShortestEnterOrExitPath(removalLocation);
+    }
+
+    private JavaPath findShortestEnterOrExitPath(Location centralJavaLocation) {
         JavaPath min = null;
-        for(Location dest : outerJavaLocations()) {
-            JavaPath path = findShortestPath(removalLocation, dest);
+        for(Location exteriorLocation : model.getBoard().getAllLocations()) {
+            if(!helper.developerCanEnterHere(exteriorLocation)) {
+                continue;
+            }
+            JavaPath path = findShortestPath(exteriorLocation, centralJavaLocation);
+            // find the minimum cost to get to this
+            int minCost = minCostToEnterOrExitHere(exteriorLocation);
+            path.setCost(path.getCost() + minCost);
             if(min == null) {
                 min = path;
             }
@@ -78,8 +105,8 @@ public class LeastCostPathFinder {
 
     private Collection<Location> outerJavaLocations() {
         Collection<Location> locations = new ArrayList<Location>();
-        for(Location location : locations) {
-            if(model.getBoard().getLocationType(location) == LocationType.Lowlands &&
+        for(Location location : model.getBoard().getAllLocations()) {
+            if(model.getBoard().getLocationType(location) == LocationType.Lowlands ||
                     model.getBoard().getLocationType(location) == LocationType.Highlands) {
                 locations.add(location);
             }
@@ -98,7 +125,7 @@ public class LeastCostPathFinder {
         // if we can only pass through
         DeveloperPassThroughRule dptr = new DeveloperPassThroughRule(to, model.getBoard(),
                 model.getJavaPlayers(), model.getCurrentJavaPlayer());
-        if(dpr.allowed()) {
+        if(dptr.allowed()) {
             return getEdgesStemmingFrom(to, nodes);
         }
 

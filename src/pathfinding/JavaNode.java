@@ -15,6 +15,7 @@ class JavaNode implements PathNode<JavaNode> {
 
     public JavaNode(Location location) {
         this.location = location;
+        edges = new HashSet<PathEdge<JavaNode>>();
     }
 
     public boolean equals(PathNode pathNode) {
