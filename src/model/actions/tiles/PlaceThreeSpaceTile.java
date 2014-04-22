@@ -44,6 +44,7 @@ public class PlaceThreeSpaceTile extends Action {
         this.ricePlacement[0] = rice1Placement;
         this.ricePlacement[1] = rice2Placement;
         this.game = game;
+	    this.playersAwardedPoints = new HashMap<JavaPlayer, Integer>();
     }
 
 

@@ -40,6 +40,7 @@ public class PlaceTwoSpaceTile extends Action {
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
         this.game = game;
+	    this.playersAwardedPoints = new HashMap<JavaPlayer, Integer>();
     }
 
     @Override

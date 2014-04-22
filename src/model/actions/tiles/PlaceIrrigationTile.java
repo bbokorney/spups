@@ -41,6 +41,7 @@ public class PlaceIrrigationTile extends Action {
     public PlaceIrrigationTile(Location placement, GameModel game){
         this.placement = placement;
         this.game = game;
+	    this.playersAwardedPoints = new HashMap<JavaPlayer, Integer>();
     }
 
 

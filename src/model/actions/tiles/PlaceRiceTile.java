@@ -42,6 +42,7 @@ public class PlaceRiceTile extends Action {
     public PlaceRiceTile(Location placement, GameModel game){
         this.placement = placement;
         this.game = game;
+	    this.playersAwardedPoints = new HashMap<JavaPlayer, Integer>();
     }
 
 
