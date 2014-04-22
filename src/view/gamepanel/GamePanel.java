@@ -39,8 +39,6 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		boardPanel = new BoardPanel();
 		cardsPanel = new CardsPanel();
-//		JScrollPane scrollCardsPanel = new JScrollPane(); 
-//		scrollCardsPanel.add(cardsPanel);
 		commonPanel = new CommonPanel(); 
 		
 
@@ -62,17 +60,18 @@ public class GamePanel extends JPanel {
 		left.add(playerPanel[0], BorderLayout.NORTH);
 		right.add(playerPanel[1], BorderLayout.NORTH);
 		left.add(commonPanel, BorderLayout.CENTER);
-//		right.add(scrollCardsPanel, BorderLayout.CENTER);
 		right.add(cardsPanel, BorderLayout.CENTER);
 		right.add(playerPanel[2], BorderLayout.SOUTH);
 		left.add(playerPanel[3], BorderLayout.SOUTH);
 
-		cardsPanel.setBackground(Color.BLUE);
-		commonPanel.setBackground(Color.BLUE);
 		for(int x = 0; x < numOfPlayerPanels; ++x) {
 			playerPanel[x].setBackground(GameFrame.playerColors[x]);
 			playerPanel[x].setBorder(BorderFactory.createLineBorder(Color.black));
 		}
+		boardPanel.setBackground(GameFrame.defaultBackground);
+		cardsPanel.setBackground(GameFrame.defaultBackground);
+		commonPanel.setBackground(GameFrame.defaultBackground);
+		
 		
 		boardPanel.setPreferredSize(new Dimension(600, 200));
 		cardsPanel.setPreferredSize(new Dimension(245, 200));
@@ -106,12 +105,6 @@ public class GamePanel extends JPanel {
 			playerPanel[x].removeAll();
 		}
 		repaint();
-	}
-
-	@SuppressWarnings("rawtypes")
-	public void refreshFestivalView(PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void refreshFestivalView(FestivalPanel festivalPanel) {

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import view.GameFrame;
 import view.JavaImageLoader;
 import model.actions.ActionResult;
 
@@ -28,24 +29,24 @@ public class CardsPanel extends JPanel {
 	JButton replayMode;
 	
 	public CardsPanel() {
-		stack = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/card.png")), 75, 200);
-		card = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/card.png")), 75, 200);
-//		this.add(stack);
-//		this.add(card);
+		stack = newJLabel("", new ImageIcon(JavaImageLoader.getImage("resources/card.png")), 75, 200);
+		card = newJLabel("", new ImageIcon(JavaImageLoader.getImage("resources/card.png")), 75, 200);
 		
 		planningMode = new JButton(); planningMode.setText("Planning Mode");
 		replayMode = new JButton(); replayMode.setText("Replay Mode");
+		planningMode.setEnabled(false);
+		replayMode.setEnabled(false);
 		
 		this.add(planningMode);
 		this.add(replayMode);
 		textArea = new JTextArea();
+		textArea.setPreferredSize(new Dimension(245, 220));
+		textArea.setLineWrap(true);  
+		textArea.setWrapStyleWord(true);
+		textArea.setBackground(GameFrame.defaultBackground);
+		textArea.setEditable(false);
+		textArea.setHighlighter(null);
 		this.add(textArea);
-	}
-
-	
-	private JLabel newJLabel(String value, String src, int width, int height){
-		ImageIcon icon = new ImageIcon(src);
-		return newJLabel(value, icon, width, height);
 	}
 	
 	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){

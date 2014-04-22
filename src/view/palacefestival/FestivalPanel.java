@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 
 
+
+import view.GameFrame;
 import model.GameModel;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
@@ -44,11 +46,11 @@ public class FestivalPanel extends JPanel {
 		bottom.add(playerPanel[2], BorderLayout.EAST);
 		bottom.add(playerPanel[3], BorderLayout.WEST);
 
-		handPanel.setBackground(Color.green);
+		handPanel.setBackground(GameFrame.defaultBackground);
 		handPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		for(int x = 0; x < numOfPlayerPanels; ++x) {
-			playerPanel[x].setBackground(Color.yellow);
+			playerPanel[x].setBackground(GameFrame.playerColors[x]);
 			playerPanel[x].setBorder(BorderFactory.createLineBorder(Color.black));
 		}
 		
