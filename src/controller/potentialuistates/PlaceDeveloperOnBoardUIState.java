@@ -28,8 +28,8 @@ public class PlaceDeveloperOnBoardUIState extends HexComponentMovementUIState {
 
     public PlaceDeveloperOnBoardUIState(Controller controller, KeyListener keyListener, GameModel model){
 	    super(controller, keyListener, model);
-
-	    potentialAction = new PotentialPlaceDeveloperOnBoard(model, controller.getPalaceFestival());
+        System.out.println("Constructor of the PlaceDeveloperOnBoardUIState");
+        potentialAction = new PotentialPlaceDeveloperOnBoard(model, controller.getPalaceFestival());
         setPotentialAction(potentialAction);
     }
 
