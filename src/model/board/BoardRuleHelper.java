@@ -133,12 +133,12 @@ public class BoardRuleHelper {
                     if(enclosingTileCount == surrounding.size()) {
                         //return 1;
                         //todo return noll baker
-                        return null;
+                        return new HashMap<JavaPlayer, Integer>();
                     }
                 }
             }
         }
-        return null;
+        return new HashMap<JavaPlayer, Integer>();
         // return 0; todo baker
 
         /*
@@ -180,7 +180,7 @@ public class BoardRuleHelper {
 
         }
         //todo baker
-        return null;
+        return new HashMap<JavaPlayer, Integer>();
         // return famePointsEarned;
 
         /*this be called by land tile placement (that are being placed directly on the board
