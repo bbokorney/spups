@@ -37,39 +37,41 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 	    this.model = model;
 
 	    potentialAction = new PotentialBeginPalaceFestival();
+	    controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
 
         initFirstListeners();
     }
 
 	public void switchPalace() {
 		potentialAction.tabToNextPalace();
-		//controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
+		controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
 	}
 
 	public void confirmPalace() {
 		potentialAction.chooseCurrentPalace();
 		//controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
 		initSecondListeners();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 	}
 
 	public void switchCard() {
 		potentialAction.tabToNextCard();
-		//how do i update selected card in view?
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 	}
 
 	public void selectCard() {
 		potentialAction.chooseCurrentCard();
-		//how do i update selected card in view?
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 	}
 
 	public void deselectCard() {
 		potentialAction.removeCurrentCardFromBid();
-		//how do i update selected card in view?
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 	}
 
 	public void confirmBid() {
 		potentialAction.confirmBid();
-		controller.setCurrentState(new PalaceFestivalTurnUIState());
+		controller.setCurrentState(new PalaceFestivalTurnUIState(controller, keyListener, model, potentialAction.getSelectedPalaceLocation()));
 	}
 
     private void initFirstListeners() {

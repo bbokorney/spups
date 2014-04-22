@@ -12,6 +12,7 @@ import model.tiles.PalaceTileComponent;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -55,6 +56,14 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
             }
         }
     }
+
+	public List<Integer> getIndexOfCardsToBid() {
+		return indexOfCardsToBid;
+	}
+
+	public Location getSelectedPalaceLocation() {
+		return selectedPalaceLocation;
+	}
 
     public boolean tabToNextPalace() {
         palaceIndex++;
