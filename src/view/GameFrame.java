@@ -35,7 +35,7 @@ public class GameFrame extends JFrame {
 	public GameFrame(KeyListener keyListener){
 		this.setTitle("Java Spups");
 		this.setSize(WIDTH, HEIGHT);
-		this.setResizable(true);
+		this.setResizable(false);
         this.setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import view.TileLabel;
 import view.palacefestival.PalaceCardImageLoader;
 import model.GameModel;
+import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceFestival;
 import model.sharedresources.SharedResourceType;
 import model.tiles.IrrigationTileComponent;
@@ -73,6 +74,7 @@ public class CommonPanel extends JPanel {
 		irrigation.setText(""+model.getCount(SharedResourceType.IRRIGATION));
 		threetile.setText(""+model.getCount(SharedResourceType.THREE));
 		stack.setText(""+festival.getDeckSize());
+		card.setIcon(new ImageIcon(PalaceCardImageLoader.getImage((PalaceCard) festival.peekAtFestivalCard())));
 		
 		// TODO put picture of festival card
 		//card.setText(""+festival.peekAtFestivalCard());
