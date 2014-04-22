@@ -6,25 +6,25 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Stack;
+import java.util.Stack;
 
 /**
  * Created by Baker on 4/14/2014.
  */
 public class TimeTraveler {
-	Queue<Queue<Pair>> undoneActions;
-	Queue<Pair> doneActions;
-	Queue<Queue<Pair>> actions;
+	Stack<Stack<Pair>> undoneActions;
+	Stack<Pair> doneActions;
+	Stack<Stack<Pair>> actions;
 	GameModel model;
 	Controller controller;
 	History history;
 
-	public TimeTraveler(Controller controller, History history, Queue<Queue<Pair>> undoneActions, Queue<Queue<Pair>> actions, GameModel model) {
+	public TimeTraveler(Controller controller, History history, Stack<Stack<Pair>> undoneActions, Stack<Stack<Pair>> actions, GameModel model) {
 		this.history = history;
 		this.controller = controller;
 		this.undoneActions = undoneActions;
-		doneActions = new LinkedList<Pair>();
+		doneActions = new Stack<Pair>();
 		this.actions = actions;
 		this.model = model;
 	}
@@ -34,14 +34,14 @@ public class TimeTraveler {
 	}
 
 	public void next() {
-		Queue<Pair> latestTurn = undoneActions.peek();
-		Pair<ActionResult, Action> pair = latestTurn.poll();
+		Stack<Pair> latestTurn = undoneActions.peek();
+		Pair<ActionResult, Action> pair = latestTurn.pop();
 		doneActions.add(pair);
 		pair.getSecond().doAction();
 		controller.refreshGameView();
 
 		if(latestTurn.size() < 1) {
-			undoneActions.poll();
+			undoneActions.pop();
 		}
 		history.addAction(pair);
 	}
@@ -49,7 +49,7 @@ public class TimeTraveler {
 	public void back() {
 		if(!doneActions.isEmpty()) {
 			history.rewindAction();
-			doneActions.poll();
+			doneActions.pop();
 		}
 	}
 }
