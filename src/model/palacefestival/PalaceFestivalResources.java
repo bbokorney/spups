@@ -1,5 +1,8 @@
 package model.palacefestival;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -25,19 +28,32 @@ public class PalaceFestivalResources implements CardGameResources<Card> {
     @Override
     public Card drawFaceUpCard() {
         Card currentFestivalCard = festivalCard;
-        festivalCard = deck.pop();
+        if(!deck.empty()){
+            festivalCard = deck.pop();
+        }
+        else{
+            replaceUnusedDeck();
+            if(!deck.empty()){
+                festivalCard = deck.pop();
+            }
+            else{
+                return null;
+            }
+        }
         return currentFestivalCard;
     }
 
     @Override
     public Card drawCardFromDeck() {
-        Card drawnCard = deck.pop();
-        if (deck.isEmpty()) {
-            deck.addAll(discard);
-            discard.clear();
-        }
+        if(!deck.isEmpty()) {
+            Card drawnCard = deck.pop();
+            if (deck.isEmpty()) {
+                replaceUnusedDeck();
+            }
 
-        return drawnCard;
+            return drawnCard;
+        }
+        return null;
     }
 
     @Override
@@ -55,8 +71,41 @@ public class PalaceFestivalResources implements CardGameResources<Card> {
         discard.push(card);
     }
 
-	public int getDeckSize() {
+    public void shuffleUnusedDeck(){
+        shuffleDeck(deck);
+    }
+
+    private void shuffleDiscardDeck(){
+        shuffleDeck(discard);
+    }
+
+    private void replaceUnusedDeck(){
+        if (!discard.isEmpty()) {
+            shuffleDiscardDeck();
+            deck.addAll(discard);
+            discard.clear();
+            deck = discard;
+        }
+    }
+
+    private void shuffleDeck(Stack<Card> deck) {
+       ArrayList<Card> cards = new ArrayList<Card>();
+       while(!deck.isEmpty()){
+           cards.add(deck.pop());
+       }
+       Collections.shuffle(cards);
+       Card[] cardsArray = cards.toArray(new Card[0]);
+      for(int i = 0; i < cardsArray.length; i++){
+          deck.push(cardsArray[i]);
+      }
+
+    }
+
+    public int getDeckSize() {
 		return deck.size();
 	}
 
+    public boolean doesDeckHaveCard() {
+        return deck != null;
+    }
 }

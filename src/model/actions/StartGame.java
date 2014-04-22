@@ -74,6 +74,7 @@ public class StartGame extends Action {
 
             game.setPlayersInGame(playerNames);
             Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
+            festival.shuffleUnusedDeck();
             for( JavaPlayer player : javaPlayers) {
                 ArrayList cardsForPlayer = new ArrayList<Card>();
 

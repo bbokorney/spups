@@ -70,6 +70,10 @@ public class PalaceFestival {
         return resources.drawCardFromDeck();
     }
 
+    public boolean doesDeckHaveCard(){
+        return resources.doesDeckHaveCard();
+    }
+
     public boolean drawSpecificDeckCard(Card card) {
         return resources.drawSpecificCardFromDeck(card);
     }
@@ -77,6 +81,8 @@ public class PalaceFestival {
     public void discard(Card card) {
         resources.discard(card);
     }
+
+    public void shuffleUnusedDeck() {resources.shuffleUnusedDeck();}
 
     public Collection<PalaceFestivalPlayer> getPlayers() {
         return currentState.getPlayers();

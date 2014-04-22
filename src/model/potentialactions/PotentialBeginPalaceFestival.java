@@ -50,7 +50,7 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
         PalaceFestivalPlayer player = paFes.getCurrentPlayer();
         Collection<Card> hand = player.getHand();
         for (Card card : hand) {
-            if (CardValues.getMatchValue(card, paFes.peekAtFestivalCard()) > 0)
+            if (paFes.peekAtFestivalCard() != null && CardValues.getMatchValue(card, paFes.peekAtFestivalCard()) > 0)
                 cardsValidToBeginFestival.add(card);
         }
 
