@@ -6,11 +6,14 @@ import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.developer.MoveDeveloperAroundBoard;
 import model.actions.tiles.PlaceVillageTile;
+import model.board.Directions;
+import model.board.HexLocation;
 import model.board.Location;
 import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +27,7 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     public PotentialMoveDeveloperAroundBoard(GameModel game, PalaceFestival festival, Location location){
         super(game, festival);
         this.developerStartingLocation = location;
+        setLocation(location);
     }
 
     public JavaPath getShortestLegalPath(){
@@ -35,18 +39,21 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
 
     @Override
     public ActionResult getActionResult() {
-        return new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), getGameModel()).tryAction();
+        return new MoveDeveloperAroundBoard(developerStartingLocation, getLocation(), getShortestLegalPath(), getGameModel()).tryAction();
     }
 
 
     public Pair<ActionResult, MoveDeveloperAroundBoard> confirmMovement() {
-        MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getShortestLegalPath(), getGameModel());
+        MoveDeveloperAroundBoard result = new MoveDeveloperAroundBoard(developerStartingLocation, getLocation(), getShortestLegalPath(), getGameModel());
         return new Pair<ActionResult, MoveDeveloperAroundBoard>(result.doAction(), result);
     }
 
     public List<Location> getLocationFromPath() {
-        //Todo Meghan
-        return null;
+        //Todo Meghan, please check
+        //return null;
+        ArrayList<Location> list = new ArrayList<Location>();
+        list.add(developerStartingLocation);
+        return list;
     }
 
     public Pair<ActionResult, Action> confirmAction(){
