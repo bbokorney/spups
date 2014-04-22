@@ -66,6 +66,6 @@ public class FestivalPanel extends JPanel {
 	@SuppressWarnings("rawtypes")
 	public void refreshView(GameModel model, PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
 		// cardsSelect = highlight these cards of the current player
-		cardsPanel.refreshView(cardsOfCurrentPlayer, cardsSelected);
+//		cardsPanel.refreshView(cardsOfCurrentPlayer, cardsSelected);
 	}
 }
