@@ -108,7 +108,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void endTurn() {
-	    EndTurn action = new EndTurn(model);
+	    EndTurn action = new EndTurn(model, paFes);
 	    ActionResult result = action.tryAction();
 	    if(result.isSuccess()) {
 			action.doAction();
@@ -118,10 +118,10 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void startPalaceFestival() {
-	    EndTurn action = new EndTurn(model);
+	    EndTurn action = new EndTurn(model, paFes);
 	    ActionResult result = action.tryAction();
 	    if(result.isSuccess()) {
-		    action.doAction();
+		    //action.doAction(); todo Jon
 		    controller.addEndTurnToHistory(new Pair<ActionResult, EndTurn>(result, action));
 		    controller.refreshGameView();
 		    controller.setCurrentState(new BeginPalaceFestivalTurnUIState(controller, keyListener, model));
@@ -139,7 +139,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
 	public void drawDeckCard() {
-        PickUpDeckCard draw = new PickUpDeckCard(paFes);
+        PickUpDeckCard draw = new PickUpDeckCard(model, paFes);
         ActionResult result = draw.tryAction();
         if(result.isSuccess()) {
             draw.doAction();
@@ -149,7 +149,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void drawFestivalCard() {
-	    PickUpFestivalCard draw = new PickUpFestivalCard(paFes);
+	    PickUpFestivalCard draw = new PickUpFestivalCard(model, paFes);
 	    ActionResult result = draw.tryAction();
 	    if(result.isSuccess()) {
 		    draw.doAction();

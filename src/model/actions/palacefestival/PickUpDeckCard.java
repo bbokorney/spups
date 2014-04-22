@@ -1,5 +1,6 @@
 package model.actions.palacefestival;
 
+import model.GameModel;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.serialization.JsonObject;
@@ -14,17 +15,20 @@ public class PickUpDeckCard extends Action {
 
     private PalaceFestival festival;
     private Card cardDrawn;
+    private GameModel game;
 
-    public PickUpDeckCard(PalaceFestival festival) {
+    public PickUpDeckCard(GameModel game, PalaceFestival festival) {
         this.festival = festival;
         this.cardDrawn = null;
+        this.game = game;
     }
 
     @Override
     public ActionResult tryAction() {
         boolean canPickUpCard = festival.canDrawCard();
-        boolean cardExists = festival.drawDeckCard() != null;
-        boolean success = canPickUpCard && cardExists;
+        boolean cardExists = festival.doesDeckHaveCard();
+        boolean hasEnoughAP = game.canUseAPForNonLandTileAction(1);
+        boolean success = canPickUpCard && cardExists && hasEnoughAP;
         String message = success ? "action successful" : "action failed";
         return new ActionResult(success, 0, 1, message);
     }
@@ -43,6 +47,8 @@ public class PickUpDeckCard extends Action {
 
             player.takeCard(cardDrawn);
             festival.recordDrawCard();
+
+            game.useActionPoints(result.getActionPoints());
         }
 
         return result;

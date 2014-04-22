@@ -17,4 +17,7 @@ public interface CardGameResources<T> {
 
     public abstract void discard(T card);
 
+    public abstract void shuffleUnusedDeck();
+
+    public abstract boolean doesDeckHaveCard();
 }

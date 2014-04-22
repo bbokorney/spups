@@ -2,6 +2,7 @@ package model.actions;
 
 import model.GameModel;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.PalaceFestival;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -17,9 +18,11 @@ public class EndTurn extends Action {
      */
 
     GameModel game;
+    PalaceFestival festival;
 
-    public EndTurn(GameModel game){
+    public EndTurn(GameModel game, PalaceFestival festival){
         this.game = game;
+        this.festival = festival;
     }
 
 
@@ -63,6 +66,8 @@ public class EndTurn extends Action {
         if(result.isSuccess()) {
 
             game.advanceJavaTurn();
+            festival.advanceTurn();
+
         }
         return result;
     }
