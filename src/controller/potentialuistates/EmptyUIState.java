@@ -11,7 +11,9 @@ import model.actions.ActionResult;
 import model.actions.EndTurn;
 import model.actions.UseActionToken;
 import model.actions.palacefestival.PickUpDeckCard;
+import model.actions.palacefestival.PickUpFestivalCard;
 import model.board.Location;
+import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.potentialactions.PotentialBeginPalaceFestival;
 import model.tiles.TileComponent;
@@ -47,6 +49,7 @@ public class EmptyUIState extends PotentialJavaUIState {
 
     private final int KEY_REPLAYROUND = KeyEvent.VK_A;
     private final int KEY_REPLAYGAME = KeyEvent.VK_Z;
+	private final int KEY_DISPLAYCARDS = KeyEvent.VK_SPACE;
 
     private final int KEY_PLANNINGPLAY = KeyEvent.VK_Q;
 
@@ -55,11 +58,15 @@ public class EmptyUIState extends PotentialJavaUIState {
     GameModel model;
 	PalaceFestival paFes;
 
+	boolean cardsDisplayed;
+
     public EmptyUIState(Controller controller, KeyListener keyListener, GameModel model, PalaceFestival paFes){
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
 	    this.paFes = paFes;
+
+	    cardsDisplayed = false;
 
         initListeners();
     }
@@ -142,12 +149,22 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void drawFestivalCard() {
-        // TODO: implement
+	    PickUpFestivalCard draw = new PickUpFestivalCard(paFes);
+	    ActionResult result = draw.tryAction();
+	    if(result.isSuccess()) {
+		    draw.doAction();
+		    controller.addToHistory(new Pair<ActionResult, PickUpFestivalCard>(result, draw));
+		    controller.refreshGameView();
+	    }
     }
 
     public void switchBetweenPlanningAndPlayModes() {
         // TODO: implement
     }
+
+	public void toggleCards() {
+		controller.refreshCardView(new ArrayList<Card>(paFes.getCurrentPlayer().getHand()));
+	}
 
     public void replayRound() {
 	    controller.setCurrentState(new ReplayRoundUIState(controller, keyListener, model, controller.startRoundReplay()));
@@ -279,13 +296,21 @@ public class EmptyUIState extends PotentialJavaUIState {
         });
         listeners.add(i);
 
-        i = new InternalListener(KEY_REPLAYGAME, new Funktor() {
-            @Override
-            public void call() {
-                replaySinceBeginningOfGame();
-            }
-        });
-        listeners.add(i);
+        i = new InternalListener(KEY_DISPLAYCARDS, new Funktor() {
+		    @Override
+		    public void call() {
+			    toggleCards();
+		    }
+	    });
+	    listeners.add(i);
+
+	    i = new InternalListener(KEY_REPLAYGAME, new Funktor() {
+		    @Override
+		    public void call() {
+			    replaySinceBeginningOfGame();
+		    }
+	    });
+	    listeners.add(i);
 
         i = new InternalListener(KEY_PLANNINGPLAY, new Funktor() {
             @Override
