@@ -1,13 +1,10 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 
 import javax.swing.JFrame;
 
 import model.GameModel;
 import model.JavaGameModel;
+import model.actions.StartGame;
 import model.board.Board;
 import model.board.HexLocation;
 import model.board.Location;
@@ -34,22 +31,30 @@ import view.GameFrame;
 public class RunGame {    
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        int numPlayers = Integer.parseInt(args[0]);
+        int numPlayers = args.length;
         if (numPlayers < 2 || numPlayers > 4)
             System.out.println("Please enter a number between 2 and 4 inclusive.");
-        else { RunGame game = new RunGame(numPlayers); }
+        else {
+            ArrayList<String> names = new ArrayList<String>();
+            for (int i = 0; i < args.length; i++) {
+                names.add(args[i]);
+            }
+            RunGame game = new RunGame(names.toArray(new String[0]));
+        }
     }
-    
-    public RunGame(int numPlayers) {
+
+    public RunGame(String[] playerNames){
     	KeyListener listener = new KeyListener();
-    	GameModel model = new JavaGameModel(numPlayers);
-        PalaceFestival festival = createPalaceFestival(model);
-        
-        
+    	GameModel model = new JavaGameModel();
+    	Board board = model.getBoard();
+        PalaceFestival festival = new PalaceFestival(null, createDeck());
+
         
         GameFrame frame = new GameFrame(listener);
         @SuppressWarnings("unused")
-        Controller controller = new Controller(frame, model, createPalaceFestival(model));
+        Controller controller = new Controller(frame, model, festival);
+        StartGame startGame = new StartGame(model, festival, playerNames);
+        System.out.println(startGame.doAction().getMessage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -67,10 +72,6 @@ public class RunGame {
         
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
-        
-        
-        
-
     	Board board = model.getBoard();
     	Tile tile = new Tile(3);
     	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
@@ -94,7 +95,7 @@ public class RunGame {
 //        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
     }    
     
-    public PalaceFestival createPalaceFestival(GameModel model) { 
+    public Stack<Card> createDeck() {
     	 @SuppressWarnings("rawtypes")
 		 Stack<Card> deck = new Stack<Card>();
          for (int i = 0; i < 5; i++) {
@@ -124,9 +125,7 @@ public class RunGame {
                      PalaceCardComponent.PUPPET);
              deck.add(card);
          }
-         PalaceFestival festival = new PalaceFestival(null, deck);
-         for(JavaPlayer player : model.getJavaPlayers())
-        	 festival.addPlayer(new JavaPlayerAdapter(player));
-         return festival;
+
+         return deck;
     }
 }

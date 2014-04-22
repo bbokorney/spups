@@ -42,7 +42,7 @@ public class PlaceDeveloperOnBoard extends Action {
 
         boolean isSuccess = true;
         int famePoints = 0;         //will never gain fame points
-        int actionPoints = 1;
+        int actionPoints = 0;
         String message = "";
 
         //check if the player has a developer off the board

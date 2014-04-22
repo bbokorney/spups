@@ -13,16 +13,18 @@ import model.palacefestival.PalaceFestivalPlayer;
 public class PickUpDeckCard extends Action {
 
     private PalaceFestival festival;
+    private Card cardDrawn;
 
     public PickUpDeckCard(PalaceFestival festival) {
         this.festival = festival;
+        this.cardDrawn = null;
     }
 
     @Override
     public ActionResult tryAction() {
         boolean canPickUpCard = festival.canDrawCard();
         boolean cardExists = festival.drawDeckCard() != null;
-        boolean success = true;//canPickUpFestivalCard && festivalCardExists;
+        boolean success = canPickUpCard && cardExists;
         String message = success ? "action successful" : "action failed";
         return new ActionResult(success, 0, 1, message);
     }
@@ -32,7 +34,15 @@ public class PickUpDeckCard extends Action {
         ActionResult result = tryAction();
         if (result.isSuccess()) {
             PalaceFestivalPlayer player = festival.getCurrentPlayer();
-            player.takeCard(festival.drawDeckCard());
+            if (cardDrawn == null) {
+                this.cardDrawn = festival.drawDeckCard();
+            }
+            else {
+                festival.drawSpecificDeckCard(cardDrawn);
+            }
+
+            player.takeCard(cardDrawn);
+            festival.recordDrawCard();
         }
 
         return result;

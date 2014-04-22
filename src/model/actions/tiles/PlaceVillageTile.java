@@ -123,6 +123,24 @@ public class PlaceVillageTile extends Action {
             message += "Error: You cannot place this tile on top of a developer.\n";
         }
 
+        //this should never work
+        if(game.isHeightAtLocation(0, placement)){
+
+            isSuccess = isSuccess && true;
+            famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
+
+            if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
+
+                actionPoints += PlacementOutsideCentralJavaRule.numberOutsideCentralJava(helperJunk, placement);
+
+            }
+            else{
+                isSuccess = isSuccess && false;
+                message += "Error: You cannot place outside Central Java. ";
+            }
+        }
+
+
         //see if they are connecting two cities
         if(!ConnectionTwoCitiesRule.connectsCities(helperJunk, placement)){
             isSuccess = isSuccess && true;

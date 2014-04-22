@@ -41,6 +41,16 @@ public class PalaceFestivalResources implements CardGameResources<Card> {
     }
 
     @Override
+    public boolean drawSpecificCardFromDeck(Card card) {
+        boolean deckContainsCard = deck.contains(card);
+        if (deckContainsCard) {
+            deck.remove(card);
+        }
+
+        return deckContainsCard;
+    }
+
+    @Override
     public void discard(Card card) {
         discard.push(card);
     }

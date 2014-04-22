@@ -55,6 +55,9 @@ public class DeveloperPassThroughRule {
         }
 
         TileComponent component = board.getTopTileComponent(location);
+        if(component == null) {
+            return false;
+        }
         component.accept(new PassThroughVisitor());
 
         return devOnSpaceOk && tileTypeOk;
