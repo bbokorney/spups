@@ -131,7 +131,7 @@ public class PlacePalaceTile extends Action {
 
         //Check if the player is attempting to place this tile on a
         //PlaceTileOnDeveloperRule
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),placement) ){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopersFromAllPlayers(),placement) ){
             isSuccess = isSuccess && true;
 
         }
@@ -170,7 +170,7 @@ public class PlacePalaceTile extends Action {
             game.addPalaceToCurrentTurnList(placement);
 
             //decremenet the number of this valued palace in the shared resources
-            game.useResource(SharedResourceType.valueOf("PALACE" + value));
+            game.useResource(SharedResourceType.valueOf("PALACELEVEL" + value));
 
         }
         return result;

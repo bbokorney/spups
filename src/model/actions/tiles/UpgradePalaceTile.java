@@ -152,7 +152,7 @@ public class UpgradePalaceTile extends Action {
             game.addPalaceToCurrentTurnList(placement);
 
             //decremenet the number of this valued palace in the shared resources
-            game.useResource(SharedResourceType.valueOf("PALACE" + value));
+            game.useResource(SharedResourceType.valueOf("PALACELEVEL" + value));
         }
         return result;
     }
