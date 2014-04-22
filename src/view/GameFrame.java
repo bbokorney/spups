@@ -77,7 +77,7 @@ public class GameFrame extends JFrame {
 
     @SuppressWarnings("rawtypes")
 	public void refreshFestivalView(GameModel model, PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected){
-    	festivalPanel.refreshView(model, festival, cardsOfCurrentPlayer, cardsSelected);
     	gamePanel.refreshFestivalView(festivalPanel);
+    	festivalPanel.refreshView(model, festival, cardsOfCurrentPlayer, cardsSelected);
     }
 }

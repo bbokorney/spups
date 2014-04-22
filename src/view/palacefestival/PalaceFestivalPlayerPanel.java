@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 
 import model.GameModel;
 import model.palacefestival.PalaceFestival;
+import model.palacefestival.PalaceFestivalPlayer;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -18,24 +19,22 @@ import model.palacefestival.PalaceFestival;
 @SuppressWarnings("serial")
 public class PalaceFestivalPlayerPanel extends JPanel {
 	JLabel[] palace = new JLabel[5];
-	JLabel irrigation;
-	JLabel threetile;
 	JLabel stack;
-	JLabel card;
 	
-	public PalaceFestivalPlayerPanel() {
-		int offHeight = 70;
-		int offWidth = 70;
-		
-		stack = newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 100);
-		card = newJLabel(" ", "/Users/maumau/spups/resources/card.png", 60, 100);
+	public PalaceFestivalPlayerPanel() {		
+		stack = newJLabel("", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
 		this.add(stack);
-		this.add(card);
 	}
+
 	
 	private JLabel newJLabel(String value, String src, int width, int height){
+		ImageIcon icon = new ImageIcon(src);
+		return newJLabel(value, icon, width, height);
+	}
+	
+	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
 		JLabel label= new JLabel(value);
-		label.setIcon(new ImageIcon(src));
+		label.setIcon(icon);
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -45,12 +44,8 @@ public class PalaceFestivalPlayerPanel extends JPanel {
 		return label;
 	}
 
-
-	public void refreshView(GameModel model, PalaceFestival festival) {
-		stack.setText(""+festival.getDeckSize());
-		
-		// TODO put picture of festival card
-		//card.setText(""+festival.peekAtFestivalCard());
+	public void refreshView(GameModel model, PalaceFestival festival, PalaceFestivalPlayer player) {
+		stack.setText(""+player.getHand().size());
 		repaint();
 	}
 }

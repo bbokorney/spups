@@ -3,6 +3,7 @@ package view.gamepanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -11,7 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import view.JavaImageLoader;
 import view.TileLabel;
+import view.palacefestival.PalaceCardImageLoader;
 import model.GameModel;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
@@ -52,11 +55,11 @@ public class PlayerPanel extends JPanel {
 
 		int offHeight = 70;
 		int offWidth = 70;
-		twotile = newJLabel("3", "/Users/maumau/spups/resources/twotile.png", offWidth, offHeight);
-		developer = newJLabel("3", "/Users/maumau/spups/resources/developer.png", offWidth, offHeight);
-		extratokens = newJLabel("3", "/Users/maumau/spups/resources/Extra Action Token.png", offWidth, offHeight);
-		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, offHeight+30);
-		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, offHeight);
+		twotile = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/twotile.png")), offWidth, offHeight);
+		developer = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/developer.png")), offWidth, offHeight);
+		extratokens = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/Extra Action Token.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH)), offWidth, offHeight);
+		card = newJLabel("3", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 80, offHeight+30);
+		user = newJLabel("", new ImageIcon(JavaImageLoader.getImage("resources/user.png")), 80, offHeight);
 		
 
 		rice = TileLabel.newHexLabel("rice", offWidth, offHeight, new RiceTileComponent());
@@ -75,10 +78,15 @@ public class PlayerPanel extends JPanel {
 		add(card);
 //		add(user);
 	}
-
+	
 	private JLabel newJLabel(String value, String src, int width, int height){
+		ImageIcon icon = new ImageIcon(src);
+		return newJLabel(value, icon, width, height);
+	}
+	
+	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
 		JLabel label= new JLabel(value);
-		label.setIcon(new ImageIcon(src));
+		label.setIcon(icon);
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
