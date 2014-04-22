@@ -1,5 +1,6 @@
 package controller.history;
 
+import controller.Controller;
 import model.GameModel;
 import model.Pair;
 import model.actions.Action;
@@ -16,8 +17,12 @@ public class History {
 	Queue<Queue<Pair>> actions;
 	Queue<Queue<Pair>> undoneActions;
 	GameModel model;
+	Controller controller;
 
-	public History(GameModel model) {
+	public History(Controller controller, GameModel model) {
+		this.controller = controller;
+		this.model = model;
+
 		actions = new LinkedList<Queue<Pair>>();
 		undoneActions = new LinkedList<Queue<Pair>>();
 		actions.add(new LinkedList<Pair>());
@@ -25,6 +30,7 @@ public class History {
 	}
 
 	public void addAction(Pair action) {
+		if(actions.size() == 0) actions.add(new LinkedList<Pair>());
 		Queue<Pair> latestTurn = actions.peek();
 		latestTurn.add(action);
 	}
@@ -42,10 +48,11 @@ public class History {
 			while(!turn.isEmpty()) {
 				reconstructedTurn.add(turn.poll());
 			}
+			if(undoneActions.peek().size() == 0) undoneActions.poll();
 			undoneActions.add(reconstructedTurn);
 		}
 		redoActions();
-		return new TimeTraveler(this, undoneActions, actions, model);
+		return new TimeTraveler(controller, this, undoneActions, actions, model);
 	}
 
 	public TimeTraveler rewindTurns(int turns) {
@@ -62,7 +69,7 @@ public class History {
 			}
 		}
 		redoActions();
-		return new TimeTraveler(this, undoneActions, actions, model);
+		return new TimeTraveler(controller, this, undoneActions, actions, model);
 	}
 
 	public TimeTraveler rewindAction() {
@@ -76,14 +83,14 @@ public class History {
 		}
 		if(!latestTurn.isEmpty()) undoneActions.peek().add(latestTurn.remove());
 		redoActions();
-		return new TimeTraveler(this, undoneActions, actions, model);
+		return new TimeTraveler(controller, this, undoneActions, actions, model);
 	}
 
 	public TimeTraveler rewindActions(int actionCount) {
 		for(int i = 0; i < actionCount; i++) {
 			rewindAction();
 		}
-		return new TimeTraveler(this, undoneActions, actions, model);
+		return new TimeTraveler(controller, this, undoneActions, actions, model);
 	}
 
 	public void deleteTurns(int turns) {
@@ -105,5 +112,6 @@ public class History {
 				a.getSecond().doAction();
 			}
 		}
+		controller.refreshGameView();
 	}
 }

@@ -1,5 +1,6 @@
 package controller.history;
 
+import controller.Controller;
 import model.GameModel;
 import model.Pair;
 import model.actions.Action;
@@ -16,11 +17,14 @@ public class TimeTraveler {
 	Queue<Pair> doneActions;
 	Queue<Queue<Pair>> actions;
 	GameModel model;
+	Controller controller;
 	History history;
 
-	public TimeTraveler(History history, Queue<Queue<Pair>> undoneActions, Queue<Queue<Pair>> actions, GameModel model) {
+	public TimeTraveler(Controller controller, History history, Queue<Queue<Pair>> undoneActions, Queue<Queue<Pair>> actions, GameModel model) {
 		this.history = history;
+		this.controller = controller;
 		this.undoneActions = undoneActions;
+		doneActions = new LinkedList<Pair>();
 		this.actions = actions;
 		this.model = model;
 	}
@@ -34,14 +38,12 @@ public class TimeTraveler {
 		Pair<ActionResult, Action> pair = latestTurn.poll();
 		doneActions.add(pair);
 		pair.getSecond().doAction();
+		controller.refreshGameView();
 
 		if(latestTurn.size() < 1) {
 			undoneActions.poll();
-			history.addEndTurn(pair);
 		}
-		else {
-			history.addAction(pair);
-		}
+		history.addAction(pair);
 	}
 
 	public void back() {
