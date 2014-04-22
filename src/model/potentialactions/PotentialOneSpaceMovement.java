@@ -22,7 +22,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
                 to game.areLocationsOnBoard(newLocation)
      */
 
-    private HexLocation location;
+    private Location location;
 
     public PotentialOneSpaceMovement(GameModel game, PalaceFestival festival){
         super(game, festival);
@@ -31,7 +31,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     @Override
     public ActionResult moveNorth() {
-        HexLocation newLocation = location.getNeighbor(0);
+        Location newLocation = location.getNeighbors().get(0);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
         }
@@ -40,7 +40,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     @Override
     public ActionResult moveNortheast() {
-        HexLocation newLocation = location.getNeighbor(1);
+        Location newLocation = location.getNeighbors().get(1);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
             //this.setComponentsOnHoverBoard();
@@ -50,7 +50,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     @Override
     public ActionResult moveSoutheast() {
-        HexLocation newLocation = location.getNeighbor(2);
+        Location newLocation = location.getNeighbors().get(2);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
             //this.setComponentsOnHoverBoard();
@@ -60,7 +60,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     @Override
     public ActionResult moveSouth() {
-        HexLocation newLocation = location.getNeighbor(3);
+        Location newLocation = location.getNeighbors().get(3);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
             //this.setComponentsOnHoverBoard();
@@ -71,7 +71,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     @Override
     public ActionResult moveSouthwest() {
-        HexLocation newLocation = location.getNeighbor(4);
+        Location newLocation = location.getNeighbors().get(4);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
             //this.setComponentsOnHoverBoard();
@@ -82,7 +82,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     @Override
     public ActionResult moveNorthwest() {
-        HexLocation newLocation = location.getNeighbor(5);
+        Location newLocation = location.getNeighbors().get(5);
         if (getGameModel().getBoard().areLocationsOnBoard(newLocation)) {
             location = newLocation;
             //this.setComponentsOnHoverBoard();
@@ -90,7 +90,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         return this.getActionResult();
     }
 
-    public HexLocation getLocation(){
+    public Location getLocation(){
         return location;
     }
 
