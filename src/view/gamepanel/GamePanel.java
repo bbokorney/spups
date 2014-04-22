@@ -8,19 +8,12 @@ import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-//import javax.swing.JScrollPane;
-
-
-
-
-
 
 import view.GameFrame;
 import view.palacefestival.FestivalPanel;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
-import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
