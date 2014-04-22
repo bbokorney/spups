@@ -223,6 +223,24 @@ public class BoardRuleHelper {
                 }
                 if(isSurrounded){
                     famePointsEarned += 3*body.getSize();
+                    Map<JavaPlayer, Integer> map = getPlayerRanksIn(surrounding);
+                    if (map.size() == 0) {
+                        //do nothing
+                    }
+                    int count = 0;
+                    for (JavaPlayer player : map.keySet()) {
+                        if (map.get(player) == 1)
+                            count++;
+                    }
+                    if (count == 1) {
+                        for (JavaPlayer player : map.keySet()) {
+                            if (map.get(player) == 1) {
+                                HashMap<JavaPlayer, Integer> returnmap = new HashMap<JavaPlayer, Integer>();
+                                returnmap.put(player, famePointsEarned);
+                                return returnmap;
+                            }
+                        }
+                    }
                 }
             }
 
