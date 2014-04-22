@@ -92,4 +92,9 @@ public class Controller {
 	public void refreshCardView(List<Card> cards) {
 		view.refreshCardView(cards);
 	}
+
+    public void goToEmptyState() {
+        this.setCurrentState(new EmptyUIState(this, keyListener, model, paFes));
+        refreshGameView();
+    }
 }

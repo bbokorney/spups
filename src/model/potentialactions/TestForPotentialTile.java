@@ -97,7 +97,7 @@ public class TestForPotentialTile {
         twoSpacePA.moveNorthwest();
         twoSpacePA.moveSouthwest();
         twoSpacePA.moveNorthwest();
-        message = twoSpacePA.confirmPlacement().getFirst().getMessage();
+        message = twoSpacePA.confirmAction().getFirst().getMessage();
         stuff.printTwoSpace(twoSpacePA, "Place rotated tile: "+ message);
 //
 //        System.out.println(palaceTile.confirmAction().getFirst().getMessage());
@@ -107,7 +107,7 @@ public class TestForPotentialTile {
         twoSpacePA2.moveNorth();
 
         twoSpacePA2.moveNorth();
-        System.out.println(twoSpacePA2.confirmPlacement().getFirst().getMessage());
+        System.out.println(twoSpacePA2.confirmAction().getFirst().getMessage());
 
 //        PotentialPlaceIrrigationTile irrigationPA = new PotentialPlaceIrrigationTile(game, festival);
 //        irrigationPA.moveSouth();
