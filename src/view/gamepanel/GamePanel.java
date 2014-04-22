@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 
 
+
+import view.GameFrame;
 import view.palacefestival.FestivalPanel;
 import model.GameModel;
 import model.actions.ActionResult;
@@ -68,7 +70,7 @@ public class GamePanel extends JPanel {
 		cardsPanel.setBackground(Color.BLUE);
 		commonPanel.setBackground(Color.BLUE);
 		for(int x = 0; x < numOfPlayerPanels; ++x) {
-			playerPanel[x].setBackground(Color.RED);
+			playerPanel[x].setBackground(GameFrame.playerColors[x]);
 			playerPanel[x].setBorder(BorderFactory.createLineBorder(Color.black));
 		}
 		
@@ -87,7 +89,7 @@ public class GamePanel extends JPanel {
 	}
 
 	public void refreshView(FestivalPanel festivalPanel, GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
-		boardPanel.refreshView(model.getBoard(), model, potentialComponents, highlightedComponents);
+		boardPanel.refreshView(model.getBoard(), model, potentialComponents, highlightedComponents, actionResult);
 		cardsPanel.refreshView(actionResult);
 		commonPanel.refreshView(model, festival);
 		

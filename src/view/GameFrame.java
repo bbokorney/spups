@@ -31,6 +31,7 @@ public class GameFrame extends JFrame {
     controller.keylistener.KeyListener listener;
     ActionPanel actionPanel;
     FestivalPanel festivalPanel;
+    public static final Color[] playerColors = {Color.red, Color.blue, Color.green, Color.orange};
     
 	public GameFrame(KeyListener keyListener){
 		this.setTitle("Java Spups");

@@ -8,20 +8,20 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
 
+import view.GameFrame;
 import model.GameModel;
+import model.actions.ActionResult;
 import model.board.Board;
 import model.board.HexLocation;
 import model.board.Location;
 import model.board.LocationType;
-import model.player.Developer;
+import model.player.JavaPlayer;
 import model.tiles.TileComponent;
 
 /**
@@ -36,6 +36,8 @@ public class BoardPanel extends JPanel {
 	GameModel model;
 	Map<Location, TileComponent> potentialComponents;
 	List<Location> highlightedComponents;
+	ActionResult result;
+	
 	public BoardPanel() {
 		this.setVisible(true);
 	}
@@ -95,13 +97,14 @@ public class BoardPanel extends JPanel {
 			}
 			
 			// DEVELOPERS
-			List<Developer> list = model.getDevelopers();
-			for(Iterator<Developer> iterator = list.iterator(); iterator.hasNext();) {
-				Developer developer = iterator.next();
-				int[] distance = ((HexLocation) developer.getLocation()).getDistanceFromOrigin();
-				int width = distance[0]+origin[0]+50;
-				int height = distance[1]*-1+origin[1]+40;
-				drawDeveloper(g, width, height, Color.orange);
+			for(JavaPlayer player : model.getJavaPlayers()) {
+				HexLocation[] locations = player.getDeveloperLocations().toArray(new HexLocation[0]);
+				for(int x = 0; x < locations.length; ++x) {
+					int[] distance = locations[x].getDistanceFromOrigin();
+					int width = distance[0]+origin[0]+50;
+					int height = distance[1]*-1+origin[1]+40;
+					drawDeveloper(g, width, height, GameFrame.playerColors[x]);
+				}
 			}
 			
 			List<HexLocation> highlights = new LinkedList<HexLocation>();
@@ -131,6 +134,15 @@ public class BoardPanel extends JPanel {
 			        	poly.addPoint((int)(wwidth*(hexScaling)), (int)(hheight*(hexScaling)));
 			        }
 			        g.setColor(Color.CYAN);
+			        if(result != null) {
+			        	if(result.isSuccess()) {
+			        		g.setColor(Color.green);
+			        	} else { 
+			        		g.setColor(Color.red);
+			        	}
+			        
+			        }
+			        	
 			        ((Graphics2D) g).setStroke(new BasicStroke(4));
 			        g.drawPolygon(poly);
 				}
@@ -286,12 +298,13 @@ public class BoardPanel extends JPanel {
 	}
 
 	
-	public void refreshView(Board board, GameModel model, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {	
+	public void refreshView(Board board, GameModel model, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents, ActionResult result) {	
 		this.board = board;	
 		this.model = model;
 		this.potentialComponents = potentialComponents; 
 		this.highlightedComponents = highlightedComponents;
 		locations = board.getAllLocations().toArray(new HexLocation[0]);
+		this.result = result;
 
 		repaint();
 	}
