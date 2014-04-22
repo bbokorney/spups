@@ -116,7 +116,7 @@ public class BoardRuleHelper {
         return surroundingLocations;
     }
 
-    public int pointsEarnedFromIrrigationPlacement(Location location) {
+    public HashMap<JavaPlayer, Integer> pointsEarnedFromIrrigationPlacement(Location location) {
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
             for(Location water : body.getLocations()) {
                 if(neighbors(water, location)) {
@@ -131,15 +131,37 @@ public class BoardRuleHelper {
                         }
                     }
                     if(enclosingTileCount == surrounding.size()) {
-                        return 1;
+                        //return 1;
+                        //todo return noll baker
+                        return null;
                     }
                 }
             }
         }
-        return 0;
+        return null;
+        // return 0; todo baker
+
+        /*
+        this will only ever return one player
+        this will be called by the irrigation action
+
+        this will return the player that is the highest ranked
+        around any tile surrounding the body of water being surrounded
+
+        utilize the HighestRankedPlayer rule to get this done
+
+        return an empty map if there is no highest player
+
+        ties do not count
+
+        award the highest ranked player surrounding that body of water with
+        3*body.getSize() famePoints
+         */
+
+
     }
 
-    public int pointsEarnedFromLandPlacement(Location... locations) {
+    public HashMap<JavaPlayer, Integer> pointsEarnedFromLandPlacement(Location... locations) {
         int famePointsEarned = 0;
 
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
@@ -157,7 +179,25 @@ public class BoardRuleHelper {
             }
 
         }
-        return famePointsEarned;
+        //todo baker
+        return null;
+        // return famePointsEarned;
+
+        /*this be called by land tile placement (that are being placed directly on the board
+
+        this will return a hash map from JavaPlayer to integers
+
+        Each body of water that is surrounded (which there can be more than one happening at once)
+        will award the highest ranked player surrounding that body of water with
+        3*body.getSize() famePoints
+
+        Each body of water that gets surrounded can be one by any player, or no players
+
+        Remember that there could be no developers surrounding the irrigation
+
+        */
+
+
     }
 
     private boolean containsAny(Collection<Location> locations, Collection<Location> lookUps) {
