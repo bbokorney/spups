@@ -1,9 +1,9 @@
 package model.board;
 
 import model.GameModel;
-import model.palacefestival.PalaceCardComponent;
 import model.player.Developer;
 import model.player.JavaPlayer;
+import model.rules.developer.DeveloperPlacementRule;
 import model.rules.palace.HighestRankingPlayerInCityRule;
 import model.rules.palace.PalaceLevelCitySizeRule;
 
@@ -173,16 +173,67 @@ public class BoardRuleHelper {
         return model.getBoard().getLocationType(location);
     }
 
-    public boolean isOuterMostBorder(HexLocation location) {
+    private int neighborCountInsideCentralJava(Location location) {
+        int count = 0;
         for(Location neighbor : location.getNeighbors()) {
-            if(model.getBoard().areLocationsOnBoard(neighbor)) {
-                return true;
+            if(model.getBoard().areLocationsOnBoard(neighbor) &&
+                    model.getBoard().getLocationType(location) == LocationType.CentralJava) {
+                ++count;
             }
         }
+        return count;
+    }
+
+    public boolean inLowlandsOrHighlands(Location location) {
+        return inLowlands(location) || inHighLands(location);
+    }
+
+    public boolean inHighLands(Location location) {
+        return model.getBoard().getLocationType(location) == LocationType.Highlands;
+    }
+
+    public boolean inLowlands(Location location) {
+        return model.getBoard().getLocationType(location) == LocationType.Lowlands;
+    }
+
+    public boolean inCentralJava(Location location) {
+        return model.getBoard().getLocationType(location) == LocationType.CentralJava;
+    }
+
+    public boolean isOuterMostBorder(Location location) {
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers());
+        if(!model.getBoard().areLocationsOnBoard(location) ||
+                !dpr.allowed()) {
+            return false;
+        }
+
+        if(neighborCountInsideCentralJava(location) < 6) {
+            return true;
+        }
+
+
+        if(inLowlandsOrHighlands(location)) {
+            if(neighborCountInsideCentralJava(location) == 4) {
+                for(Location neighbor : location.getNeighbors()) {
+                    if(inLowlandsOrHighlands(neighbor) && model.getBoard().getTopTileComponent(neighbor) == null) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        if(inCentralJava(location)) {
+            for(Location neighbor : location.getNeighbors()) {
+                if(inLowlandsOrHighlands(neighbor) && model.getBoard().getTopTileComponent(neighbor) == null) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
-    public boolean developerCanEnterHere(HexLocation location) {
+    public boolean developerCanEnterHere(Location location) {
         return isOuterMostBorder(location);
     }
 

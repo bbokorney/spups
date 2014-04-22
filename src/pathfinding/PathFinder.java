@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  * Created by Baker on 4/14/2014.
  */
 public class PathFinder<Node extends PathNode<Node>, Edge extends PathEdge<Node>> {
-    public Path findShortestPath(Node src, Node dest) {
+    public Path<Node> findShortestPath(Node src, Node dest) {
         PathListNode destNode = null;
         PriorityQueue<PathListNode> pq = new PriorityQueue<PathListNode>();
         // add the source node to start the search from
