@@ -50,7 +50,7 @@ public class MoveDeveloperAroundBoard extends Action{
         boolean isSuccess = true;
         int famePoints = 0;
         int actionPoints = 0;
-        String message = "";
+        String message = "Move Developer\n";
 
         Board board = game.getBoard();
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
