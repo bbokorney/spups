@@ -40,7 +40,6 @@ public class TileLabel extends JLabel {
 		for(int i = 0; i < xx.length; ++i) {
 			g.setColor(Color.BLACK);
 //			Polygon polygon = JavaImageLoader.makeHex(xx[i], yy[i]);
-//			System.out.println(tiles[i]);
 			TileVisitor visitor = new TileVisitor(g, xx[i], yy[i]);
 			tiles[i].accept(visitor);
 //			g.drawPolygon(polygon);
@@ -83,7 +82,7 @@ public class TileLabel extends JLabel {
 	private static void setLabelStuff(JLabel label, int width, int height) {
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
-		label.setHorizontalTextPosition(SwingConstants.RIGHT);
+		label.setHorizontalTextPosition(SwingConstants.LEFT);
 		label.setVerticalTextPosition(SwingConstants.BOTTOM);
 		label.setVerticalAlignment(SwingConstants.BOTTOM);
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));

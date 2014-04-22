@@ -1,6 +1,8 @@
 package model.potentialactions;
 
 import model.GameModel;
+import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Directions;
 import model.board.HexLocation;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by idinamenzel on 4/15/14.
  */
-public abstract class PotentialOneSpaceMovement extends PotentialAction implements HexComponentMovement {
+public abstract class PotentialOneSpaceMovement extends PotentialAction implements HexComponentPotentialAction {
 
     /*
         If time permitted:
@@ -91,8 +93,5 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
         return location;
     }
 
-
-
-
-
+    public abstract Pair<ActionResult, Action> confirmAction();
 }

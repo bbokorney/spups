@@ -28,6 +28,7 @@ public class KeyListener implements java.awt.event.KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
+    	System.out.println(e.getKeyChar());
         for(InternalListener i : temporary) {
             i.actionPerformed(e);
         }
@@ -47,8 +48,12 @@ public class KeyListener implements java.awt.event.KeyListener{
         temporary = listeners;
     }
 
-    public void addPersistentListener(InternalListener listener) {
-        persistent.add(listener);
+    public void addTemporaryListeners(List<InternalListener> listeners) { temporary.addAll(listeners); }
+
+    public void addTemporaryListener(InternalListener listener) { temporary.add(listener); }
+
+    public void addPersistentListeners(List<InternalListener> listeners) {
+        persistent.addAll(listeners);
     }
 
     public void clearPersistentListeners() {

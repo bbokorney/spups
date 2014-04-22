@@ -38,7 +38,7 @@ public class JavaGameModel extends GameModel{
 
         String[] playerNames = new String[numberOfPlayers];
         for(int i = 0; i < numberOfPlayers; i++){
-            playerNames[0] = "Player " + (i+1);
+            playerNames[i] = "Player " + (i+1);
         }
         setPlayersInGame(playerNames);
 
@@ -114,10 +114,10 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void advanceJavaTurn() {
-        if (canAdvanceJavaTurn()) {
+        //if (canAdvanceJavaTurn()) {
             turn.advanceTurn();
             javaPlayers.advanceTurn();
-        }
+        //}
     }
 
     @Override
@@ -240,11 +240,16 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void placeDeveloperOnBoard(Location locationOfDeveloperPlaced) {
-            getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
+        getCurrentJavaPlayer().addDeveloper(locationOfDeveloperPlaced);
     }
 
     @Override
     public boolean isLocationInCity(Location loc) {
         return board.isLocationInCity(loc);
     }
+
+	@Override
+	public Turn getTurn() {
+		return this.turn;
+	}
 }

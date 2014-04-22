@@ -5,87 +5,131 @@ import controller.keylistener.Funktor;
 import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
 import model.GameModel;
+import model.board.Location;
 import model.potentialactions.PotentialBeginPalaceFestival;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Baker on 4/14/2014.
  */
-public class BeginPalaceFestivalTurnUIState {
-
-    private final int KEY_TAB = KeyEvent.VK_TAB;
-    private final int KEY_CANCEL = KeyEvent.VK_ESCAPE;
-    private final int KEY_CANCEL_CARD = KeyEvent.VK_DELETE;
-    private final int KEY_CONFIRM = KeyEvent.VK_ENTER;
-    private final int KEY_LEFT = KeyEvent.VK_LEFT;
-    private final int KEY_RIGHT = KeyEvent.VK_RIGHT;
+public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
+	private final int KEY_SWITCH = KeyEvent.VK_TAB;
+	private final int KEY_SELECT = KeyEvent.VK_ENTER;
+	private final int KEY_DESELECT = KeyEvent.VK_DELETE;
+	private final int KEY_BID = KeyEvent.VK_B;
 
     Controller controller;
     KeyListener keyListener;
-    GameModel model;
+	GameModel model;
 
-    PotentialBeginPalaceFestival potentialAction;
+	PotentialBeginPalaceFestival potentialAction;
 
     public BeginPalaceFestivalTurnUIState(Controller controller, KeyListener keyListener, GameModel model){
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
-        this.model = model;
+	    this.model = model;
 
-        potentialAction = new PotentialBeginPalaceFestival();
+	    potentialAction = new PotentialBeginPalaceFestival();
+	    controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
 
-        initListeners();
+        initFirstListeners();
     }
 
-    private void initListeners() {
+	public void switchPalace() {
+		potentialAction.tabToNextPalace();
+		controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
+	}
 
-        List<InternalListener> listeners = new ArrayList<InternalListener>();
-        listeners.add( new InternalListener(KEY_TAB, new Funktor() {
-            @Override
-            public void call() {
-                potentialAction.tabToNextPalace();
-            }
-        }));
+	public void confirmPalace() {
+		potentialAction.chooseCurrentPalace();
+		//controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getCurrentPalace()}));
+		initSecondListeners();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
+	}
 
-        listeners.add( new InternalListener(KEY_CANCEL, new Funktor() {
-            @Override
-            public void call() {
-                //todo figure this out
-            }
-        }));
+	public void switchCard() {
+		potentialAction.tabToNextCard();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
+	}
 
-        listeners.add( new InternalListener(KEY_CANCEL_CARD, new Funktor() {
-            @Override
-            public void call() {
-                potentialAction.removeCurrentCardFromBid();
-            }
-        }));
+	public void selectCard() {
+		potentialAction.chooseCurrentCard();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
+	}
 
-        listeners.add( new InternalListener(KEY_CONFIRM, new Funktor() {
-            @Override
-            public void call() {
-                potentialAction.chooseCurrentCard();
-            }
-        }));
+	public void deselectCard() {
+		potentialAction.removeCurrentCardFromBid();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
+	}
 
-        listeners.add( new InternalListener(KEY_LEFT, new Funktor() {
-            @Override
-            public void call() {
-                potentialAction.tabToNextCard();
-            }
-        }));
+	public void confirmBid() {
+		potentialAction.confirmBid();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
+		controller.setCurrentState(new PalaceFestivalTurnUIState(controller, keyListener, model, potentialAction.getSelectedPalaceLocation()));
+	}
 
-        listeners.add( new InternalListener(KEY_RIGHT, new Funktor() {
-            @Override
-            public void call() {
-                potentialAction.tabToPreviousCard();
-            }
-        }));
+    private void initFirstListeners() {
+	    List<InternalListener> listeners = new ArrayList<InternalListener>();
+	    InternalListener i = new InternalListener(KEY_SWITCH, new Funktor() {
+		    @Override
+		    public void call() {
+			    switchPalace();
+		    }
+	    });
+	    listeners.add(i);
 
-        keyListener.replaceTemporaryListener(listeners);
+	    i = new InternalListener(KEY_SELECT, new Funktor() {
+		    @Override
+		    public void call() {
+			    confirmPalace();
+		    }
+	    });
+	    listeners.add(i);
 
+	    keyListener.replaceTemporaryListener(listeners);
     }
 
+	private void initSecondListeners() {
+		List<InternalListener> listeners = new ArrayList<InternalListener>();
+		InternalListener i = new InternalListener(KEY_SWITCH, new Funktor() {
+			@Override
+			public void call() {
+				switchCard();
+			}
+		});
+		listeners.add(i);
+
+		i = new InternalListener(KEY_SELECT, new Funktor() {
+			@Override
+			public void call() {
+				selectCard();
+			}
+		});
+		listeners.add(i);
+
+		i = new InternalListener(KEY_DESELECT, new Funktor() {
+			@Override
+			public void call() {
+				deselectCard();
+			}
+		});
+		listeners.add(i);
+
+		i = new InternalListener(KEY_BID, new Funktor() {
+			@Override
+			public void call() {
+				confirmBid();
+			}
+		});
+		listeners.add(i);
+
+		keyListener.addTemporaryListeners(listeners);
+	}
 }

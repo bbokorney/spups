@@ -9,6 +9,7 @@ import model.rules.palace.CardValues;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -31,6 +32,10 @@ public class PotentialJoinFestival extends PotentialAction {
                 cardsValidToBeginFestival.add(card);
         }
     }
+
+	public List<Integer> getIndexOfCardsToBid() {
+		return indexOfCardsToBid;
+	}
 
     public boolean tabToNextElement() {
         currentIndex++;

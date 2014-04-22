@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by idinamenzel on 4/15/14.
  */
-public abstract class PotentialThreeSpaceMovement extends PotentialAction implements HexComponentMovement, HexComponentRotation{
+public abstract class PotentialThreeSpaceMovement extends PotentialAction implements HexComponentPotentialAction, HexComponentRotation{
 
 
     private HexLocation centerLocation;
@@ -125,11 +125,11 @@ public abstract class PotentialThreeSpaceMovement extends PotentialAction implem
         return this.getActionResult();
     }
 
-    protected HexLocation getCenterLocation(){
+    public HexLocation getCenterLocation(){
         return centerLocation;
     }
 
-    protected HexLocation getOtherLocation( int i){
+    public HexLocation getOtherLocation( int i){
         return otherLocations[i];
     }
 }

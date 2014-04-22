@@ -57,7 +57,7 @@ public class JavaBoard extends Board {
             BodyOfWater newBody = new BodyOfWater();
             for (BodyOfWater body : bodiesToJoin) {
                 for (Location waterLoc : body.getLocations()) {
-                    newBody.add(loc);
+                    newBody.add(waterLoc);
                 }
             }
             newBody.add(loc);
@@ -81,8 +81,8 @@ public class JavaBoard extends Board {
         }
 
         //Remove this location from a city if it was in one
-        if (isLocationInCity(loc))
-            cityContainer.removeLocationFromCity(loc);
+        //if (isLocationInCity(loc))
+        //    cityContainer.removeLocationFromCity(loc);
 
         //Okay so here's the tough part. We're gonna go through each of our
         //city neighbors and basically make a new city out of it and its city
@@ -97,7 +97,7 @@ public class JavaBoard extends Board {
             //Now create a new city
             City newCity = new City(oldCity.getPalaceLocation(),
                                     oldCity.getPalaceTile());
-            ArrayList<Location> city = makeCity(loc, oldCity.getPalaceLocation()
+            ArrayList<Location> city = makeCity(neighbor, oldCity.getPalaceLocation()
                                            , new HashMap<Location, Boolean>());
             newCity.add(city.toArray(new Location[0]));
 
@@ -119,8 +119,8 @@ public class JavaBoard extends Board {
         }
 
         //Remove this location from a village if it was in one
-        if (isLocationInVillage(loc))
-            villageContainer.removeLocationFromVillage(loc);
+        //if (isLocationInVillage(loc))
+        //    villageContainer.removeLocationFromVillage(loc);
 
         //Okay so here's the tough part. We're gonna go through each of our
         //village neighbors and basically make a new village out of it and its
@@ -134,7 +134,7 @@ public class JavaBoard extends Board {
 
             //Now create a new city
             Village newVillage = new Village();
-            ArrayList<Location> villages = makeVillage(loc, new HashMap<Location, Boolean>());
+            ArrayList<Location> villages = makeVillage(neighbor, new HashMap<Location, Boolean>());
             newVillage.add(villages.toArray(new Location[0]));
 
             //Add this new city to citycontainer
@@ -166,7 +166,7 @@ public class JavaBoard extends Board {
             Village village = new Village();
             village.add(loc);
             villageContainer.addVillage(village);
-    }
+        }
         //If this joins 1 village
         else if (villagesToJoin.size() == 1) {
             Village village = villagesToJoin.get(0);
@@ -177,7 +177,7 @@ public class JavaBoard extends Board {
             Village newVillage = new Village();
             for (Village village : villagesToJoin) {
                 for (Location villageLoc : village.getLocations()) {
-                    newVillage.add(loc);
+                    newVillage.add(villageLoc);
                 }
             }
             newVillage.add(loc);
@@ -191,12 +191,13 @@ public class JavaBoard extends Board {
             if (isLocationInCity(neighbor)) {
                 //If so, add this location (and any village its in) to the city
                 City city = cityContainer.getCityFromLocation(neighbor);
-                Village village = villageContainer.getVillageFromLocation(neighbor);
+                Village village = villageContainer.getVillageFromLocation(loc);
                 for (Location villageLoc : village.getLocations()) {
                     city.add(villageLoc);
                 }
                 //Now remove the village cause it no longer is one
                 villageContainer.removeVillage(village);
+                break;
             }
         }
 
@@ -209,12 +210,32 @@ public class JavaBoard extends Board {
     private ArrayList<Location> makeCity(Location loc, Location palaceLoc,
                                          HashMap<Location, Boolean> visited) {
         ArrayList<Location> locations = new ArrayList<Location>();
-        visited.put(loc, true);
-        if ((loc.equals(palaceLoc) || isLocationInCity(loc) &&
+
+        //An old implementation
+ /*       //So the order of the visited.put statement is important. Basically
+        //first we check if a spot is not to be added to the city we're creating
+        if (!loc.equals(palaceLoc) && !isLocationInCity(loc))
+            visited.put(loc, true);
+        //Now we check for a spot that was in a city, but hasnt been visited
+        //yet. We had to put visited.put() in both of these if statements
+        //separately because the visited is part of the conditional below
+        else if ((loc.equals(palaceLoc) || isLocationInCity(loc) &&
              !visited.get(loc))) {
+            visited.put(loc, true);
             locations.add(loc);
             for (Location neighbor : loc.getNeighbors()) {
                 locations.addAll(makeCity(neighbor, palaceLoc, visited));
+            }
+        }*/
+
+        //if (!visited.get(loc)) {
+        if (!visited.containsKey(loc) || (!visited.get(loc))) {
+            visited.put(loc, true);
+            if (loc.equals(palaceLoc) || isLocationInCity(loc)) {
+                locations.add(loc);
+                for (Location neighbor : loc.getNeighbors()) {
+                    locations.addAll(makeCity(neighbor, palaceLoc, visited));
+                }
             }
         }
         return locations;
@@ -225,11 +246,27 @@ public class JavaBoard extends Board {
     private ArrayList<Location> makeVillage(Location loc,
                                             HashMap<Location, Boolean> visited) {
         ArrayList<Location> locations = new ArrayList<Location>();
-        visited.put(loc, true);
-        if (isLocationInVillage(loc) && !visited.get(loc)) {
+
+        //An old implementation
+/*        //See above method for the confusing stuff
+        if (!isLocationInVillage(loc))
+            visited.put(loc, true);
+        else if (isLocationInVillage(loc) && !visited.get(loc)) {
             locations.add(loc);
+            visited.put(loc, true);
             for (Location neighbor : loc.getNeighbors()) {
                 locations.addAll(makeVillage(neighbor, visited));
+            }
+        }*/
+
+        //if (!visited.get(loc)) {
+        if (!visited.containsKey(loc) || (!visited.get(loc))) {
+            visited.put(loc, true);
+            if (isLocationInVillage(loc)) {
+                locations.add(loc);
+                for (Location neighbor : loc.getNeighbors()) {
+                    locations.addAll(makeVillage(neighbor, visited));
+                }
             }
         }
         return locations;

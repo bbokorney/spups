@@ -2,6 +2,7 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.tiles.PlaceTwoSpaceTile;
 import model.palacefestival.PalaceFestival;
@@ -35,9 +36,9 @@ public class PotentialJavaTwoSpaceTile extends PotentialTwoSpaceMovement{
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    protected Pair<ActionResult, PlaceTwoSpaceTile> confirmPlacement() {
+    public Pair<ActionResult, Action> confirmAction() {
         PlaceTwoSpaceTile result = new PlaceTwoSpaceTile(getCenterLocation(), getOtherLocation(), getGameModel());
-        return new Pair<ActionResult, PlaceTwoSpaceTile>(result.doAction(), result);
+        return new Pair<ActionResult, Action>(result.doAction(), result);
     }
 
 }

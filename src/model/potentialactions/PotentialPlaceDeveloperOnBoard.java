@@ -2,6 +2,7 @@ package model.potentialactions;
 
 import model.GameModel;
 import model.Pair;
+import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.developer.PlaceDeveloperOnBoard;
 import model.board.Location;
@@ -9,6 +10,7 @@ import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,9 +36,9 @@ public class PotentialPlaceDeveloperOnBoard extends PotentialOneSpaceMovement {
        This change was for the OO purposes.
        To return both, the Pair class was implemented, taking these two as it's parameterizing types
     */
-    public Pair<ActionResult, PlaceDeveloperOnBoard> confirmMovement() {
+    public Pair<ActionResult, Action> confirmAction() {
         PlaceDeveloperOnBoard result = new PlaceDeveloperOnBoard(getLocation(), getShortestLegalPath(), getGameModel());
-        return new Pair<ActionResult, PlaceDeveloperOnBoard>(result.doAction(), result);
+        return new Pair<ActionResult, Action>(result.doAction(), result);
     }
 
     private JavaPath getShortestLegalPath(){
@@ -46,8 +48,11 @@ public class PotentialPlaceDeveloperOnBoard extends PotentialOneSpaceMovement {
     }
 
     public List<Location> getLocationFromPath() {
-        //Todo Meghan
-        return null;
+        //Todo Meghan check this please
+        //return null;
+        ArrayList<Location> list = new ArrayList<Location>();
+        list.add(getLocation());
+        return list;
     }
 
 

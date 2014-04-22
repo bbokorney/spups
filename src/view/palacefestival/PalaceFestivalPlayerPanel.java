@@ -1,7 +1,51 @@
 package view.palacefestival;
 
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import model.GameModel;
+import model.palacefestival.PalaceFestival;
+import model.palacefestival.PalaceFestivalPlayer;
+
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PalaceFestivalPlayerPanel {
+@SuppressWarnings("serial")
+public class PalaceFestivalPlayerPanel extends JPanel {
+	JLabel[] palace = new JLabel[5];
+	JLabel stack;
+	
+	public PalaceFestivalPlayerPanel() {		
+		stack = newJLabel("", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
+		this.add(stack);
+	}
+
+	
+	private JLabel newJLabel(String value, String src, int width, int height){
+		ImageIcon icon = new ImageIcon(src);
+		return newJLabel(value, icon, width, height);
+	}
+	
+	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
+		JLabel label= new JLabel(value);
+		label.setIcon(icon);
+		label.setFont(new Font("Lucida Grande", 0, 14));
+		label.setPreferredSize(new Dimension(width, height));
+		label.setHorizontalTextPosition(SwingConstants.CENTER);
+		label.setVerticalTextPosition(SwingConstants.BOTTOM);
+		label.setVerticalAlignment(SwingConstants.BOTTOM);
+		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		return label;
+	}
+
+	public void refreshView(GameModel model, PalaceFestival festival, PalaceFestivalPlayer player) {
+		stack.setText(""+player.getHand().size());
+		repaint();
+	}
 }

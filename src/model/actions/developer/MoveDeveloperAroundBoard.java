@@ -33,6 +33,7 @@ public class MoveDeveloperAroundBoard extends Action {
 
     public MoveDeveloperAroundBoard(Location developerStartinglocation, JavaPath path, GameModel game){
         this.developerStartinglocation = developerStartinglocation;
+        this.developerEndingLocation = developerStartinglocation;
         this.path = path;
         this.game = game;
     }
@@ -48,15 +49,16 @@ public class MoveDeveloperAroundBoard extends Action {
      */
         boolean isSuccess = true;
         int famePoints = 0;
-        int actionPoints = path.getCost();
+        int actionPoints = 0;
         String message = "";
 
         Board board = game.getBoard();
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //Check if the path is valid
-        if(path.valid()){
+        if(path != null && path.valid()){
             isSuccess = isSuccess && true;
+            actionPoints += path.getCost();
         }
         else{
             isSuccess = isSuccess && false;

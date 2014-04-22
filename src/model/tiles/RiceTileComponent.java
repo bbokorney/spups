@@ -13,7 +13,7 @@ public class RiceTileComponent extends TileComponent{
     }
 
     public RiceTileComponent() {
-
+        super(new Tile(1));
     }
 
     public void accept(Visitor visitor) {

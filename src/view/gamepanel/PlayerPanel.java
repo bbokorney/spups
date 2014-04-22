@@ -1,20 +1,26 @@
 package view.gamepanel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import view.JavaImageLoader;
 import view.TileLabel;
+import view.palacefestival.PalaceCardImageLoader;
+import model.GameModel;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
-import model.player.Player;
 import model.tiles.RiceTileComponent;
 import model.tiles.VillageTileComponent;
+import model.turn.Turn;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -26,39 +32,61 @@ public class PlayerPanel extends JPanel {
 	JLabel rice;
 	JLabel village;
 	JLabel card;
-	JLabel AP;
+	JLabel extratokens;
 	JLabel user;
+	JTextArea name;
+	JTextArea AP;
+	JTextArea fame;
 	public PlayerPanel() {
+		name = new JTextArea();
+		name.setPreferredSize(new Dimension(70, 30));
+		name.setBackground(Color.red);
+        name.setEditable(false);
+		fame = new JTextArea();
+		fame.setPreferredSize(new Dimension(70, 30));
+		fame.setBackground(Color.red);
+        fame.setEditable(false);
+		AP = new JTextArea();
+		AP.setPreferredSize(new Dimension(70, 30));
+		AP.setBackground(Color.red);
+        AP.setEditable(false);
 //		this.setLayout(null);
 		
 
 		int offHeight = 70;
 		int offWidth = 70;
-//		twotile = new JLabel("", JavaImageLoader.getImage("/Users/maumau/spups/resources/Palace2.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-		twotile = newJLabel("3", "/Users/maumau/spups/resources/twotile.png", offWidth, offHeight);
-		developer = newJLabel("3", "/Users/maumau/spups/resources/developer.png", offWidth, offHeight);
-		rice = newJLabel("3", "/Users/maumau/spups/resources/rice.png", offWidth, offHeight);
-		village = newJLabel("3", "/Users/maumau/spups/resources/village.png", offWidth, offHeight);
-		AP = newJLabel("3", "/Users/maumau/spups/resources/AP.png", offWidth, offHeight);
-		card = newJLabel("3", "/Users/maumau/spups/resources/card.png", 80, offHeight+30);
-		user = newJLabel("", "/Users/maumau/spups/resources/user.png", 80, offHeight);
+		twotile = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/twotile.png")), offWidth, offHeight);
+		developer = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/developer.png")), offWidth, offHeight);
+		extratokens = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/Extra Action Token.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH)), offWidth, offHeight);
+		card = newJLabel("3", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 80, offHeight+30);
+		user = newJLabel("", new ImageIcon(JavaImageLoader.getImage("resources/user.png")), 80, offHeight);
 		
 
 		rice = TileLabel.newHexLabel("rice", offWidth, offHeight, new RiceTileComponent());
 		village = TileLabel.newHexLabel("village", offWidth, offHeight, new VillageTileComponent());
 		twotile = TileLabel.newTwoHexLabel("twotile", offWidth, offHeight+30);
+		
+		add(name);
+		add(fame);
+		add(AP);
+		
 		add(developer);
 		add(rice);
 		add(village);
 		add(twotile);
-		add(AP);
+		add(extratokens);
 		add(card);
 //		add(user);
 	}
-
+	
 	private JLabel newJLabel(String value, String src, int width, int height){
+		ImageIcon icon = new ImageIcon(src);
+		return newJLabel(value, icon, width, height);
+	}
+	
+	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
 		JLabel label= new JLabel(value);
-		label.setIcon(new ImageIcon(src));
+		label.setIcon(icon);
 		label.setFont(new Font("Lucida Grande", 0, 14));
 		label.setPreferredSize(new Dimension(width, height));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -68,12 +96,21 @@ public class PlayerPanel extends JPanel {
 		return label;
 	}
 
-	public void refreshView(JavaPlayer javaPlayer, int cardSize) {
+	public void refreshView(GameModel model, Turn turn, JavaPlayer javaPlayer, int cardSize) {
 		twotile.setText(""+javaPlayer.getCount(JavaPlayerResourceType.TWO));
 		rice.setText(""+javaPlayer.getCount(JavaPlayerResourceType.RICE));
 		village.setText(""+javaPlayer.getCount(JavaPlayerResourceType.VILLAGE));
-		AP.setText(""+javaPlayer.getCount(JavaPlayerResourceType.EXTRAACTIONTOKEN));
+		extratokens.setText(""+javaPlayer.getCount(JavaPlayerResourceType.EXTRAACTIONTOKEN));
 		developer.setText(""+javaPlayer.getCount(JavaPlayerResourceType.DEVELOPER));
 		card.setText(""+cardSize);
+		name.setText(javaPlayer.getName());
+		fame.setText("FAME: "+javaPlayer.getScore());
+		if(model.getCurrentJavaPlayer() == javaPlayer) {
+//			System.out.println("TURN " + turn);
+			String s = turn == null ? "turn" : turn.getActionPoints() + "";
+			AP.setText("AP:" + s);
+		} else { 
+			AP.setText("");
+		}
 	}
 }

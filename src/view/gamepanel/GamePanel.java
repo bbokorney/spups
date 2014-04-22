@@ -6,12 +6,19 @@ import java.awt.Dimension;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+//import javax.swing.JScrollPane;
 
+
+
+
+
+import view.palacefestival.FestivalPanel;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
+import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
@@ -30,9 +37,15 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		boardPanel = new BoardPanel();
 		cardsPanel = new CardsPanel();
-		JScrollPane scrollCardsPanel = new JScrollPane(); 
-		scrollCardsPanel.add(cardsPanel);
+//		JScrollPane scrollCardsPanel = new JScrollPane(); 
+//		scrollCardsPanel.add(cardsPanel);
 		commonPanel = new CommonPanel(); 
+		
+
+		boardPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		cardsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		commonPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 		playerPanel = new PlayerPanel[numOfPlayerPanels];
 		for(int x = 0; x < numOfPlayerPanels; ++x)
 			playerPanel[x] = new PlayerPanel();
@@ -47,14 +60,17 @@ public class GamePanel extends JPanel {
 		left.add(playerPanel[0], BorderLayout.NORTH);
 		right.add(playerPanel[1], BorderLayout.NORTH);
 		left.add(commonPanel, BorderLayout.CENTER);
-		right.add(scrollCardsPanel, BorderLayout.CENTER);
+//		right.add(scrollCardsPanel, BorderLayout.CENTER);
+		right.add(cardsPanel, BorderLayout.CENTER);
 		right.add(playerPanel[2], BorderLayout.SOUTH);
 		left.add(playerPanel[3], BorderLayout.SOUTH);
 
 		cardsPanel.setBackground(Color.BLUE);
 		commonPanel.setBackground(Color.BLUE);
-		for(int x = 0; x < numOfPlayerPanels; ++x) 
+		for(int x = 0; x < numOfPlayerPanels; ++x) {
 			playerPanel[x].setBackground(Color.RED);
+			playerPanel[x].setBorder(BorderFactory.createLineBorder(Color.black));
+		}
 		
 		boardPanel.setPreferredSize(new Dimension(600, 200));
 		cardsPanel.setPreferredSize(new Dimension(245, 200));
@@ -70,21 +86,34 @@ public class GamePanel extends JPanel {
 		
 	}
 
-	public void refreshView(GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
-		boardPanel.refreshView(model.getBoard());
-		cardsPanel.refreshView(model);
+	public void refreshView(FestivalPanel festivalPanel, GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
+		boardPanel.refreshView(model.getBoard(), model, potentialComponents, highlightedComponents);
+		cardsPanel.refreshView(actionResult);
 		commonPanel.refreshView(model, festival);
+		
+		this.remove(festivalPanel);
+		this.add(boardPanel);
 		
 		JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[0]);
 
-		System.out.println(players.length);
-		for(int x = 0; x < players.length; ++x){
-			System.out.println("Player : " + x);
-			//playerPanel[x].refreshView(players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
+		for(int x = 0; x < players.length; ++x) {
+			if(festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand() != null)
+				playerPanel[x].refreshView(model, model.getTurn(), players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
 		}
 		for(int x = players.length; x < numOfPlayerPanels; ++x) { 
 			playerPanel[x].removeAll();
 		}
 		repaint();
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void refreshFestivalView(PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void refreshFestivalView(FestivalPanel festivalPanel) {
+		this.remove(boardPanel);
+		this.add(festivalPanel);
 	}
 }
