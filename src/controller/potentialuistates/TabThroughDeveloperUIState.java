@@ -8,6 +8,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.TakeDeveloperOffBoard;
+import model.palacefestival.PalaceFestival;
 import model.player.Developer;
 import model.potentialactions.PotentialTabThroughDevelopers;
 
@@ -30,13 +31,13 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 
 	PotentialTabThroughDevelopers potentialAction;
 
-    public TabThroughDeveloperUIState(Controller controller, KeyListener keyListener, GameModel model){
+    public TabThroughDeveloperUIState(Controller controller, KeyListener keyListener, GameModel model, PalaceFestival fest){
 	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
 
-	    //potentialAction = new PotentialTabThroughDevelopers();
+	    potentialAction = new PotentialTabThroughDevelopers(model, fest);
 
         initListeners();
     }
