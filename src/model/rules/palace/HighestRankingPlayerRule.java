@@ -53,6 +53,10 @@ public class HighestRankingPlayerRule {
             if(highestRankedPlayer.equals(player)){
                 return true;
             }
+            System.out.println("Not the highest ranking");
+        }
+        else{
+            System.out.println("Highest ranking player is null");
         }
         return false;
     }
@@ -62,19 +66,23 @@ public class HighestRankingPlayerRule {
         JavaPlayer highestRanked = null;
         Map<JavaPlayer, Integer> ranks = helper.getPlayerRanksIn(locations);
         // if this player doesn't have developers in this area or isn't ranked first
-        if (!ranks.isEmpty()) {
+        if (ranks.isEmpty()) {
             return null;
         }
         // check for ties
         int oneCount = 0;
         for (JavaPlayer p : ranks.keySet()) {
+            System.out.println(p.getName());
             if (ranks.get(p) == 1) {
                 highestRanked = p;
                 ++oneCount;
+                System.out.println("ranks p was equal to one");
             }
         }
         if (oneCount > 1) { // there was a tile
+            System.out.println("There was a tie");
             return null;
+
         }
         return highestRanked;
     }

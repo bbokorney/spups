@@ -46,6 +46,7 @@ public class BoardRuleHelper {
         // if this is the only player, they're first by default
         if(players.length == 1) {
             myRanks.put(players[0], 1);
+            return myRanks;
         }
 
         // if we've gone through every height, everyone is tied
