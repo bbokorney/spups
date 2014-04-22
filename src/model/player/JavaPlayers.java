@@ -34,6 +34,8 @@ public class JavaPlayers implements TurnTracker<JavaPlayer> {
 
     public void advanceTurn(){
         currentPlayer++;
+        if (currentPlayer == players.size())
+            currentPlayer = 0;
     }
 
 }
