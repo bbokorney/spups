@@ -157,6 +157,24 @@ public class BoardRuleHelper {
                     if(enclosingTileCount == surrounding.size()) {
                         ////break because we dont wanna give points for every
                         //water location in this one body of water
+                        Map<JavaPlayer, Integer> map = getPlayerRanksIn(surrounding);
+                        if (map.size() == 0) {
+                            //do nothing
+                        }
+                        int count = 0;
+                        for (JavaPlayer player : map.keySet()) {
+                            if (map.get(player) == 1)
+                                count++;
+                        }
+                        if (count == 1) {
+                            for (JavaPlayer player : map.keySet()) {
+                                if (map.get(player) == 1) {
+                                    HashMap<JavaPlayer, Integer> returnmap = new HashMap<JavaPlayer, Integer>();
+                                    returnmap.put(player, newBody.size() * 3);
+                                    return returnmap;
+                                }
+                            }
+                        }
                         break;
 
                         //return 1;
