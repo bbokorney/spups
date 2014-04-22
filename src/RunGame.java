@@ -70,7 +70,7 @@ public class RunGame {
 		List<Card> cardsOfCurrentPlayer = new LinkedList<Card>();
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
-        initTestBoard(model, festival, highlights, cardsOfCurrentPlayer, cardsHighlighted, map, frame);
+//        initTestBoard(model, festival, highlights, cardsOfCurrentPlayer, cardsHighlighted, map, frame);
         
         frame.refreshGame(model,festival,null,map,highlights);
     }
