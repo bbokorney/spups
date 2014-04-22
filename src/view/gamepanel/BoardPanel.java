@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -99,25 +100,35 @@ public class BoardPanel extends JPanel {
 				drawDeveloper(g, width, height, Color.orange);
 			}
 			
+			List<HexLocation> highlights = new LinkedList<HexLocation>();
+			if(potentialComponents != null)
+				for(HexLocation location : potentialComponents.keySet().toArray(new HexLocation[0]))
+					highlights.add(location);
+			if(highlightedComponents != null)
+				for(HexLocation location : highlightedComponents.toArray(new HexLocation[0]))
+					highlights.add(location);
+			
 			// POTENTIAL COMPONENT
 			if(potentialComponents != null) {
-				for(HexLocation location : potentialComponents.keySet().toArray(new HexLocation[0])) { 
+				for(HexLocation location : highlights) { 
 					TileComponent tile = potentialComponents.get(location);
 					int[] distance = location.getDistanceFromOrigin();
 					int width = distance[0]+origin[0]+50;
 					int height = distance[1]*-1+origin[1]+40;
-					TileVisitor visitor = new TileVisitor(g, width, height);
-					tile.accept(visitor);
-				        Polygon poly = new Polygon();
-				        for (int x = 0; x < 6; x++) {
-				        	int hheight = (int) (height + hexSideLength()*Math.sin(x*2*Math.PI/6));
-				        	int wwidth = (int) (width + hexSideLength()*Math.cos(x*2*Math.PI/6));
-				        	poly.addPoint((int)(wwidth*(hexScaling)), (int)(hheight*(hexScaling)));
-				        }
-				        
-				        g.setColor(Color.CYAN);
-				        ((Graphics2D) g).setStroke(new BasicStroke(4));
-				        g.drawPolygon(poly);
+					if(tile != null) {
+						TileVisitor visitor = new TileVisitor(g, width, height);
+						tile.accept(visitor);
+					}
+			        
+					Polygon poly = new Polygon();
+			        for (int x = 0; x < 6; x++) {
+			        	int hheight = (int) (height + hexSideLength()*Math.sin(x*2*Math.PI/6));
+			        	int wwidth = (int) (width + hexSideLength()*Math.cos(x*2*Math.PI/6));
+			        	poly.addPoint((int)(wwidth*(hexScaling)), (int)(hheight*(hexScaling)));
+			        }
+			        g.setColor(Color.CYAN);
+			        ((Graphics2D) g).setStroke(new BasicStroke(4));
+			        g.drawPolygon(poly);
 				}
 			}	
 			

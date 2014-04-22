@@ -7,11 +7,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+//import javax.swing.JScrollPane;
 
+
+
+
+import view.palacefestival.FestivalPanel;
 import model.GameModel;
 import model.actions.ActionResult;
 import model.board.Location;
+import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
@@ -71,10 +76,13 @@ public class GamePanel extends JPanel {
 		
 	}
 
-	public void refreshView(GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
+	public void refreshView(FestivalPanel festivalPanel, GameModel model, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
 		boardPanel.refreshView(model.getBoard(), model, potentialComponents, highlightedComponents);
-		cardsPanel.refreshView(model);
+		cardsPanel.refreshView(actionResult);
 		commonPanel.refreshView(model, festival);
+		
+		this.remove(festivalPanel);
+		this.add(boardPanel);
 		
 		JavaPlayer[] players = model.getJavaPlayers().toArray(new JavaPlayer[0]);
 
@@ -83,8 +91,19 @@ public class GamePanel extends JPanel {
 				playerPanel[x].refreshView(model, model.getTurn(), players[x], festival.getPlayers().toArray(new PalaceFestivalPlayer[0])[x].getHand().size());
 		}
 		for(int x = players.length; x < numOfPlayerPanels; ++x) { 
-//			playerPanel[x].removeAll();
+			playerPanel[x].removeAll();
 		}
 		repaint();
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void refreshFestivalView(PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void refreshFestivalView(FestivalPanel festivalPanel) {
+		this.remove(boardPanel);
+		this.add(festivalPanel);
 	}
 }

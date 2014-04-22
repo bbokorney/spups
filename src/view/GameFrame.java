@@ -59,7 +59,7 @@ public class GameFrame extends JFrame {
 
     public void refreshGame( GameModel game, PalaceFestival festival, ActionResult actionResult, Map<Location, TileComponent> potentialComponents, List<Location> highlightedComponents) {
         //this gives all the information during the java game
-    	gamePanel.refreshView(game, festival, actionResult, potentialComponents, highlightedComponents);
+    	gamePanel.refreshView(festivalPanel, game, festival, actionResult, potentialComponents, highlightedComponents);
 //    	actionPanel.refreshView();
     }
 
@@ -73,5 +73,11 @@ public class GameFrame extends JFrame {
         //picking cards
         //sorry they aren't a list of pairs with card and a boolean for selection
         //it was implemented this way in the model and I don't feel like working on it
+    }
+
+    @SuppressWarnings("rawtypes")
+	public void refreshFestivalView(GameModel model, PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected){
+    	festivalPanel.refreshView(model, festival, cardsOfCurrentPlayer, cardsSelected);
+    	gamePanel.refreshFestivalView(festivalPanel);
     }
 }
