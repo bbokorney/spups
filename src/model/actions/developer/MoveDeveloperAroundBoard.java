@@ -12,7 +12,7 @@ import pathfinding.JavaPath;
 /**
  * Created by idinamenzel on 4/14/14.
  */
-public class MoveDeveloperAroundBoard extends Action {
+public class MoveDeveloperAroundBoard extends Action{
 
     /*
         attributes
@@ -31,9 +31,9 @@ public class MoveDeveloperAroundBoard extends Action {
         this.game = game;
     }
 
-    public MoveDeveloperAroundBoard(Location developerStartinglocation, JavaPath path, GameModel game){
+    public MoveDeveloperAroundBoard(Location developerStartinglocation, Location developerEndingLocation, JavaPath path, GameModel game){
         this.developerStartinglocation = developerStartinglocation;
-        this.developerEndingLocation = developerStartinglocation;
+        this.developerEndingLocation = developerEndingLocation;
         this.path = path;
         this.game = game;
     }

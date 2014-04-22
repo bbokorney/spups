@@ -39,14 +39,15 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
     GameModel model;
     PotentialMoveDeveloperAroundBoard potentialAction;
 
-    public MoveDeveloperAroundBoardUIState(Controller controller, KeyListener keyListener, GameModel model, HexLocation developer){
+    public MoveDeveloperAroundBoardUIState(Controller controller, KeyListener keyListener, GameModel model, PotentialMoveDeveloperAroundBoard potential){
 	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
 
-        potentialAction = new PotentialMoveDeveloperAroundBoard(model, controller.getPalaceFestival(), developer);
-
+        //potentialAction = new PotentialMoveDeveloperAroundBoard(model, controller.getPalaceFestival(), developer);
+        potentialAction = potential;
+        controller.refreshGameView(null, new HashMap<Location, TileComponent>(), potentialAction.getLocationFromPath());
         initListeners();
     }
 
@@ -128,7 +129,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
         i = new InternalListener(KEY_SOUTHWEST, new Funktor() {
             @Override
             public void call() {
-                moveSoutheast();
+                moveSouthwest();
             }
         });
         listeners.add(i);
@@ -136,7 +137,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
         i = new InternalListener(KEY_SOUTHEAST, new Funktor() {
             @Override
             public void call() {
-                moveSouthwest();
+                moveSoutheast();
             }
         });
         listeners.add(i);
