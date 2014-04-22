@@ -104,7 +104,6 @@ public class PlayerPanel extends JPanel {
 		fame.setBackground(this.getBackground());
 		AP.setBackground(this.getBackground());
 		if(model.getCurrentJavaPlayer() == javaPlayer) {
-//			System.out.println("TURN " + turn);
 			String s = turn == null ? "turn" : turn.getActionPoints() + "";
 			AP.setText("AP:" + s);
 		} else { 
