@@ -19,7 +19,9 @@ import java.util.List;
 public class PotentialPlaceDeveloperOnBoard extends PotentialOneSpaceMovement {
 
     public PotentialPlaceDeveloperOnBoard (GameModel game, PalaceFestival festival){
+
         super(game, festival);
+//        System.out.println("Constructor of PotentialPlaceDeveloperOnBoard");
     }
 
 

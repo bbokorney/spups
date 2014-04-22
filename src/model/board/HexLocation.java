@@ -161,4 +161,8 @@ public class HexLocation implements Location {
         return vectorDistance;
     }
 
+    public String toString() {
+        return String.format("%s, %s", getDistanceFromOrigin()[0], getDistanceFromOrigin()[1]);
+    }
+
 }
