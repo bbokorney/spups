@@ -127,7 +127,7 @@ public class PlaceRiceTile extends Action {
         }
 
         //Check if the player is placing on top of a developer
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(), placement)){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopersFromAllPlayers(), placement)){
             isSuccess = isSuccess && true;
 
         }

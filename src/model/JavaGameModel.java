@@ -162,6 +162,10 @@ public class JavaGameModel extends GameModel{
         return getCurrentJavaPlayer().getDevelopers();
     }
 
+    public List<Developer> getDevelopersFromAllPlayers() {
+        return javaPlayers.getDevelopers();
+    }
+
     @Override
     public Board getBoard() {
         return board;

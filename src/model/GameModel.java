@@ -42,6 +42,7 @@ public abstract class GameModel {
     public abstract String getName();
     public abstract void incrementScore(int score);
     public abstract List<Developer> getDevelopers();
+    public abstract List<Developer> getDevelopersFromAllPlayers();
     public abstract Board getBoard();
     public abstract void addPalaceToCurrentTurnList(Location loc);
     public abstract boolean hasPalaceLocationBeenUsedThisTurn(Location loc);

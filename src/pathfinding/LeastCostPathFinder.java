@@ -120,7 +120,7 @@ public class LeastCostPathFinder {
 
     private List<JavaEdge> getEdgesTo(Location from, Location to, Map<Location, JavaNode> nodes, Developer developer) {
         // if we can traverse directly there
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(to, model.getBoard(), model.getDevelopers(), developer);
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(to, model.getBoard(), model.getDevelopersFromAllPlayers(), developer);
         if(dpr.allowed()) {
             List<JavaEdge> edge = new ArrayList<JavaEdge>();
             edge.add(getEdgeBetween(from, to, nodes));

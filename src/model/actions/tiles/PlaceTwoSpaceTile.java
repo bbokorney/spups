@@ -140,7 +140,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),villagePlacement,ricePlacement) ){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopersFromAllPlayers(),villagePlacement,ricePlacement) ){
             isSuccess = isSuccess && true;
 
         }
