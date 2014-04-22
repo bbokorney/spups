@@ -44,8 +44,6 @@ public class PlaceDeveloperOnBoardUIState extends HexComponentMovementUIState {
         // a path to that location exists or not
         List<Location> highlighted = new ArrayList<Location>();
         highlighted.add(potentialAction.getLocation());
-        System.out.println(potentialAction == null);
-        System.out.println(potentialAction.getShortestLegalPath() == null);
         JavaPath path = potentialAction.getShortestLegalPath();
         if(path != null) {
             highlighted.addAll(potentialAction.getShortestLegalPath().getPath());
