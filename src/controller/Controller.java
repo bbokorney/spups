@@ -50,7 +50,7 @@ public class Controller {
 		//history.addAction(action); TODO: Baker, history broken
 	}
 	public void addEndTurnToHistory(Pair action) {
-		history.addEndTurn(action);
+		//history.addEndTurn(action); //todo baker or jon
 	}
 
     public void askForUserConfirmation(Action actionMessage) {
