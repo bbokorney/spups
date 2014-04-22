@@ -53,12 +53,21 @@ public class BoardRuleHelper {
             for(JavaPlayer p : players) {
                 myRanks.put(p, 1);
             }
+            return myRanks;
+        }
+        else{
+            System.out.println("BRH calcRanks currHeight>=0 " + currHeight);
         }
 
-        for(JavaPlayer p : heightMap.keySet()) {
-            if(!heightMap.get(p).containsKey(currHeight)) {
-                heightMap.get(p).put(currHeight, 0);
+        if(heightMap != null) {
+            for (JavaPlayer p : heightMap.keySet()) {
+                if (!heightMap.get(p).containsKey(currHeight)) {
+                    heightMap.get(p).put(currHeight, 0);
+                }
             }
+        }
+        else{
+            System.out.println("BRH calcRanks height map was null");
         }
 
         // sort the players descending by the number of developers they have at this height.
@@ -88,7 +97,7 @@ public class BoardRuleHelper {
             }
             rankOffset = maxRank;
             start = end;
-            end = start+1;
+            end++;
         }
         return myRanks;
     }
@@ -253,7 +262,7 @@ public class BoardRuleHelper {
     }
 
     public boolean isOuterMostBorder(Location location) {
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers(), null);
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopersFromAllPlayers(), null);
         if(!model.getBoard().areLocationsOnBoard(location) ||
                 !dpr.allowed()) {
             return false;
