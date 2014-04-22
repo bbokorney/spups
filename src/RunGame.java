@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import model.GameModel;
 import model.JavaGameModel;
+import model.actions.StartGame;
 import model.board.Board;
 import model.board.HexLocation;
 import model.board.Location;
@@ -39,20 +40,23 @@ public class RunGame {
     
     public RunGame() {
     	KeyListener listener = new KeyListener();
-    	GameModel model = new JavaGameModel(3);
+    	GameModel model = new JavaGameModel();
     	Board board = model.getBoard();
 //    	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
 //    	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
 //    	board.getSpace(board.getAllLocations().toArray(new Location[0])[2]).accept(new RiceTileComponent());
 //    	board.getSpace(board.getAllLocations().toArray(new Location[0])[3]).accept(new IrrigationTileComponent());
         PalaceFestival festival = createPalaceFestival(model);
-        
+
 //        model.getJavaPlayers().toArray(new JavaPlayer[0])[0].addDeveloper(board.getAllLocations().toArray(new Location[0])[0]);
-        
+
+        String[] playerNames = { "Player 2341", "Player234 2", "Player 2343"};
         
         GameFrame frame = new GameFrame(listener);
         @SuppressWarnings("unused")
-        Controller controller = new Controller(frame, model, createPalaceFestival(model));
+        Controller controller = new Controller(frame, model, festival);
+        StartGame startGame = new StartGame(model, festival, playerNames);
+        System.out.println(startGame.doAction().getMessage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -82,7 +86,7 @@ public class RunGame {
 //        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, null);
     }    
     
-    public PalaceFestival createPalaceFestival(GameModel model) { 
+    public PalaceFestival createPalaceFestival(GameModel model) {
     	 @SuppressWarnings("rawtypes")
 		 Stack<Card> deck = new Stack<Card>();
          for (int i = 0; i < 5; i++) {
@@ -113,8 +117,8 @@ public class RunGame {
              deck.add(card);
          }
          PalaceFestival festival = new PalaceFestival(null, deck);
-         for(JavaPlayer player : model.getJavaPlayers())
-        	 festival.addPlayer(new JavaPlayerAdapter(player));
+//         for(JavaPlayer player : model.getJavaPlayers())
+//        	 festival.addPlayer(new JavaPlayerAdapter(player));
          return festival;
     }
 }
