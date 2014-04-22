@@ -1,10 +1,11 @@
 package model.board;
 
 import model.GameModel;
+import model.Pair;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.rules.developer.DeveloperPlacementRule;
-import model.rules.palace.HighestRankingPlayerInCityRule;
+import model.rules.palace.HighestRankingPlayerRule;
 import model.rules.palace.PalaceLevelCitySizeRule;
 
 import java.util.*;
@@ -139,20 +140,24 @@ public class BoardRuleHelper {
     }
 
     public int pointsEarnedFromLandPlacement(Location... locations) {
+        int famePointsEarned = 0;
+
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
             Collection<Location> surrounding = getSurroundingTiles(body.getLocations());
             if(containsAny(surrounding, Arrays.asList(locations))) {
+                boolean isSurrounded = true;
                 for(Location hex : surrounding) {
                     if(getHeight(hex, Arrays.asList(locations)) == 0) {
-                        return 0;
+                        isSurrounded = false;
                     }
                 }
+                if(isSurrounded){
+                    famePointsEarned += 3*body.getSize();
+                }
             }
-            else {
-                return 0;
-            }
+
         }
-        return 1;
+        return famePointsEarned;
     }
 
     private boolean containsAny(Collection<Location> locations, Collection<Location> lookUps) {
@@ -201,7 +206,7 @@ public class BoardRuleHelper {
     }
 
     public boolean isOuterMostBorder(Location location) {
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers());
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers(), null);
         if(!model.getBoard().areLocationsOnBoard(location) ||
                 !dpr.allowed()) {
             return false;
@@ -278,7 +283,7 @@ public class BoardRuleHelper {
         //exclude palaces by the following criteria
         for(City city : model.getBoard().cityContainer.getCityCollection()) {
             //The current player must be the highest in the city
-            if(!HighestRankingPlayerInCityRule.highestRankingPlayerInCityRule(model.getCurrentJavaPlayer(),
+            if(!HighestRankingPlayerRule.highestRankingPlayerInCityRule(model.getCurrentJavaPlayer(),
                     city.getPalaceLocation(), this, model.getBoard())) {
                 continue;
             }
