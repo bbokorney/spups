@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -67,6 +69,7 @@ public class BoardPanel extends JPanel {
 		    		color = Color.green;
 				
 				drawHex(g, width, height, color);
+				connectLocations(g, location);
 				TileComponent tile = board.getSpace(location).getTopTileComponent();
 				TileVisitor visitor = new TileVisitor(g, width, height);
 				if(tile != null) 
@@ -119,7 +122,7 @@ public class BoardPanel extends JPanel {
 						TileVisitor visitor = new TileVisitor(g, width, height);
 						tile.accept(visitor);
 					}
-			        
+					
 					Polygon poly = new Polygon();
 			        for (int x = 0; x < 6; x++) {
 			        	int hheight = (int) (height + hexSideLength()*Math.sin(x*2*Math.PI/6));
@@ -130,10 +133,7 @@ public class BoardPanel extends JPanel {
 			        ((Graphics2D) g).setStroke(new BasicStroke(4));
 			        g.drawPolygon(poly);
 				}
-			}	
-			
-			
-			
+			}
     }
 	
 	public static void drawHouses(Graphics g, int i, int j, Color color) {
@@ -179,6 +179,12 @@ public class BoardPanel extends JPanel {
 		Rice, Village, Palace, Irrigation, Highlands;
 	}
 	
+	
+	/*
+	 *   / \ / \
+	 *  |   |   |
+	 *   \ / \ /
+	 */
 	public static void drawHex(Graphics g, int posWidth, int posHeight, Color color) {
         Polygon tile = new Polygon();
         for (int x = 0; x < 6; x++) {
@@ -226,6 +232,39 @@ public class BoardPanel extends JPanel {
         ((Graphics2D) g).setColor(Color.black);
         ((Graphics2D) g).setStroke(new BasicStroke(2));
         g.drawPolygon(tile);
+	}
+	
+	public void connectLocations(Graphics g, HexLocation location) {
+		int[] origin = getBoardOrigin(locations);
+		board.getSpace(location);
+		for(HexLocation neighbor : location.getNeighbors().toArray(new HexLocation[0])) {
+			System.out.println(location + " " + neighbor);
+//			System.out.println(board.getSpace(location).getTopTileComponent());
+//			System.out.println(board.getSpace(neighbor).getTopTileComponent());
+//			System.out.println(board.getSpace(location).getTopTileComponent().getParent());
+//			System.out.println(board.getSpace(neighbor).getTopTileComponent().getParent());
+			if(board.getSpace(location) != null && board.getSpace(location).getTopTileComponent() != null 
+					&& board.getSpace(neighbor) != null && board.getSpace(neighbor).getTopTileComponent() != null 
+					&& board.getSpace(location).getTopTileComponent().getParent() == board.getSpace(neighbor).getTopTileComponent().getParent()) {
+				ArrayList<Point> list  = new ArrayList<Point>();
+				int[] distance = location.getDistanceFromOrigin();
+				int width1 = distance[0]+origin[0]+50;
+				int height1 = distance[1]*-1+origin[1]+40;
+				distance = neighbor.getDistanceFromOrigin();
+				int width2 = distance[0]+origin[0]+50;
+				int height2 = distance[1]*-1+origin[1]+40;
+		        for (int x = 0; x < 6; x++) {
+		        	int height = (int) (height1 + hexSideLength()*Math.sin(x*2*Math.PI/6));
+		        	int width = (int) (width1 + hexSideLength()*Math.cos(x*2*Math.PI/6));
+		            if(Math.abs(height-height2) < hexSideLength() && Math.abs(width-width2) < hexSideLength())
+		            	list.add(new Point((int)(width*(hexScaling)), (int)(height*(hexScaling))));
+		        }
+		        g.setColor(new Color(30, 128, 2));
+		        ((Graphics2D) g).setStroke(new BasicStroke(2));
+		        g.drawLine(list.get(0).x, list.get(0).y, list.get(1).x, list.get(1).y);
+			}
+		}
+		
 	}
 	
 	public static void drawIrrigationWave(Graphics g, int width, int height, int yOffset) {

@@ -16,5 +16,7 @@ public interface PalaceFestivalPlayer {
     public Collection<Card> getHand();
 
     public int getScore();
+    
+    public String getPlayerName();
 
 }
