@@ -1,11 +1,13 @@
 package model.potentialactions;
 
+import model.GameModel;
 import model.actions.ActionResult;
 import model.actions.palacefestival.BeginPalaceFestival;
 import model.board.City;
 import model.board.CityContainer;
 import model.board.Location;
 import model.palacefestival.Card;
+import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 import model.rules.palace.CardValues;
 import model.tiles.PalaceTileComponent;
@@ -28,7 +30,10 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
     private PalaceTileComponent selectedPalace;
     private Location selectedPalaceLocation;
 
-    public PotentialBeginPalaceFestival() {
+	PalaceFestival paFes;
+	GameModel model;
+
+    public PotentialBeginPalaceFestival(GameModel model, PalaceFestival paFes) {
         this.palacesValidForFestival = new ArrayList<PalaceTileComponent>();
         this.locationsValidForFestival = new ArrayList<Location>();
         this.cardsValidToBeginFestival = new ArrayList<Card>();
@@ -38,16 +43,19 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
         this.selectedPalace = null;
         this.selectedPalaceLocation = null;
 
+	    this.paFes = paFes;
+	    this.model = model;
+
         // Calculate valid cards
-        PalaceFestivalPlayer player = getPalaceFestival().getCurrentPlayer();
+        PalaceFestivalPlayer player = paFes.getCurrentPlayer();
         Collection<Card> hand = player.getHand();
         for (Card card : hand) {
-            if (CardValues.getMatchValue(card, getPalaceFestival().peekAtFestivalCard()) > 0)
+            if (CardValues.getMatchValue(card, paFes.peekAtFestivalCard()) > 0)
                 cardsValidToBeginFestival.add(card);
         }
 
         // calculate valid palaces & locations
-        CityContainer cityContainer = getGameModel().getBoard().getCityContainer();
+        CityContainer cityContainer = model.getBoard().getCityContainer();
         for(City city : cityContainer.getCityCollection()) {
             PalaceTileComponent palaceTileComponent = city.getPalaceTile();
             if (palaceTileComponent.isFaceUp()) {
@@ -120,7 +128,7 @@ public class PotentialBeginPalaceFestival extends PotentialAction {
         for (int index : indexOfCardsToBid) {
             bid.add(cardsValidToBeginFestival.get(index));
         }
-        return new BeginPalaceFestival(getGameModel(), getPalaceFestival(), selectedPalace.getLevel(), selectedPalaceLocation ,bid).tryAction();
+        return new BeginPalaceFestival(model, paFes, selectedPalace.getLevel(), selectedPalaceLocation ,bid).tryAction();
     }
 
     private void setComponentsOnHoverBoard() {
