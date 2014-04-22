@@ -4,12 +4,15 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.TakeDeveloperOffBoard;
+import model.board.Directions;
+import model.board.HexLocation;
 import model.board.Location;
 import model.palacefestival.PalaceFestival;
 import model.player.Developer;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,7 +73,12 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
     }
 
 	public List<Location> getLocationFromPath() {
-		//Todo Meghan
-        return null;
+		//Todo Meghan: please check this
+        //return null;
+
+        Location loc = developerLocationList.get(indexOfCurrentDeveloper);
+        ArrayList<Location> list = new ArrayList<Location>();
+        list.add(loc);
+        return list;
 	}
 }

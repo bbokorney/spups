@@ -65,7 +65,7 @@ public class EmptyUIState extends PotentialJavaUIState {
     }
 
     public void switchToSwitchDeveloperState() {
-        controller.setCurrentState(new TabThroughDeveloperUIState(controller, keyListener, model));
+        controller.setCurrentState(new TabThroughDeveloperUIState(controller, keyListener, model, paFes));
     }
 
     public void switchToPlaceDeveloperState() {

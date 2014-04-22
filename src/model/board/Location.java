@@ -17,4 +17,6 @@ public interface Location extends Serializable {
 
     public List<Location> getNeighbors();
 
+    public int[] getDistanceFromOrigin();
+
 }

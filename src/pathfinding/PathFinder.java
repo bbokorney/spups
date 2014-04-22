@@ -14,13 +14,9 @@ public class PathFinder<Node extends PathNode<Node>, Edge extends PathEdge<Node>
         Set<Node> inPath = new HashSet<Node>();
         // add the source node to start the search from
         pq.add(new PathListNode(src, null, 0));
-        // while we haven't found the destination and there are
-        // still nodes to explore
         while(!pq.isEmpty()) {
             PathListNode curr = pq.poll();
             inPath.add(curr.node);
-            //System.out.println(pq.size());
-            //System.out.println(curr.toString());
 
             // if we've found the destination, we're done
             if(curr.node.equals(dest)) {

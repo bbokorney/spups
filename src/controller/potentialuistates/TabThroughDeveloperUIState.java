@@ -8,11 +8,15 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.developer.TakeDeveloperOffBoard;
+import model.board.Location;
+import model.palacefestival.PalaceFestival;
 import model.player.Developer;
 import model.potentialactions.PotentialTabThroughDevelopers;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,13 +34,14 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 
 	PotentialTabThroughDevelopers potentialAction;
 
-    public TabThroughDeveloperUIState(Controller controller, KeyListener keyListener, GameModel model){
+    public TabThroughDeveloperUIState(Controller controller, KeyListener keyListener, GameModel model, PalaceFestival fest){
 	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
 
-	    //potentialAction = new PotentialTabThroughDevelopers();
+	    potentialAction = new PotentialTabThroughDevelopers(model, fest);
+        controller.refreshGameView(null, new HashMap<Location, TileComponent>(), potentialAction.getLocationFromPath());
 
         initListeners();
     }
@@ -46,13 +51,15 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 		//if(!result.isSuccess()) {
 
 		//}
+        //ActionResult result = potentialAction.getActionResult();
+        potentialAction.tabToNextDeveloper();
+        controller.refreshGameView(null, new HashMap<Location, TileComponent>(), potentialAction.getLocationFromPath());
 	}
 
 	public void switchToMoveDeveloperState() {
-//		Developer developer = potentialAction.getSelectedDeveloper();
-//		if(developer instanceof Developer) {
-//			controller.setCurrentState(new MoveDeveloperAroundBoardUIState(controller, keyListener, model, developer));
-//		}
+
+        controller.setCurrentState(new MoveDeveloperAroundBoardUIState(controller, keyListener, model, potentialAction.selectDeveloperToMoveAroundBoard()));
+
 	}
 
 	public void confirmDeletion() {
@@ -61,6 +68,7 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 
 		if(result.isSuccess()) {
 			controller.addToHistory(actionPair);
+            controller.refreshGameView(result, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
 			//stuff?
 		}
 	}

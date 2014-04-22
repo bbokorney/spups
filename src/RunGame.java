@@ -6,6 +6,7 @@ import model.GameModel;
 import model.JavaGameModel;
 import model.actions.StartGame;
 import model.board.Board;
+import model.board.Directions;
 import model.board.HexLocation;
 import model.board.Location;
 import model.palacefestival.Card;
@@ -20,6 +21,7 @@ import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
 import model.tiles.TileComponent;
 import model.tiles.VillageTileComponent;
+import model.tiles.*;
 import controller.Controller;
 import controller.keylistener.KeyListener;
 import view.GameFrame;
@@ -73,6 +75,16 @@ public class RunGame {
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
 //    	Tile tile = new Tile(3);
+
+        //SACHITS TEST CODE (PATENT PENDING)
+//        ArrayList<Directions> list = new ArrayList<Directions>();
+//        board.placeRiceTileComponent(new HexLocation(list), new RiceTileComponent(new Tile(1)));
+//        model.placeDeveloperOnBoard(new HexLocation(new ArrayList<Directions>()));
+//        list.add(Directions.NORTH);
+//        model.placeDeveloperOnBoard(new HexLocation(list));
+        
+
+//    	Board board = model.getBoard();
 //    	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
 //    	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
 //    	board.getSpace(board.getAllLocations().toArray(new Location[0])[2]).accept(new RiceTileComponent());
@@ -92,6 +104,8 @@ public class RunGame {
 
         frame.refreshGame(model,festival,null,map,highlights);
 //        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
+        //frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
+
     }    
     
     public Stack<Card> createDeck() {
