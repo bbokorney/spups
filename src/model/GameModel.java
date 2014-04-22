@@ -9,6 +9,7 @@ import model.palacefestival.PalaceFestivalPlayer;
 import model.player.Developer;
 import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
+import model.player.Player;
 import model.sharedresources.SharedResourceType;
 import model.tiles.PalaceTileComponent;
 import model.tiles.TileComponent;
@@ -52,6 +53,7 @@ public abstract class GameModel {
     public abstract void useActionPoints(int actionPoints);
     public abstract boolean isHeightAtLocation(int i, Location location);
     public abstract boolean isLocationInCity(Location loc);
+    public abstract void incrementScore(int score, JavaPlayer player);
 
     //Okay this was some old stuff from when we
 /*    public abstract void addPlayer(PalaceFestivalPlayer player);

@@ -2,10 +2,7 @@ package model;
 
 import model.board.*;
 import model.palacefestival.*;
-import model.player.Developer;
-import model.player.JavaPlayer;
-import model.player.JavaPlayers;
-import model.player.JavaPlayerResourceType;
+import model.player.*;
 import model.sharedresources.SharedResourceType;
 import model.sharedresources.SharedResources;
 import model.tiles.PalaceTileComponent;
@@ -157,8 +154,7 @@ public class JavaGameModel extends GameModel{
 
     @Override
     public void incrementScore(int score) {
-        int currentScore = getCurrentJavaPlayer().getScore();
-        getCurrentJavaPlayer().adjustScore(currentScore + score);
+        getCurrentJavaPlayer().adjustScore(score);
     }
 
     @Override
@@ -252,4 +248,11 @@ public class JavaGameModel extends GameModel{
 	public Turn getTurn() {
 		return this.turn;
 	}
+
+    public void incrementScore(int score, JavaPlayer player) {
+        for (JavaPlayer playa : getJavaPlayers()) {
+            if (playa.equals(player))
+                player.adjustScore(score);
+        }
+    }
 }

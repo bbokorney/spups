@@ -18,7 +18,7 @@ public class PlacementOnSameSizeTileRule {
                     ++count;
                 }
             }
-            return count == locations.length;
+            return count == (locations.length > tile.getNumberOfComponents() ? locations.length : tile.getNumberOfComponents());
         }
         return false;
     }
