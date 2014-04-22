@@ -24,8 +24,8 @@ public class PalaceFestivalPlayerPanel extends JPanel {
 	JLabel card;
 	
 	public PalaceFestivalPlayerPanel() {
-		int offHeight = 70;
-		int offWidth = 70;
+//		int offHeight = 70;
+//		int offWidth = 70;
 		
 		stack = newJLabel("", "/Users/maumau/spups/resources/card.png", 60, 100);
 		card = newJLabel(" ", "/Users/maumau/spups/resources/card.png", 60, 100);

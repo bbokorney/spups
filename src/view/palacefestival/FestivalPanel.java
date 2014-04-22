@@ -5,8 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 //import javax.swing.JScrollPane;
+
 
 
 
@@ -47,8 +49,10 @@ public class FestivalPanel extends JPanel {
 		center.add(cardsPanel, BorderLayout.EAST);
 
 		cardsPanel.setBackground(Color.BLUE);
-		for(int x = 0; x < numOfPlayerPanels; ++x) 
+		for(int x = 0; x < numOfPlayerPanels; ++x) {
 			playerPanel[x].setBackground(Color.yellow);
+			playerPanel[x].setBorder(BorderFactory.createLineBorder(Color.black));
+		}
 		
 		handPanel.setPreferredSize(new Dimension(600, 200));
 		cardsPanel.setPreferredSize(new Dimension(245, 200));
