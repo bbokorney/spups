@@ -7,7 +7,7 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
-import model.rules.palace.HighestRankingPlayerInCityRule;
+import model.rules.palace.HighestRankingPlayerRule;
 import model.rules.palace.PalaceLevelCitySizeRule;
 import model.rules.tiles.PalacePlacementRule;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
@@ -114,7 +114,7 @@ public class PlacePalaceTile extends Action {
 
             //Check if the player is the highest ranked player in this city
             //HighestRankedPlayerInCityRule
-            if(HighestRankingPlayerInCityRule.highestRankingPlayerInCityRule(game.getCurrentJavaPlayer(), placement, helperJunk, board)){
+            if(HighestRankingPlayerRule.highestRankingPlayerInVillageRule(game.getCurrentJavaPlayer(), placement, helperJunk, board)){
                 isSuccess = isSuccess && true;
 
             }
