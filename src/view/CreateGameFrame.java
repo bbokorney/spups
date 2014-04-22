@@ -1,124 +1,80 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class CreateGameFrame extends JFrame {
-	JPanel newGamePanel;
-	JButton startGame;
-	JPanel[] newPlayers;
-	JTextField[] playerNames;
-	JComboBox<String> playerSelectionBox;
-	int width = 500;
-	int height = 500;
+	public JPanel panel;
+	public JButton startGame;
+	public JPanel[] players;
+	public JTextField[] playerNames;
+	public JComboBox<String> selectNumPlayers;
+	public int maxNumPlayers = 4;
 	
-	@SuppressWarnings("unchecked")
-	public CreateGameFrame() {
-		newGamePanel = new JPanel();
-		newGamePanel.setPreferredSize(new Dimension(width, height));
-		newGamePanel.setLayout(new FlowLayout());
-		newGamePanel.setBackground(Color.WHITE);
-		newGamePanel.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
+	public CreateGameFrame(ActionListener listener) {
+		panel = new JPanel();
+		panel.setPreferredSize(new Dimension(400, 600));
 		
-		newPlayers = new JPanel[4];
-		playerNames = new JTextField[4];
+		players = new JPanel[maxNumPlayers];
+		playerNames = new JTextField[maxNumPlayers];
+		startGame = new JButton("Play");
 		
-		startGame = new JButton("Let's Play!");
-		
-		setTitle("Setup New Game");
-		setSize(width, height);
+		setTitle("New Game");
+		setSize(400, 600);
 		setResizable(false);
 		
-		setUpView();
-		displayPanel(newGamePanel);
-	}
-
-	private void setUpView(){
-		JPanel numPlayerPanel = new JPanel();
-		numPlayerPanel.setPreferredSize(new Dimension(480, 70));
-		numPlayerPanel.setBackground(Color.WHITE);
-		JLabel numPlayers = new JLabel("Number of Players: ");
-		numPlayerPanel.add(numPlayers);
+		JLabel numPlayers = new JLabel("Number of Players");
 		
-		String[] players = {"Select number of Players", "2", "3", "4"};
-		playerSelectionBox = new JComboBox<String>(players);
-		playerSelectionBox.setSelectedIndex(0);
-		playerSelectionBox.addActionListener(new ActionListener() {
-			
-			@Override
+		selectNumPlayers = new JComboBox<String>(new String[] {"1", "2", "3", "4"});
+		selectNumPlayers.setSelectedIndex(0);
+		
+		selectNumPlayers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedIndex = playerSelectionBox.getSelectedIndex();
-				if(selectedIndex > 0){
-					displayPlayerNamePanels(selectedIndex+1);
-				}
-				
+				int numOfPlayers = selectNumPlayers.getSelectedIndex();
+				for(int x = 0; x < players.length; ++x)
+					if(x <= numOfPlayers)
+						players[x].setVisible(true);
+					else
+						players[x].setVisible(false);
 			}
 		});
-		numPlayerPanel.add(playerSelectionBox);
 		
-		newGamePanel.add(numPlayerPanel);
+		panel.add(numPlayers);
+		panel.add(selectNumPlayers);
 		
-		String[] colors = {"Red", "Orange", "Yellow", "Green", "Blue", "Purple"}; 
-		
-		for(int i = 0; i < newPlayers.length; ++i){
-			newPlayers[i] = new JPanel();
-			newPlayers[i].setPreferredSize(new Dimension(480, 70));
-			newPlayers[i].setBackground(Color.WHITE);
-			newPlayers[i].add(new JLabel("Player "+(i+1)+" name: "));
+		for(int x = 0; x < players.length; ++x){
+			players[x] = new JPanel();
+			players[x].setPreferredSize(new Dimension(400, 100));
+			players[x].add(new JLabel("name "));
 			
-			playerNames[i] = new JTextField();
-			playerNames[i].setPreferredSize(new Dimension(100, 25));
-			newPlayers[i].add(playerNames[i]);
+			playerNames[x] = new JTextField();
+			playerNames[x].setPreferredSize(new Dimension(100, 25));
+			players[x].add(playerNames[x]);
 			
-			newGamePanel.add(newPlayers[i]);
-			newPlayers[i].setVisible(false);
-			
+			panel.add(players[x]);
+			players[x].setVisible(false);
 		}
-		
-		newGamePanel.add(startGame);
-		
-	}
-	
-	private void displayPlayerNamePanels(int players){
-		for(int i = 0; i < newPlayers.length; ++i){
-			newPlayers[i].setVisible(true);
-			if(i >= players){
-				newPlayers[i].setVisible(false);
-			}
-		}
-	}
-	
-	private void displayPanel(JPanel panel){
-		this.setContentPane(panel);
-		this.validate();
-	}
-	
-	public void addStartNewGameListener(ActionListener listenForStartGameButton){
-		startGame.addActionListener(listenForStartGameButton);
-	}
-	
-	public void displayErrorMessage(String errorMessage){
-		JOptionPane.showMessageDialog(this,  errorMessage);
-	}
-	
-	public JComboBox<String> getPlayerSelectionComboBox(){
-		return this.playerSelectionBox;
-	}
-	public JTextField[] getPlayerNames(){
-		return this.playerNames;
+
+		panel.add(startGame);
+		this.add(panel);
+		this.setVisible(true);
+		startGame.addActionListener(listener);
 	}
 
+	public String[] getPlayerNames(){
+		int numPlayers = selectNumPlayers.getSelectedIndex() + 1;
+		final String names[] = new String[numPlayers];
+		for(int x = 0; x < numPlayers; ++x)
+			names[x] = playerNames[x].getText();
+		return names;
+	}
 }

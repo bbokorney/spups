@@ -86,12 +86,12 @@ public class UpgradePalaceTile extends Action {
             All these after should only be done if the thingy is a palace tile
              */
             //See if the tile has been interacted with this turn
-            if(game.hasPalaceLocationBeenUsedThisTurn(placement)){
-                isSuccess = isSuccess && true;
+            if(!game.hasPalaceLocationBeenUsedThisTurn(placement)){
+                isSuccess = true;
 
             }
             else{
-                isSuccess = isSuccess && false;
+                isSuccess = false;
                 message += "Error: This palace has already been interacted with this turn.\n";
             }
 
@@ -107,11 +107,11 @@ public class UpgradePalaceTile extends Action {
 
             //check if there are enough villages in the city to support a palace of this value
             if(PalaceLevelCitySizeRule.palaceLevelSizeAllowed(placement, board, value)){
-                isSuccess = isSuccess && true;
+                isSuccess = true;
 
             }
             else{
-                isSuccess = isSuccess && false;
+                isSuccess = false;
                 message += "Error: There are not enough villages.\n";
             }
 

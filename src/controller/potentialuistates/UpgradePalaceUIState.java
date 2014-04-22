@@ -8,11 +8,16 @@ import model.GameModel;
 import model.Pair;
 import model.actions.ActionResult;
 import model.actions.tiles.UpgradePalaceTile;
+import model.board.Location;
 import model.potentialactions.PotentialUpgradePalaceTile;
+import model.tiles.PalaceTileComponent;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -37,27 +42,32 @@ public class UpgradePalaceUIState extends GameplayUIState {
 
 	    potentialAction = new PotentialUpgradePalaceTile(model, controller.getPalaceFestival());
 
+        updateView();
         initListeners();
     }
 
 	public void switchPalaces() {
 		potentialAction.tabToNextPalace();
-		//send result to view
+		updateView();
 	}
 
 	public void incValue() {
-		//int value = potentialAction.getValue();
-		//potentialAction.setValue((value >= 10) ? 10 : (value + 2) % 11);
-		//update view
-        // TODO: Baker
+		potentialAction.incrementLevel();
+        updateView();
 	}
 
 	public void decValue() {
-		// TODO: Baker
-		//int value = potentialAction.getValue();
-		//potentialAction.setValue((value <= 2) ? 2 : value - 2);
-		//update view
+		potentialAction.decrementLevel();
+		updateView();
 	}
+
+    private void updateView() {
+        Map<Location, TileComponent> componentMap = new HashMap<Location, TileComponent>();
+        componentMap.put(potentialAction.getLocation(), new PalaceTileComponent(potentialAction.getLevel()));
+        List<Location> highlight = new ArrayList<Location>();
+        highlight.add(potentialAction.getLocation());
+        controller.refreshGameView(potentialAction.getActionResult(), componentMap, highlight);
+    }
 
 	public void confirmPlacement() {
 		Pair<ActionResult, UpgradePalaceTile> actionPair = potentialAction.chooseCurrentPlaceToUpgrade();
