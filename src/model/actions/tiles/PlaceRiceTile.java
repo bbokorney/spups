@@ -7,6 +7,7 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.PlaceTileOnDeveloperRule;
 import model.rules.tiles.PlacementOnSameSizeTileRule;
@@ -14,6 +15,8 @@ import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.rules.tiles.RicePlacementRule;
 import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
+
+import java.util.HashMap;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -26,6 +29,8 @@ public class PlaceRiceTile extends Action {
      */
     Location placement;
     GameModel game;
+
+    private HashMap<JavaPlayer, Integer> playersAwardedPoints;
 
     /*
         constructors
@@ -82,8 +87,10 @@ public class PlaceRiceTile extends Action {
         //check if they are not placing outside of central java
         if(game.isHeightAtLocation(0, placement)){
 
-            isSuccess = isSuccess && true;
-            famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
+            playersAwardedPoints = helperJunk.pointsEarnedFromLandPlacement(placement);
+            if(playersAwardedPoints.containsKey(game.getCurrentJavaPlayer())){
+                famePoints = playersAwardedPoints.get(game.getCurrentJavaPlayer());
+            }
 
             if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
 
@@ -151,8 +158,10 @@ public class PlaceRiceTile extends Action {
             // decrement rice tiles in the players resources
             game.useResource(JavaPlayerResourceType.RICE);
 
-            //award them with the fame points, if anything
-            game.incrementScore(result.getFamePoints());
+            //award the player the fame points earned
+            for(JavaPlayer p : playersAwardedPoints.keySet()){
+                game.incrementScore(playersAwardedPoints.get(p), p);
+            }
 
             //place the tile on the board
             game.placeRiceTileComponent(placement, new RiceTileComponent(new Tile(1)));

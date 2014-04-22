@@ -8,11 +8,14 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.player.JavaPlayer;
 import model.rules.tiles.*;
 import model.sharedresources.SharedResourceType;
 import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
 import model.tiles.VillageTileComponent;
+
+import java.util.HashMap;
 
 /**
  * Created by idinamenzel on 4/13/14.
@@ -26,6 +29,8 @@ public class PlaceThreeSpaceTile extends Action {
     Location villagePlacement;
     Location[] ricePlacement = new Location[2];
     GameModel game;
+
+    private HashMap<JavaPlayer, Integer> playersAwardedPoints;
 
 
     /*
@@ -77,8 +82,10 @@ public class PlaceThreeSpaceTile extends Action {
             //this should never work
             if(game.isHeightAtLocation(0, villagePlacement)){
 
-                isSuccess = isSuccess && true;
-                famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
+                playersAwardedPoints = helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement[0], ricePlacement[1]);
+                if(playersAwardedPoints.containsKey(game.getCurrentJavaPlayer())){
+                    famePoints = playersAwardedPoints.get(game.getCurrentJavaPlayer());
+                }
 
                 if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement[0], ricePlacement[1])){
 
@@ -200,7 +207,10 @@ public class PlaceThreeSpaceTile extends Action {
             game.placeRiceTileComponent(ricePlacement[1], new RiceTileComponent(threeSpaceTile));
 
             //award the player fame points as needed
-            game.incrementScore(result.getFamePoints());
+            //award the player the fame points earned
+            for(JavaPlayer p : playersAwardedPoints.keySet()){
+                game.incrementScore(playersAwardedPoints.get(p), p);
+            }
 
             //set has placed land boolean to true
             game.setHasPlacedLandTile(true);

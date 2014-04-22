@@ -14,6 +14,9 @@ import model.rules.tiles.*;
 import model.tiles.Tile;
 import model.tiles.VillageTileComponent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by idinamenzel on 4/14/14.
  */
@@ -25,8 +28,7 @@ public class PlaceVillageTile extends Action {
      */
     Location placement;
     GameModel game;
-    private JavaPlayer playerAwardedPoints;
-    int famePointsEarned;
+    private HashMap<JavaPlayer, Integer> playersAwardedPoints;
 
     /*
         constructors
@@ -91,12 +93,6 @@ public class PlaceVillageTile extends Action {
                 message += "Error: You cannot place this on top of another one space tile.\n";
             }
 
-            if(game.isHeightAtLocation(0, placement)){
-
-
-                helperJunk.pointsEarnedFromLandPlacement(placement);
-            }
-
         }
         else{
             isSuccess = false;
@@ -126,10 +122,10 @@ public class PlaceVillageTile extends Action {
         //this should never work
         if(game.isHeightAtLocation(0, placement)){
 
-            //HashMap<JavaPlayer, >
-            famePointsEarned = helperJunk.pointsEarnedFromLandPlacement(placement);
-
-
+            playersAwardedPoints = helperJunk.pointsEarnedFromLandPlacement(placement);
+            if(playersAwardedPoints.containsKey(game.getCurrentJavaPlayer())){
+                famePoints = playersAwardedPoints.get(game.getCurrentJavaPlayer());
+            }
 
             if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
 
@@ -180,8 +176,9 @@ public class PlaceVillageTile extends Action {
 
 
             //award the player the fame points earned
-            game.incrementScore(famePointsEarned, playerAwardedPoints);
-            game.incrementScore(result.getFamePoints());
+            for(JavaPlayer p : playersAwardedPoints.keySet()){
+                game.incrementScore(playersAwardedPoints.get(p), p);
+            }
 
             //set has placed land tile to true
             game.setHasPlacedLandTile(true);

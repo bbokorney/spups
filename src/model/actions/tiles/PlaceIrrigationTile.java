@@ -7,10 +7,13 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.player.JavaPlayer;
 import model.rules.tiles.PlacementOutsideCentralJavaRule;
 import model.sharedresources.SharedResourceType;
 import model.tiles.IrrigationTileComponent;
 import model.tiles.Tile;
+
+import java.util.HashMap;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -23,6 +26,8 @@ public class PlaceIrrigationTile extends Action {
      */
     private Location placement;
     GameModel game;
+
+    private HashMap<JavaPlayer, Integer> playersAwardedPoints;
 
 
     /*
@@ -82,7 +87,10 @@ public class PlaceIrrigationTile extends Action {
 
             isSuccess = isSuccess && true;
             //calculate the points earned by placing this
-            famePoints += helperJunk.pointsEarnedFromIrrigationPlacement(placement);
+            playersAwardedPoints = helperJunk.pointsEarnedFromIrrigationPlacement(placement);
+            if(playersAwardedPoints.containsKey(game.getCurrentJavaPlayer())){
+                famePoints = playersAwardedPoints.get(game.getCurrentJavaPlayer());
+            }
 
             if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
                 isSuccess = isSuccess && true;
@@ -118,8 +126,10 @@ public class PlaceIrrigationTile extends Action {
             //Decrememnt the AP points it cost
             game.useActionPoints(result.getActionPoints());
 
-            //Award the fame points to the player
-            game.incrementScore(result.getFamePoints());
+            //award the player the fame points earned
+            for(JavaPlayer p : playersAwardedPoints.keySet()){
+                game.incrementScore(playersAwardedPoints.get(p), p);
+            }
 
             //decrement the number of irrigation tiles from shared resources
             game.useResource(SharedResourceType.IRRIGATION);
