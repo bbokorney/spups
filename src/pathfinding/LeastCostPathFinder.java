@@ -24,7 +24,6 @@ public class LeastCostPathFinder {
     }
 
     public JavaPath findShortestPath(Location src, Location dest) {
-        //System.out.println("Finding a shortest path");
         JavaNode destination = new JavaNode(dest);
         PathFinder<JavaNode, JavaEdge> pathFinder = new PathFinder<JavaNode, JavaEdge>();
         Set<Location> visited = new HashSet<Location>();
@@ -38,12 +37,8 @@ public class LeastCostPathFinder {
         while(!queue.isEmpty()) {
 
             JavaNode curr = queue.poll();
-//            System.out.println("Building the graph");
-//            System.out.println("Size of queue: " + queue.size());
-//            System.out.println(curr.getLocation().toString());
             // get all of the valid edges
             for(Location neighbor : curr.getLocation().getNeighbors()) {
-//                System.out.println("Neighbor: " + neighbor.toString());
                 if(!model.getBoard().areLocationsOnBoard(neighbor)) {
                     continue;
                 }
@@ -59,9 +54,7 @@ public class LeastCostPathFinder {
                 }
             }
         }
-//        System.out.println("Starting the pathfinding.");
         Path<JavaNode> path = pathFinder.findShortestPath(source, destination);
-//        System.out.println("Done pathfinding.");
         return new JavaPath(path);
     }
 
