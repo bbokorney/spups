@@ -2,6 +2,7 @@ package view.palacefestival;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -11,6 +12,7 @@ import javax.swing.SwingConstants;
 
 import view.TileLabel;
 import model.GameModel;
+import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
 import model.sharedresources.SharedResourceType;
 import model.tiles.IrrigationTileComponent;
@@ -59,15 +61,15 @@ public class FestivalCardPanel extends JPanel {
 	}
 
 
-	public void refreshView(GameModel model, PalaceFestival festival) {
-		palace[0].setText(""+model.getCount(SharedResourceType.PALACELEVEL2));
-		palace[1].setText(""+model.getCount(SharedResourceType.PALACELEVEL4));
-		palace[2].setText(""+model.getCount(SharedResourceType.PALACELEVEL6));
-		palace[3].setText(""+model.getCount(SharedResourceType.PALACELEVEL8));
-		palace[4].setText(""+model.getCount(SharedResourceType.PALACELEVEL10));
-		irrigation.setText(""+model.getCount(SharedResourceType.IRRIGATION));
-		threetile.setText(""+model.getCount(SharedResourceType.THREE));
-		stack.setText(""+festival.getDeckSize());
+	public void refreshView(List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
+		palace[0].setText(""+cardsOfCurrentPlayer.getCount(SharedResourceType.PALACELEVEL2));
+		palace[1].setText(""+cardsOfCurrentPlayer.getCount(SharedResourceType.PALACELEVEL4));
+		palace[2].setText(""+cardsOfCurrentPlayer.getCount(SharedResourceType.PALACELEVEL6));
+		palace[3].setText(""+cardsOfCurrentPlayer.getCount(SharedResourceType.PALACELEVEL8));
+		palace[4].setText(""+cardsOfCurrentPlayer.getCount(SharedResourceType.PALACELEVEL10));
+		irrigation.setText(""+cardsOfCurrentPlayer.getCount(SharedResourceType.IRRIGATION));
+		threetile.setText(""+cardsOfCurrentPlayer.getCount(SharedResourceType.THREE));
+		stack.setText(""+cardsSelected.getDeckSize());
 		
 		// TODO put picture of festival card
 		//card.setText(""+festival.peekAtFestivalCard());
