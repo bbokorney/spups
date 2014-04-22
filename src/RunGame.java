@@ -72,7 +72,6 @@ public class RunGame {
         
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
-    	Board board = model.getBoard();
     	Tile tile = new Tile(3);
     	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
     	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
