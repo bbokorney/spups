@@ -10,7 +10,7 @@ import model.tiles.RiceTileComponent;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PlaceRiceTileUIState extends PlaceOneSpaceTileUIState {
+public class PlaceRiceTileUIState extends PlaceSingleTileUIState {
     public PlaceRiceTileUIState(Controller controller, KeyListener keyListener, GameModel model, PalaceFestival festival) {
         super(controller, keyListener, model, new RiceTileComponent(), new PotentialPlaceRiceTile(model, festival));
     }

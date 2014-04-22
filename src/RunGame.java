@@ -63,7 +63,6 @@ public class RunGame {
         map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
         map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
         map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
-
         
         LinkedList<Location> highlights = new LinkedList<Location>();
         highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
