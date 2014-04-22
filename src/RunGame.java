@@ -46,7 +46,7 @@ public class RunGame {
     	KeyListener listener = new KeyListener();
     	GameModel model = new JavaGameModel();
     	Board board = model.getBoard();
-        PalaceFestival festival = createPalaceFestival(model);
+        PalaceFestival festival = new PalaceFestival(null, createDeck());
 
         
         GameFrame frame = new GameFrame(listener);
@@ -94,10 +94,10 @@ public class RunGame {
 //        }
 //        cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
         
-        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
+       // frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
     }    
     
-    public PalaceFestival createPalaceFestival(GameModel model) {
+    public Stack<Card> createDeck() {
     	 @SuppressWarnings("rawtypes")
 		 Stack<Card> deck = new Stack<Card>();
          for (int i = 0; i < 5; i++) {
@@ -127,9 +127,7 @@ public class RunGame {
                      PalaceCardComponent.PUPPET);
              deck.add(card);
          }
-         PalaceFestival festival = new PalaceFestival(null, deck);
-//         for(JavaPlayer player : model.getJavaPlayers())
-//        	 festival.addPlayer(new JavaPlayerAdapter(player));
-         return festival;
+
+         return deck;
     }
 }
