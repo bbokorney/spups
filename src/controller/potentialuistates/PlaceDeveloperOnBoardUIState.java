@@ -25,9 +25,9 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 	private final int KEY_NORTH = KeyEvent.VK_NUMPAD8;
 	private final int KEY_SOUTH = KeyEvent.VK_NUMPAD2;
 	private final int KEY_NORTHEAST = KeyEvent.VK_NUMPAD9;
-	private final int KEY_SOUTHEAST = KeyEvent.VK_NUMPAD3;
+	private final int KEY_SOUTHEAST = KeyEvent.VK_NUMPAD1;
 	private final int KEY_NORTHWEST = KeyEvent.VK_NUMPAD7;
-	private final int KEY_SOUTHWEST = KeyEvent.VK_NUMPAD1;
+	private final int KEY_SOUTHWEST = KeyEvent.VK_NUMPAD3;
 
 	private final int KEY_CONFIRM = KeyEvent.VK_ENTER;
 
