@@ -73,12 +73,10 @@ public class GameFrame extends JFrame {
     @SuppressWarnings("rawtypes")
 	public void refreshCardView(List<Card> cards){
         //shows cards of the current player when it is the players turn in the Java Game
-    	System.out.println("cards");
     	CardsFrame cardsFrame = new CardsFrame(new CurrentPlayerHandPanel());
-    	cardsFrame.refresh(cards);
     	cardsFrame.setVisible(true);
-    	cardsFrame.setPreferredSize(new Dimension(400, 400));
         cardsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	cardsFrame.refresh(cards);
     }
 
     @SuppressWarnings("rawtypes")
