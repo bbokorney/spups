@@ -23,6 +23,7 @@ public class PalaceFestival {
         this.players = new PalaceFestivalPlayers();
         this.highestBid = 0;
         this.currentState = new DrawCardState();
+        this.turn = new PalaceFestivalTurn();
     }
 
     public void addPlayer(PalaceFestivalPlayer player) {
@@ -67,6 +68,10 @@ public class PalaceFestival {
 
     public Card drawDeckCard() {
         return resources.drawCardFromDeck();
+    }
+
+    public boolean drawSpecificDeckCard(Card card) {
+        return resources.drawSpecificCardFromDeck(card);
     }
 
     public void discard(Card card) {

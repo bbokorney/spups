@@ -14,9 +14,11 @@ import model.palacefestival.PalaceFestivalPlayer;
 public class PickUpFestivalCard extends Action {
 
     private PalaceFestival festival;
+    private Card festivalCard;
 
     public PickUpFestivalCard(PalaceFestival festival) {
         this.festival = festival;
+        this.festivalCard = null;
     }
 
     @Override
@@ -33,9 +35,16 @@ public class PickUpFestivalCard extends Action {
         ActionResult result = tryAction();
 
         if(result.isSuccess()) {
-            Card festivalCard = festival.drawFestivalCard();
+            if (festivalCard == null) {
+                festivalCard = festival.drawFestivalCard();
+            }
+            else {
+                festival.drawSpecificDeckCard(festivalCard);
+            }
+
             PalaceFestivalPlayer player = festival.getCurrentPlayer();
             player.takeCard(festivalCard);
+            festival.recordDrawCard();
         }
 
         return result;

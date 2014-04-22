@@ -13,6 +13,8 @@ public interface CardGameResources<T> {
 
     public abstract T drawCardFromDeck();
 
+    public abstract boolean drawSpecificCardFromDeck(T card);
+
     public abstract void discard(T card);
 
 }
