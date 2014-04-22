@@ -5,10 +5,6 @@ import controller.keylistener.Funktor;
 import controller.keylistener.InternalListener;
 import controller.keylistener.KeyListener;
 import model.GameModel;
-import model.Pair;
-import model.actions.Action;
-import model.actions.ActionResult;
-import model.actions.tiles.PlacePalaceTile;
 import model.palacefestival.PalaceFestival;
 import model.potentialactions.PotentialPlacePalaceTile;
 import model.tiles.PalaceTileComponent;
@@ -20,7 +16,7 @@ import java.util.List;
 /**
  * Created by Baker on 4/14/2014.
  */
-public class PlacePalaceTileUIState extends PlaceOneSpaceTileUIState {
+public class PlacePalaceTileUIState extends PlaceSingleTileUIState {
     private final int KEY_INCREMENT_LEVEL = KeyEvent.VK_UP;
     private final int KEY_DECREMENT_LEVEL = KeyEvent.VK_DOWN;
 
@@ -31,6 +27,7 @@ public class PlacePalaceTileUIState extends PlaceOneSpaceTileUIState {
                 new PalaceTileComponent(2));
 
 	    potentialAction = new PotentialPlacePalaceTile(model, controller.getPalaceFestival(), 2);
+        setOneSpacePotentialAction(potentialAction);
         setPotentialAction(potentialAction);
     }
 
@@ -49,7 +46,7 @@ public class PlacePalaceTileUIState extends PlaceOneSpaceTileUIState {
         updateView();
     }
 
-    protected void initAdditonalListeners() {
+    protected void initAdditionalListeners() {
         List<InternalListener> listeners = new ArrayList<InternalListener>();
         InternalListener i = new InternalListener(KEY_INCREMENT_LEVEL, new Funktor() {
             @Override

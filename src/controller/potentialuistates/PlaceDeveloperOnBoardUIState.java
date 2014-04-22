@@ -25,9 +25,16 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 	private final int KEY_NORTH = KeyEvent.VK_NUMPAD8;
 	private final int KEY_SOUTH = KeyEvent.VK_NUMPAD2;
 	private final int KEY_NORTHEAST = KeyEvent.VK_NUMPAD9;
-	private final int KEY_SOUTHEAST = KeyEvent.VK_NUMPAD3;
+	private final int KEY_SOUTHEAST = KeyEvent.VK_NUMPAD1;
 	private final int KEY_NORTHWEST = KeyEvent.VK_NUMPAD7;
-	private final int KEY_SOUTHWEST = KeyEvent.VK_NUMPAD1;
+	private final int KEY_SOUTHWEST = KeyEvent.VK_NUMPAD3;
+
+    private final int ALT_KEY_NORTH = KeyEvent.VK_SEMICOLON;
+    private final int ALT_KEY_SOUTH = KeyEvent.VK_PERIOD;
+    private final int ALT_KEY_NORTHEAST = KeyEvent.VK_QUOTE;
+    private final int ALT_KEY_SOUTHEAST = KeyEvent.VK_SLASH;
+    private final int ALT_KEY_NORTHWEST = KeyEvent.VK_L;
+    private final int ALT_KEY_SOUTHWEST = KeyEvent.VK_COMMA;
 
 	private final int KEY_CONFIRM = KeyEvent.VK_ENTER;
 
@@ -98,6 +105,14 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
+        i = new InternalListener(ALT_KEY_NORTH, new Funktor() {
+            @Override
+            public void call() {
+                moveNorth();
+            }
+        });
+        listeners.add(i);
+
 		i = new InternalListener(KEY_SOUTH, new Funktor() {
 			@Override
 			public void call() {
@@ -105,6 +120,14 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 			}
 		});
 		listeners.add(i);
+
+        i = new InternalListener(ALT_KEY_SOUTH, new Funktor() {
+            @Override
+            public void call() {
+                moveSouth();
+            }
+        });
+        listeners.add(i);
 
 		i = new InternalListener(KEY_NORTHWEST, new Funktor() {
 			@Override
@@ -114,6 +137,14 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
+        i = new InternalListener(ALT_KEY_NORTHWEST, new Funktor() {
+            @Override
+            public void call() {
+                moveNorthwest();
+            }
+        });
+        listeners.add(i);
+
 		i = new InternalListener(KEY_NORTHEAST, new Funktor() {
 			@Override
 			public void call() {
@@ -121,6 +152,14 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 			}
 		});
 		listeners.add(i);
+
+        i = new InternalListener(ALT_KEY_NORTHEAST, new Funktor() {
+            @Override
+            public void call() {
+                moveNortheast();
+            }
+        });
+        listeners.add(i);
 
 		i = new InternalListener(KEY_SOUTHWEST, new Funktor() {
 			@Override
@@ -130,6 +169,14 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
+        i = new InternalListener(ALT_KEY_SOUTHWEST, new Funktor() {
+            @Override
+            public void call() {
+                moveSouthwest();
+            }
+        });
+        listeners.add(i);
+
 		i = new InternalListener(KEY_SOUTHEAST, new Funktor() {
 			@Override
 			public void call() {
@@ -137,6 +184,14 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 			}
 		});
 		listeners.add(i);
+
+        i = new InternalListener(ALT_KEY_SOUTHEAST, new Funktor() {
+            @Override
+            public void call() {
+                moveSoutheast();
+            }
+        });
+        listeners.add(i);
 
 		i = new InternalListener(KEY_CONFIRM, new Funktor() {
 			@Override

@@ -4,7 +4,6 @@ import model.GameModel;
 import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
-import model.actions.tiles.PlaceRiceTile;
 import model.board.Directions;
 import model.board.HexLocation;
 import model.palacefestival.PalaceFestival;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by idinamenzel on 4/15/14.
  */
-public abstract class PotentialOneSpaceMovement extends PotentialAction implements HexComponentMovement {
+public abstract class PotentialOneSpaceMovement extends PotentialAction implements HexComponentPotentialAction {
 
     /*
         If time permitted:
