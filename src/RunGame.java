@@ -1,13 +1,10 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 
 import javax.swing.JFrame;
 
 import model.GameModel;
 import model.JavaGameModel;
+import model.actions.StartGame;
 import model.board.Board;
 import model.board.HexLocation;
 import model.board.Location;
@@ -33,15 +30,21 @@ import view.GameFrame;
 public class RunGame {    
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        int numPlayers = Integer.parseInt(args[0]);
+        int numPlayers = args.length;
         if (numPlayers < 2 || numPlayers > 4)
             System.out.println("Please enter a number between 2 and 4 inclusive.");
-        else { RunGame game = new RunGame(numPlayers); }
+        else {
+            ArrayList<String> names = new ArrayList<String>();
+            for (int i = 0; i < args.length; i++) {
+                names.add(args[i]);
+            }
+            RunGame game = new RunGame(names.toArray(new String[0]));
+        }
     }
     
-    public RunGame(int numPlayers) {
+    public RunGame(String[] playersNames) {
     	KeyListener listener = new KeyListener();
-    	GameModel model = new JavaGameModel(numPlayers);
+    	GameModel model = new JavaGameModel(playersNames.length);
         PalaceFestival festival = createPalaceFestival(model);
         
         
@@ -49,6 +52,7 @@ public class RunGame {
         GameFrame frame = new GameFrame(listener);
         @SuppressWarnings("unused")
         Controller controller = new Controller(frame, model, createPalaceFestival(model));
+        StartGame startGame = new StartGame(model, festival, playersNames);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
