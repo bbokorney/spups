@@ -23,6 +23,7 @@ public class PlaceVillageTile extends Action {
      */
     Location placement;
     GameModel game;
+    //private JavaPlayer playerAwardedPoints
 
     /*
         constructors
@@ -54,21 +55,19 @@ public class PlaceVillageTile extends Action {
 
         //see if there is a village tile to take from player
         if(game.getCount(JavaPlayerResourceType.VILLAGE) > 0){
-            isSuccess = isSuccess && true;
 
         }
         else{
-            isSuccess = isSuccess && false;
+            isSuccess = false;
             message += "Error: You do not have enough village tiles.";
         }
 
         //Check if the player has enough action points
         if(game.canUseAPForLandTileAction(actionPoints)){
-            isSuccess = isSuccess && true;
 
         }
         else{
-            isSuccess = isSuccess && false;
+            isSuccess = false;
             message += "Error: You do not have enough AP.\n";
         }
 
@@ -76,18 +75,16 @@ public class PlaceVillageTile extends Action {
 
         //see if all the spaces they are placing on are the same elevation
         if(SameElevationRule.sameElevation(game.getSpaceAtLocation(placement))){
-            isSuccess = isSuccess && true;
 
             /*
                 The rest of this stuff should only be checked if they are on the same elevation
              */
             //check if they are placing on another one tile
             if(!PlacementOnSameSizeTileRule.placingOnSameTile(board, placement)){
-                isSuccess = isSuccess && true;
 
             }
             else{
-                isSuccess = isSuccess && false;
+                isSuccess = false;
                 message += "Error: You cannot place this on top of another one space tile.\n";
             }
 
@@ -97,7 +94,7 @@ public class PlaceVillageTile extends Action {
 
         }
         else{
-            isSuccess = isSuccess && false;
+            isSuccess = false;
             message += "Error: You cannot place on spaces with different elevations.\n";
         }
 
@@ -105,28 +102,26 @@ public class PlaceVillageTile extends Action {
         VillagePlacementRule terrainRule = new VillagePlacementRule(placement, board);
 
         if(terrainRule.allowed()){
-            isSuccess = isSuccess && true;
 
         }
         else{
-            isSuccess = isSuccess && false;
+            isSuccess = false;
             message += "Error: You cannot place a village tile on this terrain.\n";
         }
 
         //see if they are placing on top of a developer
         if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),placement) ){
-            isSuccess = isSuccess && true;
 
         }
         else{
-            isSuccess = isSuccess && false;
+            isSuccess = false;
             message += "Error: You cannot place this tile on top of a developer.\n";
         }
 
         //this should never work
         if(game.isHeightAtLocation(0, placement)){
 
-            isSuccess = isSuccess && true;
+
             famePoints += helperJunk.pointsEarnedFromLandPlacement(placement);
 
             if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, placement)){
@@ -135,7 +130,7 @@ public class PlaceVillageTile extends Action {
 
             }
             else{
-                isSuccess = isSuccess && false;
+                isSuccess = false;
                 message += "Error: You cannot place outside Central Java. ";
             }
         }
@@ -143,11 +138,10 @@ public class PlaceVillageTile extends Action {
 
         //see if they are connecting two cities
         if(!ConnectionTwoCitiesRule.connectsCities(helperJunk, placement)){
-            isSuccess = isSuccess && true;
 
         }
         else{
-            isSuccess = isSuccess && false;
+            isSuccess = false;
             message += "Error: You cannot connect cities.\n";
         }
 
