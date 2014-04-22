@@ -75,7 +75,5 @@ public class FestivalPanel extends JPanel {
 				playerPanel[x].removeAll();
 		}
 		handPanel.refreshView(cardsOfCurrentPlayer, cardsSelected, festival.getCurrentPlayer().getPlayerName());
-		// cardsSelect = highlight these cards of the current player
-//		cardsPanel.refreshView(cardsOfCurrentPlayer, cardsSelected);
 	}
 }
