@@ -33,16 +33,8 @@ public class JavaGameModel extends GameModel{
         Use for testing the view only
      */
     public JavaGameModel(int numberOfPlayers) {
+	    this.numPlayers = numberOfPlayers;
         resetStates();
-        javaPlayers = new JavaPlayers();
-
-        String[] playerNames = new String[numberOfPlayers];
-        for(int i = 0; i < numberOfPlayers; i++){
-            playerNames[i] = "Player " + (i+1);
-        }
-        setPlayersInGame(playerNames);
-
-        numPlayers = numberOfPlayers;
 
     }
 
@@ -75,6 +67,12 @@ public class JavaGameModel extends GameModel{
         board = creator.createBoard();
         turn = new NonFinalTurn();
         javaPlayers = new JavaPlayers();
+
+	    String[] playerNames = new String[numPlayers];
+	    for(int i = 0; i < numPlayers; i++){
+		    playerNames[i] = "Player " + (i+1);
+	    }
+	    setPlayersInGame(playerNames);
     }
 
     @Override

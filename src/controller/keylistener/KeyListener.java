@@ -28,7 +28,7 @@ public class KeyListener implements java.awt.event.KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-    	System.out.println(e.getKeyChar());
+    	//System.out.println(e.getKeyChar());
         for(InternalListener i : temporary) {
             i.actionPerformed(e);
         }

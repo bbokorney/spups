@@ -56,6 +56,8 @@ public class EmptyUIState extends PotentialJavaUIState {
 	PalaceFestival paFes;
 
     public EmptyUIState(Controller controller, KeyListener keyListener, GameModel model, PalaceFestival paFes){
+	    System.out.println("EmptyUIState reached.");
+
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;

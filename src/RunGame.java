@@ -84,7 +84,7 @@ public class RunGame {
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
         
-        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
+        //frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
     }    
     
     public PalaceFestival createPalaceFestival(GameModel model) { 
