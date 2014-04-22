@@ -36,7 +36,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
         this.keyListener = keyListener;
 	    this.model = model;
 
-	    potentialAction = new PotentialBeginPalaceFestival();
+	    potentialAction = new PotentialBeginPalaceFestival(model, controller.getPalaceFestival());
 	    controller.refreshGameView(null, new HashMap<Location, TileComponent>(), Arrays.asList(new Location[] {potentialAction.getSelectedPalaceLocation()}));
 
         initFirstListeners();
