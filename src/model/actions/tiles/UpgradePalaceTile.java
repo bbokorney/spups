@@ -57,7 +57,7 @@ public class UpgradePalaceTile extends Action {
         BoardRuleHelper helperJunk = new BoardRuleHelper(game);
 
         //check if there are any palaces left in shared resources
-        if(game.getCount(SharedResourceType.valueOf("PALACE" + value)) > 1){
+        if(game.getCount(SharedResourceType.valueOf("PALACELEVEL" + value)) > 1){
             isSuccess = isSuccess && true;
 
         }

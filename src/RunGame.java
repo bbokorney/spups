@@ -71,13 +71,16 @@ public class RunGame {
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
 //        initTestBoard(model, festival, highlights, cardsOfCurrentPlayer, cardsHighlighted, map, frame);
-        
+
         frame.refreshGame(model,festival,null,map,highlights);
+//        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
+//        frame.refreshGame(model,festival,null,map,highlights);
     }
     
 
 
-    private void initTestBoard(GameModel model, PalaceFestival festival,
+    @SuppressWarnings("unused")
+	private void initTestBoard(GameModel model, PalaceFestival festival,
 			LinkedList<Location> highlights, @SuppressWarnings("rawtypes") List<Card> cardsOfCurrentPlayer,
 			List<Integer> cardsHighlighted, HashMap<Location, TileComponent> map, GameFrame frame) {
 		// TODO Auto-generated method stub
@@ -108,7 +111,6 @@ public class RunGame {
         }
         cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
 
-        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
 		
 	}   
     
