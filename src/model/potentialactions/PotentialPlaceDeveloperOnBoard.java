@@ -10,6 +10,7 @@ import model.palacefestival.PalaceFestival;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,8 +48,11 @@ public class PotentialPlaceDeveloperOnBoard extends PotentialOneSpaceMovement {
     }
 
     public List<Location> getLocationFromPath() {
-        //Todo Meghan
-        return null;
+        //Todo Meghan check this please
+        //return null;
+        ArrayList<Location> list = new ArrayList<Location>();
+        list.add(getLocation());
+        return list;
     }
 
 
