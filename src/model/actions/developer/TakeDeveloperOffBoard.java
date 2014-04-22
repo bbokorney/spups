@@ -45,7 +45,7 @@ public class TakeDeveloperOffBoard extends Action {
         boolean isSuccess = true;
         int famePoints = 0;         //will never gain fame points
         int actionPoints = 0;
-        String message = "";
+        String message = "Remove Developer\n";
 
         if(path != null && path.valid()){
             isSuccess = isSuccess && true;
@@ -64,7 +64,7 @@ public class TakeDeveloperOffBoard extends Action {
         }
 
         if(message.equalsIgnoreCase("")){
-            message += "Remove Developer, AP " + actionPoints;
+            message += "AP " + actionPoints;
         }
 
         return new ActionResult(isSuccess, famePoints, actionPoints, message);

@@ -65,7 +65,7 @@ public class CardsPanel extends JPanel {
 		if(actionResult != null) {
 			textArea.setText(actionResult.getMessage());
 		} else {
-			textArea.setText("ACTION RESULT NULL");
+			textArea.setText("");
 		}
 	}
 }

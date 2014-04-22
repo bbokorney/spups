@@ -14,6 +14,7 @@ public class KeyListener implements java.awt.event.KeyListener{
     private List<InternalListener> temporary;
     private List<InternalListener> persistent;
     private boolean persistentEnabled;
+	private boolean modified;
 
     public KeyListener() {
         persistentEnabled = true;
@@ -28,14 +29,17 @@ public class KeyListener implements java.awt.event.KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
+	    modified = false;
     	System.out.println(e.getKeyChar());
-        for(InternalListener i : temporary) {
-            i.actionPerformed(e);
-        }
+	    for(int i = 0; i < temporary.size(); i++) {
+		    if(modified == true) return;
+		    temporary.get(i).actionPerformed(e);
+	    }
         if(persistentEnabled) {
-            for(InternalListener i : persistent) {
-                i.actionPerformed(e);
-            }
+	        for(int i = 0; i < persistent.size(); i++) {
+		        if(modified == true) return;
+		        persistent.get(i).actionPerformed(e);
+	        }
         }
     }
 
@@ -46,18 +50,27 @@ public class KeyListener implements java.awt.event.KeyListener{
 
     public void replaceTemporaryListener(List<InternalListener> listeners) {
         temporary = listeners;
+	    modified = true;
     }
 
-    public void addTemporaryListeners(List<InternalListener> listeners) { temporary.addAll(listeners); }
+    public void addTemporaryListeners(List<InternalListener> listeners) {
+	    temporary.addAll(listeners);
+        modified = true;
+    }
 
-    public void addTemporaryListener(InternalListener listener) { temporary.add(listener); }
+    public void addTemporaryListener(InternalListener listener) {
+	    temporary.add(listener);
+        modified = true;
+    }
 
     public void addPersistentListeners(List<InternalListener> listeners) {
-        persistent.addAll(listeners);
+	    persistent.addAll(listeners);
+	    modified = true;
     }
 
     public void clearPersistentListeners() {
         persistent.clear();
+	    modified = true;
     }
 
     public void disablePersistentListeners() {
