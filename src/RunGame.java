@@ -72,23 +72,23 @@ public class RunGame {
         
         List<Integer> cardsHighlighted = new LinkedList<Integer>();
         
-    	Tile tile = new Tile(3);
-    	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
-    	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
-    	board.getSpace(board.getAllLocations().toArray(new Location[0])[2]).accept(new RiceTileComponent());
-    	board.getSpace(board.getAllLocations().toArray(new Location[0])[3]).accept(new IrrigationTileComponent());
-        model.getJavaPlayers().toArray(new JavaPlayer[0])[0].addDeveloper(board.getAllLocations().toArray(new Location[0])[0]);
-        map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
-        map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
-        map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
-        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
-        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[11]);
-        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[12]);
-        for(int x = 0; x < 27; ++x) {
-        	PalaceCard card = new PalaceCard(PalaceCardComponent.values()[(new Random()).nextInt(3)]);
-        	cardsOfCurrentPlayer.add(card);
-        }
-        cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
+//    	Tile tile = new Tile(3);
+//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[0]).accept(new VillageTileComponent());
+//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[1]).accept(new PalaceTileComponent(2));
+//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[2]).accept(new RiceTileComponent());
+//    	board.getSpace(board.getAllLocations().toArray(new Location[0])[3]).accept(new IrrigationTileComponent());
+//        model.getJavaPlayers().toArray(new JavaPlayer[0])[0].addDeveloper(board.getAllLocations().toArray(new Location[0])[0]);
+//        map.put(board.getAllLocations().toArray(new Location[0])[6], new VillageTileComponent());
+//        map.put(board.getAllLocations().toArray(new Location[0])[7], new RiceTileComponent());
+//        map.put(board.getAllLocations().toArray(new Location[0])[8], new RiceTileComponent());
+//        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[10]);
+//        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[11]);
+//        highlights.add((HexLocation) board.getAllLocations().toArray(new Location[0])[12]);
+//        for(int x = 0; x < 27; ++x) {
+//        	PalaceCard card = new PalaceCard(PalaceCardComponent.values()[(new Random()).nextInt(3)]);
+//        	cardsOfCurrentPlayer.add(card);
+//        }
+//        cardsHighlighted.add(3); cardsHighlighted.add(5); cardsHighlighted.add(9); cardsHighlighted.add(13); 
 
         frame.refreshGame(model,festival,null,map,highlights);
 //        frame.refreshFestivalView(model, festival, cardsOfCurrentPlayer, cardsHighlighted);
