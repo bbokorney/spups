@@ -1,7 +1,15 @@
 package view.palacefestival;
 
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Polygon;
+import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -10,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import model.GameModel;
+import model.palacefestival.PalaceCard;
 import model.palacefestival.PalaceFestival;
 import model.palacefestival.PalaceFestivalPlayer;
 
@@ -18,34 +27,38 @@ import model.palacefestival.PalaceFestivalPlayer;
  */
 @SuppressWarnings("serial")
 public class PalaceFestivalPlayerPanel extends JPanel {
+	BufferedImage cardsImage; 
+	private static final int cardPerLine = 9;
 	JLabel[] palace = new JLabel[5];
-	JLabel stack;
+	JLabel score;
+	JLabel name;
 	
 	public PalaceFestivalPlayerPanel() {		
-		stack = newJLabel("", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
-		this.add(stack);
-	}
-
-	
-	private JLabel newJLabel(String value, String src, int width, int height){
-		ImageIcon icon = new ImageIcon(src);
-		return newJLabel(value, icon, width, height);
-	}
-	
-	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
-		JLabel label= new JLabel(value);
-		label.setIcon(icon);
-		label.setFont(new Font("Lucida Grande", 0, 14));
-		label.setPreferredSize(new Dimension(width, height));
-		label.setHorizontalTextPosition(SwingConstants.CENTER);
-		label.setVerticalTextPosition(SwingConstants.BOTTOM);
-		label.setVerticalAlignment(SwingConstants.BOTTOM);
-		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-		return label;
+		cardsImage = new BufferedImage(550, 300, BufferedImage.TYPE_INT_ARGB);
+		score = new JLabel();		
+		name = new JLabel();
+		this.add(name, BorderLayout.EAST);
+		this.add(score, BorderLayout.SOUTH);
 	}
 
 	public void refreshView(GameModel model, PalaceFestival festival, PalaceFestivalPlayer player) {
-		stack.setText(""+player.getHand().size());
+		name.setText(player.getPlayerName() +"'s Played Cards");
+		score.setText("Score: " + festival.getCurrentPlayer().getScore());
+		
+		PalaceCard[] cards = player.getHand().toArray(new PalaceCard[0]);
+		
+		Graphics2D g2d = cardsImage.createGraphics();
+        g2d.setStroke(new BasicStroke(5));
+		g2d.setColor(Color.cyan);
+		for(int x = 0; x < cards.length; ++x) { 
+			Image card = PalaceCardImageLoader.getImage(cards[x]);
+			int width = (x%cardPerLine)*60+10;
+			int height = (x/cardPerLine)*75+50;
+			g2d.drawImage(card, width, height, null);
+		}
+		g2d.dispose();
+		// TODO put picture of festival card
+		//card.setText(""+festival.peekAtFestivalCard());
 		repaint();
 	}
 }

@@ -43,6 +43,11 @@ public class JavaPlayerAdapter implements PalaceFestivalPlayer {
     public int getScore() {
         return javaPlayer.getScore();
     }
+    
+    @Override
+    public String getPlayerName() { 
+    	return javaPlayer.getName();
+    }
 
     @Override
     public boolean equals(Object other) {
