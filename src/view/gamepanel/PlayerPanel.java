@@ -1,6 +1,5 @@
 package view.gamepanel;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -27,6 +26,9 @@ import model.turn.Turn;
  */
 @SuppressWarnings("serial")
 public class PlayerPanel extends JPanel {
+	public static final int offHeight = 70;
+	public static final int offWidth = 70;
+	
 	JLabel twotile;
 	JLabel developer;
 	JLabel rice;
@@ -39,22 +41,19 @@ public class PlayerPanel extends JPanel {
 	JTextArea fame;
 	public PlayerPanel() {
 		name = new JTextArea();
-		name.setPreferredSize(new Dimension(70, 30));
-		name.setBackground(Color.red);
+		name.setPreferredSize(new Dimension(80, 30));
         name.setEditable(false);
+        name.setHighlighter(null);
 		fame = new JTextArea();
 		fame.setPreferredSize(new Dimension(70, 30));
-		fame.setBackground(Color.red);
         fame.setEditable(false);
+        fame.setHighlighter(null);
 		AP = new JTextArea();
 		AP.setPreferredSize(new Dimension(70, 30));
-		AP.setBackground(Color.red);
         AP.setEditable(false);
-//		this.setLayout(null);
+        AP.setHighlighter(null);
 		
 
-		int offHeight = 70;
-		int offWidth = 70;
 		twotile = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/twotile.png")), offWidth, offHeight);
 		developer = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/developer.png")), offWidth, offHeight);
 		extratokens = newJLabel("3", new ImageIcon(JavaImageLoader.getImage("resources/Extra Action Token.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH)), offWidth, offHeight);
@@ -76,14 +75,8 @@ public class PlayerPanel extends JPanel {
 		add(twotile);
 		add(extratokens);
 		add(card);
-//		add(user);
 	}
-	
-	private JLabel newJLabel(String value, String src, int width, int height){
-		ImageIcon icon = new ImageIcon(src);
-		return newJLabel(value, icon, width, height);
-	}
-	
+
 	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
 		JLabel label= new JLabel(value);
 		label.setIcon(icon);
@@ -105,6 +98,9 @@ public class PlayerPanel extends JPanel {
 		card.setText(""+cardSize);
 		name.setText(javaPlayer.getName());
 		fame.setText("FAME: " + javaPlayer.getScore());
+		name.setBackground(this.getBackground());
+		fame.setBackground(this.getBackground());
+		AP.setBackground(this.getBackground());
 		if(model.getCurrentJavaPlayer() == javaPlayer) {
 //			System.out.println("TURN " + turn);
 			String s = turn == null ? "turn" : turn.getActionPoints() + "";

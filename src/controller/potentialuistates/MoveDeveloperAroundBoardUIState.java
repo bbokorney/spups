@@ -120,6 +120,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
 
 	    if(result.isSuccess()) {
 		    controller.addToHistory(actionPair);
+		    controller.setCurrentState(new EmptyUIState(controller, keyListener, model, controller.getPalaceFestival()));
 	    }
     }
 

@@ -23,6 +23,8 @@ import model.tiles.PalaceTileComponent;
  */
 @SuppressWarnings("serial")
 public class CommonPanel extends JPanel {
+	public static final int offHeight = 70; 
+	public static final int offWidth = 70;
 	JLabel[] palace = new JLabel[5];
 	JLabel irrigation;
 	JLabel threetile;
@@ -30,27 +32,20 @@ public class CommonPanel extends JPanel {
 	JLabel card;
 	
 	public CommonPanel() {
-		int offHeight = 70;
-		int offWidth = 70;
-		for(int x = 2; x <= 10; x += 2) {
-			palace[x/2-1] = TileLabel.newHexLabel(x + "palace", offWidth, offHeight, new PalaceTileComponent(x));
-			this.add(palace[x/2-1]);
+		for(int x = 0; x < 10; x += 2) {
+			palace[x/2] = TileLabel.newHexLabel(x + "palace", offWidth, offHeight, new PalaceTileComponent(x));
+			this.add(palace[x/2]);
 		}
 		
 		irrigation = TileLabel.newHexLabel("irrigation", offWidth, offHeight, new IrrigationTileComponent());
 		threetile = TileLabel.newThreeHexLabel("threetile", offWidth+20, offHeight+30);
 		this.add(irrigation);
 		this.add(threetile);
-		//TODO make the text of this go on the right place
+		
 		stack = newJLabel("", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
 		card = newJLabel(" ", new ImageIcon(PalaceCardImageLoader.getDeckImage()), 60, 100);
 		this.add(stack);
 		this.add(card);
-	}
-	
-	private JLabel newJLabel(String value, String src, int width, int height){
-		ImageIcon icon = new ImageIcon(src);
-		return newJLabel(value, icon, width, height);
 	}
 	
 	private JLabel newJLabel(String value, ImageIcon icon, int width, int height){
@@ -76,8 +71,6 @@ public class CommonPanel extends JPanel {
 		stack.setText(""+festival.getDeckSize());
 		card.setIcon(new ImageIcon(PalaceCardImageLoader.getImage((PalaceCard) festival.peekAtFestivalCard())));
 		
-		// TODO put picture of festival card
-		//card.setText(""+festival.peekAtFestivalCard());
 		repaint();
 	}
 }

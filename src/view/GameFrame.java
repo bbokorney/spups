@@ -26,18 +26,19 @@ import view.palacefestival.FestivalPanel;
 public class GameFrame extends JFrame {
     private final static int WIDTH = 1040; // 1300;
     private final static int HEIGHT = 820; // 850;
+    public static final Color[] playerColors = {Color.red, Color.blue, Color.green, Color.orange};
+    public static final Color defaultBackground = new Color(79, 140, 255);
+    
     JavaMenu menu;
     GamePanel gamePanel;
     controller.keylistener.KeyListener listener;
     ActionPanel actionPanel;
     FestivalPanel festivalPanel;
-    public static final Color[] playerColors = {Color.red, Color.blue, Color.green, Color.orange};
     
 	public GameFrame(KeyListener keyListener){
 		this.setTitle("Java Spups");
 		this.setSize(WIDTH, HEIGHT);
 		this.setResizable(false);
-        this.setBackground(Color.WHITE);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
         menu = new JavaMenu();
@@ -53,7 +54,9 @@ public class GameFrame extends JFrame {
         setFocusTraversalKeysEnabled(false);
 
         requestFocusInWindow();
-        //this.setContentPane(gamePanel);
+        requestFocus();
+        
+        
 	}
 
     public controller.keylistener.KeyListener getKeyListener() { return listener; }
