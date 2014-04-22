@@ -42,10 +42,13 @@ public class BoardRuleHelper {
     private Map<JavaPlayer, Integer> calcRanks(JavaPlayer[] players, Map<JavaPlayer,
             Map<Integer, Integer>> heightMap, int currHeight) {
 
+        System.out.println(Arrays.toString(players));
+
         Map<JavaPlayer, Integer> myRanks = new HashMap<JavaPlayer, Integer>();
         // if this is the only player, they're first by default
         if(players.length == 1) {
             myRanks.put(players[0], 1);
+            return myRanks;
         }
 
         // if we've gone through every height, everyone is tied
@@ -80,10 +83,13 @@ public class BoardRuleHelper {
             while(end < players.length) {
                 // if this player is tied with the current highest ranked
                 // unresolved player
-                if(heightMap.get(players[start]).get(heightMap) ==
-                        heightMap.get(players[end]).get(heightMap)) {
+                if(heightMap.get(players[start]).get(currHeight)
+                        .equals(heightMap.get(players[end]).get(currHeight))) {
                     // include them in the list of tied players
                     ++end;
+                }
+                else {
+                    break;
                 }
             }
             // resolve this tie at the next height down
