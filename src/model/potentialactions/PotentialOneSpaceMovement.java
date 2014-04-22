@@ -96,7 +96,7 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
 
     public abstract Pair<ActionResult, Action> confirmAction();
 
-    protected void setLocation(HexLocation loc) {
+    protected void setLocation(Location loc) {
         location = loc;
     }
 }
