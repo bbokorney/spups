@@ -2,8 +2,10 @@ package model.actions;
 
 import model.GameModel;
 import model.actions.serialization.JsonObject;
+import model.palacefestival.Card;
 import model.palacefestival.JavaPlayerAdapter;
 import model.palacefestival.PalaceFestival;
+import model.palacefestival.PalaceFestivalPlayer;
 import model.player.JavaPlayer;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class StartGame extends Action {
     String[] playerColors;
     GameModel game;
     PalaceFestival festival;
+    ArrayList< ArrayList<Card> >  cardsDelt;
 
     /*
         Constructors
@@ -29,6 +32,8 @@ public class StartGame extends Action {
         this.playerNames = playerNames;
         this.game = game;
         this.festival = festival;
+        this.cardsDelt = new ArrayList<ArrayList<Card>>();
+
     }
 
     @Override
@@ -70,8 +75,27 @@ public class StartGame extends Action {
             game.setPlayersInGame(playerNames);
             Collection<JavaPlayer> javaPlayers = game.getJavaPlayers();
             for( JavaPlayer player : javaPlayers) {
-                festival.addPlayer(new JavaPlayerAdapter(player));
+                ArrayList cardsForPlayer = new ArrayList<Card>();
 
+                JavaPlayerAdapter festivalPlayer = new JavaPlayerAdapter(player);
+                festival.addPlayer(festivalPlayer);
+                if(cardsForPlayer.isEmpty()) {
+                    for (int i = 0; i < 3; i++) {
+                        Card cardForPlayer = festival.drawDeckCard();
+                        cardsForPlayer.add(cardForPlayer);
+                        festivalPlayer.takeCard(cardForPlayer);
+
+                    }
+                    cardsForPlayer.add(cardsForPlayer);
+                }
+                else{
+                    for(int j=0; j <  festival.getPlayers().size(); j++){
+                        for(int i = 0; i < 3; i++){
+                            festivalPlayer.takeCard(cardsDelt.get(j).get(i));
+                            festival.drawSpecificDeckCard(cardsDelt.get(j).get(i));
+                        }
+                    }
+                }
             }
 
 

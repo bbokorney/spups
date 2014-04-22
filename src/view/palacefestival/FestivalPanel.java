@@ -78,4 +78,8 @@ public class FestivalPanel extends JPanel {
 		}
 		handPanel.refreshView(cardsOfCurrentPlayer, cardsSelected, festival.getCurrentPlayer().getPlayerName());
 	}
+
+	public CurrentPlayerHandPanel getCurrentPlayerHandPanel() {
+		 return handPanel;
+	}
 }

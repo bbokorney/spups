@@ -39,7 +39,8 @@ public class CurrentPlayerHandPanel extends JPanel {
 	
 	@SuppressWarnings("rawtypes")
 	public void refreshView(List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected, String playerName) {
-		user.setText(playerName + "'s Hand:");
+		if(playerName != null)
+			user.setText(playerName + "'s Hand:");
 		Graphics2D g2d = cards.createGraphics();
         g2d.setStroke(new BasicStroke(5));
 		g2d.setColor(Color.green);
@@ -50,10 +51,12 @@ public class CurrentPlayerHandPanel extends JPanel {
 			g2d.drawImage(card, width, height, null);
 		}
 
-		for(Integer i : cardsSelected) { 
-			int width = (i%cardPerLine)*(cardWidth+cardMargin)+widthMargin;
-			int height = (i/cardPerLine)*(cardHeight+cardMargin)+heightMargin;
-			g2d.drawPolygon(new Polygon(new int[] {width, width+cardWidth, width+cardWidth, width}, new int[] {height, height, height+cardHeight, height+cardHeight}, 4)); 
+		if(cardsSelected != null) {
+			for(Integer i : cardsSelected) { 
+				int width = (i%cardPerLine)*(cardWidth+cardMargin)+widthMargin;
+				int height = (i/cardPerLine)*(cardHeight+cardMargin)+heightMargin;
+				g2d.drawPolygon(new Polygon(new int[] {width, width+cardWidth, width+cardWidth, width}, new int[] {height, height, height+cardHeight, height+cardHeight}, 4)); 
+			}
 		}
 		g2d.dispose();
 		

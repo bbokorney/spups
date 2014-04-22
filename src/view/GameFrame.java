@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import model.palacefestival.PalaceFestival;
 import model.tiles.TileComponent;
 import view.actionpanel.ActionPanel;
 import view.gamepanel.GamePanel;
+import view.palacefestival.CardsFrame;
+import view.palacefestival.CurrentPlayerHandPanel;
 import view.palacefestival.FestivalPanel;
 
 
@@ -70,6 +73,10 @@ public class GameFrame extends JFrame {
     @SuppressWarnings("rawtypes")
 	public void refreshCardView(List<Card> cards){
         //shows cards of the current player when it is the players turn in the Java Game
+    	CardsFrame cardsFrame = new CardsFrame(new CurrentPlayerHandPanel());
+    	cardsFrame.setVisible(true);
+        cardsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	cardsFrame.refresh(cards);
     }
 
     @SuppressWarnings("rawtypes")
