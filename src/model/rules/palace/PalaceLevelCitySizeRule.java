@@ -15,7 +15,9 @@ public class PalaceLevelCitySizeRule {
         Collection<City> cities = board.getCityContainer().getCityCollection();
         // find the city this location is part of
         for(City city : cities) {
-            if(city.getCity().contains(location) && city.getCity().size() >= palaceLevel) {
+            System.out.println("Found a palace at " + city.getPalaceLocation());
+            if(city.getCity().contains(location) && city.getCity().size() >= palaceLevel &&
+                    palaceLevel > city.getPalaceLevel()) {
                 return true;
             }
         }
@@ -25,12 +27,6 @@ public class PalaceLevelCitySizeRule {
             if(village.getLocations().contains(location) &&
                     village.getLocations().size() >= palaceLevel) {
                 return true;
-            }
-        }
-        for(Village village : board.getVillageContainer().getVillages()) {
-            if(village.getLocations().contains(location) &&
-                    village.getLocations().size() >= palaceLevel) {
-
             }
         }
         return false;
