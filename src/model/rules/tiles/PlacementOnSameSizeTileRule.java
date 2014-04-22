@@ -13,7 +13,7 @@ public class PlacementOnSameSizeTileRule {
             Tile tile = board.getTopTileComponent(locations[0]).getParent();
             int count = 1;
             for (int i = 1; i < locations.length; ++i) {
-                if (tile.equals(board.getTopTileComponent(locations[i]))) {
+                if (tile.equals(board.getTopTileComponent(locations[i]).getParent())) {
                     ++count;
                 }
             }
