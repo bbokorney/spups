@@ -36,6 +36,7 @@ public class PlaceThreeSpaceTileUIState extends GameplayUIState {
 	PotentialJavaThreeSpaceTile potentialAction;
 
     public PlaceThreeSpaceTileUIState(Controller controller, KeyListener keyListener, GameModel model){
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -169,6 +170,6 @@ public class PlaceThreeSpaceTileUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
-		keyListener.replaceTemporaryListener(listeners);
+		keyListener.addTemporaryListeners(listeners);
 	}
 }

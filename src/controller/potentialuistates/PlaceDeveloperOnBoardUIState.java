@@ -9,10 +9,13 @@ import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
 import model.actions.developer.PlaceDeveloperOnBoard;
+import model.board.Location;
 import model.potentialactions.PotentialPlaceDeveloperOnBoard;
+import model.tiles.TileComponent;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,6 +38,7 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 	PotentialPlaceDeveloperOnBoard potentialAction;
 
     public PlaceDeveloperOnBoardUIState(Controller controller, KeyListener keyListener, GameModel model){
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -46,49 +50,38 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 
 	public void moveNorth() {
 		ActionResult result = potentialAction.moveNorth();
-		if(!result.isSuccess()) {
-
-		}
+		updateView(result, potentialAction.getLocationFromPath());
 	}
 
 	public void moveSouth() {
 		ActionResult result = potentialAction.moveSouth();
-		if(!result.isSuccess()) {
-
-		}
+		updateView(result, potentialAction.getLocationFromPath());
 	}
 
 	public void moveNortheast() {
 		ActionResult result = potentialAction.moveNortheast();
-		if(!result.isSuccess()) {
-
-		}
+		updateView(result, potentialAction.getLocationFromPath());
 	}
 
 	public void moveNorthwest() {
 		ActionResult result = potentialAction.moveNorthwest();
-		if(!result.isSuccess()) {
-
-		}
+		updateView(result, potentialAction.getLocationFromPath());
 	}
 
 	public void moveSoutheast() {
 		ActionResult result = potentialAction.moveSoutheast();
-		if(!result.isSuccess()) {
-
-		}
+		updateView(result, potentialAction.getLocationFromPath());
 	}
 
 	public void moveSouthwest() {
 		ActionResult result = potentialAction.moveSouthwest();
-		if(!result.isSuccess()) {
-
-		}
+		updateView(result, potentialAction.getLocationFromPath());
 	}
 
 	public void confirmPlacement() {
 		Pair<ActionResult, Action> actionPair = potentialAction.confirmAction();
 		ActionResult result = actionPair.getFirst();
+		updateView(result, potentialAction.getLocationFromPath());
 
 		if(result.isSuccess()) {
 			controller.addToHistory(actionPair);
@@ -153,6 +146,10 @@ public class PlaceDeveloperOnBoardUIState extends GameplayUIState {
 		});
 		listeners.add(i);
 
-		keyListener.replaceTemporaryListener(listeners);
+		keyListener.addTemporaryListeners(listeners);
+	}
+
+	private void updateView(ActionResult result, List<Location> list) {
+		controller.refreshGameView(result, new HashMap<Location, TileComponent>(), list);
 	}
 }

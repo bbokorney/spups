@@ -40,6 +40,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
     PotentialMoveDeveloperAroundBoard potentialAction;
 
     public MoveDeveloperAroundBoardUIState(Controller controller, KeyListener keyListener, GameModel model, HexLocation developer){
+	    super(controller, keyListener, model);
         this.controller = controller;
         this.keyListener = keyListener;
         this.model = model;
@@ -84,6 +85,10 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
         ActionResult result = actionPair.getFirst();
 
 	    updateView(result, potentialAction.getShortestLegalPath().getPath());
+
+	    if(result.isSuccess()) {
+		    controller.addToHistory(actionPair);
+	    }
     }
 
     private void initListeners() {
@@ -144,7 +149,7 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
         });
         listeners.add(i);
 
-        keyListener.replaceTemporaryListener(listeners);
+        keyListener.addTemporaryListeners(listeners);
     }
 
 	private void updateView(ActionResult result, List<Location> list) {
