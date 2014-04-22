@@ -60,32 +60,56 @@ public class MoveDeveloperAroundBoardUIState extends GameplayUIState {
 
     public void moveNorth() {
         ActionResult result = potentialAction.moveNorth();
-		updateView(result, potentialAction.getShortestLegalPath().getPath());
+        List<Location> highlighted = new ArrayList<Location>();
+        highlighted.add(potentialAction.getLocation());
+        if (potentialAction.getShortestLegalPath() != null)
+            highlighted.addAll(potentialAction.getShortestLegalPath().getPath());
+		updateView(result, highlighted);
     }
 
     public void moveSouth() {
         ActionResult result = potentialAction.moveSouth();
-	    updateView(result, potentialAction.getShortestLegalPath().getPath());
+        List<Location> highlighted = new ArrayList<Location>();
+        highlighted.add(potentialAction.getLocation());
+        if (potentialAction.getShortestLegalPath() != null)
+            highlighted.addAll(potentialAction.getShortestLegalPath().getPath());
+        updateView(result, highlighted);
     }
 
     public void moveNortheast() {
         ActionResult result = potentialAction.moveNortheast();
-	    updateView(result, potentialAction.getShortestLegalPath().getPath());
+        List<Location> highlighted = new ArrayList<Location>();
+        highlighted.add(potentialAction.getLocation());
+        if (potentialAction.getShortestLegalPath() != null)
+            highlighted.addAll(potentialAction.getShortestLegalPath().getPath());
+        updateView(result, highlighted);
     }
 
     public void moveNorthwest() {
         ActionResult result = potentialAction.moveNorthwest();
-	    updateView(result, potentialAction.getShortestLegalPath().getPath());
+        List<Location> highlighted = new ArrayList<Location>();
+        highlighted.add(potentialAction.getLocation());
+        if (potentialAction.getShortestLegalPath() != null)
+            highlighted.addAll(potentialAction.getShortestLegalPath().getPath());
+        updateView(result, highlighted);
     }
 
 	public void moveSoutheast() {
 		ActionResult result = potentialAction.moveSoutheast();
-		updateView(result, potentialAction.getShortestLegalPath().getPath());
+        List<Location> highlighted = new ArrayList<Location>();
+        highlighted.add(potentialAction.getLocation());
+        if (potentialAction.getShortestLegalPath() != null)
+            highlighted.addAll(potentialAction.getShortestLegalPath().getPath());
+        updateView(result, highlighted);
 	}
 
     public void moveSouthwest() {
         ActionResult result = potentialAction.moveSouthwest();
-	    updateView(result, potentialAction.getShortestLegalPath().getPath());
+        List<Location> highlighted = new ArrayList<Location>();
+        highlighted.add(potentialAction.getLocation());
+        if (potentialAction.getShortestLegalPath() != null)
+            highlighted.addAll(potentialAction.getShortestLegalPath().getPath());
+        updateView(result, highlighted);
     }
 
     public void confirmPlacement() {
