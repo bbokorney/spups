@@ -6,6 +6,7 @@ import model.actions.Action;
 import model.actions.ActionResult;
 import model.board.Directions;
 import model.board.HexLocation;
+import model.board.Location;
 import model.palacefestival.PalaceFestival;
 
 import java.util.ArrayList;
@@ -94,4 +95,8 @@ public abstract class PotentialOneSpaceMovement extends PotentialAction implemen
     }
 
     public abstract Pair<ActionResult, Action> confirmAction();
+
+    protected void setLocation(HexLocation loc) {
+        location = loc;
+    }
 }
