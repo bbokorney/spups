@@ -69,7 +69,7 @@ public class TabThroughDeveloperUIState extends GameplayUIState {
 		if(result.isSuccess()) {
 			controller.addToHistory(actionPair);
             controller.refreshGameView(result, new HashMap<Location, TileComponent>(), new ArrayList<Location>());
-			//stuff?
+			controller.goToEmptyState();
 		}
 	}
 
