@@ -1,10 +1,12 @@
 package model.potentialactions;
 
+import model.GameModel;
 import model.actions.ActionResult;
 import model.actions.palacefestival.JoinFestival;
 import model.actions.palacefestival.Withdraw;
 import model.board.Location;
 import model.palacefestival.Card;
+import model.palacefestival.PalaceFestival;
 import model.rules.palace.CardValues;
 
 import java.util.ArrayList;
@@ -21,14 +23,21 @@ public class PotentialJoinFestival extends PotentialAction {
     private int currentIndex;
     private Location palaceLoc;
 
-    public PotentialJoinFestival(Location palaceLocation) {
+	GameModel model;
+	PalaceFestival paFes;
+
+    public PotentialJoinFestival(GameModel model, PalaceFestival paFes, Location palaceLocation) {
         currentIndex = 0;
         indexOfCardsToBid = new ArrayList<Integer>();
         cardsValidToBeginFestival = new ArrayList<Card>();
         this.palaceLoc = palaceLocation;
-        Collection<Card> hand = this.getPalaceFestival().getCurrentPlayer().getHand();
+
+	    this.model = model;
+	    this.paFes = paFes;
+
+        Collection<Card> hand = paFes.getCurrentPlayer().getHand();
         for (Card card : hand) {
-            if (CardValues.getMatchValue(card, getPalaceFestival().peekAtFestivalCard()) > 0)
+            if (CardValues.getMatchValue(card, paFes.peekAtFestivalCard()) > 0)
                 cardsValidToBeginFestival.add(card);
         }
     }
@@ -54,7 +63,7 @@ public class PotentialJoinFestival extends PotentialAction {
     }
 
     public ActionResult withdraw() {
-        return new Withdraw(getPalaceFestival()).tryAction();
+        return new Withdraw(paFes).tryAction();
     }
 
     public ActionResult confirmBid() {
@@ -63,7 +72,7 @@ public class PotentialJoinFestival extends PotentialAction {
             bid.add(cardsValidToBeginFestival.get(i));
         }
 
-        return new JoinFestival(palaceLoc, bid, getGameModel(), getPalaceFestival()).tryAction();
+        return new JoinFestival(palaceLoc, bid, model, paFes).tryAction();
     }
 
     @Override

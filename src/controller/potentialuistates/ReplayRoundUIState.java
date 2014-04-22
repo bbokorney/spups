@@ -37,6 +37,7 @@ public class ReplayRoundUIState extends PotentialJavaUIState {
 
 	public void replayNextMove() {
 		if(timeTraveler.hasNext()) timeTraveler.next();
+		else controller.goToEmptyState();
 	}
 
 	public void unReplayMove() {
