@@ -33,6 +33,7 @@ public class BoardRuleHelper {
                     createOrIncrement(heights, height);
                 }
             }
+            heightMap.put(players[i], heights);
         }
 
         return calcRanks(players, heightMap, maxHeight);
@@ -41,10 +42,13 @@ public class BoardRuleHelper {
     private Map<JavaPlayer, Integer> calcRanks(JavaPlayer[] players, Map<JavaPlayer,
             Map<Integer, Integer>> heightMap, int currHeight) {
 
+        System.out.println(Arrays.toString(players));
+
         Map<JavaPlayer, Integer> myRanks = new HashMap<JavaPlayer, Integer>();
         // if this is the only player, they're first by default
         if(players.length == 1) {
             myRanks.put(players[0], 1);
+            return myRanks;
         }
 
         // if we've gone through every height, everyone is tied
@@ -52,6 +56,21 @@ public class BoardRuleHelper {
             for(JavaPlayer p : players) {
                 myRanks.put(p, 1);
             }
+            return myRanks;
+        }
+        else{
+            System.out.println("BRH calcRanks currHeight>=0 " + currHeight);
+        }
+
+        if(heightMap != null) {
+            for (JavaPlayer p : heightMap.keySet()) {
+                if (!heightMap.get(p).containsKey(currHeight)) {
+                    heightMap.get(p).put(currHeight, 0);
+                }
+            }
+        }
+        else{
+            System.out.println("BRH calcRanks height map was null");
         }
 
         // sort the players descending by the number of developers they have at this height.
@@ -64,10 +83,13 @@ public class BoardRuleHelper {
             while(end < players.length) {
                 // if this player is tied with the current highest ranked
                 // unresolved player
-                if(heightMap.get(players[start]).get(heightMap) ==
-                        heightMap.get(players[end]).get(heightMap)) {
+                if(heightMap.get(players[start]).get(currHeight)
+                        .equals(heightMap.get(players[end]).get(currHeight))) {
                     // include them in the list of tied players
                     ++end;
+                }
+                else {
+                    break;
                 }
             }
             // resolve this tie at the next height down
@@ -81,7 +103,7 @@ public class BoardRuleHelper {
             }
             rankOffset = maxRank;
             start = end;
-            end = start+1;
+            end++;
         }
         return myRanks;
     }
@@ -100,7 +122,7 @@ public class BoardRuleHelper {
             public int compare(JavaPlayer p1, JavaPlayer p2) {
                 int p1Count = heightMap.get(p1).containsKey(currentHeight) ? heightMap.get(p1).get(currentHeight) : 0;
                 int p2Count = heightMap.get(p2).containsKey(currentHeight) ? heightMap.get(p2).get(currentHeight) : 0;
-                return p2Count - p1Count;
+                return p1Count > p2Count ? -1 : 1;
             }
         });
     }
@@ -116,7 +138,7 @@ public class BoardRuleHelper {
         return surroundingLocations;
     }
 
-    public int pointsEarnedFromIrrigationPlacement(Location location) {
+    public HashMap<JavaPlayer, Integer> pointsEarnedFromIrrigationPlacement(Location location) {
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
             for(Location water : body.getLocations()) {
                 if(neighbors(water, location)) {
@@ -131,15 +153,37 @@ public class BoardRuleHelper {
                         }
                     }
                     if(enclosingTileCount == surrounding.size()) {
-                        return 1;
+                        //return 1;
+                        //todo return noll baker
+                        return new HashMap<JavaPlayer, Integer>();
                     }
                 }
             }
         }
-        return 0;
+        return new HashMap<JavaPlayer, Integer>();
+        // return 0; todo baker
+
+        /*
+        this will only ever return one player
+        this will be called by the irrigation action
+
+        this will return the player that is the highest ranked
+        around any tile surrounding the body of water being surrounded
+
+        utilize the HighestRankedPlayer rule to get this done
+
+        return an empty map if there is no highest player
+
+        ties do not count
+
+        award the highest ranked player surrounding that body of water with
+        3*body.getSize() famePoints
+         */
+
+
     }
 
-    public int pointsEarnedFromLandPlacement(Location... locations) {
+    public HashMap<JavaPlayer, Integer> pointsEarnedFromLandPlacement(Location... locations) {
         int famePointsEarned = 0;
 
         for(BodyOfWater body : model.getBoard().getBodyOfWaterContainer().getBodiesOfWater()) {
@@ -157,7 +201,25 @@ public class BoardRuleHelper {
             }
 
         }
-        return famePointsEarned;
+        //todo baker
+        return new HashMap<JavaPlayer, Integer>();
+        // return famePointsEarned;
+
+        /*this be called by land tile placement (that are being placed directly on the board
+
+        this will return a hash map from JavaPlayer to integers
+
+        Each body of water that is surrounded (which there can be more than one happening at once)
+        will award the highest ranked player surrounding that body of water with
+        3*body.getSize() famePoints
+
+        Each body of water that gets surrounded can be one by any player, or no players
+
+        Remember that there could be no developers surrounding the irrigation
+
+        */
+
+
     }
 
     private boolean containsAny(Collection<Location> locations, Collection<Location> lookUps) {
@@ -205,8 +267,8 @@ public class BoardRuleHelper {
         return model.getBoard().getLocationType(location) == LocationType.CentralJava;
     }
 
-    public boolean isOuterMostBorder(Location location) {
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers(), null);
+    public boolean isOuterMostBorder(Location location, Developer developer) {
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopersFromAllPlayers(), developer);
         if(!model.getBoard().areLocationsOnBoard(location) ||
                 !dpr.allowed()) {
             return false;
@@ -239,11 +301,11 @@ public class BoardRuleHelper {
     }
 
     public boolean developerCanEnterHere(Location location) {
-        return isOuterMostBorder(location);
+        return isOuterMostBorder(location, null);
     }
 
-    public boolean developerCanBeRemovedFromHere(HexLocation location) {
-        return isOuterMostBorder(location);
+    public boolean developerCanBeRemovedFromHere(Location location, Developer developer) {
+        return isOuterMostBorder(location, developer);
     }
 
     public boolean connectsTwoCities(Location villageLocation, Location... riceLocations) {

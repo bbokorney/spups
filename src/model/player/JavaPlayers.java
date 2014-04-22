@@ -2,6 +2,7 @@ package model.player;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Sachit on 4/18/2014.
@@ -38,4 +39,11 @@ public class JavaPlayers implements TurnTracker<JavaPlayer> {
             currentPlayer = 0;
     }
 
+    public List<Developer> getDevelopers() {
+        ArrayList<Developer> developersFromAllPlayers = new ArrayList<Developer>();
+        for(JavaPlayer p : players){
+            developersFromAllPlayers.addAll(p.getDevelopers());
+        }
+        return developersFromAllPlayers;
+    }
 }

@@ -25,7 +25,14 @@ public class LeastCostPathFinder {
     }
 
     public JavaPath findShortestPath(Location src, Location dest, Developer developer) {
-//        System.out.println("Shortest path from "+src+" to "+ dest);
+        System.out.println("Shortest path from "+src+" to "+ dest);
+        if(src.equals(dest)) {
+            System.out.println("Locations are equal.");
+            List<JavaNode> nodes = new ArrayList<JavaNode>();
+            nodes.add(new JavaNode(src));
+            Path<JavaNode> path = new Path<JavaNode>(true, 0, nodes);
+            return new JavaPath(path);
+        }
         JavaNode destination = new JavaNode(dest);
         PathFinder<JavaNode, JavaEdge> pathFinder = new PathFinder<JavaNode, JavaEdge>();
         Set<Location> visited = new HashSet<Location>();
@@ -80,24 +87,44 @@ public class LeastCostPathFinder {
     }
 
     public JavaPath findShortestPlacementPath(Location placementLocation) {
-        return findShortestEnterOrExitPath(placementLocation, null, false);
-    }
-
-    public JavaPath findShortestRemovalPath(Location removalLocation, Developer developer) {
-        return findShortestEnterOrExitPath(removalLocation, developer, true);
-    }
-
-    private JavaPath findShortestEnterOrExitPath(Location dest, Developer developer, boolean reverse) {
         JavaPath min = null;
         for(Location src : model.getBoard().getAllLocations()) {
             if(!helper.developerCanEnterHere(src)) {
                 continue;
             }
-            JavaPath path = reverse ? findShortestPath(dest, src, developer) : findShortestPath(src, dest, developer);
+            JavaPath path = findShortestPath(src, placementLocation, null);
+            //System.out.println(path);
             // find the minimum cost to get to this
             int minCost = minCostToEnterOrExitHere(src);
             path.setCost(path.getCost() + minCost);
             if(min == null) {
+                System.out.println("found a min path");
+                System.out.println(path);
+                min = path;
+            }
+            else {
+                min = path.valid() && path.getCost() < min.getCost() ? path : min;
+            }
+        }
+        //System.out.println("The result "+min);
+        return min;
+        //return findShortestEnterOrExitPath(placementLocation, null, false);
+    }
+
+    public JavaPath findShortestRemovalPath(Location removalLocation, Developer developer) {
+        JavaPath min = null;
+        for(Location src : model.getBoard().getAllLocations()) {
+            if(!helper.developerCanBeRemovedFromHere(src, developer)) {
+                continue;
+            }
+            JavaPath path = findShortestPath(removalLocation, src, developer);
+            //System.out.println(path);
+            // find the minimum cost to get to this
+            int minCost = minCostToEnterOrExitHere(src);
+            path.setCost(path.getCost() + minCost);
+            if(min == null) {
+                System.out.println("found a min path");
+                System.out.println(path);
                 min = path;
             }
             else {
@@ -120,7 +147,7 @@ public class LeastCostPathFinder {
 
     private List<JavaEdge> getEdgesTo(Location from, Location to, Map<Location, JavaNode> nodes, Developer developer) {
         // if we can traverse directly there
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(to, model.getBoard(), model.getDevelopers(), developer);
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(to, model.getBoard(), model.getDevelopersFromAllPlayers(), developer);
         if(dpr.allowed()) {
             List<JavaEdge> edge = new ArrayList<JavaEdge>();
             edge.add(getEdgeBetween(from, to, nodes));

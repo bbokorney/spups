@@ -7,11 +7,14 @@ import model.actions.serialization.JsonObject;
 import model.board.Board;
 import model.board.BoardRuleHelper;
 import model.board.Location;
+import model.player.JavaPlayer;
 import model.player.JavaPlayerResourceType;
 import model.rules.tiles.*;
 import model.tiles.RiceTileComponent;
 import model.tiles.Tile;
 import model.tiles.VillageTileComponent;
+
+import java.util.HashMap;
 
 /**
  * Created by idinamenzel on 4/14/14.
@@ -25,6 +28,8 @@ public class PlaceTwoSpaceTile extends Action {
     Location villagePlacement;
     Location ricePlacement;
     GameModel game;
+
+    private HashMap<JavaPlayer, Integer> playersAwardedPoints;
     /*
         constructors
      */
@@ -35,6 +40,7 @@ public class PlaceTwoSpaceTile extends Action {
         this.villagePlacement = villagePlacement;
         this.ricePlacement = ricePlacement;
         this.game = game;
+	    this.playersAwardedPoints = new HashMap<JavaPlayer, Integer>();
     }
 
     @Override
@@ -78,8 +84,10 @@ public class PlaceTwoSpaceTile extends Action {
                     //this should never work
             if(game.isHeightAtLocation(0, villagePlacement)){
 
-                isSuccess = isSuccess && true;
-                famePoints += helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement);
+                playersAwardedPoints = helperJunk.pointsEarnedFromLandPlacement(villagePlacement, ricePlacement);
+                if(playersAwardedPoints.containsKey(game.getCurrentJavaPlayer())){
+                    famePoints = playersAwardedPoints.get(game.getCurrentJavaPlayer());
+                }
 
                 if(PlacementOutsideCentralJavaRule.canPlaceOutsideCentralJava(board, helperJunk, villagePlacement, ricePlacement)){
 
@@ -132,7 +140,7 @@ public class PlaceTwoSpaceTile extends Action {
         }
 
         //see if they are placing on top of a developer
-        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopers(),villagePlacement,ricePlacement) ){
+        if(PlaceTileOnDeveloperRule.canPlaceTile(game.getDevelopersFromAllPlayers(),villagePlacement,ricePlacement) ){
             isSuccess = isSuccess && true;
 
         }
@@ -171,8 +179,10 @@ public class PlaceTwoSpaceTile extends Action {
             //Decrememnt the AP points
             game.useActionPoints(result.getActionPoints());
 
-            //award the player fame points
-            game.incrementScore(result.getFamePoints());
+            //award the player the fame points earned
+            for(JavaPlayer p : playersAwardedPoints.keySet()){
+                game.incrementScore(playersAwardedPoints.get(p), p);
+            }
 
             //decrement a two space tile from player resources
             game.useResource(JavaPlayerResourceType.TWO);

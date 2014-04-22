@@ -65,6 +65,7 @@ public class UpgradePalaceUIState extends GameplayUIState {
 
 		if(result.isSuccess()) {
 			controller.addToHistory(actionPair);
+			controller.goToEmptyState();
 		}
 	}
 

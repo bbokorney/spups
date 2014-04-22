@@ -79,7 +79,9 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
 	public List<Location> getLocationFromPath() {
 		//Todo Meghan: please check this
         //return null;
-
+        if(developerLocationList.isEmpty()){
+            return new ArrayList<Location>();
+        }
         Location loc = developerLocationList.get(indexOfCurrentDeveloper);
         ArrayList<Location> list = new ArrayList<Location>();
         list.add(loc);
