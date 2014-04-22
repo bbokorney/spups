@@ -35,4 +35,6 @@ class JavaNode implements PathNode<JavaNode> {
     }
 
     public Location getLocation() { return location; }
+
+    public String toString() { return location.toString(); }
 }
