@@ -25,6 +25,8 @@ public class Path<Node extends PathNode> {
         return cost;
     }
 
+    public void setCost(int cost) { this.cost = cost; }
+
     public List<Node> getPath() {
         return path;
     }

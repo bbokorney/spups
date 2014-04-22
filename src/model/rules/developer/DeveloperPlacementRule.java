@@ -41,8 +41,11 @@ public class DeveloperPlacementRule {
             }
         }
 
-        board.getSpace(location).getTopTileComponent().accept(new PlacementVisitor());
-        return allowed;
+        if(board.getSpace(location).getTopTileComponent() != null) {
+            board.getSpace(location).getTopTileComponent().accept(new PlacementVisitor());
+            return allowed;
+        }
+        return false;
     }
 
     private class PlacementVisitor implements Visitor {
