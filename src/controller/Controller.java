@@ -34,6 +34,7 @@ public class Controller {
     PotentialJavaUIState currentState;
 
 	public Controller(GameFrame view, GameModel model, PalaceFestival palaceFestival) {
+        history = new History(this, model);
 		this.view = view;
         this.model = model;
         keyListener = view.getKeyListener();
