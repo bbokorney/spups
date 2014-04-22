@@ -10,6 +10,7 @@ import model.board.Directions;
 import model.board.HexLocation;
 import model.board.Location;
 import model.palacefestival.PalaceFestival;
+import model.player.Developer;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
 
@@ -31,9 +32,14 @@ public class PotentialMoveDeveloperAroundBoard extends PotentialOneSpaceMovement
     }
 
     public JavaPath getShortestLegalPath(){
+        Developer developer = null;
+        for(Developer dev : getGameModel().getDevelopers()) {
+            if(dev.getLocation().equals(getLocation())) {
+                developer = dev;
+            }
+        }
         LeastCostPathFinder pathFinder = new LeastCostPathFinder(getGameModel());
-        return  pathFinder.findShortestPath(developerStartingLocation, getLocation());
-
+        return  pathFinder.findShortestPath(developerStartingLocation, getLocation(), developer);
     }
 
 

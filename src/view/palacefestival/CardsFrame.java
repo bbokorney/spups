@@ -1,5 +1,7 @@
 package view.palacefestival;
 
+import controller.keylistener.KeyListener;
+
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
