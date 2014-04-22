@@ -9,6 +9,7 @@ import model.GameModel;
 import model.Pair;
 import model.actions.Action;
 import model.actions.ActionResult;
+import model.actions.StartGame;
 import model.board.Location;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
@@ -33,8 +34,9 @@ public class Controller {
 
     PotentialJavaUIState currentState;
 
-	public Controller(GameFrame view, GameModel model, PalaceFestival palaceFestival) {
+	public Controller(GameFrame view, GameModel model, PalaceFestival palaceFestival, StartGame startGame) {
         history = new History(this, model);
+		history.addAction(new Pair<ActionResult, Action>(null, startGame));
 		this.view = view;
         this.model = model;
         keyListener = view.getKeyListener();

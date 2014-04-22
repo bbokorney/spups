@@ -7,6 +7,7 @@ import model.player.JavaPlayer;
 import model.rules.developer.DeveloperPlacementRule;
 import model.rules.palace.HighestRankingPlayerRule;
 import model.rules.palace.PalaceLevelCitySizeRule;
+import model.tiles.PalaceTileComponent;
 
 import java.util.*;
 
@@ -33,10 +34,12 @@ public class BoardRuleHelper {
                     createOrIncrement(heights, height);
                 }
             }
-            heightMap.put(players[i], heights);
+            if(heights.keySet().size() > 0) {
+                heightMap.put(players[i], heights);
+            }
         }
 
-        return calcRanks(players, heightMap, maxHeight);
+        return calcRanks(heightMap.keySet().toArray(new JavaPlayer[0]), heightMap, maxHeight);
     }
 
     private Map<JavaPlayer, Integer> calcRanks(JavaPlayer[] players, Map<JavaPlayer,

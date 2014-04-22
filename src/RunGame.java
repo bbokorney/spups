@@ -52,8 +52,8 @@ public class RunGame {
 
         GameFrame frame = new GameFrame(listener);
         @SuppressWarnings("unused")
-        Controller controller = new Controller(frame, model, festival);
         StartGame startGame = new StartGame(model, festival, playerNames);
+	    Controller controller = new Controller(frame, model, festival, startGame);
         System.out.println(startGame.doAction().getMessage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
