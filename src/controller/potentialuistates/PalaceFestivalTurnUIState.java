@@ -86,15 +86,18 @@ public class PalaceFestivalTurnUIState extends PotentialJavaUIState {
 
 	public void confirmBid() {
 		potentialAction.confirmBid();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 		controller.setCurrentState(new PalaceFestivalTurnUIState(controller, keyListener, model, palaceLocation));
 	}
 
 	public void withdraw() {
 		potentialAction.withdraw();
 		if(playersTying > 0) {
+			controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 			controller.setCurrentState(new PalaceFestivalTurnUIState(controller, keyListener, model, palaceLocation, potentialTie, playersTying));
 		}
 		else {
+			controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 			controller.setCurrentState(new PalaceFestivalTurnUIState(controller, keyListener, model, palaceLocation));
 		}
 	}

@@ -71,6 +71,7 @@ public class BeginPalaceFestivalTurnUIState extends GameplayUIState {
 
 	public void confirmBid() {
 		potentialAction.confirmBid();
+		controller.refreshPalaceFestivalView(potentialAction.getIndexOfCardsToBid());
 		controller.setCurrentState(new PalaceFestivalTurnUIState(controller, keyListener, model, potentialAction.getSelectedPalaceLocation()));
 	}
 
