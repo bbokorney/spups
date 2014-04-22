@@ -201,7 +201,7 @@ public class BoardRuleHelper {
     }
 
     public boolean isOuterMostBorder(Location location) {
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers());
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(location, model.getBoard(), model.getDevelopers(), null);
         if(!model.getBoard().areLocationsOnBoard(location) ||
                 !dpr.allowed()) {
             return false;

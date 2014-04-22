@@ -4,6 +4,7 @@ import model.GameModel;
 import model.board.BoardRuleHelper;
 import model.board.Location;
 import model.board.LocationType;
+import model.player.Developer;
 import model.rules.developer.DeveloperPassThroughRule;
 import model.rules.developer.DeveloperPlacementRule;
 import model.rules.developer.DeveloperTraversalRule;
@@ -23,7 +24,8 @@ public class LeastCostPathFinder {
         this.helper = new BoardRuleHelper(model);
     }
 
-    public JavaPath findShortestPath(Location src, Location dest) {
+    public JavaPath findShortestPath(Location src, Location dest, Developer developer) {
+//        System.out.println("Shortest path from "+src+" to "+ dest);
         JavaNode destination = new JavaNode(dest);
         PathFinder<JavaNode, JavaEdge> pathFinder = new PathFinder<JavaNode, JavaEdge>();
         Set<Location> visited = new HashSet<Location>();
@@ -37,12 +39,15 @@ public class LeastCostPathFinder {
         while(!queue.isEmpty()) {
 
             JavaNode curr = queue.poll();
+//            System.out.println("Queue size: " + queue.size());
+//            System.out.println("Curr: " + curr.toString());
             // get all of the valid edges
             for(Location neighbor : curr.getLocation().getNeighbors()) {
+//                System.out.println("Neighbor: " + neighbor.toString());
                 if(!model.getBoard().areLocationsOnBoard(neighbor)) {
                     continue;
                 }
-                List<JavaEdge> edges = getEdgesTo(curr.getLocation(), neighbor, nodes);
+                List<JavaEdge> edges = getEdgesTo(curr.getLocation(), neighbor, nodes, developer);
                 for(JavaEdge edge : edges) {
                     if(edge != null) {
                         curr.addEdge(edge);
@@ -75,22 +80,22 @@ public class LeastCostPathFinder {
     }
 
     public JavaPath findShortestPlacementPath(Location placementLocation) {
-        return findShortestEnterOrExitPath(placementLocation);
+        return findShortestEnterOrExitPath(placementLocation, null, false);
     }
 
-    public JavaPath findShortestRemovalPath(Location removalLocation) {
-        return findShortestEnterOrExitPath(removalLocation);
+    public JavaPath findShortestRemovalPath(Location removalLocation, Developer developer) {
+        return findShortestEnterOrExitPath(removalLocation, developer, true);
     }
 
-    private JavaPath findShortestEnterOrExitPath(Location centralJavaLocation) {
+    private JavaPath findShortestEnterOrExitPath(Location dest, Developer developer, boolean reverse) {
         JavaPath min = null;
-        for(Location exteriorLocation : model.getBoard().getAllLocations()) {
-            if(!helper.developerCanEnterHere(exteriorLocation)) {
+        for(Location src : model.getBoard().getAllLocations()) {
+            if(!helper.developerCanEnterHere(src)) {
                 continue;
             }
-            JavaPath path = findShortestPath(exteriorLocation, centralJavaLocation);
+            JavaPath path = reverse ? findShortestPath(dest, src, developer) : findShortestPath(src, dest, developer);
             // find the minimum cost to get to this
-            int minCost = minCostToEnterOrExitHere(exteriorLocation);
+            int minCost = minCostToEnterOrExitHere(src);
             path.setCost(path.getCost() + minCost);
             if(min == null) {
                 min = path;
@@ -113,9 +118,9 @@ public class LeastCostPathFinder {
         return locations;
     }
 
-    private List<JavaEdge> getEdgesTo(Location from, Location to, Map<Location, JavaNode> nodes) {
+    private List<JavaEdge> getEdgesTo(Location from, Location to, Map<Location, JavaNode> nodes, Developer developer) {
         // if we can traverse directly there
-        DeveloperPlacementRule dpr = new DeveloperPlacementRule(to, model.getBoard(), model.getDevelopers());
+        DeveloperPlacementRule dpr = new DeveloperPlacementRule(to, model.getBoard(), model.getDevelopers(), developer);
         if(dpr.allowed()) {
             List<JavaEdge> edge = new ArrayList<JavaEdge>();
             edge.add(getEdgeBetween(from, to, nodes));
@@ -125,17 +130,17 @@ public class LeastCostPathFinder {
         DeveloperPassThroughRule dptr = new DeveloperPassThroughRule(to, model.getBoard(),
                 model.getJavaPlayers(), model.getCurrentJavaPlayer());
         if(dptr.allowed()) {
-            return getEdgesStemmingFrom(to, nodes);
+            return getEdgesStemmingFrom(to, nodes, developer);
         }
 
         // we can't use this location at all
         return new ArrayList<JavaEdge>();
     }
 
-    private List<JavaEdge> getEdgesStemmingFrom(Location to, Map<Location, JavaNode> nodes) {
+    private List<JavaEdge> getEdgesStemmingFrom(Location to, Map<Location, JavaNode> nodes, Developer developer) {
         List<JavaEdge> edges = new ArrayList<JavaEdge>();
         for(Location neighbor : to.getNeighbors()) {
-            edges.addAll(getEdgesTo(to, neighbor, nodes));
+            edges.addAll(getEdgesTo(to, neighbor, nodes, developer));
         }
         return edges;
     }

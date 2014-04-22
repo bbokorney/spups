@@ -21,13 +21,17 @@ public class DeveloperPlacementRule {
     private Location location;
     private Board board;
     private Collection<Developer> developers;
+    private Developer developer;
 
-    public DeveloperPlacementRule(Location location, Board board, Collection<Developer> developers) {
+    public DeveloperPlacementRule(Location location, Board board, Collection<Developer> developers, Developer developer) {
         allowed = false;
         this.location = location;
         this.board = board;
         this.developers = developers;
+        this.developer = developer;
     }
+
+
 
     public boolean allowed() {
         // is this space on the board?
@@ -37,7 +41,12 @@ public class DeveloperPlacementRule {
         // is there a developer there?
         for(Developer dev : developers) {
             if(dev.getLocation().equals(location)) {
-                return false;
+                if(developers != null && dev.equals(developer)) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
         }
 

@@ -11,6 +11,7 @@ import model.palacefestival.PalaceFestival;
 import model.player.Developer;
 import pathfinding.JavaPath;
 import pathfinding.LeastCostPathFinder;
+import pathfinding.PathFinder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,9 +68,12 @@ public class PotentialTabThroughDevelopers extends PotentialAction {
     }
 
     private JavaPath getShortestLegalPath(){
+        Developer developer = null;
+        for(Developer dev : getGameModel().getDevelopers()) {
+            developer = dev;
+        }
         LeastCostPathFinder pathFinder = new LeastCostPathFinder(getGameModel());
-        return  pathFinder.findShortestRemovalPath(developerLocationList.get(indexOfCurrentDeveloper));
-
+        return pathFinder.findShortestRemovalPath(developerLocationList.get(indexOfCurrentDeveloper), developer);
     }
 
 	public List<Location> getLocationFromPath() {

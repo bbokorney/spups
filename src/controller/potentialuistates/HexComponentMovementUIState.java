@@ -64,7 +64,6 @@ public abstract class HexComponentMovementUIState extends GameplayUIState {
 
     protected void setPotentialAction(HexComponentPotentialAction action) {
         this.potentialAction = action;
-        System.out.println("setPotentialAction");
         updateView(potentialAction.getActionResult());
     }
 
