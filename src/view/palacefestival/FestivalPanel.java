@@ -12,9 +12,11 @@ import javax.swing.JPanel;
 
 
 
+
 import model.GameModel;
 import model.palacefestival.Card;
 import model.palacefestival.PalaceFestival;
+import model.palacefestival.PalaceFestivalPlayer;
 
 /**
  * Created by Baker on 4/14/2014.
@@ -69,6 +71,13 @@ public class FestivalPanel extends JPanel {
 
 	@SuppressWarnings("rawtypes")
 	public void refreshView(GameModel model, PalaceFestival festival, List<Card> cardsOfCurrentPlayer, List<Integer> cardsSelected) {
+		PalaceFestivalPlayer[] players = festival.getPlayers().toArray(new PalaceFestivalPlayer[0]);
+		for(int x = 0; x < numOfPlayerPanels; ++x) {
+			if(x < players.length)
+				playerPanel[x].refreshView(model, festival, players[x]);
+			else
+				playerPanel[x].removeAll();
+		}
 		// cardsSelect = highlight these cards of the current player
 //		cardsPanel.refreshView(cardsOfCurrentPlayer, cardsSelected);
 	}
