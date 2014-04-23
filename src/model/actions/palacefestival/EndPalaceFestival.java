@@ -63,10 +63,5 @@ public class EndPalaceFestival extends Action {
         throw new UnsupportedOperationException("Tell Sara to implement me!");
     }
 
-    @Override
-    public int getActionID() {
-        // TODO: Sara
-        throw new UnsupportedOperationException("Tell Sara to implement me!");
-    }
 
 }

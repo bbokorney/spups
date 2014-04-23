@@ -29,7 +29,7 @@ public class RunGame {
     public static void main(String[] args) {
         int numPlayers = args.length;
         if (numPlayers < 2 || numPlayers > 4)
-            System.out.println("Please enter a number between 2 and 4 inclusive.");
+            //System.out.println("Please enter a number between 2 and 4 inclusive.");
         else {
             final ArrayList<String> names = new ArrayList<String>();
             for (int i = 0; i < args.length; i++) {
@@ -54,9 +54,10 @@ public class RunGame {
 
         GameFrame frame = new GameFrame(listener);
         @SuppressWarnings("unused")
-        Controller controller = new Controller(frame, model, festival);
+
         StartGame startGame = new StartGame(model, festival, playerNames);
-        System.out.println(startGame.doAction().getMessage());
+        Controller controller = new Controller(frame, model, festival, startGame);
+        //System.out.println(startGame.doAction().getMessage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 

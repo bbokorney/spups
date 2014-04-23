@@ -9,13 +9,13 @@ import model.actions.serialization.JsonObject;
  */
 public abstract class Action {
 
-    int actionID;
+
+    public Action(){
+
+    }
 
     /*      Getters     */
 
-    public int getActionID(){
-        return actionID;
-    }
 
     /*      Abstract Interface      */
 
@@ -26,6 +26,7 @@ public abstract class Action {
     public abstract String serialize();
 
     public abstract Action restore(JsonObject actionToRestore);
+
 
 
 }
